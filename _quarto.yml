@@ -1,6 +1,6 @@
 project:
   type: website
-
+engine: jupyter
 website:
   title: "Lin511-2024"
   navbar:
