@@ -16,9 +16,8 @@ jobs:
         run: |
           python -m pip install -r requirements.txt
       - uses: r-lib/actions/setup-renv@v2
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::reticulate
+      - name: Install Reticulate
+        run: Rscript -e 'renv::install("reticulate")'
       - uses: quarto-dev/quarto-actions/setup@v2
       - name: Render and publish to gh pages
         uses: quarto-dev/quarto-actions/publish@v2
