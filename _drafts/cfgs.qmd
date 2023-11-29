@@ -1,0 +1,177 @@
+---
+title: "Context Free Grammars"
+---
+
+```{ojs}
+//| echo: false
+d3 = require("d3@5");
+margin = ({top: 10, right: 10, bottom: 10, left: 10});
+diagonal = d3.linkVertical().x(d => d.x).y(d => d.y);
+tree = d3.tree().nodeSize([dx, dy]);
+dy = 60;
+dx = width / (data.children.length*8);
+data = FileAttachment("cfg.json").json();
+```
+
+```{ojs}
+//| echo: false
+// https://observablehq.com/@koljada/collapsible-tree
+chart = {
+  const root = d3.hierarchy(data);
+
+  root.x0 = dx / 2;
+  root.y0 = 0;
+  root.descendants().forEach((d, i) => {
+    d.id = i;
+    d._children = d.children;
+    if (d.depth) d.children = null;
+  });
+
+  const svg = d3.create("svg")
+      .attr('width', width)
+      .attr('height', 500)
+      .style("font", "10px sans-serif")      
+      .style("user-select", "none");
+  
+  const g = svg.append("g")
+      //.attr("transform", `translate(${width / 2},${margin.top})`);
+
+  const gLink = g.append("g")
+      .attr("fill", "none")
+      .attr("stroke", "#555")
+      .attr("stroke-opacity", 0.4)
+      .attr("stroke-width", 1.5);
+
+  const gNode = g.append("g")
+      .attr("cursor", "pointer")
+      .attr("pointer-events", "all");
+  
+  const zoomBehaviours = d3.zoom()
+      .scaleExtent([0.05, 3])
+      .on('zoom', () => g.attr('transform', d3.event.transform));  
+  
+  svg.call(zoomBehaviours); 
+  
+  setTimeout(() => zoomBehaviours.translateTo(svg, 0, 0), 100);  
+  
+  function update(source) {
+    const duration = d3.event && d3.event.altKey ? 2500 : 250;
+    const nodes = root.descendants().reverse();
+    const links = root.links();
+
+    // Compute the new tree layout.
+    tree(root);
+    
+    const transition = svg.transition()
+        .duration(duration)
+        .tween("resize", window.ResizeObserver ? null : () => () => svg.dispatch("toggle"));
+
+    // Update the nodes…
+    const node = gNode.selectAll("g")
+      .data(nodes, d => d.id);
+
+    // Enter any new nodes at the parent's previous position.
+    const nodeEnter = node.enter().append("g")
+        .attr("transform", d => `translate(${source.x0},${source.y0})`)
+        .attr("fill-opacity", 0)
+        .attr("stroke-opacity", 0)
+        .on("click", d => {
+          d.children = d.children ? null : d._children;
+          update(d);
+          if(d3.event && d3.event.altKey){
+            setTimeout(() => {zoomToFit();}, duration + 100);
+            //zoomToFit();
+          }
+        });   
+    
+    nodeEnter.append("circle")
+        .attr("r", 4)
+        .attr("fill", d => d._children ? "#555" : "#999")
+        .attr("stroke-width", 10);
+
+    nodeEnter.append("text")
+        .attr("dy", "0.31em")
+        .attr("x", d => d._children ? -6 : 6)
+        .attr("text-anchor", d => d._children ? "end" : "start")
+        .text(d => d.data.name)
+        .clone(true)
+        .lower()
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-width", 3)
+        .attr("stroke", "white");
+
+    // Transition nodes to their new position.
+    const nodeUpdate = node.merge(nodeEnter).transition(transition)
+        .attr("transform", d => `translate(${d.x},${d.y})`)
+        .attr("fill-opacity", 1)
+        .attr("stroke-opacity", 1);
+
+    // Transition exiting nodes to the parent's new position.
+    const nodeExit = node.exit().transition(transition).remove()
+        .attr("transform", d => `translate(${source.x},${source.y})`)
+        .attr("fill-opacity", 0)
+        .attr("stroke-opacity", 0);
+
+    // Update the links…
+    const link = gLink.selectAll("path")
+      .data(links, d => d.target.id);
+
+    // Enter any new links at the parent's previous position.
+    const linkEnter = link.enter().append("path")
+        .attr("d", d => {
+          const o = {x: source.x0, y: source.y0};
+          return diagonal({source: o, target: o});
+        });
+
+    // Transition links to their new position.
+    link.merge(linkEnter).transition(transition)
+        .attr("d", diagonal);
+
+    // Transition exiting nodes to the parent's new position.
+    link.exit().transition(transition).remove()
+        .attr("d", d => {
+          const o = {x: source.x, y: source.y};
+          return diagonal({source: o, target: o});
+        });
+
+    // Stash the old positions for transition.
+    root.eachBefore(d => {
+      d.x0 = d.x;
+      d.y0 = d.y;
+    });
+  }
+  
+  function zoomToFit(paddingPercent) {
+        const bounds = g.node().getBBox();
+        const parent = svg.node().parentElement;
+        const fullWidth = parent.clientWidth;
+        const fullHeight = parent.clientHeight;
+
+        const width = bounds.width;
+        const height = bounds.height;
+
+        const midX = bounds.x + (width / 2);
+        const midY = bounds.y + (height / 2);
+
+        if (width == 0 || height == 0) return; // nothing to fit
+
+        const scale = (paddingPercent || 0.75) / Math.max(width / fullWidth, height / fullHeight);
+        const translate = [fullWidth / 2 - scale * midX, fullHeight / 2 - scale * midY];
+
+        const transform = d3.zoomIdentity
+            .translate(translate[0], translate[1])
+            .scale(scale);
+    
+        svg
+            .transition()
+            .duration(500)
+            .call(zoomBehaviours.transform, transform);
+    }
+
+  update(root);
+  
+  //setTimeout(() => { zoomToFit();}, 5000);  
+
+  return svg.node();
+}
+```

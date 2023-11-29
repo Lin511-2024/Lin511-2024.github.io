@@ -1,0 +1,61 @@
+{
+ "name": "S",
+ "children": [
+   {
+     "name": "NP",
+      "children" : [
+        {
+          "name": "det",
+          "children": [
+            {
+              "name": "the",
+              "value": "the"
+            }
+          ]
+        },
+        {
+          "name": "N",
+          "children": [
+            {
+              "name": "dog",
+              "value": "dog"
+            }
+          ]
+        }
+      ]
+   },
+   {
+     "name": "VP",
+     "children": [
+       {
+         "name": "V",
+         "children": [
+           {
+             "name": "chased"           }
+         ]
+       },
+       {
+         "name": "NP",
+         "children": [
+           {
+             "name": "det",
+             "children": [
+               {
+                 "name": "the"
+               }
+              ]
+            },
+            {
+              "name": "N",
+              "children": [
+                {
+                  "name": "cat"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
