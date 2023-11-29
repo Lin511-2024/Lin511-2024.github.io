@@ -5,13 +5,18 @@ website:
   title: "Lin511-2024"
   navbar:
     left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+      - text: "Home"
+        href: index.qmd
+  sidebar: 
+    contents:
+      - syllabus.qmd
+
 
 format:
   html:
-    theme: cosmo
+    theme:
+      light: flatly
+      dark: darkly
     css: styles.css
     toc: true
 
