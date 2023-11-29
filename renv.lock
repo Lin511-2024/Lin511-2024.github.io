@@ -8,6 +8,11 @@
       }
     ]
   },
+  "Python": {
+    "Version": "3.11.4",
+    "Type": "virtualenv",
+    "Name": "/Users/joseffruehwald/.pyenv/versions/3.11.4/envs/lin511-2024"
+  },
   "Packages": {
     "R6": {
       "Package": "R6",
