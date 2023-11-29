@@ -112,11 +112,32 @@
     "text": "15 Diversity, Equity and Inclusion\nThe University of Kentucky is committed to our core values of diversity and inclusion, mutual respect and human dignity, and a sense of community (Governing Regulations XIV). We acknowledge and respect the seen and unseen diverse identities and experiences of all members of the university community (https://www.uky.edu/regs/gr14). These identities include but are not limited to those based on race, ethnicity, gender identity and expressions, ideas and perspectives, religious and cultural beliefs, sexual orientation, national origin, age, ability, and socioeconomic status. We are committed to equity and justice and providing a learning and engaging community in which every member is engaged, heard, and valued.\nWe strive to rectify and change behavior that is inconsistent with our principles and commitment to diversity, equity, and inclusion. If students encounter such behavior in a course, they are encouraged to speak with the instructor of record and/or the Office of Institutional Equity and Equal Opportunity. Students may also contact a faculty member within the department, program director, the director of undergraduate or graduate studies, the department chair, any college administrator, or the dean. All of these individuals are mandatory reporters under University policies.\nhttps://www.uky.edu/universitysenate/syllabus-dei"
   },
   {
+    "objectID": "notes/index.html",
+    "href": "notes/index.html",
+    "title": "Meeting Notes",
+    "section": "",
+    "text": "These are the notes for our regular meetings.\n\n\n\n\n\n\n\n\n  \n\n\n\n\nSetup Notes\n\n\n\n\n\n\n\n\n\n\n\n\nJan 8, 2024\n\n\n\n\n\n\nNo matching items\n\nReuseCC-BY-SA 4.0"
+  },
+  {
+    "objectID": "notes/meetings/setup.html",
+    "href": "notes/meetings/setup.html",
+    "title": "Setup Notes",
+    "section": "",
+    "text": "We’ll need to get our systems setup to work properly with the tools we’ll be using this semester.\n\n\nIf you ware using a windows computer, I’ll ask you to install Windows Subsystem for Linux like so:\n\nFollow the tutorial here for enabling and installing WSL https://lingmethodshub.github.io/content/windows/wsl/00_installing_wsl.html\nInstall VS Code https://code.visualstudio.com/\nWork through the first section of this tutorial, stopping after you connect to WSL https://code.visualstudio.com/docs/remote/wsl-tutorial#_prerequisites\n\n\n\n\n\nInstall VS Code https://code.visualstudio.com/"
+  },
+  {
+    "objectID": "notes/meetings/setup.html#setup",
+    "href": "notes/meetings/setup.html#setup",
+    "title": "Setup Notes",
+    "section": "",
+    "text": "We’ll need to get our systems setup to work properly with the tools we’ll be using this semester.\n\n\nIf you ware using a windows computer, I’ll ask you to install Windows Subsystem for Linux like so:\n\nFollow the tutorial here for enabling and installing WSL https://lingmethodshub.github.io/content/windows/wsl/00_installing_wsl.html\nInstall VS Code https://code.visualstudio.com/\nWork through the first section of this tutorial, stopping after you connect to WSL https://code.visualstudio.com/docs/remote/wsl-tutorial#_prerequisites\n\n\n\n\n\nInstall VS Code https://code.visualstudio.com/"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Lin511-2024",
+    "title": "Computational Linguistics (Spring 2024)",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2\n\n\n\nimport numpy as np\nnp.ones(10)\n\narray([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.])\n\n\n\n\n\nReuseCC-BY-SA 4.0"
+    "text": "Welcome to the Lin511 Computational Linguistics website. This course is being taught in the University of Kentucky’s Linguistics Department in Spring 2024\nIf you are visiting on a mobile device, site navigation can be found under the “hamburger” at the top.\n\n\n\nReuseCC-BY-SA 4.0"
   },
   {
     "objectID": "about.html",
