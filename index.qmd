@@ -1,16 +1,10 @@
 ---
-title: "Lin511-2024"
+title: "Computational Linguistics (Spring 2024)"
+author: 
+  name: Josef Fruehwald
+  url: https://jofrhwld.github.io/
 ---
 
-This is a Quarto website.
+Welcome to the Lin511 Computational Linguistics website. This course is being taught in the University of Kentucky's Linguistics Department in Spring 2024
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{r}
-1 + 1
-```
-
-```{python}
-import numpy as np
-np.ones(10)
-```
+If you are visiting on a mobile device, site navigation can be found under the "hamburger" at the top.
