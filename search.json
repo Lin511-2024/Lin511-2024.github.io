@@ -11,6 +11,6 @@
     "href": "index.html",
     "title": "Lin511-2024",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2\n\n\n\nimport numpy as np\nnp.ones(10)\n\narray([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.])"
   }
 ]
