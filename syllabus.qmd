@@ -87,6 +87,8 @@ After attending class meetings and completion of the coursework, students should
 
 ## Course Materials
 
+We will be
+
 ## Course Technology
 
 ### Python
@@ -97,9 +99,11 @@ After attending class meetings and completion of the coursework, students should
 
 Git is a "Version Control System" that lets you keep track of changes on software projects. Github is a service that allows online hosting of Git projects. You will need to create a free a Github account for the course.
 
+There will be a number of course assignments that you will submit via commits to GitHub.
+
 ### Canvas
 
-Canvas will be used to make course announcements, and to set & submit assignments.
+Canvas will be used to make course announcements, and to distribute assignment links.
 
 ------------------------------------------------------------------------
 
@@ -113,29 +117,6 @@ I will respond to emails in a timely manner during normal working hours, but it 
 
 The topics and readings listed here are the tentative schedule for the course. We may find, in the room, that some topics will take longer than initially scheduled.
 
-### Open Blocks Plan
-
-I've laid out Blocks 1 through 3 rather prescriptively, as they reflect what I think the core components of "knowing R" require. However, Blocks 4 and 5 are more open ended, as I hope the interests of people in the course might guide what we work on. *Possible* topics we could cover include and are not limited to
-
--   Interactive, or animated data visualizations
-
--   Exploring `ggplot2` extensions for even greater control of figures
-
--   Working with and analyzing textual data
-
--   Working with and visualizing geographic data
-
--   Writing R packages
-
--   Building interactive dashboards
-
-In order to plan for these blocks, we'll devote some time the week before the block starts discussing the topic we'll pursue. After identifying the topic we're going to explore, the block schedule will follow the following pattern:
-
-1.  **Resource Scanning**: A process of searching for relevant R packages for the topic, identifying how they interact with broader R ecosystem, evaluating whether they are actively maintained, and searching for accessible documentation, texts, or how-tos on their use.
-2.  **Initial Implementation**: A process of straight fowardly re-running code examples from the available resources.
-3.  **Fine-Tuning**: A process of adjusting the code from the initial implementation to fit into our preferred workflows, and reapplying them to new data.
-4.  **Report backs**: Reflecting on what went well with the blocks, what was most challenging, and what aspects could be pushed even further.
-
 ### Block 1: Onboarding
 
 Weeks:
@@ -148,21 +129,11 @@ Dates:
 
 Topics
 
-:   -   Setting Up R, RStudio, Github
+:   -   VSCode, Python, Git, Github
 
-    -   Writing a Quarto Document
+    -   Writing a markdown document
 
 Resources:
-
-:   -   [Github Onboarding with RStudio](https://jofrhwld.github.io/blog/posts/2022/12/2022-12-21_github-onboarding/)
-
-    -   [R4DS: RMarkdown](https://r4ds.had.co.nz/r-markdown.html)
-
-    -   [Quarto Tutorial: Hello Quarto](https://quarto.org/docs/get-started/hello/rstudio.html)
-
-    -   [Quarto Tutorial: Computations](https://quarto.org/docs/get-started/computations/rstudio.html)
-
-    -   [Quarto Tutorial: Authoring](https://quarto.org/docs/get-started/authoring/rstudio.html)
 
 ### Block 2: Data Visualization Basics
 
