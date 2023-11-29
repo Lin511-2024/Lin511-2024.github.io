@@ -61,11 +61,11 @@ What you'll do:
 
 What you'll need:
 
-:   A computer with a physical keyboard; A github account.
+:   A computer with a physical keyboard; A GitHub account.
 
 The final-est deadline
 
-:   
+:   [April 30, 2024](#the-final-est-deadline)
 
 Attendance Policy
 
@@ -313,27 +313,11 @@ Every graded piece of work will have a due date. After a 2 day grace period, the
 
 ### Midterm Grades
 
-::: {.content-visible when-format="html"}
-<a title="Add to Calendar" class="addeventatc" data-id="rP15801523" href="https://www.addevent.com/event/rP15801523" target="_blank">Add to Calendar</a>
-
-```{=html}
-<script type="text/javascript" src="https://cdn.addevent.com/libs/atc/1.6.1/atc.min.js" async defer></script>
-```
-:::
-
-I will submit midterm grades on March 13, 2023, at the end of the midterm grading window. Any unsubmitted assignments that were due before March 13 will be given a grade of 0, ***BUT*** you can still submit those assignments after March 13 for their inclusion in the final grade.
+I will submit midterm grades on March 08, 2024, at the end of the midterm grading window. Any unsubmitted assignments that were due before March 08 will be given a grade of 0, ***BUT*** you can still submit those assignments after March 08 for their inclusion in the final grade.
 
 ### The Final-est Deadline {#the-final-est-deadline}
 
-::: {.content-visible when-format="html"}
-<a title="Add to Calendar" class="addeventatc" data-id="Ko15801514" href="https://www.addevent.com/event/Ko15801514" target="_blank">Add to Calendar</a>
-
-```{=html}
-<script type="text/javascript" src="https://cdn.addevent.com/libs/atc/1.6.1/atc.min.js" async defer></script>
-```
-:::
-
-The final-est deadline by which to submit any material to be graded is **May 4, 2023**. I have to set this hard deadline in order to have enough time to conclude final grading in time for the university's final grade submission deadline.
+The final-est deadline by which to submit any material to be graded is **April 30, 2024**. I have to set this hard deadline in order to have enough time to conclude final grading in time for the university's final grade submission deadline.
 
 ------------------------------------------------------------------------
 
