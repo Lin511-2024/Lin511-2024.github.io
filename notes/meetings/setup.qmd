@@ -1,5 +1,7 @@
-# Setup Notes
-2024-01-08
+---
+title: Setup Notes
+date: 2024-01-08
+---
 
 ## Setup
 
@@ -7,21 +9,37 @@ We'll need to get our systems setup to work properly with the tools we'll be usi
 
 ### VSCode and The Command Line
 
+:::: {.columns}
+
+::: {.column width="45%"}
+
 #### Windows Users
 
-If you ware using a windows computer, Iâ€™ll ask you to install Windows
-Subsystem for Linux like so:
+If you ware using a windows computer, I'll ask you to install Windows Subsystem for Linux like so:
 
-1.  Follow the tutorial here for enabling and installing WSL [https://lingmethodshub.github.io/content/windows/wsl/00_installing_wsl.html](https://lingmethodshub.github.io/content/windows/wsl/00_installing_wsl.html)
-2.  Install VS Code [https://code.visualstudio.com/](https://code.visualstudio.com/)
-3.  Work through the first section of this tutorial, stopping after you connect to WSL [https://code.visualstudio.com/docs/remote/wsl-tutorial#_prerequisites](https://code.visualstudio.com/docs/remote/wsl-tutorial#_prerequisites)
+1.  [Follow the tutorial here for enabling and installing WSL ](https://lingmethodshub.github.io/content/windows/wsl/00_installing_wsl.html)
+2.  [Install VS Code](https://code.visualstudio.com/)
+3.  [Work through the first section of this tutorial, stopping after you connect to WSL](https://code.visualstudio.com/docs/remote/wsl-tutorial#_prerequisites)
+:::
+
+:::{.column width="10%"}
+
+:::
+
+:::{.column width="45%"}
 
 #### MacOS/Linux Users
 
-1. Install VS Code [https://code.visualstudio.com/](https://code.visualstudio.com/)
+1. [Install VS Code](https://code.visualstudio.com/)
+
+:::
+
+::::
 
 ### Python
 
+
+#### pyenv 
 We'll be using a program called `pyenv` to manage the versions of python we use. To install `pyenv`, open the VSCode Command Palette (with `Shift+Ctrl+P`) which will open the command line interface. Then, copy this but of code, paste it into the terminal, and hit enter.
 
 ``` bash
@@ -86,5 +104,31 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init -)"
 ```
 
+#### Installing Python
 
+You'll need to close and reopen the terminal window you were using. But once you have, run the following:
+
+```bash
+pyenv install 3.11
+pyenv global 3.11
+pyenv virtualenv 3.11 Lin511
+```
+
+This will have installed a recent version of python onto your computer, and created a "virtual environment" for the class.
+
+## Git & Github Configuration
+
+First, in yout terminal run the following
+
+**Make sure you change the email and name to the email and username you use for Github!**
+
+```bash
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+```
+
+Then, follow these tutorials from github:
+
+1. [Generating a new SSH Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+2. [Adding your ssh key to github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
