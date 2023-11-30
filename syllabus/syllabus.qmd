@@ -1,6 +1,7 @@
 ---
 title: "Lin511-001 - Computational Linguistics"
 date: "Spring 2024"
+date-modified: last-modified
 date-format: "MMMM YYYY"
 author: "Josef Fruehwald"
 format: 
@@ -230,7 +231,7 @@ I will also expect all of us in the course to treat each other with respect and 
 
 ## Academic Conduct
 
-UK Senate rules on academic offences: <https://www.uky.edu/universitysenate/ao>
+[UK Senate rules on academic offences](https://www.uky.edu/universitysenate/ao)
 
 Appropriating someone else's work and portraying it as your own is cheating. Collaborating with someone and portraying that work as solely your own is cheating. Obtaining answers to homework assignments or exams from previous semesters is cheating. Using an internet search engine to look up a question and reporting that answer as your own is cheating. Falsifying data or experimental results is cheating. If you are unsure about whether a specific action is cheating, you may check with me.
 
@@ -244,7 +245,7 @@ Students may discuss assignments among themselves or with an instructor or tutor
 
 ## University Academic Policy Statements
 
-Link to University Senate Academic Policy Statements <https://www.uky.edu/universitysenate/acadpolicy>
+[Link to University Senate Academic Policy Statements](https://www.uky.edu/universitysenate/acadpolicy)
 
 ### Excused Absences and Acceptable Excuses
 
@@ -322,8 +323,8 @@ Reports of discrimination, harassment, or sexual misconduct may be made via the 
 
 ## Diversity, Equity and Inclusion
 
+[UK Senate DEI Statement](https://universitysenate.uky.edu/syllabus-statement-diversity-equity-and-inclusion-dei)
+
 The University of Kentucky is committed to our core values of diversity and inclusion, mutual respect and human dignity, and a sense of community ([[Governing Regulations XIV]{.underline}](https://www.uky.edu/regs/gr14)). We acknowledge and respect the seen and unseen diverse identities and experiences of all members of the university community (<https://www.uky.edu/regs/gr14>). These identities include but are not limited to those based on race, ethnicity, gender identity and expressions, ideas and perspectives, religious and cultural beliefs, sexual orientation, national origin, age, ability, and socioeconomic status. We are committed to equity and justice and providing a learning and engaging community in which every member is engaged, heard, and valued.
 
 We strive to rectify and change behavior that is inconsistent with our principles and commitment to diversity, equity, and inclusion. If students encounter such behavior in a course, they are encouraged to speak with the instructor of record and/or the [[Office of Institutional Equity and Equal Opportunity]{.underline}](https://www.uky.edu/eeo/). Students may also contact a faculty member within the department, program director, the director of undergraduate or graduate studies, the department chair, any college administrator, or the dean. All of these individuals are mandatory reporters under University policies.
-
-<https://www.uky.edu/universitysenate/syllabus-dei>

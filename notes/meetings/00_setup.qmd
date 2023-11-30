@@ -127,9 +127,12 @@ eval "$(pyenv init -)"
 pyenv install 3.11
 pyenv global 3.11
 pyenv virtualenv 3.11 Lin511
+pyenv activate Lin511
 ```
 
 This will have installed a recent version of python onto your computer, and created a "virtual environment" for the class.
+
+#### Installing some 
 
 ### Git & Github Configuration
 

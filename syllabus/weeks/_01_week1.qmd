@@ -19,3 +19,5 @@ Topics:
 :::
 
 ::::
+
+Read Speech and Language Processing Chapter 1
