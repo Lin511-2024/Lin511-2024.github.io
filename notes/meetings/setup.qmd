@@ -131,7 +131,7 @@ pyenv virtualenv 3.11 Lin511
 
 This will have installed a recent version of python onto your computer, and created a "virtual environment" for the class.
 
-## Git & Github Configuration
+### Git & Github Configuration
 
 **Make sure you change the email and name to the email and username you use for Github!**
 
