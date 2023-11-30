@@ -8,10 +8,25 @@ website:
     left:
       - text: "Home"
         href: index.qmd
+      - text: "Notes"
+        href: notes/index.qmd
   sidebar: 
-    contents:
-      - href: syllabus.qmd
-        text: Syllabus
+    - title: "Home"
+      contents:
+        - text: Home
+          href: index.qmd
+        - href: syllabus.qmd
+          text: Syllabus
+    - title: "Notes"
+      contents:
+        - text: Notes Home
+          href: notes/index.qmd
+        - section: Class Meetings
+          contents: 
+            - auto: notes/meetings/*
+    # contents:
+    #   - href: syllabus.qmd
+    #     text: Syllabus
 
 format:
   html:
