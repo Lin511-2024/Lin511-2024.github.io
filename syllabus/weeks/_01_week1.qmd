@@ -1,0 +1,21 @@
+### Week 1
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Dates: 
+
+: Jan 8-12
+
+:::
+
+::: {.column width="50%"}
+
+Topics:
+
+: Setup, Strings, Text
+
+:::
+
+::::

@@ -1,0 +1,21 @@
+### Week 2
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Dates: 
+
+: Jan 15-19
+
+:::
+
+::: {.column width="50%"}
+
+Topics:
+
+: Regular Expressions, Finite State Automata
+
+:::
+
+::::
