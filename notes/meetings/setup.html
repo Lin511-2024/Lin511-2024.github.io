@@ -207,20 +207,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="windows-users" class="level4">
 <h4 class="anchored" data-anchor-id="windows-users">Windows Users</h4>
 <p>If you ware using a windows computer, I’ll ask you to install Windows Subsystem for Linux like so:</p>
-<ol type="1">
-<li><a href="https://lingmethodshub.github.io/content/windows/wsl/00_installing_wsl.html">Follow the tutorial here for enabling and installing WSL</a></li>
-<li><a href="https://code.visualstudio.com/">Install VS Code</a></li>
-<li><a href="https://code.visualstudio.com/docs/remote/wsl-tutorial#_prerequisites">Work through the first section of this tutorial, stopping after you connect to WSL</a></li>
-</ol>
+<ul class="task-list">
+<li><input type="checkbox"><a href="https://lingmethodshub.github.io/content/windows/wsl/00_installing_wsl.html">Follow the tutorial here for enabling and installing WSL</a></li>
+<li><input type="checkbox"><a href="https://code.visualstudio.com/">Install VS Code</a></li>
+<li><input type="checkbox"><a href="https://code.visualstudio.com/docs/remote/wsl-tutorial#_prerequisites">Work through the first section of this tutorial, stopping after you connect to WSL</a></li>
+</ul>
 </section>
 </div><div class="column" style="width:10%;">
 
 </div><div class="column" style="width:45%;">
 <section id="macoslinux-users" class="level4">
 <h4 class="anchored" data-anchor-id="macoslinux-users">MacOS/Linux Users</h4>
-<ol type="1">
-<li><a href="https://code.visualstudio.com/">Install VS Code</a></li>
-</ol>
+<ul class="task-list">
+<li><input type="checkbox"><a href="https://code.visualstudio.com/">Install VS Code</a></li>
+</ul>
 </section>
 </div>
 </div>
@@ -229,8 +229,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="python">Python</h3>
 <section id="pyenv" class="level4">
 <h4 class="anchored" data-anchor-id="pyenv">pyenv</h4>
-<p>We’ll be using a program called <code>pyenv</code> to manage the versions of python we use. To install <code>pyenv</code>, open the VSCode Command Palette (with <code>Shift+Ctrl+P</code>) which will open the command line interface. Then, copy this but of code, paste it into the terminal, and hit enter.</p>
+<p>We’ll be using a program called <code>pyenv</code> to manage the versions of python we use. To install <code>pyenv</code>, open the VSCode Command Palette (with <code>Shift+Ctrl+P</code>) which will open the command line interface. Then,</p>
+<ul class="task-list">
+<li><input type="checkbox">copy this line of code code from this page (Ctrl-c or ⌘-c)</li>
+</ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> https://pyenv.run <span class="kw">|</span> <span class="fu">bash</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul class="task-list">
+<li><input type="checkbox">Paste it into the terminal (Ctrl-v or ⌘-v)</li>
+<li><input type="checkbox">Hit enter.</li>
+</ul>
 <p>Once that has successfully finished:</p>
 <hr>
 </section>
@@ -238,33 +245,59 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="column" style="width:45%;">
 <section id="macos-users" class="level4">
 <h4 class="anchored" data-anchor-id="macos-users">MacOS Users</h4>
-<p>Run</p>
+<ul class="task-list">
+<li><input type="checkbox">Run this</li>
+</ul>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> ~/.zshrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If that gives you an error, run</p>
+<details>
+<summary>
+If you get an error.
+</summary>
+<ul class="task-list">
+<li><input type="checkbox">Run this</li>
+</ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> ~/.zshrc</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> ~/.zshrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </section>
 </div><div class="column" style="width:10%;">
 
 </div><div class="column" style="width:45%;">
 <section id="wsl-users" class="level4">
 <h4 class="anchored" data-anchor-id="wsl-users">WSL users</h4>
-<p>Run</p>
+<ul class="task-list">
+<li><input type="checkbox">Run this</li>
+</ul>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> ~/.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If that gives you an error, run</p>
+<details>
+<summary>
+If you get an error
+</summary>
+<ul class="task-list">
+<li><input type="checkbox">Run ths</li>
+</ul>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> ~/.bashrc</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> ~/.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </section>
 </div>
 </div>
 <hr>
-<p>Paste the following into the window that opens, and save it.</p>
+<ul class="task-list">
+<li><input type="checkbox">Paste the following into the window that opens.</li>
+</ul>
 <div class="sourceCode" id="cb6"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PYENV_ROOT</span><span class="op">=</span><span class="st">"</span><span class="va">$HOME</span><span class="st">/.pyenv"</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">[[</span> <span class="ot">-d</span> <span class="va">$PYENV_ROOT</span>/bin <span class="kw">]]</span> <span class="kw">&amp;&amp;</span> <span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="st">"</span><span class="va">$PYENV_ROOT</span><span class="st">/bin:</span><span class="va">$PATH</span><span class="st">"</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="ex">pyenv</span> init <span class="at">-</span><span class="va">)</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul class="task-list">
+<li><input type="checkbox">Save it</li>
+</ul>
 <section id="installing-python" class="level4">
 <h4 class="anchored" data-anchor-id="installing-python">Installing Python</h4>
-<p>You’ll need to close and reopen the terminal window you were using. But once you have, run the following:</p>
+<ul class="task-list">
+<li><input type="checkbox">Close and reopen the terminal window</li>
+<li><input type="checkbox">Copy-Paste the following lines of code</li>
+</ul>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pyenv</span> install 3.11</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pyenv</span> global 3.11</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pyenv</span> virtualenv 3.11 Lin511</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -274,15 +307,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="git-github-configuration" class="level2">
 <h2 class="anchored" data-anchor-id="git-github-configuration">Git &amp; Github Configuration</h2>
-<p>First, in yout terminal run the following</p>
 <p><strong>Make sure you change the email and name to the email and username you use for Github!</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"you@example.com"</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Your Name"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul class="task-list">
+<li><input type="checkbox">In the terminal, set your git email address:</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"you@example.com"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul class="task-list">
+<li><input type="checkbox">Set your username.</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Your Name"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Then, follow these tutorials from github:</p>
-<ol type="1">
-<li><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Generating a new SSH Key</a></li>
-<li><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Adding your ssh key to github</a></li>
-</ol>
+<ul class="task-list">
+<li><input type="checkbox"><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Generating a new SSH Key</a></li>
+<li><input type="checkbox"><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Adding your ssh key to github</a></li>
+</ul>
 
 
 </section>
