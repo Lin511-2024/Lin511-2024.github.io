@@ -17,6 +17,8 @@ website:
           href: index.qmd
         - href: syllabus/syllabus.qmd
           text: Syllabus
+        - href: syllabus/schedule.qmd
+          text: Schedule
     - title: "Notes"
       contents:
         - text: Notes Home

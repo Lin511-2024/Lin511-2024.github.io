@@ -38,12 +38,12 @@ format:
 
 ### Instructor
 
-|                  |                            |
-|------------------|----------------------------|
-|                  | Dr. Josef Fruehwald        |
-| email:           | josef.fruehwald\@uky.edu   |
-| office hours:    | Mons, 12:00pm - 02:00pm |
-| office hours location: | Breckinridge, Rm 10                   |
+|                        |                            |
+|------------------------|----------------------------|
+|                        | Dr. Josef Fruehwald        |
+| email:                 | josef.fruehwald\@uky.edu   |
+| office hours:          | Mons, 12:00pm - 02:00pm    |
+| office hours location: | Breckinridge, Rm 10        |
 
 </div>
 :::
@@ -200,12 +200,12 @@ The topics and readings listed here are the tentative schedule for the course. W
 
 ### Grade Components
 
-|               |     |
-|---------------|----:|
-| Progress blog | 35% |
-| Block Reports | 30% |
-| Final Project | 25% |
-| Engagement    | 10% |
+|                    |     |
+|---------------     |----:|
+| Weekly Exercises   | 45% |
+| In-Class Exercises | 25% |
+| Final Project      | 20% |
+| Engagement         | 10% |
 
 </div>
 
@@ -226,19 +226,12 @@ The topics and readings listed here are the tentative schedule for the course. W
 
 ### Assignment Submission
 
-Assignments will be set on canvas, and you will submit notification of the assignment's completion through canvas. The *content* of the assignment itself may be contained elsewhere (e.g. the A&S RStudio server, or a Github repository).\\
+Some assignments will be created in GitHub Classroom, and their invite code will be posted to canvas. Some of these assignments will have "autograding" tests enabled. These "autogrades" are intended to be feedback to help you fine tune your code, and **are not** meant to be the final grade you will get for the assignment. Only grades as they are appear on Canvas are your official grade.
 
-### Progress Blog
-
-An end-of-week Quarto blog post about what you learned that week, including sample code if relevant.
-
-### Block Reports
-
-At the end of each block, a final cohesive report implementing what was learned. These will be due during the week *immediately after* we complete a block.
 
 ### Final Project
 
-A final capstone project for the course. This could be a report, in a similar format to the block reports, or some other agreed upon format (e.g. a dashboard, an R package, etc.)
+A final capstone project for the course. This could be a report, an extension of an earlier exercise, or some other agreed upon format.
 
 ### Engagement
 
