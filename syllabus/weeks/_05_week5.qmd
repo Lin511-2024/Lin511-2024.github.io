@@ -1,0 +1,21 @@
+### Week 3
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Dates: 
+
+: Feb 05-09
+
+:::
+
+::: {.column width="50%"}
+
+Topics:
+
+: More
+
+:::
+
+::::
