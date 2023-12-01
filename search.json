@@ -14,39 +14,18 @@
     "text": "Welcome to the Lin511 Computational Linguistics website. This course is being taught in the University of Kentucky’s Linguistics Department in Spring 2024\nIf you are visiting on a mobile device, site navigation can be found under the “hamburger” at the top.\n\n\n\nReuseCC-BY-SA 4.0"
   },
   {
-    "objectID": "notes/index.html",
-    "href": "notes/index.html",
-    "title": "Meeting Notes",
-    "section": "",
-    "text": "These are the notes for our regular meetings.\n\n\n\n\n\n\n\n\n  \n\n\n\n\nSetup Notes\n\n\n\n\n\n\n\n\n\n\n\n\nJan 8, 2024\n\n\n\n\n\n\nNo matching items\n\nReuseCC-BY-SA 4.0"
-  },
-  {
-    "objectID": "notes/meetings/00_setup.html",
-    "href": "notes/meetings/00_setup.html",
-    "title": "Setup Notes",
-    "section": "",
-    "text": "We’ll need to get our systems setup to work properly with the tools we’ll be using this semester.\n\n\n\n\n\n\nIf you ware using a windows computer, I’ll ask you to install Windows Subsystem for Linux like so:\n\nFollow the tutorial here for enabling and installing WSL\nInstall VS Code\nWork through the first section of this tutorial, stopping after you connect to WSL\n\n\n\n\n\n\n\n\nInstall VS Code\n\n\n\n\n\n\n\n\n\nWe’ll be using a program called pyenv to manage the versions of python we use. To install pyenv, open the VSCode Command Palette (with Shift+Ctrl+P) which will open the command line interface. Then,\n\ncopy this line of code code from this page (Ctrl-c or ⌘-c)\n\ncurl https://pyenv.run | bash\n\nPaste it into the terminal (Ctrl-v or ⌘-v)\nHit enter.\n\nOnce that has successfully finished:\n\n\n\n\n\n\n\nRun this\n\nopen ~/.zshrc\n\n\nIf you get an error.\n\n\nRun this\n\ntouch ~/.zshrc\nopen ~/.zshrc\n\n\n\n\n\n\n\n\nRun this\n\nopen ~/.bashrc\n\n\nIf you get an error\n\n\nRun ths\n\ntouch ~/.bashrc\nopen ~/.bashrc\n\n\n\n\n\n\nPaste the following into the window that opens.\n\nexport PYENV_ROOT=\"$HOME/.pyenv\"\n[[ -d $PYENV_ROOT/bin ]] && export PATH=\"$PYENV_ROOT/bin:$PATH\"\neval \"$(pyenv init -)\"\n\nSave it\n\n\n\n\nClose and reopen the terminal window\nCopy-Paste the following lines of code\n\npyenv install 3.11\npyenv global 3.11\npyenv virtualenv 3.11 Lin511\npyenv activate Lin511\nThis will have installed a recent version of python onto your computer, and created a “virtual environment” for the class.\n\n\n\n\n\n\n\nMake sure you change the email and name to the email and username you use for Github!\n\nIn the terminal, set your git email address:\n\ngit config --global user.email \"you@example.com\"\n\nSet your username.\n\ngit config --global user.name \"Your Name\"\nThen, follow these tutorials from github:\n\nGenerating a new SSH Key\nAdding your ssh key to github"
-  },
-  {
-    "objectID": "notes/meetings/00_setup.html#setup",
-    "href": "notes/meetings/00_setup.html#setup",
-    "title": "Setup Notes",
-    "section": "",
-    "text": "We’ll need to get our systems setup to work properly with the tools we’ll be using this semester.\n\n\n\n\n\n\nIf you ware using a windows computer, I’ll ask you to install Windows Subsystem for Linux like so:\n\nFollow the tutorial here for enabling and installing WSL\nInstall VS Code\nWork through the first section of this tutorial, stopping after you connect to WSL\n\n\n\n\n\n\n\n\nInstall VS Code\n\n\n\n\n\n\n\n\n\nWe’ll be using a program called pyenv to manage the versions of python we use. To install pyenv, open the VSCode Command Palette (with Shift+Ctrl+P) which will open the command line interface. Then,\n\ncopy this line of code code from this page (Ctrl-c or ⌘-c)\n\ncurl https://pyenv.run | bash\n\nPaste it into the terminal (Ctrl-v or ⌘-v)\nHit enter.\n\nOnce that has successfully finished:\n\n\n\n\n\n\n\nRun this\n\nopen ~/.zshrc\n\n\nIf you get an error.\n\n\nRun this\n\ntouch ~/.zshrc\nopen ~/.zshrc\n\n\n\n\n\n\n\n\nRun this\n\nopen ~/.bashrc\n\n\nIf you get an error\n\n\nRun ths\n\ntouch ~/.bashrc\nopen ~/.bashrc\n\n\n\n\n\n\nPaste the following into the window that opens.\n\nexport PYENV_ROOT=\"$HOME/.pyenv\"\n[[ -d $PYENV_ROOT/bin ]] && export PATH=\"$PYENV_ROOT/bin:$PATH\"\neval \"$(pyenv init -)\"\n\nSave it\n\n\n\n\nClose and reopen the terminal window\nCopy-Paste the following lines of code\n\npyenv install 3.11\npyenv global 3.11\npyenv virtualenv 3.11 Lin511\npyenv activate Lin511\nThis will have installed a recent version of python onto your computer, and created a “virtual environment” for the class.\n\n\n\n\n\n\n\nMake sure you change the email and name to the email and username you use for Github!\n\nIn the terminal, set your git email address:\n\ngit config --global user.email \"you@example.com\"\n\nSet your username.\n\ngit config --global user.name \"Your Name\"\nThen, follow these tutorials from github:\n\nGenerating a new SSH Key\nAdding your ssh key to github"
-  },
-  {
     "objectID": "syllabus/syllabus.html",
     "href": "syllabus/syllabus.html",
     "title": "Lin511-001 - Computational Linguistics",
     "section": "",
-    "text": "Where:\nWhitehall, Rm 205\n\n\nWhen:\nTues & Thurs, 09:30 - 10:45\n\n\nPrereq:\nLin221\n\n\nCredits:\n3\n\n\n\n\n\n\n\n\n\n\nDr. Josef Fruehwald\n\n\nemail:\njosef.fruehwald@uky.edu\n\n\noffice hours:\nMondays, 12:00pm - 02:00pm\n\n\noffice location:\nPOT 1671"
+    "text": "Where:\nWhitehall, Rm 205\n\n\nWhen:\nTues & Thurs, 09:30 - 10:45\n\n\nPrereq:\nLin221\n\n\nCredits:\n3\n\n\n\n\n\n\n\n\n\n\nDr. Josef Fruehwald\n\n\nemail:\njosef.fruehwald@uky.edu\n\n\noffice hours:\nMons, 12:00pm - 02:00pm\n\n\noffice hours location:\nBreckinridge, Rm 10"
   },
   {
     "objectID": "syllabus/syllabus.html#key-info",
     "href": "syllabus/syllabus.html#key-info",
     "title": "Lin511-001 - Computational Linguistics",
     "section": "",
-    "text": "Where:\nWhitehall, Rm 205\n\n\nWhen:\nTues & Thurs, 09:30 - 10:45\n\n\nPrereq:\nLin221\n\n\nCredits:\n3\n\n\n\n\n\n\n\n\n\n\nDr. Josef Fruehwald\n\n\nemail:\njosef.fruehwald@uky.edu\n\n\noffice hours:\nMondays, 12:00pm - 02:00pm\n\n\noffice location:\nPOT 1671"
+    "text": "Where:\nWhitehall, Rm 205\n\n\nWhen:\nTues & Thurs, 09:30 - 10:45\n\n\nPrereq:\nLin221\n\n\nCredits:\n3\n\n\n\n\n\n\n\n\n\n\nDr. Josef Fruehwald\n\n\nemail:\njosef.fruehwald@uky.edu\n\n\noffice hours:\nMons, 12:00pm - 02:00pm\n\n\noffice hours location:\nBreckinridge, Rm 10"
   },
   {
     "objectID": "syllabus/syllabus.html#course-at-a-glance",
@@ -60,28 +39,28 @@
     "href": "syllabus/syllabus.html#course-description",
     "title": "Lin511-001 - Computational Linguistics",
     "section": "3 Course Description",
-    "text": "3 Course Description"
+    "text": "3 Course Description\nThere are two important components to this course\n\nThis is an introduction to computational linguistics, with an emphasis on linguistics. We’ll be learning about approaches to computation as it relates to linguistic theory (e.g. phonological rules, syntactic parsing, etc) as well as computation involved in processing linguistic data (e.g. Large Language Models, Speech-to-Text etc.).\nThis will be an introduction to some practical aspects of general purpose computation, including basics of file system organization, version control, Integrated Developent Environments, command-line interfaces, and program writing (specifically in Python).\n\n\nHave you ever said one these things?\n\n“My computer hates me.”\n“I’m not a tech person.”\n\nAs part of our course meetings, I’ll be labelling these and other similar statements as “negative self-talk”. Instead, I’ll encourage you to try different statements, like\n\n“I’m not familiar with these concepts yet.”\n“Up to now, I’ve found these methods opaque.”\n\nWe can acknowledge your current struggle or confusion with computation or technology, while also acknowledging that their use is a skill, not a talent, and that skill can be built upon and improved with experience and practice."
   },
   {
     "objectID": "syllabus/syllabus.html#learning-outcomes",
     "href": "syllabus/syllabus.html#learning-outcomes",
     "title": "Lin511-001 - Computational Linguistics",
     "section": "4 Learning Outcomes",
-    "text": "4 Learning Outcomes\nAfter attending class meetings and completion of the coursework, students should be able to"
+    "text": "4 Learning Outcomes\nAfter attending class meetings and completion of the coursework, students should be able to\n\nDescribe the computational methods used to model and process linguistic structures.\nUse Regular Expressions to search and match strings.\nWrite a python program to linguistically parse language data.\nCritically evaluate claims made about modern natural language processing applications."
   },
   {
     "objectID": "syllabus/syllabus.html#course-materials",
     "href": "syllabus/syllabus.html#course-materials",
     "title": "Lin511-001 - Computational Linguistics",
     "section": "5 Course Materials",
-    "text": "5 Course Materials\nWe will be"
+    "text": "5 Course Materials\nWe will be using a mixture of textbooks and online resources for the course. These are currently available for free online. The labels SLP, NLTK and TP will be used to refer to each book in the reading schedule.\n\nSLP:\n\nDaniel Jurafsky and James H Martin. 202\\d. Speech and Language Processing: An Introduction to Natural Language Processing Computational Linguistics, and Speech Recognition Third Edition.\n\nNLTK:\n\nSteven Bird, Ewan Klein, and Edward Loper. 2009. Natural Language Processing with Python: Analyzing Text with the Natural Language Toolkit\n\nTP:\n\nAllen B. Downey. 2015. Think Python, 2nd edition"
   },
   {
     "objectID": "syllabus/syllabus.html#course-technology",
     "href": "syllabus/syllabus.html#course-technology",
     "title": "Lin511-001 - Computational Linguistics",
     "section": "6 Course Technology",
-    "text": "6 Course Technology\n\nPython\n\n\nVS Code/\n\n\nGit/Github\nGit is a “Version Control System” that lets you keep track of changes on software projects. Github is a service that allows online hosting of Git projects. You will need to create a free a Github account for the course.\nThere will be a number of course assignments that you will submit via commits to GitHub.\n\n\nCanvas\nCanvas will be used to make course announcements, and to distribute assignment links."
+    "text": "6 Course Technology\nAs course with a practical programming component, we’re going to be using a number of technical programs. There will be specific class time set aside for setting these up.\n\nCommand-Line Interfaces\nCommand-line Interfaces (CLI) are text-only ways to interact with your computer, including accessing its files and running programs. We will all be accessing the CLI through Visual Studio Code. For Windows users, this will also involve installing Windows Subsystem for Linux.\n\n\nPython Scripts & Jupyter Notebooks\nPython is the programming language that we’ll be using to do most of our work and analysis in this course. We’ll also be using extensions to the Python programming language in the form of freely available Python libraries, such as nltk and numpy.\nWe’ll be writing both python scripts as well as using Jupyter notebooks to interact with python.\n\n\nVisual Studio Code\nThe fact we will be “writing” python scripts implies we will be writing them in something. The program we will be using for composing our programs will be Visual Studio Code. VS Code is a general purpose Integrated Development Environment (IDE).\nAs “formal languages”, programming languages are very sensitive to any kind of typo or formatting error. The purpose IDEs is to provide you support to avoid these typos & errors in the first place, and to warn you when they exist.\n\n\nGit/Github\nGit is a “Version Control System” that lets you keep track of changes on software projects. Github is a service that allows online hosting of Git projects. You will need to create a free a Github account for the course.\nThere will be a number of course assignments that you will submit via commits to GitHub.\n\n\nCanvas\nCanvas will be used to make course announcements, and to distribute assignment links."
   },
   {
     "objectID": "syllabus/syllabus.html#communications",
@@ -95,7 +74,7 @@
     "href": "syllabus/syllabus.html#course-schedule",
     "title": "Lin511-001 - Computational Linguistics",
     "section": "8 Course Schedule",
-    "text": "8 Course Schedule\nThe topics and readings listed here are the tentative schedule for the course. We may find, in the room, that some topics will take longer than initially scheduled.\n\nWeek 1\n\n\n\nDates:\n\nJan 8-12\n\n\n\n\nTopics:\n\nSetup, Strings, Text\n\n\n\n\nRead Speech and Language Processing Chapter 1\n\n\nWeek 2\n\n\n\nDates:\n\nJan 15-19\n\n\n\n\nTopics:\n\nRegular Expressions, Finite State Automata\n\n\n\n\n\n\nWeek 3\n\n\n\nDates:\n\nJan 22-26\n\n\n\n\nTopics:\n\nMore"
+    "text": "8 Course Schedule\nThe topics and readings listed here are the tentative schedule for the course. We may find, in the room, that some topics will take longer than initially scheduled.\n\nWeek 1\n\n\n\nDates:\n\nJan 8-12\n\n\n\n\nTopics:\n\nSetup, Strings, Text\n\n\n\n\nRead Speech and Language Processing Chapter 1\n\n\nWeek 2\n\n\n\nDates:\n\nJan 15-19\n\n\n\n\nTopics:\n\nRegular Expressions, Finite State Automata\n\n\n\n\nNo Office Hours for MLK Jr Day.\n\n\nWeek 3\n\n\n\nDates:\n\nJan 22-26\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 4\n\n\n\nDates:\n\nJan 29 - Feb 02\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 5\n\n\n\nDates:\n\nFeb 05-09\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 6\n\n\n\nDates:\n\nFeb 12 - 16\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 7\n\n\n\nDates:\n\nFeb 19-23\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 8\n\n\n\nDates:\n\nFeb 26 - Mar 01\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 9\n\n\n\nDates:\n\nMar 04-08\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nSpring Break\n\n\n\n\nWeek 10\n\n\n\nDates:\n\nMar 18-22\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 11\n\n\n\nDates:\n\nMar 25-29\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 12\n\n\n\nDates:\n\nApr 01-05\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 13\n\n\n\nDates:\n\nApr 08-12\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 14\n\n\n\nDates:\n\nApr 15-19\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 15\n\n\n\nDates:\n\nApr 22-26\n\n\n\n\nTopics:\n\nMore"
   },
   {
     "objectID": "syllabus/syllabus.html#course-evaluation",
@@ -145,5 +124,33 @@
     "title": "Lin511-001 - Computational Linguistics",
     "section": "15 Diversity, Equity and Inclusion",
     "text": "15 Diversity, Equity and Inclusion\nUK Senate DEI Statement\nThe University of Kentucky is committed to our core values of diversity and inclusion, mutual respect and human dignity, and a sense of community (Governing Regulations XIV). We acknowledge and respect the seen and unseen diverse identities and experiences of all members of the university community (https://www.uky.edu/regs/gr14). These identities include but are not limited to those based on race, ethnicity, gender identity and expressions, ideas and perspectives, religious and cultural beliefs, sexual orientation, national origin, age, ability, and socioeconomic status. We are committed to equity and justice and providing a learning and engaging community in which every member is engaged, heard, and valued.\nWe strive to rectify and change behavior that is inconsistent with our principles and commitment to diversity, equity, and inclusion. If students encounter such behavior in a course, they are encouraged to speak with the instructor of record and/or the Office of Institutional Equity and Equal Opportunity. Students may also contact a faculty member within the department, program director, the director of undergraduate or graduate studies, the department chair, any college administrator, or the dean. All of these individuals are mandatory reporters under University policies."
+  },
+  {
+    "objectID": "notes/meetings/00_setup.html",
+    "href": "notes/meetings/00_setup.html",
+    "title": "Setup Notes",
+    "section": "",
+    "text": "We’ll need to get our systems setup to work properly with the tools we’ll be using this semester.\n\n\n\n\n\n\nIf you ware using a windows computer, I’ll ask you to install Windows Subsystem for Linux like so:\n\nFollow the tutorial here for enabling and installing WSL\nInstall VS Code\nWork through the first section of this tutorial, stopping after you connect to WSL\n\n\n\n\n\n\n\n\nInstall VS Code\n\n\n\n\n\n\n\n\n\nWe’ll be using a program called pyenv to manage the versions of python we use. To install pyenv, open the VSCode Command Palette (with Shift+Ctrl+P) which will open the command line interface. Then,\n\ncopy this line of code code from this page (Ctrl-c or ⌘-c)\n\ncurl https://pyenv.run | bash\n\nPaste it into the terminal (Ctrl-v or ⌘-v)\nHit enter.\n\nOnce that has successfully finished:\n\n\n\n\n\n\n\nRun this\n\nopen ~/.zshrc\n\n\nIf you get an error.\n\n\nRun this\n\ntouch ~/.zshrc\nopen ~/.zshrc\n\n\n\n\n\n\n\n\nRun this\n\nopen ~/.bashrc\n\n\nIf you get an error\n\n\nRun ths\n\ntouch ~/.bashrc\nopen ~/.bashrc\n\n\n\n\n\n\nPaste the following into the window that opens.\n\nexport PYENV_ROOT=\"$HOME/.pyenv\"\n[[ -d $PYENV_ROOT/bin ]] && export PATH=\"$PYENV_ROOT/bin:$PATH\"\neval \"$(pyenv init -)\"\n\nSave it\n\n\n\n\nClose and reopen the terminal window\nCopy-Paste the following lines of code\n\npyenv install 3.11\npyenv global 3.11\npyenv virtualenv 3.11 Lin511\npyenv activate Lin511\nThis will have installed a recent version of python onto your computer, and created a “virtual environment” for the class.\n\n\n\n\n\n\n\nMake sure you change the email and name to the email and username you use for Github!\n\nIn the terminal, set your git email address:\n\ngit config --global user.email \"you@example.com\"\n\nSet your username.\n\ngit config --global user.name \"Your Name\"\nThen, follow these tutorials from github:\n\nGenerating a new SSH Key\nAdding your ssh key to github"
+  },
+  {
+    "objectID": "notes/meetings/00_setup.html#setup",
+    "href": "notes/meetings/00_setup.html#setup",
+    "title": "Setup Notes",
+    "section": "",
+    "text": "We’ll need to get our systems setup to work properly with the tools we’ll be using this semester.\n\n\n\n\n\n\nIf you ware using a windows computer, I’ll ask you to install Windows Subsystem for Linux like so:\n\nFollow the tutorial here for enabling and installing WSL\nInstall VS Code\nWork through the first section of this tutorial, stopping after you connect to WSL\n\n\n\n\n\n\n\n\nInstall VS Code\n\n\n\n\n\n\n\n\n\nWe’ll be using a program called pyenv to manage the versions of python we use. To install pyenv, open the VSCode Command Palette (with Shift+Ctrl+P) which will open the command line interface. Then,\n\ncopy this line of code code from this page (Ctrl-c or ⌘-c)\n\ncurl https://pyenv.run | bash\n\nPaste it into the terminal (Ctrl-v or ⌘-v)\nHit enter.\n\nOnce that has successfully finished:\n\n\n\n\n\n\n\nRun this\n\nopen ~/.zshrc\n\n\nIf you get an error.\n\n\nRun this\n\ntouch ~/.zshrc\nopen ~/.zshrc\n\n\n\n\n\n\n\n\nRun this\n\nopen ~/.bashrc\n\n\nIf you get an error\n\n\nRun ths\n\ntouch ~/.bashrc\nopen ~/.bashrc\n\n\n\n\n\n\nPaste the following into the window that opens.\n\nexport PYENV_ROOT=\"$HOME/.pyenv\"\n[[ -d $PYENV_ROOT/bin ]] && export PATH=\"$PYENV_ROOT/bin:$PATH\"\neval \"$(pyenv init -)\"\n\nSave it\n\n\n\n\nClose and reopen the terminal window\nCopy-Paste the following lines of code\n\npyenv install 3.11\npyenv global 3.11\npyenv virtualenv 3.11 Lin511\npyenv activate Lin511\nThis will have installed a recent version of python onto your computer, and created a “virtual environment” for the class.\n\n\n\n\n\n\n\nMake sure you change the email and name to the email and username you use for Github!\n\nIn the terminal, set your git email address:\n\ngit config --global user.email \"you@example.com\"\n\nSet your username.\n\ngit config --global user.name \"Your Name\"\nThen, follow these tutorials from github:\n\nGenerating a new SSH Key\nAdding your ssh key to github"
+  },
+  {
+    "objectID": "notes/index.html",
+    "href": "notes/index.html",
+    "title": "Meeting Notes",
+    "section": "",
+    "text": "These are the notes for our regular meetings.\n\n\n\n\n\n\n\n\n  \n\n\n\n\nSetup Notes\n\n\n\n\n\n\n\n\n\n\n\n\nJan 8, 2024\n\n\n\n\n\n\nNo matching items\n\nReuseCC-BY-SA 4.0"
+  },
+  {
+    "objectID": "syllabus/schedule.html",
+    "href": "syllabus/schedule.html",
+    "title": "Course Schedule",
+    "section": "",
+    "text": "Week 1\n\n\n\nDates:\n\nJan 8-12\n\n\n\n\nTopics:\n\nSetup, Strings, Text\n\n\n\n\nRead Speech and Language Processing Chapter 1\n\n\nWeek 2\n\n\n\nDates:\n\nJan 15-19\n\n\n\n\nTopics:\n\nRegular Expressions, Finite State Automata\n\n\n\n\nNo Office Hours for MLK Jr Day.\n\n\nWeek 3\n\n\n\nDates:\n\nJan 22-26\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 4\n\n\n\nDates:\n\nJan 29 - Feb 02\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 5\n\n\n\nDates:\n\nFeb 05-09\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 6\n\n\n\nDates:\n\nFeb 12 - 16\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 7\n\n\n\nDates:\n\nFeb 19-23\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 8\n\n\n\nDates:\n\nFeb 26 - Mar 01\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 9\n\n\n\nDates:\n\nMar 04-08\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nSpring Break\n\n\n\n\nWeek 10\n\n\n\nDates:\n\nMar 18-22\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 11\n\n\n\nDates:\n\nMar 25-29\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 12\n\n\n\nDates:\n\nApr 01-05\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 13\n\n\n\nDates:\n\nApr 08-12\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 14\n\n\n\nDates:\n\nApr 15-19\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 15\n\n\n\nDates:\n\nApr 22-26\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\n\n\nReuseCC-BY-SA 4.0"
   }
 ]
