@@ -2,6 +2,8 @@ project:
   type: website
 
 license: CC-BY-SA 4.0
+author: Josef Fruehwald
+
 website:
   title: "Lin511-2024"
   navbar:
@@ -23,6 +25,9 @@ website:
       contents:
         - text: Notes Home
           href: notes/index.qmd
+        - section: Concepts
+          contents:
+            - auto: notes/concepts/*
         - section: Class Meetings
           contents: 
             - auto: notes/meetings/*
@@ -38,6 +43,7 @@ format:
     css: styles.css
     toc: true
     fontsize: large
+    smooth-scroll: true    
 
 editor: visual
 
