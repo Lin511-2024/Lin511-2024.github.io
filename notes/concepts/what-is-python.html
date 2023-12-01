@@ -7,9 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Josef Fruehwald">
-<meta name="dcterms.date" content="2024-01-08">
 
-<title>Lin511-2024 - Setup Notes</title>
+<title>Lin511-2024 - What is Python?</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -140,7 +139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/meetings/00_setup.html">Class Meetings</a></li><li class="breadcrumb-item"><a href="../../notes/meetings/00_setup.html">Setup Notes</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/concepts/what-is-python.html">Concepts</a></li><li class="breadcrumb-item"><a href="../../notes/concepts/what-is-python.html">What <em>is</em> Python?</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -169,7 +168,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notes/concepts/what-is-python.html" class="sidebar-item-text sidebar-link">
+  <a href="../../notes/concepts/what-is-python.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">What <em>is</em> Python?</span></a>
   </div>
 </li>
@@ -186,7 +185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notes/meetings/00_setup.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../notes/meetings/00_setup.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Setup Notes</span></a>
   </div>
 </li>
@@ -202,12 +201,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a>
-  <ul class="collapse">
-  <li><a href="#vscode-and-the-command-line" id="toc-vscode-and-the-command-line" class="nav-link" data-scroll-target="#vscode-and-the-command-line">VSCode and The Command Line</a></li>
-  <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python">Python</a></li>
-  <li><a href="#git-github-configuration" id="toc-git-github-configuration" class="nav-link" data-scroll-target="#git-github-configuration">Git &amp; Github Configuration</a></li>
-  </ul></li>
+  <li><a href="#python-is-set-of-rules-for-a-formal-language" id="toc-python-is-set-of-rules-for-a-formal-language" class="nav-link active" data-scroll-target="#python-is-set-of-rules-for-a-formal-language">📕 Python is set of rules for a formal language</a></li>
+  <li><a href="#python-is-a-program-that-interprets-formal-language-input" id="toc-python-is-a-program-that-interprets-formal-language-input" class="nav-link" data-scroll-target="#python-is-a-program-that-interprets-formal-language-input">🤖 Python is a program that interprets formal language input</a></li>
+  <li><a href="#python-is-an-ecosystem" id="toc-python-is-an-ecosystem" class="nav-link" data-scroll-target="#python-is-an-ecosystem">⛰️ Python is an Ecosystem</a></li>
+  <li><a href="#python-is-a-social-project" id="toc-python-is-a-social-project" class="nav-link" data-scroll-target="#python-is-a-social-project">🧑‍💻 Python is a social project</a></li>
   </ul>
 </nav>
     </div>
@@ -216,7 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Setup Notes</h1>
+<h1 class="title">What <em>is</em> Python?</h1>
 </div>
 
 
@@ -230,12 +227,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div>
   </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">January 8, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -243,139 +234,181 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="setup" class="level2">
-<h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<p>We’ll need to get our systems setup to work properly with the tools we’ll be using this semester.</p>
-<section id="vscode-and-the-command-line" class="level3">
-<h3 class="anchored" data-anchor-id="vscode-and-the-command-line">VSCode and The Command Line</h3>
-<div class="columns">
-<div class="column" style="width:45%;">
-<section id="windows-users" class="level4">
-<h4 class="anchored" data-anchor-id="windows-users">Windows Users</h4>
-<p>If you ware using a windows computer, I’ll ask you to install Windows Subsystem for Linux like so:</p>
-<ul class="task-list">
-<li><input type="checkbox"><a href="https://lingmethodshub.github.io/content/windows/wsl/00_installing_wsl.html">Follow the tutorial here for enabling and installing WSL</a></li>
-<li><input type="checkbox"><a href="https://code.visualstudio.com/">Install VS Code</a></li>
-<li><input type="checkbox"><a href="https://code.visualstudio.com/docs/remote/wsl-tutorial#_prerequisites">Work through the first section of this tutorial, stopping after you connect to WSL</a></li>
+<p>When talking about “Python” or other programming langauges, we often engage in a form of polysemy<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> that can be confusing at first. I’ll try to unpack the different meanings here.</p>
+<section id="python-is-set-of-rules-for-a-formal-language" class="level2">
+<h2 class="anchored" data-anchor-id="python-is-set-of-rules-for-a-formal-language">📕 Python is set of rules for a formal language</h2>
+<p>When we talk about “Python”, one thing we sometimes refer to is an abstract set of rules for a formal language.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+📕 The abstract language
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When you say:</p>
+<blockquote class="blockquote">
+<p>I’m learning Python this semester.</p>
+</blockquote>
+<p>You’re talking about the abstract set of rules.</p>
+</div>
+</div>
+<p>We can describe some of these rules in natural language (this isn’t how they’re <em>actually</em> written).</p>
+<ul>
+<li>If a list of values has been assigned to a variable, when the variable’s name is followed <code>[0]</code>, return the first value in the list.</li>
+<li>If <code>print(</code> is followed by a value or variable, which is then followed by <code>)</code>, print the value, or the value assigned to the variable.</li>
+<li>If a <code>#</code> symbol is encountered on a line, ignore everything following it.</li>
 </ul>
+<p>These rules define very precisely how code should be written, and also define what should be <em>done</em> when certain patterns of code are encountered, but these rules are abstract, and don’t actually <em>do</em> anything.</p>
 </section>
-</div><div class="column" style="width:10%;">
-
-</div><div class="column" style="width:45%;">
-<section id="macoslinux-users" class="level4">
-<h4 class="anchored" data-anchor-id="macoslinux-users">MacOS/Linux Users</h4>
-<ul class="task-list">
-<li><input type="checkbox"><a href="https://code.visualstudio.com/">Install VS Code</a></li>
+<section id="python-is-a-program-that-interprets-formal-language-input" class="level2">
+<h2 class="anchored" data-anchor-id="python-is-a-program-that-interprets-formal-language-input">🤖 Python is a program that interprets formal language input</h2>
+<p>Simply having a set of abstract rules can be fun, but it’s not so useful if you have no way to actually <em>do</em> things. To make code we write that conforms to the rules of the language actually do anything, we need to use a program called an <strong>Interpreter</strong>.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+🤖 The Python Interpreter
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When you say</p>
+<blockquote class="blockquote">
+<p>I’m having a hard time installing Python.</p>
+</blockquote>
+<p>you’re talking about a Python Interpreter.</p>
+</div>
+</div>
+<p>The Python interpreter processes code, determines whether or not it is valid, then does the things the code told it to do.</p>
+<p>Code can get passed to the interpreter many different ways, including</p>
+<ul>
+<li>In a single text file, called a python “script”, (usually named to end in <code>.py</code>)</li>
+<li>In an interactive python “shell”.</li>
+<li>Inside a Jupyter notebook.</li>
 </ul>
-</section>
+<p>For example, the text in the shaded block below was passed to a Python interpreter, and the interpreter decided that it was invalid (because there is an opening quote <code>"</code>, but not a closing quote).</p>
+<div class="cell" data-execution_count="1">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Python Code</strong></pre>
+</div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">"x</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-error">
+<pre><code>SyntaxError: unterminated string literal (detected at line 1) (20073044.py, line 1)</code></pre>
+</div>
+</div>
+<p>The text in this next shaded block was passed to a Python interpreter. This time, it was deemed valid, and the interpreter did what thee code instructed.</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"hello! "</span> <span class="op">*</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>hello! hello! hello! </code></pre>
 </div>
 </div>
 </section>
-<section id="python" class="level3">
-<h3 class="anchored" data-anchor-id="python">Python</h3>
-<section id="pyenv" class="level4">
-<h4 class="anchored" data-anchor-id="pyenv">pyenv</h4>
-<p>We’ll be using a program called <code>pyenv</code> to manage the versions of python we use. To install <code>pyenv</code>, open the VSCode Command Palette (with <code>Shift+Ctrl+P</code>) which will open the command line interface. Then,</p>
-<ul class="task-list">
-<li><input type="checkbox">copy this line of code code from this page (Ctrl-c or ⌘-c)</li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> https://pyenv.run <span class="kw">|</span> <span class="fu">bash</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul class="task-list">
-<li><input type="checkbox">Paste it into the terminal (Ctrl-v or ⌘-v)</li>
-<li><input type="checkbox">Hit enter.</li>
-</ul>
-<p>Once that has successfully finished:</p>
-<hr>
-</section>
-<div class="columns">
-<div class="column" style="width:45%;">
-<section id="macos-users" class="level4">
-<h4 class="anchored" data-anchor-id="macos-users">MacOS Users</h4>
-<ul class="task-list">
-<li><input type="checkbox">Run this</li>
-</ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> ~/.zshrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<details>
-<summary>
-If you get an error.
-</summary>
-<ul class="task-list">
-<li><input type="checkbox">Run this</li>
-</ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> ~/.zshrc</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> ~/.zshrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</section>
-</div><div class="column" style="width:10%;">
-
-</div><div class="column" style="width:45%;">
-<section id="wsl-users" class="level4">
-<h4 class="anchored" data-anchor-id="wsl-users">WSL users</h4>
-<ul class="task-list">
-<li><input type="checkbox">Run this</li>
-</ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> ~/.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<details>
-<summary>
-If you get an error
-</summary>
-<ul class="task-list">
-<li><input type="checkbox">Run ths</li>
-</ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> ~/.bashrc</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> ~/.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</section>
+<section id="python-is-an-ecosystem" class="level2">
+<h2 class="anchored" data-anchor-id="python-is-an-ecosystem">⛰️ Python is an Ecosystem</h2>
+<p>People often say that Python comes “with batteries included”, meaning it can do a lot of different things out without needing to install any extensions. But you <em>can</em> install extensions in the form of additional libraries that extend Python’s capabilities.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+⛰️ The Ecosystem
 </div>
 </div>
-<hr>
-<ul class="task-list">
-<li><input type="checkbox">Paste the following into the window that opens.</li>
+<div class="callout-body-container callout-body">
+<p>When someone says</p>
+<blockquote class="blockquote">
+<p>Python is the most widely used language in natural language processing.</p>
+</blockquote>
+<p>They are talking about the <em>ecosystem</em> of libraries for Pything that have been built to do natural language processing.</p>
+</div>
+</div>
+<p>Some examples of additional libraries for Python are</p>
+<ul>
+<li><code>numpy</code>: Allows for effective computation with numbers</li>
+<li><code>matplotlib</code>: Makes graphs</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PYENV_ROOT</span><span class="op">=</span><span class="st">"</span><span class="va">$HOME</span><span class="st">/.pyenv"</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">[[</span> <span class="ot">-d</span> <span class="va">$PYENV_ROOT</span>/bin <span class="kw">]]</span> <span class="kw">&amp;&amp;</span> <span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="st">"</span><span class="va">$PYENV_ROOT</span><span class="st">/bin:</span><span class="va">$PATH</span><span class="st">"</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="ex">pyenv</span> init <span class="at">-</span><span class="va">)</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul class="task-list">
-<li><input type="checkbox">Save it</li>
-</ul>
-<section id="installing-python" class="level4">
-<h4 class="anchored" data-anchor-id="installing-python">Installing Python</h4>
-<ul class="task-list">
-<li><input type="checkbox">Close and reopen the terminal window</li>
-<li><input type="checkbox">Copy-Paste the following lines of code</li>
-</ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pyenv</span> install 3.11</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pyenv</span> global 3.11</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pyenv</span> virtualenv 3.11 Lin511</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pyenv</span> activate Lin511</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This will have installed a recent version of python onto your computer, and created a “virtual environment” for the class.</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span> <span class="op">*</span> np.pi, <span class="dv">200</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.sin(x)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>ax.plot(x, y)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="what-is-python_files/figure-html/cell-4-output-1.png" width="590" height="411"></p>
+</div>
+</div>
 </section>
-<section id="installing-some" class="level4">
-<h4 class="anchored" data-anchor-id="installing-some">Installing some</h4>
-</section>
-</section>
-<section id="git-github-configuration" class="level3">
-<h3 class="anchored" data-anchor-id="git-github-configuration">Git &amp; Github Configuration</h3>
-<p><strong>Make sure you change the email and name to the email and username you use for Github!</strong></p>
-<ul class="task-list">
-<li><input type="checkbox">In the terminal, set your git email address:</li>
+<section id="python-is-a-social-project" class="level2">
+<h2 class="anchored" data-anchor-id="python-is-a-social-project">🧑‍💻 Python is a social project</h2>
+<p>The meanings of “Python” we’ve already talked about are</p>
+<ul>
+<li>📕 The abstract language</li>
+<li>🤖 The Python Interpreter</li>
+<li>⛰️ The Python Ecosystem</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"you@example.com"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul class="task-list">
-<li><input type="checkbox">Set your username.</li>
+<p>Understanding how to put all of these pieces together effectively is a <em>social</em> project.</p>
+<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+🧑‍💻 The social project
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When you say</p>
+<blockquote class="blockquote">
+<p>So-n-so is really good at Python.</p>
+</blockquote>
+<p>You are talking about their involvement in the Python social project.</p>
+</div>
+</div>
+<ul>
+<li>❌ There is no part of the 📕 <em>abstract langauge</em> that will inform you that there is a very good Python library for doing a certain task.</li>
+<li>❌ The 🤖 <em>Python Interpreter</em> won’t tell you that there’s a better way to do what you’re trying to do.</li>
+<li>❌ There are nearly <a href="https://pypi.org/">half a million libraries on ⛰️ <em>the Python Package Index</em></a>, so you can’t just peruse it to find what’s relevant.</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Your Name"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Then, follow these tutorials from github:</p>
-<ul class="task-list">
-<li><input type="checkbox"><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Generating a new SSH Key</a></li>
-<li><input type="checkbox"><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Adding your ssh key to github</a></li>
-</ul>
+<p>In order to know newest or most effective way to do things, you need to be involved in 🧑‍💻 <em>the social project</em>. That begins within a classroom, then extends to keeping up with blogs and other discourses about changes and developments.</p>
+<p>One way people demonstrate that they are involved in the Python social project is by writing their code <em>idiomatically</em>. For example, in the code block above, I included the line <code>import numpy as np</code>. But <em>there’s no rule</em> that we import <code>numpy</code> as <code>np</code>, it’s simply convention.</p>
+<p>This code below will run just as well, but would cause problems for people trying to read your code, because it’s not idiomatic.</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> jokes</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> farts</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> farts.linspace(<span class="dv">0</span>, <span class="dv">2</span> <span class="op">*</span> farts.pi, <span class="dv">200</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> farts.sin(x)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> jokes.subplots()</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>ax.plot(x, y)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>jokes.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="what-is-python_files/figure-html/cell-5-output-1.png" width="590" height="411"></p>
+</div>
+</div>
 
 
 </section>
-</section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section></div></main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>A word is polysemous when it has more than one meaning.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

@@ -62,6 +62,7 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -128,6 +129,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Syllabus</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../syllabus/schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -176,8 +183,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#course-evaluation" id="toc-course-evaluation" class="nav-link" data-scroll-target="#course-evaluation"><span class="header-section-number">9</span> Course Evaluation</a>
   <ul class="collapse">
   <li><a href="#assignment-submission" id="toc-assignment-submission" class="nav-link" data-scroll-target="#assignment-submission">Assignment Submission</a></li>
-  <li><a href="#progress-blog" id="toc-progress-blog" class="nav-link" data-scroll-target="#progress-blog">Progress Blog</a></li>
-  <li><a href="#block-reports" id="toc-block-reports" class="nav-link" data-scroll-target="#block-reports">Block Reports</a></li>
   <li><a href="#final-project" id="toc-final-project" class="nav-link" data-scroll-target="#final-project">Final Project</a></li>
   <li><a href="#engagement" id="toc-engagement" class="nav-link" data-scroll-target="#engagement">Engagement</a></li>
   </ul></li>
@@ -734,16 +739,16 @@ ul.task-list li input[type="checkbox"] {
 <table class="table">
 <tbody>
 <tr class="odd">
-<td>Progress blog</td>
-<td style="text-align: right;">35%</td>
+<td>Weekly Exercises</td>
+<td style="text-align: right;">45%</td>
 </tr>
 <tr class="even">
-<td>Block Reports</td>
-<td style="text-align: right;">30%</td>
+<td>In-Class Exercises</td>
+<td style="text-align: right;">25%</td>
 </tr>
 <tr class="odd">
 <td>Final Project</td>
-<td style="text-align: right;">25%</td>
+<td style="text-align: right;">20%</td>
 </tr>
 <tr class="even">
 <td>Engagement</td>
@@ -783,19 +788,11 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <section id="assignment-submission" class="level3">
 <h3 class="anchored" data-anchor-id="assignment-submission">Assignment Submission</h3>
-<p>Assignments will be set on canvas, and you will submit notification of the assignment’s completion through canvas. The <em>content</em> of the assignment itself may be contained elsewhere (e.g.&nbsp;the A&amp;S RStudio server, or a Github repository).\</p>
-</section>
-<section id="progress-blog" class="level3">
-<h3 class="anchored" data-anchor-id="progress-blog">Progress Blog</h3>
-<p>An end-of-week Quarto blog post about what you learned that week, including sample code if relevant.</p>
-</section>
-<section id="block-reports" class="level3">
-<h3 class="anchored" data-anchor-id="block-reports">Block Reports</h3>
-<p>At the end of each block, a final cohesive report implementing what was learned. These will be due during the week <em>immediately after</em> we complete a block.</p>
+<p>Some assignments will be created in GitHub Classroom, and their invite code will be posted to canvas. Some of these assignments will have “autograding” tests enabled. These “autogrades” are intended to be feedback to help you fine tune your code, and <strong>are not</strong> meant to be the final grade you will get for the assignment. Only grades as they are appear on Canvas are your official grade.</p>
 </section>
 <section id="final-project" class="level3">
 <h3 class="anchored" data-anchor-id="final-project">Final Project</h3>
-<p>A final capstone project for the course. This could be a report, in a similar format to the block reports, or some other agreed upon format (e.g.&nbsp;a dashboard, an R package, etc.)</p>
+<p>A final capstone project for the course. This could be a report, an extension of an earlier exercise, or some other agreed upon format.</p>
 </section>
 <section id="engagement" class="level3">
 <h3 class="anchored" data-anchor-id="engagement">Engagement</h3>
@@ -1298,4 +1295,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

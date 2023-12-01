@@ -81,7 +81,7 @@
     "href": "syllabus/syllabus.html#course-evaluation",
     "title": "Lin511-001 - Computational Linguistics",
     "section": "9 Course Evaluation",
-    "text": "9 Course Evaluation\n\n\n\nGrade Components\n\n\n\nProgress blog\n35%\n\n\nBlock Reports\n30%\n\n\nFinal Project\n25%\n\n\nEngagement\n10%\n\n\n\n\n\nGrading Scale\n\n\n\nA\n&gt;= 90\n\n\nB\n80 to 89\n\n\nC\n70 to 79\n\n\nD\n60 to 69\n\n\nE\n&lt;= 59\n\n\n\n\n\n\n\nAssignment Submission\nAssignments will be set on canvas, and you will submit notification of the assignment’s completion through canvas. The content of the assignment itself may be contained elsewhere (e.g. the A&S RStudio server, or a Github repository).\\\n\n\nProgress Blog\nAn end-of-week Quarto blog post about what you learned that week, including sample code if relevant.\n\n\nBlock Reports\nAt the end of each block, a final cohesive report implementing what was learned. These will be due during the week immediately after we complete a block.\n\n\nFinal Project\nA final capstone project for the course. This could be a report, in a similar format to the block reports, or some other agreed upon format (e.g. a dashboard, an R package, etc.)\n\n\nEngagement\nInspired by Kirby Conrod’s approach to Participation Grades\n\nThis portion of the grade is a way for me to give you credit for informal/unstructured collaborative work that you do. Participation and collaboration are strong predictors of success and learning retention, so please make an effort to find a way that works well for you to participate and engage with your colleagues.\n\nA well known process for solving programming problems is “Rubber Duck Debugging.” It works by describing how each step of a program is supposed to work to another person or, as the name suggests, a rubber duck. Often the solution to the problem or the typo causing the bug jumps out at you during the process. Having a study buddy or study group could be really helpful if only for this purpose."
+    "text": "9 Course Evaluation\n\n\n\nGrade Components\n\n\n\nWeekly Exercises\n45%\n\n\nIn-Class Exercises\n25%\n\n\nFinal Project\n20%\n\n\nEngagement\n10%\n\n\n\n\n\nGrading Scale\n\n\n\nA\n&gt;= 90\n\n\nB\n80 to 89\n\n\nC\n70 to 79\n\n\nD\n60 to 69\n\n\nE\n&lt;= 59\n\n\n\n\n\n\n\nAssignment Submission\nSome assignments will be created in GitHub Classroom, and their invite code will be posted to canvas. Some of these assignments will have “autograding” tests enabled. These “autogrades” are intended to be feedback to help you fine tune your code, and are not meant to be the final grade you will get for the assignment. Only grades as they are appear on Canvas are your official grade.\n\n\nFinal Project\nA final capstone project for the course. This could be a report, an extension of an earlier exercise, or some other agreed upon format.\n\n\nEngagement\nInspired by Kirby Conrod’s approach to Participation Grades\n\nThis portion of the grade is a way for me to give you credit for informal/unstructured collaborative work that you do. Participation and collaboration are strong predictors of success and learning retention, so please make an effort to find a way that works well for you to participate and engage with your colleagues.\n\nA well known process for solving programming problems is “Rubber Duck Debugging.” It works by describing how each step of a program is supposed to work to another person or, as the name suggests, a rubber duck. Often the solution to the problem or the typo causing the bug jumps out at you during the process. Having a study buddy or study group could be really helpful if only for this purpose."
   },
   {
     "objectID": "syllabus/syllabus.html#late-submissions-and-re-submissions",
@@ -126,6 +126,48 @@
     "text": "15 Diversity, Equity and Inclusion\nUK Senate DEI Statement\nThe University of Kentucky is committed to our core values of diversity and inclusion, mutual respect and human dignity, and a sense of community (Governing Regulations XIV). We acknowledge and respect the seen and unseen diverse identities and experiences of all members of the university community (https://www.uky.edu/regs/gr14). These identities include but are not limited to those based on race, ethnicity, gender identity and expressions, ideas and perspectives, religious and cultural beliefs, sexual orientation, national origin, age, ability, and socioeconomic status. We are committed to equity and justice and providing a learning and engaging community in which every member is engaged, heard, and valued.\nWe strive to rectify and change behavior that is inconsistent with our principles and commitment to diversity, equity, and inclusion. If students encounter such behavior in a course, they are encouraged to speak with the instructor of record and/or the Office of Institutional Equity and Equal Opportunity. Students may also contact a faculty member within the department, program director, the director of undergraduate or graduate studies, the department chair, any college administrator, or the dean. All of these individuals are mandatory reporters under University policies."
   },
   {
+    "objectID": "notes/concepts/what-is-python.html",
+    "href": "notes/concepts/what-is-python.html",
+    "title": "What is Python?",
+    "section": "",
+    "text": "When talking about “Python” or other programming langauges, we often engage in a form of polysemy1 that can be confusing at first. I’ll try to unpack the different meanings here."
+  },
+  {
+    "objectID": "notes/concepts/what-is-python.html#python-is-set-of-rules-for-a-formal-language",
+    "href": "notes/concepts/what-is-python.html#python-is-set-of-rules-for-a-formal-language",
+    "title": "What is Python?",
+    "section": "📕 Python is set of rules for a formal language",
+    "text": "📕 Python is set of rules for a formal language\nWhen we talk about “Python”, one thing we sometimes refer to is an abstract set of rules for a formal language.\n\n\n\n\n\n\n📕 The abstract language\n\n\n\nWhen you say:\n\nI’m learning Python this semester.\n\nYou’re talking about the abstract set of rules.\n\n\nWe can describe some of these rules in natural language (this isn’t how they’re actually written).\n\nIf a list of values has been assigned to a variable, when the variable’s name is followed [0], return the first value in the list.\nIf print( is followed by a value or variable, which is then followed by ), print the value, or the value assigned to the variable.\nIf a # symbol is encountered on a line, ignore everything following it.\n\nThese rules define very precisely how code should be written, and also define what should be done when certain patterns of code are encountered, but these rules are abstract, and don’t actually do anything."
+  },
+  {
+    "objectID": "notes/concepts/what-is-python.html#python-is-a-program-that-interprets-formal-language-input",
+    "href": "notes/concepts/what-is-python.html#python-is-a-program-that-interprets-formal-language-input",
+    "title": "What is Python?",
+    "section": "🤖 Python is a program that interprets formal language input",
+    "text": "🤖 Python is a program that interprets formal language input\nSimply having a set of abstract rules can be fun, but it’s not so useful if you have no way to actually do things. To make code we write that conforms to the rules of the language actually do anything, we need to use a program called an Interpreter.\n\n\n\n\n\n\n🤖 The Python Interpreter\n\n\n\nWhen you say\n\nI’m having a hard time installing Python.\n\nyou’re talking about a Python Interpreter.\n\n\nThe Python interpreter processes code, determines whether or not it is valid, then does the things the code told it to do.\nCode can get passed to the interpreter many different ways, including\n\nIn a single text file, called a python “script”, (usually named to end in .py)\nIn an interactive python “shell”.\nInside a Jupyter notebook.\n\nFor example, the text in the shaded block below was passed to a Python interpreter, and the interpreter decided that it was invalid (because there is an opening quote \", but not a closing quote).\n\n\n\nPython Code\n\n\"x\n\n\nSyntaxError: unterminated string literal (detected at line 1) (20073044.py, line 1)\n\n\nThe text in this next shaded block was passed to a Python interpreter. This time, it was deemed valid, and the interpreter did what thee code instructed.\n\nprint(\"hello! \" * 3)\n\nhello! hello! hello!"
+  },
+  {
+    "objectID": "notes/concepts/what-is-python.html#python-is-an-ecosystem",
+    "href": "notes/concepts/what-is-python.html#python-is-an-ecosystem",
+    "title": "What is Python?",
+    "section": "⛰️ Python is an Ecosystem",
+    "text": "⛰️ Python is an Ecosystem\nPeople often say that Python comes “with batteries included”, meaning it can do a lot of different things out without needing to install any extensions. But you can install extensions in the form of additional libraries that extend Python’s capabilities.\n\n\n\n\n\n\n⛰️ The Ecosystem\n\n\n\nWhen someone says\n\nPython is the most widely used language in natural language processing.\n\nThey are talking about the ecosystem of libraries for Pything that have been built to do natural language processing.\n\n\nSome examples of additional libraries for Python are\n\nnumpy: Allows for effective computation with numbers\nmatplotlib: Makes graphs\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nx = np.linspace(0, 2 * np.pi, 200)\ny = np.sin(x)\n\nfig, ax = plt.subplots()\nax.plot(x, y)\nplt.show()"
+  },
+  {
+    "objectID": "notes/concepts/what-is-python.html#python-is-a-social-project",
+    "href": "notes/concepts/what-is-python.html#python-is-a-social-project",
+    "title": "What is Python?",
+    "section": "🧑‍💻 Python is a social project",
+    "text": "🧑‍💻 Python is a social project\nThe meanings of “Python” we’ve already talked about are\n\n📕 The abstract language\n🤖 The Python Interpreter\n⛰️ The Python Ecosystem\n\nUnderstanding how to put all of these pieces together effectively is a social project.\n\n\n\n\n\n\n🧑‍💻 The social project\n\n\n\nWhen you say\n\nSo-n-so is really good at Python.\n\nYou are talking about their involvement in the Python social project.\n\n\n\n❌ There is no part of the 📕 abstract langauge that will inform you that there is a very good Python library for doing a certain task.\n❌ The 🤖 Python Interpreter won’t tell you that there’s a better way to do what you’re trying to do.\n❌ There are nearly half a million libraries on ⛰️ the Python Package Index, so you can’t just peruse it to find what’s relevant.\n\nIn order to know newest or most effective way to do things, you need to be involved in 🧑‍💻 the social project. That begins within a classroom, then extends to keeping up with blogs and other discourses about changes and developments.\nOne way people demonstrate that they are involved in the Python social project is by writing their code idiomatically. For example, in the code block above, I included the line import numpy as np. But there’s no rule that we import numpy as np, it’s simply convention.\nThis code below will run just as well, but would cause problems for people trying to read your code, because it’s not idiomatic.\n\nimport matplotlib.pyplot as jokes\nimport numpy as farts\n\nx = farts.linspace(0, 2 * farts.pi, 200)\ny = farts.sin(x)\n\nfig, ax = jokes.subplots()\nax.plot(x, y)\njokes.show()"
+  },
+  {
+    "objectID": "notes/concepts/what-is-python.html#footnotes",
+    "href": "notes/concepts/what-is-python.html#footnotes",
+    "title": "What is Python?",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nA word is polysemous when it has more than one meaning.↩︎"
+  },
+  {
     "objectID": "notes/meetings/00_setup.html",
     "href": "notes/meetings/00_setup.html",
     "title": "Setup Notes",
@@ -144,7 +186,7 @@
     "href": "notes/index.html",
     "title": "Meeting Notes",
     "section": "",
-    "text": "These are the notes for our regular meetings.\n\n\n\n\n\n\n\n\n  \n\n\n\n\nSetup Notes\n\n\n\n\n\n\n\n\n\n\n\n\nJan 8, 2024\n\n\n\n\n\n\nNo matching items\n\nReuseCC-BY-SA 4.0"
+    "text": "These are the notes for our regular meetings.\n\n\n\n\n\n\n\n\n  \n\n\n\n\nSetup Notes\n\n\n\n\n\n\n\n\n\n\n\n\nJan 8, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\nNo matching items\n\nReuseCC-BY-SA 4.0"
   },
   {
     "objectID": "syllabus/schedule.html",
