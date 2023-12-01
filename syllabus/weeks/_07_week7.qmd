@@ -1,0 +1,21 @@
+### Week 7
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Dates: 
+
+: Feb 19-23
+
+:::
+
+::: {.column width="50%"}
+
+Topics:
+
+: More
+
+:::
+
+::::
