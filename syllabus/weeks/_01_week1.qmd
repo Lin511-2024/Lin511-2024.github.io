@@ -14,10 +14,13 @@ Dates:
 
 Topics:
 
-: Setup, Strings, Text
+: Setup, What is Computational Linguistics?
 
 :::
 
 ::::
 
-Read Speech and Language Processing Chapter 1
+**Alternative Office Hours**: Friday, Jan 12, 12pm to 2pm, LinCoLab (Breckenridge Room 10)
+
+#### Readings
+Follow posted tutorials for setting up our course technology.
