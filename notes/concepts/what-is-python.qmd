@@ -32,7 +32,8 @@ These rules define very precisely how code should be written, and also define wh
 
 ## 🤖 Python is a program that interprets formal language input 
 
-Simply having a set of abstract rules can be fun, but it's not so useful if you have no way to actually *do* things. To make code we write that conforms to the rules of the language actually do anything, we need to use a program called an **Interpreter**. 
+Simply having a set of abstract rules can be fun, but it's not so useful if you have no way to actually *do* things. 
+To make code we write actually do anything, we need to use a program called an **Interpreter**. 
 
 ::: {.callout}
 ### 🤖 The Python Interpreter
@@ -121,7 +122,7 @@ You are talking about their involvement in the Python social project.
 
 :::
 
-- ❌ There is no part of the 📕 *abstract langauge* that will inform you that there is a very good Python library for doing a certain task.
+- ❌ There is no part of the 📕 *abstract language* that will inform you that there is a very good Python library for doing a certain task.
 - ❌ The 🤖 *Python Interpreter* won't tell you that there's a better way to do what you're trying to do.
 - ❌ There are nearly [half a million libraries on ⛰️ *the Python Package Index*](https://pypi.org/), so you can't just peruse it to find what's relevant.
 
