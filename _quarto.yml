@@ -3,6 +3,8 @@ project:
 
 license: CC-BY-SA 4.0
 author: Josef Fruehwald
+execute: 
+  freeze: auto
 
 website:
   title: "Lin511-2024"
@@ -39,8 +41,8 @@ format:
   html:
     theme:
       light: flatly
-      dark: darkly
-    css: styles.css
+      dark: [darkly, styles/dark.scss]
+    css: styles/styles.css
     toc: true
     fontsize: large
     smooth-scroll: true    
