@@ -9,7 +9,10 @@
 
 	// Install Dev Container Features. More info: https://containers.dev/features
 	"features": {
-		"ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {},
+		"ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
+			"installChromium": true,
+			"installTinyTex": true
+		},
 		"ghcr.io/devcontainers/features/python:1": {"version": "3.11.4"}
 		// Install JupyterLab and IRkernel.
 		// More info: https://github.com/rocker-org/devcontainer-templates/tree/main/src/r-ver
