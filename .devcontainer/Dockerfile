@@ -9,7 +9,7 @@ RUN install2.r --error --skipinstalled -n -1 \
     && rm -rf /tmp/downloaded_packages 
 
 WORKDIR /project
-COPY renv.lock renv.lock
+COPY ../renv.lock renv.lock
 #RUN mkdir -p renv
 #COPY .Rprofile .Rprofile
 #COPY renv/activate.R renv/activate.R
