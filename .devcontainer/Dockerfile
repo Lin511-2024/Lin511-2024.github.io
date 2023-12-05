@@ -4,17 +4,16 @@ ARG VARIANT="4.3"
 FROM ghcr.io/rocker-org/devcontainer/tidyverse:${VARIANT}
 
 RUN install2.r --error --skipinstalled -n -1 \
-        rlanguageserver,\
         renv \
     && rm -rf /tmp/downloaded_packages 
 
-WORKDIR /project
-COPY ../renv.lock renv.lock
+##WORKDIR /project
+##COPY ../renv.lock renv.lock
 #RUN mkdir -p renv
 #COPY .Rprofile .Rprofile
 #COPY renv/activate.R renv/activate.R
 #COPY renv/settings.json renv/settings.json
-RUN R -e "renv::restore()"
+##RUN R -e "renv::restore()"
 
 
 # Install Python packages
