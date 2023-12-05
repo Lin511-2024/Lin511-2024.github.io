@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.3.0",
+    "Version": "4.3.2",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -11,7 +11,7 @@
   "Python": {
     "Version": "3.11.4",
     "Type": "virtualenv",
-    "Name": "/Users/joseffruehwald/.pyenv/versions/3.11.4/envs/lin511-2024"
+    "Name": "./renv/python/virtualenvs/renv-python-3.11"
   },
   "Packages": {
     "R6": {
@@ -370,7 +370,7 @@
     },
     "vctrs": {
       "Package": "vctrs",
-      "Version": "0.6.4",
+      "Version": "0.6.5",
       "Source": "Repository",
       "Repository": "RSPM",
       "Requirements": [
@@ -380,7 +380,7 @@
         "lifecycle",
         "rlang"
       ],
-      "Hash": "266c1ca411266ba8f365fcc726444b87"
+      "Hash": "c03fa420630029418f7e6da3667aac4a"
     },
     "xfun": {
       "Package": "xfun",
