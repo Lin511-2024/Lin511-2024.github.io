@@ -45,7 +45,8 @@ format:
     css: styles/styles.css
     toc: true
     fontsize: large
-    smooth-scroll: true    
+    smooth-scroll: true
+    fig-cap-location: margin
 
 editor: visual
 
