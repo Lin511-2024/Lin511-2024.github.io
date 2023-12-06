@@ -1,26 +1,27 @@
 ### Week 1
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="50%"}
 
-Dates: 
+Dates:
 
-: Jan 8-12
-
+:   Jan 8-12
 :::
 
 ::: {.column width="50%"}
 
 Topics:
 
-: Setup, What is Computational Linguistics?
-
+:   Setup, What is Computational Linguistics?
+:::
 :::
 
-::::
+**Alternative Office Hours**:
 
-**Alternative Office Hours**: Friday, Jan 12, 12pm to 2pm, LinCoLab (Breckenridge Room 10)
+|                |             |                                 |
+|----------------|-------------|---------------------------------|
+| Friday, Jan 12 | 12pm to 2pm | LinCoLab (Breckinridge, Room10) |
 
 #### Readings
+
 Follow posted tutorials for setting up our course technology.

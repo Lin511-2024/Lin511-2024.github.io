@@ -1,29 +1,25 @@
 ### Week 2
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="50%"}
 
-Dates: 
+Dates:
 
-: Jan 15-19
-
+:   Jan 15-19
 :::
 
 ::: {.column width="50%"}
 
 Topics:
 
-: Files, Text, Strings, Regular Expressions, Finite State Automata
-
+:   Files, Text, Strings, Regular Expressions, Finite State Automata
 :::
-
-::::
+:::
 
 **No Office Hours** for MLK Jr Day.
 
 #### Readings:
 
-- [Course Notes: What *is* Python](../../notes/concepts/what-is-python.html)
-- [SLP Chapter 2, section 2.1 (pdf)](https://web.stanford.edu/~jurafsky/slp3/2.pdf)
-- [TP Chapter 1](https://greenteapress.com/thinkpython2/html/thinkpython2002.html)
+-   [Course Notes: What *is* Python](../../notes/concepts/what-is-python.html)
+-   [SLP Chapter 2, section 2.1 (pdf)](https://web.stanford.edu/~jurafsky/slp3/2.pdf)
+-   [TP Chapter 1](https://greenteapress.com/thinkpython2/html/thinkpython2002.html)
