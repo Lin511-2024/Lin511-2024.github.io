@@ -8,7 +8,7 @@
 
 <meta name="author" content="Josef Fruehwald">
 
-<title>Lin511-2024 - What is Python?</title>
+<title>Lin511-2024 - Navigating Directories</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -103,7 +103,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../styles/styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -140,7 +140,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/concepts/00_glossary.html">Concepts</a></li><li class="breadcrumb-item"><a href="../../notes/concepts/01_what-is-python.html">What <em>is</em> Python?</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/concepts/00_glossary.html">Concepts</a></li><li class="breadcrumb-item"><a href="../../notes/concepts/03_navigating-directories.html">Navigating Directories</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -175,7 +175,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notes/concepts/01_what-is-python.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../notes/concepts/01_what-is-python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">What <em>is</em> Python?</span></a>
   </div>
 </li>
@@ -187,7 +187,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notes/concepts/03_navigating-directories.html" class="sidebar-item-text sidebar-link">
+  <a href="../../notes/concepts/03_navigating-directories.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Navigating Directories</span></a>
   </div>
 </li>
@@ -220,20 +220,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#python-is-set-of-rules-for-a-formal-language" id="toc-python-is-set-of-rules-for-a-formal-language" class="nav-link active" data-scroll-target="#python-is-set-of-rules-for-a-formal-language">📕 Python is set of rules for a formal language</a></li>
-  <li><a href="#python-is-a-program-that-interprets-formal-language-input" id="toc-python-is-a-program-that-interprets-formal-language-input" class="nav-link" data-scroll-target="#python-is-a-program-that-interprets-formal-language-input">🤖 Python is a program that interprets formal language input</a></li>
-  <li><a href="#python-is-an-ecosystem" id="toc-python-is-an-ecosystem" class="nav-link" data-scroll-target="#python-is-an-ecosystem">⛰️ Python is an Ecosystem</a></li>
-  <li><a href="#python-is-a-social-project" id="toc-python-is-a-social-project" class="nav-link" data-scroll-target="#python-is-a-social-project">🧑‍💻 Python is a social project</a></li>
-  <li><a href="#the-polysemy-is-ok" id="toc-the-polysemy-is-ok" class="nav-link" data-scroll-target="#the-polysemy-is-ok">📕, 🤖, ⛰️, 🧑‍💻 The Polysemy is Ok</a></li>
+  <li><a href="#command-line-interface" id="toc-command-line-interface" class="nav-link active" data-scroll-target="#command-line-interface">Command Line Interface</a>
+  <ul class="collapse">
+  <li><a href="#macos" id="toc-macos" class="nav-link" data-scroll-target="#macos">macOS</a></li>
+  <li><a href="#windows" id="toc-windows" class="nav-link" data-scroll-target="#windows">Windows</a></li>
+  </ul></li>
+  <li><a href="#getting-your-bearings" id="toc-getting-your-bearings" class="nav-link" data-scroll-target="#getting-your-bearings">Getting your Bearings</a>
+  <ul class="collapse">
+  <li><a href="#the-prompt" id="toc-the-prompt" class="nav-link" data-scroll-target="#the-prompt">“The Prompt”</a></li>
+  <li><a href="#pwd" id="toc-pwd" class="nav-link" data-scroll-target="#pwd"><code>pwd</code></a></li>
+  <li><a href="#ls" id="toc-ls" class="nav-link" data-scroll-target="#ls"><code>ls</code></a></li>
+  <li><a href="#know-your-surroundings" id="toc-know-your-surroundings" class="nav-link" data-scroll-target="#know-your-surroundings">Know your surroundings</a></li>
+  </ul></li>
+  <li><a href="#getting-around" id="toc-getting-around" class="nav-link" data-scroll-target="#getting-around">Getting around</a>
+  <ul class="collapse">
+  <li><a href="#cd-moving-down-1-level" id="toc-cd-moving-down-1-level" class="nav-link" data-scroll-target="#cd-moving-down-1-level"><code>cd</code> : Moving down 1 level</a></li>
+  <li><a href="#cd-moving-up-1-level" id="toc-cd-moving-up-1-level" class="nav-link" data-scroll-target="#cd-moving-up-1-level"><code>cd</code> : Moving up 1 level</a></li>
+  <li><a href="#cd-moving-down-multiple-levels" id="toc-cd-moving-down-multiple-levels" class="nav-link" data-scroll-target="#cd-moving-down-multiple-levels"><code>cd</code> : Moving down multiple levels</a></li>
+  <li><a href="#moving-up-and-over" id="toc-moving-up-and-over" class="nav-link" data-scroll-target="#moving-up-and-over">Moving up and over</a></li>
+  </ul></li>
+  <li><a href="#very-useful-tips" id="toc-very-useful-tips" class="nav-link" data-scroll-target="#very-useful-tips">Very useful tips!</a>
+  <ul class="collapse">
+  <li><a href="#tab-autocomplete" id="toc-tab-autocomplete" class="nav-link" data-scroll-target="#tab-autocomplete">Tab autocomplete</a></li>
+  <li><a href="#get-back-home" id="toc-get-back-home" class="nav-link" data-scroll-target="#get-back-home">Get back home!</a></li>
+  <li><a href="#absolute-paths" id="toc-absolute-paths" class="nav-link" data-scroll-target="#absolute-paths">Absolute paths</a></li>
+  </ul></li>
+  <li><a href="#this-is-all-going-to-matter-a-lot" id="toc-this-is-all-going-to-matter-a-lot" class="nav-link" data-scroll-target="#this-is-all-going-to-matter-a-lot">This is all going to matter a lot</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">What <em>is</em> Python?</h1>
+<h1 class="title">Navigating Directories</h1>
 </div>
 
 
@@ -254,192 +275,200 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>When talking about “Python” or other programming langauges, we often engage in a form of polysemy<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> that can be confusing at first. I’ll try to unpack the different meanings here.</p>
-<section id="python-is-set-of-rules-for-a-formal-language" class="level2">
-<h2 class="anchored" data-anchor-id="python-is-set-of-rules-for-a-formal-language">📕 Python is set of rules for a formal language</h2>
-<p>When we talk about “Python”, one thing we sometimes refer to is an abstract set of rules for a formal language.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-📕 The abstract language
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>When you say:</p>
-<blockquote class="blockquote">
-<p>I’m learning Python this semester.</p>
-</blockquote>
-<p>You’re talking about the abstract set of rules.</p>
-</div>
-</div>
-<p>We can describe some of these rules in natural language (this isn’t how they’re <em>actually</em> written).</p>
-<ul>
-<li>If a list of values has been assigned to a variable, when the variable’s name is followed <code>[0]</code>, return the first value in the list.</li>
-<li>If <code>print(</code> is followed by a value or variable, which is then followed by <code>)</code>, print the value, or the value assigned to the variable.</li>
-<li>If a <code>#</code> symbol is encountered on a line, ignore everything following it.</li>
-</ul>
-<p>These rules define very precisely how code should be written, and also define what should be <em>done</em> when certain patterns of code are encountered, but these rules are abstract, and don’t actually <em>do</em> anything.</p>
+<section id="command-line-interface" class="level2">
+<h2 class="anchored" data-anchor-id="command-line-interface">Command Line Interface</h2>
+<p>Some of what we’ll be doing in class will involve interacting with your computer through a “Command Line Interface.” Command line interacts are purely text based way to interact with your computer. It’s your same exact computer, just a different way of using it without using icons, or clicking.&nbsp;</p>
+<section id="macos" class="level3">
+<h3 class="anchored" data-anchor-id="macos">macOS</h3>
+<p>In macOS, we can access a command line interface using the program Terminal. You can find Terminal in your Applications inside the folder called Utilities, or just by typing in “Terminal” into Spotlight search.</p>
 </section>
-<section id="python-is-a-program-that-interprets-formal-language-input" class="level2">
-<h2 class="anchored" data-anchor-id="python-is-a-program-that-interprets-formal-language-input">🤖 Python is a program that interprets formal language input</h2>
-<p>Simply having a set of abstract rules can be fun, but it’s not so useful if you have no way to actually <em>do</em> things. To make code we write actually do anything, we need to use a program called an <strong>Interpreter</strong>.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<section id="windows" class="level3">
+<h3 class="anchored" data-anchor-id="windows">Windows</h3>
+<p>For now, on Windows, I’d recommend using PowerShell. You can launch PowerShell by searching for it in the Start menu.</p>
+</section>
+</section>
+<section id="getting-your-bearings" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="getting-your-bearings">Getting your Bearings</h2>
+<p>When you first launch your command line interface, it will look something like this:</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full" style="display: block; margin-left: auto; margin-right: auto;">
+<figure class="figure page-columns page-full">
+<p><img src="assets/Display_—_-zsh_—_72×22.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption class="figure-caption margin-caption">Command Line Interface</figcaption>
+</figure>
 </div>
-<div class="callout-title-container flex-fill">
-🤖 The Python Interpreter
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>When you say</p>
-<blockquote class="blockquote">
-<p>I’m having a hard time installing Python.</p>
-</blockquote>
-<p>you’re talking about a Python Interpreter.</p>
-</div>
-</div>
-<p>The Python interpreter processes code, determines whether or not it is valid, then does the things the code told it to do.</p>
-<p>Code can get passed to the interpreter many different ways, including</p>
-<ul>
-<li>In a single text file, called a python “script”, (usually named to end in <code>.py</code>)</li>
-<li>In an interactive python “shell”.</li>
-<li>Inside a Jupyter notebook.</li>
-</ul>
-<p>For example, the text in the shaded block below was passed to a Python interpreter, and the interpreter decided that it was invalid (because there is an opening quote <code>"</code>, but not a closing quote).</p>
-<div class="cell" data-filename="Python Code" data-execution_count="1">
+<p>This is obviously scary looking, and it doesn’t give you much hint as to what to do next. The important to thing to keep in mind is that while you are using the command line interface&nbsp;<em>you are inside of a folder</em>. There are two commands I recommend using over and over again to figure out where you are, and where you can go.</p>
+<section id="the-prompt" class="level3">
+<h3 class="anchored" data-anchor-id="the-prompt">“The Prompt”</h3>
+<p>We call the the space waiting for us to type in something the “prompt”. It usually has a symbol before it. Depending on your system, it might be any of the following: <code>$</code>, <code>%</code>, or <code>&gt;</code>. If you type something in here, your computer will interpret it as a command, and try to run it.&nbsp;</p>
+</section>
+<section id="pwd" class="level3">
+<h3 class="anchored" data-anchor-id="pwd"><code>pwd</code></h3>
+<p>If you type in <code>pwd</code> into the terminal and hit enter, it will print out the <a href="../../notes/concepts/02_undersdanding-paths.html#absolute-paths">absolute path</a> to where you currently are. When you first launch a terminal, it usually starts you off in your home directory, which is usually going to be named after your username.</p>
 <div class="langname">
-<pre class="langname">python</pre>
+<pre class="langname">bash</pre>
 </div>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">"x</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>SyntaxError: unterminated string literal (detected at line 1) (20073044.py, line 1)</code></pre>
-</div>
-</div>
-<p>The text in this next shaded block was passed to a Python interpreter. This time, it was deemed valid, and the interpreter did what the code instructed.</p>
-<div class="cell" data-execution_count="2">
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>/Users/Display</code></pre>
+<p>Use <code>pwd</code> early, and use it often. It stands for&nbsp;<strong>p</strong>resent&nbsp;<strong>w</strong>orking&nbsp;<strong>d</strong>irectory.&nbsp;</p>
+</section>
+<section id="ls" class="level3">
+<h3 class="anchored" data-anchor-id="ls"><code>ls</code></h3>
+<p>If you type in <code>ls</code> into the terminal and hit enter, it will print out a list of all of the directories and files inside the folder you are currently in. Here’s how it prints out on my own computer when I first launch Terminal:</p>
 <div class="langname">
-<pre class="langname">python</pre>
+<pre class="langname">bash</pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"hello! "</span> <span class="op">*</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>hello! hello! hello! </code></pre>
-</div>
-</div>
-</section>
-<section id="python-is-an-ecosystem" class="level2">
-<h2 class="anchored" data-anchor-id="python-is-an-ecosystem">⛰️ Python is an Ecosystem</h2>
-<p>People often say that Python comes “with batteries included”, meaning it can do a lot of different things out without needing to install any extensions. But you <em>can</em> install extensions in the form of additional libraries that extend Python’s capabilities.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-⛰️ The Ecosystem
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>When someone says</p>
-<blockquote class="blockquote">
-<p>Python is the most widely used language in natural language processing.</p>
-</blockquote>
-<p>They are talking about the <em>ecosystem</em> of libraries for Python hat have been built to do natural language processing.</p>
-</div>
-</div>
-<p>Some examples of additional libraries for Python are</p>
-<ul>
-<li><code>numpy</code>: Allows for effective computation with numbers</li>
-<li><code>matplotlib</code>: Makes graphs</li>
-</ul>
-<div class="cell" data-execution_count="3">
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>Desktop      Library    Pictures
+Documents    Movies     Public
+Downloads    Music      Sites  </code></pre>
+<p>Each of the items listed here is another directory inside of my current directory. I can look inside and get a list of all the files inside of these directories by typing in <code>ls</code> and the name of the directory I want to see inside of. For example, if I wanted to get a list of all of the files on my desktop, this is what I would type:</p>
 <div class="langname">
-<pre class="langname">python</pre>
+<pre class="langname">bash</pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span> <span class="op">*</span> np.pi, <span class="dv">200</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.sin(x)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>ax.plot(x, y)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="01_what-is-python_files/figure-html/cell-4-output-1.png" class="" width="590" height="411"></p>
-</div>
-</div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> Desktop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>Sampletext.txt</code></pre>
+<p>I only have one file on my desktop right now, and it’s a document called <code>Sampletext.txt</code>.&nbsp;</p>
 </section>
-<section id="python-is-a-social-project" class="level2">
-<h2 class="anchored" data-anchor-id="python-is-a-social-project">🧑‍💻 Python is a social project</h2>
-<p>The meanings of “Python” we’ve already talked about are</p>
-<ul>
-<li>📕 The abstract language</li>
-<li>🤖 The Python Interpreter</li>
-<li>⛰️ The Python Ecosystem</li>
-</ul>
-<p>Understanding how to put all of these pieces together effectively is a <em>social</em> project.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-🧑‍💻 The social project
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>When you say</p>
-<blockquote class="blockquote">
-<p>So-n-so is really good at Python.</p>
-</blockquote>
-<p>You are talking about their involvement in the Python social project.</p>
-</div>
-</div>
-<ul>
-<li>❌ There is no part of the 📕 <em>abstract language</em> that will inform you that there is a very good Python library for doing a certain task.</li>
-<li>❌ The 🤖 <em>Python Interpreter</em> won’t tell you that there’s a better way to do what you’re trying to do.</li>
-<li>❌ There are nearly <a href="https://pypi.org/">half a million libraries on ⛰️ <em>the Python Package Index</em></a>, so you can’t just peruse it to find what’s relevant.</li>
-</ul>
-<p>In order to know newest or most effective way to do things, you need to be involved in 🧑‍💻 <em>the social project</em>. That begins within a classroom, then extends to keeping up with blogs and other discourses about changes and developments.</p>
-<p>One way people demonstrate that they are involved in the Python social project is by writing their code <em>idiomatically</em>. For example, in the code block above, I included the line <code>import numpy as np</code>. But <em>there’s no rule</em> that we import <code>numpy</code> as <code>np</code>, it’s simply convention.</p>
-<p>This code below will run just as well, but would cause problems for people trying to read your code, because it’s not idiomatic.</p>
-<div class="cell" data-execution_count="4">
+<section id="know-your-surroundings" class="level3">
+<h3 class="anchored" data-anchor-id="know-your-surroundings">Know your surroundings</h3>
+<p>Really skilled and accomplished programmers use the commands <code>pwd</code> and <code>ls</code> <em>constantly</em>, and so should you!&nbsp;It’s the only way to keep track of your surroundings on the command line.&nbsp;</p>
+<p>If you ever are looking at a terminal, and don’t know what to do next, just type in <code>pwd</code> and <code>ls</code>.&nbsp;</p>
+<p>Every time you do a new thing in the terminal, type in type in <code>pwd</code> and <code>ls</code>&nbsp;afterwards.</p>
+<p>Just type in <code>pwd</code> and <code>ls</code>&nbsp;all the time. :::</p>
+</section>
+</section>
+<section id="getting-around" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="getting-around">Getting around</h2>
+<p>You’re not always going to want to hang around in your home directory the whole time. You may want to get to a specific directory where some code or a script is to run it. To do this, we use the <code>cd</code> command, which stands for&nbsp;<strong>c</strong>hange&nbsp;<strong>d</strong>irectory.</p>
+<section id="cd-moving-down-1-level" class="level3">
+<h3 class="anchored" data-anchor-id="cd-moving-down-1-level"><code>cd</code> : Moving down 1 level</h3>
+<p>To change the folder you’re in, you just need to type in <code>cd</code> and then the name of the folder. For example to move from my home directory into my Documents folder, it would look like this:</p>
 <div class="langname">
-<pre class="langname">python</pre>
+<pre class="langname">bash</pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> jokes</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> farts</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> farts.linspace(<span class="dv">0</span>, <span class="dv">2</span> <span class="op">*</span> farts.pi, <span class="dv">200</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> farts.sin(x)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> jokes.subplots()</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>ax.plot(x, y)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>jokes.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="01_what-is-python_files/figure-html/cell-5-output-1.png" class="" width="590" height="411"></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>Desktop     Library   Pictures
+Documents   Movies    Public
+Downloads   Music     Sites</code></pre>
+<div class="langname">
+<pre class="langname">bash</pre>
 </div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Documents</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>FranklinInstituteSamples.pptx   Zoom
+FranklinInstituteSounds         html_practice</code></pre>
+<div class="langname">
+<pre class="langname">bash</pre>
 </div>
-</section>
-<section id="the-polysemy-is-ok" class="level2">
-<h2 class="anchored" data-anchor-id="the-polysemy-is-ok">📕, 🤖, ⛰️, 🧑‍💻 The Polysemy is Ok</h2>
-<p>It’s ok just say “Python” when you’re talking about one specific meaning.</p>
-
-
-</section>
-
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>A word is polysemous when it has more than one meaning.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>/Users/Display/Documents</code></pre>
+<ol type="1">
+<li>First, I double checked which directories were in the folder I was currently in with <code>ls</code>.</li>
+<li>Second, I moved into the Documents directory with <code>cd Documents</code>.</li>
+<li>Third, I checked what files and directories were in my new location with <code>ls</code>.</li>
+<li>Fourth, I double checked my current location with <code>pwd</code>, which gave my the absolute path to where I was.</li>
 </ol>
-</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section></div></main> <!-- /main -->
+</section>
+<section id="cd-moving-up-1-level" class="level3">
+<h3 class="anchored" data-anchor-id="cd-moving-up-1-level"><code>cd</code> : Moving up 1 level</h3>
+<p>If after moving into my documents folder, I wanted to move back to my home directory, that would involve moving up one level, because my Documents folder is inside of my home directory. We can do this using <code>cd</code> again, but instead of the name of a directory, we follow it with <code>..</code>. The two dots, <code>..</code>, is a short hand for “one level up from where I am.” Here’s how that works out on my system.</p>
+<div class="langname">
+<pre class="langname">bash</pre>
+</div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>/Users/Display/Documents</code></pre>
+<div class="langname">
+<pre class="langname">bash</pre>
+</div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>/Users/Display</code></pre>
+<ol type="1">
+<li>First, I double checked where I was with <code>pwd</code>.</li>
+<li>Second, I moved up one level with <code>cd ..</code></li>
+<li>Third, I double checked where I would up with <code>pwd</code> again, confirming that I was now in my home directory again.</li>
+</ol>
+</section>
+<section id="cd-moving-down-multiple-levels" class="level3">
+<h3 class="anchored" data-anchor-id="cd-moving-down-multiple-levels"><code>cd</code> : Moving down multiple levels</h3>
+<p>You don’t have to move down just one level at a time. For example, right now we’re in my home directory, but inside of my documents there’s a directory called <code>html_practice</code>. That’s two levels down. To get into <code>html_practice</code>, I just need to enter <code>cd</code> followed by the&nbsp;<a href="$WIKI_REFERENCE$/pages/g21c15fb30124f1d4a80a2fe3e48d4184" title="Understanding Directories"><em>relative path</em></a> to it. Remember, the relative path is the sequence of directory names that lie between where we are and where we want to go. Here’s how that looks on my system.</p>
+<div class="langname">
+<pre class="langname">bash</pre>
+</div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>/Users/Display</code></pre>
+<div class="langname">
+<pre class="langname">bash</pre>
+</div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Documents/html_practice</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>/Users/Display/Documents/html_practice</code></pre>
+<div class="langname">
+<pre class="langname">bash</pre>
+</div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>site.html  style.css</code></pre>
+<ol type="1">
+<li>First, I double checked my location with <code>pwd</code></li>
+<li>Second, I moved down two levels through <code>Documents</code> into <code>html_practice</code> with <code>cd</code>.</li>
+<li>Third, I double checked where I had moved to with <code>pwd</code>.</li>
+<li>Lastly, I checked what files were in my new directory with <code>ls</code>.</li>
+</ol>
+</section>
+<section id="moving-up-and-over" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="moving-up-and-over">Moving up and over</h3>
+<p>Now, we’re inside <code>html_practice</code>&nbsp;which is inside <code>Documents</code>. But what if we wanted to move into another directory that is also inside of <code>Documents</code>. For example, the directory <code>Zoom</code> is also inside of <code>Documents</code>, which is where Zoom saves all of the chat logs from our class meetings.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full" style="display: block; margin-left: auto; margin-right: auto;">
+<figure class="figure page-columns page-full">
+<p><img src="assets/html_practice-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption margin-caption">Where we want to move</figcaption>
+</figure>
+</div>
+<p>We could do this in a two step process, using <code>cd ..</code> to move up one level, then <code>cd Zoom</code> to move into the zoom directory. But we can also combine the two into one step.</p>
+<div class="langname">
+<pre class="langname">bash</pre>
+</div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>/Users/Display/Documents/html_practice</code></pre>
+<div class="langname">
+<pre class="langname">bash</pre>
+</div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ../Zoom</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>/Users/Display/Documents/Zoom</code></pre>
+<ol type="1">
+<li>First, I double checked where I was with <code>pwd</code>.</li>
+<li>Then, I moved up into <code>Documents</code> and down into <code>Zoom</code> in one go with <code>cd ../Zoom</code></li>
+<li>Finally, I double checked where I wound up with <code>pwd</code>.</li>
+</ol>
+</section>
+</section>
+<section id="very-useful-tips" class="level2">
+<h2 class="anchored" data-anchor-id="very-useful-tips">Very useful tips!</h2>
+<p>There are a few tips, tricks, and shortcuts that can make using the command line a little bit easier.</p>
+<section id="tab-autocomplete" class="level3">
+<h3 class="anchored" data-anchor-id="tab-autocomplete">Tab autocomplete</h3>
+<p>When using a command line interface, “tab autocomplete” is&nbsp;a&nbsp;<em>crucial</em> tool to help you get around. For example, if you are in your home directory and you want to move into your documents directory, all you really need to type is <code>cd Doc</code>&nbsp;and the terminal should autocomplete the rest of the file name!&nbsp;</p>
+<p>If you have multiple directories that start with <code>Doc</code>, it will list all of them, and then you’ll only need to type in a few more characters before it will be able to autocomplete.&nbsp;</p>
+<p>Tab autocomplete works for <code>ls</code> as well, which can let you explore through directories without needing to move around.</p>
+</section>
+<section id="get-back-home" class="level3">
+<h3 class="anchored" data-anchor-id="get-back-home">Get back home!</h3>
+<p>Technically, your home directory is a directory with a long absolute path. But because it’s a directory you’ll probably want to keep getting back to often, there’s a shortcut built in. If you run <code>cd ~</code>, it will zip you back to your home directory from wherever you are.</p>
+</section>
+<section id="absolute-paths" class="level3">
+<h3 class="anchored" data-anchor-id="absolute-paths">Absolute paths</h3>
+<p>If, for some reason, you don’t know what the relative path is to a directory you want to get to from where you are (or maybe it’s very complicated), you can always run <code>cd</code> followed by the absolute path to where you want to go.</p>
+</section>
+</section>
+<section id="this-is-all-going-to-matter-a-lot" class="level2">
+<h2 class="anchored" data-anchor-id="this-is-all-going-to-matter-a-lot">This is all going to matter a lot</h2>
+<p>Using the command line and navigating your computer is going to come up a lot more in this course. You should try as much as you can to get a handle on how this all works now.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
