@@ -11,121 +11,115 @@ We'll need to get our systems setup to work properly with the tools we'll be usi
 
 ### VSCode and The Command Line
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="45%"}
-
 #### Windows Users
 
 If you ware using a windows computer, I'll ask you to install Windows Subsystem for Linux like so:
 
-- [ ] [Follow the tutorial here for enabling and installing WSL ](https://lingmethodshub.github.io/content/windows/wsl/00_installing_wsl.html)
-- [ ] [Install VS Code](https://code.visualstudio.com/)
-- [ ] [Work through the first section of this tutorial, stopping after you connect to WSL](https://code.visualstudio.com/docs/remote/wsl-tutorial#_prerequisites)
+-   [ ] [Follow the tutorial here for enabling and installing WSL](https://lingmethodshub.github.io/content/windows/wsl/00_installing_wsl.html)
+-   [ ] [Install VS Code](https://code.visualstudio.com/)
+-   [ ] [Work through the first section of this tutorial, stopping after you connect to WSL](https://code.visualstudio.com/docs/remote/wsl-tutorial#_prerequisites)
 :::
 
-:::{.column width="10%"}
-
+::: {.column width="10%"}
 :::
 
-:::{.column width="45%"}
-
+::: {.column width="45%"}
 #### MacOS/Linux Users
 
-- [ ] [Install VS Code](https://code.visualstudio.com/)
-
+-   [ ] [Install VS Code](https://code.visualstudio.com/)
 :::
-
-::::
+:::
 
 ### Python
 
+#### pyenv
 
-#### pyenv 
-We'll be using a program called `pyenv` to manage the versions of python we use. To install `pyenv`, open the VSCode Command Palette (with `Shift+Ctrl+P`) which will open the command line interface. Then, 
+We'll be using a program called `pyenv` to manage the versions of python we use. To install `pyenv`, open the VSCode Command Palette (with `Shift+Ctrl+P`) which will open the command line interface. Then,
 
-- [ ] copy this line of code code from this page (Ctrl-c or ⌘-c)
+-   [ ] copy this line of code code from this page (Ctrl-c or ⌘-c)
 
 ``` bash
 curl https://pyenv.run | bash
 ```
 
-- [ ] Paste it into the terminal (Ctrl-v or ⌘-v)
-- [ ] Hit enter.
+-   [ ] Paste it into the terminal (Ctrl-v or ⌘-v)
+-   [ ] Hit enter.
 
 Once that has successfully finished:
 
------
+------------------------------------------------------------------------
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="45%"}
 #### MacOS Users
 
- - [ ] Run this
+-   [ ] Run this
 
-```bash
+``` bash
 open ~/.zshrc
 ```
+
 <details>
+
 <summary>If you get an error.</summary>
 
-- [ ] Run this
+-   [ ] Run this
 
-```bash
+``` bash
 touch ~/.zshrc
 open ~/.zshrc
 ```
-</details>
 
+</details>
 :::
 
-:::{.column width="10%"}
-
+::: {.column width="10%"}
 :::
 
 ::: {.column width="45%"}
 #### WSL users
 
-- [ ] Run this
+-   [ ] Run this
 
-```bash
+``` bash
 open ~/.bashrc
 ```
+
 <details>
+
 <summary>If you get an error</summary>
 
-- [ ] Run ths
+-   [ ] Run ths
 
-```bash
+``` bash
 touch ~/.bashrc
 open ~/.bashrc
 ```
 
 </details>
-
+:::
 :::
 
-::::
+------------------------------------------------------------------------
 
------
+-   [ ] Paste the following into the window that opens.
 
-- [ ] Paste the following into the window that opens.
-
-```sh
+``` sh
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 ```
 
-- [ ] Save it
+-   [ ] Save it
 
 #### Installing Python
 
-- [ ] Close and reopen the terminal window
-- [ ] Copy-Paste the following lines of code
+-   [ ] Close and reopen the terminal window
+-   [ ] Copy-Paste the following lines of code
 
-```bash
+``` bash
 pyenv install 3.11
 pyenv global 3.11
 pyenv virtualenv 3.11 Lin511
@@ -134,26 +128,25 @@ pyenv activate Lin511
 
 This will have installed a recent version of python onto your computer, and created a "virtual environment" for the class.
 
-#### Installing some 
+#### Installing some
 
 ### Git & Github Configuration
 
 **Make sure you change the email and name to the email and username you use for Github!**
 
-- [ ] In the terminal, set your git email address:
+-   [ ] In the terminal, set your git email address:
 
-```bash
+``` bash
 git config --global user.email "you@example.com"
 ```
 
-- [ ] Set your username.
+-   [ ] Set your username.
 
-```bash
+``` bash
 git config --global user.name "Your Name"
 ```
 
 Then, follow these tutorials from github:
 
-- [ ] [Generating a new SSH Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
-- [ ] [Adding your ssh key to github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
-
+-   [ ] [Generating a new SSH Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+-   [ ] [Adding your ssh key to github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
