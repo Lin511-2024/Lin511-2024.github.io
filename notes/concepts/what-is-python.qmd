@@ -1,6 +1,8 @@
 ---
 title: What *is* Python?
 subject: And what *is* a programming language?
+filters:
+    - codeblocklabel
 ---
 
 When talking about "Python" or other programming langauges, we often engage in a form of polysemy[^poly-def] that can be confusing at first. I'll try to unpack the different meanings here.
