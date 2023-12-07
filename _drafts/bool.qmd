@@ -1,0 +1,145 @@
+---
+title: "Logical Expressions"
+knitr: 
+  opts_chunk: 
+    echo: false
+    message: false
+    warning: false
+---
+
+```{r}
+library(tidyverse)
+library(khroma)
+```
+
+```{r}
+#| fig-width: 5
+#| fig-height: 5
+#| out-width: 80%
+expand_grid(
+  a = c(T, F),
+  b = c(T, F)
+) |> 
+  mutate(and = a & b) |> 
+  ggplot(aes(a,b, fill = and))+
+    geom_tile(
+      color = "grey10"
+    )+
+    geom_text(aes(label = and))+
+    coord_fixed()+
+    scale_fill_bright(limits = c(T, F))+
+    scale_y_discrete(expand = expansion())+
+    scale_x_discrete(expand = expansion(), position = "top",
+                     limits = c(T, F))+
+    labs(title="a AND b")+
+    theme_minimal()+
+    theme(
+      axis.title.y = element_text(angle = 0, vjust = 0.5)
+    )
+```
+
+```{r}
+#| fig-width: 5
+#| fig-height: 5
+#| out-width: 80%
+expand_grid(
+  a = c(T, F),
+  b = c(T, F)
+) |> 
+  mutate(or = a | b) |> 
+  ggplot(aes(a,b, fill = or))+
+    geom_tile(
+      color = "grey10"
+    )+
+    geom_text(aes(label = or))+
+    coord_fixed()+
+    scale_fill_bright(limits = c(T, F))+
+    scale_y_discrete(expand = expansion())+
+    scale_x_discrete(expand = expansion(), position = "top",
+                     limits = c(T, F))+
+    labs(title="a OR b")+
+    theme_minimal()+
+    theme(
+      axis.title.y = element_text(angle = 0, vjust = 0.5)
+    )
+```
+
+```{r}
+#| fig-width: 5
+#| fig-height: 5
+#| out-width: 80%
+expand_grid(
+  a = c(T, F),
+  b = c(T, F)
+) |> 
+  mutate(xor = xor(a, b)) |> 
+  ggplot(aes(a,b, fill = xor))+
+    geom_tile(
+      color = "grey10"
+    )+
+    geom_text(aes(label = xor))+
+    coord_fixed()+
+    scale_fill_bright(limits = c(T, F))+
+    scale_y_discrete(expand = expansion())+
+    scale_x_discrete(expand = expansion(), position = "top",
+                     limits = c(T, F))+
+    labs(title="a XOR b")+
+    theme_minimal()+
+    theme(
+      axis.title.y = element_text(angle = 0, vjust = 0.5)
+    )
+```
+
+```{r}
+#| fig-width: 5
+#| fig-height: 5
+#| out-width: 80%
+expand_grid(
+  a = c(T, F),
+  b = c(T, F)
+) |> 
+  mutate(nand = !(a & b)) |> 
+  ggplot(aes(a,b, fill = nand))+
+    geom_tile(
+      color = "grey10"
+    )+
+    geom_text(aes(label = nand))+
+    coord_fixed()+
+    scale_fill_bright(limits = c(T, F))+
+    scale_y_discrete(expand = expansion())+
+    scale_x_discrete(expand = expansion(), position = "top",
+                     limits = c(T, F))+
+    labs(title="a NAND b")+
+    theme_minimal()+
+    theme(
+      axis.title.y = element_text(angle = 0, vjust = 0.5)
+    )
+```
+
+## Not *really* a thing
+
+```{r}
+#| fig-width: 5
+#| fig-height: 5
+#| out-width: 80%
+expand_grid(
+  a = c(T, F),
+  b = c(T, F)
+) |> 
+  mutate(equal = a == b) |> 
+  ggplot(aes(a,b, fill = equal))+
+    geom_tile(
+      color = "grey10"
+    )+
+    geom_text(aes(label = equal))+
+    coord_fixed()+
+    scale_fill_bright(limits = c(T, F))+
+    scale_y_discrete(expand = expansion())+
+    scale_x_discrete(expand = expansion(), position = "top",
+                     limits = c(T, F))+
+    labs(title="a == b")+
+    theme_minimal()+
+    theme(
+      axis.title.y = element_text(angle = 0, vjust = 0.5)
+    )
+```
