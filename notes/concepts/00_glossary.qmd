@@ -16,11 +16,24 @@ library(tidyverse)
 ```
 
 ```{r}
+values_to_p <- function(term, def){
+  cat(str_c("<h3>", term, "</h3>"))
+  cat("\\n")
+  cat(def)
+}
+```
+
+```{r}
+#| results: asis
 tribble(
   ~Term, ~Def,
-  "Copy-Paste", "Copying text fro"
+  "Copy-Paste", "Copying text to your computer's 'clipboard' and pasting it into another location. Copying can be done many ways, including selecting text with your mouse, right-clicking then selecting 'copy', by selecting text and using your computer's 'hotkey' for copying (Either `Ctrl-C` on Windows or `⌘-C` on Mac)"
 ) |>
   arrange(
     Term
-  )
+  ) |>
+  mutate(
+    foo = map2(Term, Def, values_to_p)
+  ) ->
+  out
 ```

@@ -1,0 +1,14 @@
+{
+  "hash": "e7ecbb35afbddb5fdf86d894a6cb3c52",
+  "result": {
+    "markdown": "---\ntitle: \"Glossary\"\nfilters: \n  - codeblocklabel\nknitr: \n  opts_chunk: \n    echo: false\n    message: false\n    warning: false\n---\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n\n:::\n\n<h3>Copy-Paste</h3>\\nCopying text to your computer's 'clipboard' and pasting it into another location. Copying can be done many ways, including selecting text with your mouse, right-clicking then selecting 'copy', by selecting text and using your computer's 'hotkey' for copying (Either `Ctrl-C` on Windows or `⌘-C` on Mac)\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
