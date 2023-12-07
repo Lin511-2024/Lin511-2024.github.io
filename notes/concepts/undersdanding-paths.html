@@ -8,7 +8,7 @@
 
 <meta name="author" content="Josef Fruehwald">
 
-<title>Lin511-2024 - What is Python?</title>
+<title>Lin511-2024 - Understanding Directories</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -76,7 +76,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/quarto-contrib/codenamelabel/codeblocklabel.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -103,7 +102,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../styles/styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -140,7 +139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/concepts/undersdanding-paths.html">Concepts</a></li><li class="breadcrumb-item"><a href="../../notes/concepts/what-is-python.html">What <em>is</em> Python?</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/concepts/undersdanding-paths.html">Concepts</a></li><li class="breadcrumb-item"><a href="../../notes/concepts/undersdanding-paths.html">Understanding Directories</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -169,13 +168,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notes/concepts/undersdanding-paths.html" class="sidebar-item-text sidebar-link">
+  <a href="../../notes/concepts/undersdanding-paths.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Understanding Directories</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notes/concepts/what-is-python.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../notes/concepts/what-is-python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">What <em>is</em> Python?</span></a>
   </div>
 </li>
@@ -208,20 +207,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#python-is-set-of-rules-for-a-formal-language" id="toc-python-is-set-of-rules-for-a-formal-language" class="nav-link active" data-scroll-target="#python-is-set-of-rules-for-a-formal-language">📕 Python is set of rules for a formal language</a></li>
-  <li><a href="#python-is-a-program-that-interprets-formal-language-input" id="toc-python-is-a-program-that-interprets-formal-language-input" class="nav-link" data-scroll-target="#python-is-a-program-that-interprets-formal-language-input">🤖 Python is a program that interprets formal language input</a></li>
-  <li><a href="#python-is-an-ecosystem" id="toc-python-is-an-ecosystem" class="nav-link" data-scroll-target="#python-is-an-ecosystem">⛰️ Python is an Ecosystem</a></li>
-  <li><a href="#python-is-a-social-project" id="toc-python-is-a-social-project" class="nav-link" data-scroll-target="#python-is-a-social-project">🧑‍💻 Python is a social project</a></li>
-  <li><a href="#the-polysemy-is-ok" id="toc-the-polysemy-is-ok" class="nav-link" data-scroll-target="#the-polysemy-is-ok">📕, 🤖, ⛰️, 🧑‍💻 The Polysemy is Ok</a></li>
+  <li><a href="#directory-structure" id="toc-directory-structure" class="nav-link active" data-scroll-target="#directory-structure">Directory Structure</a></li>
+  <li><a href="#files-in-folders" id="toc-files-in-folders" class="nav-link" data-scroll-target="#files-in-folders">Files in Folders</a>
+  <ul class="collapse">
+  <li><a href="#viewing-the-folder-hierarchy-on-a-mac" id="toc-viewing-the-folder-hierarchy-on-a-mac" class="nav-link" data-scroll-target="#viewing-the-folder-hierarchy-on-a-mac">Viewing the folder hierarchy on a Mac</a></li>
+  <li><a href="#viewing-the-folder-hierarchy-in-windows" id="toc-viewing-the-folder-hierarchy-in-windows" class="nav-link" data-scroll-target="#viewing-the-folder-hierarchy-in-windows">Viewing the folder hierarchy in Windows</a></li>
+  </ul></li>
+  <li><a href="#giving-directions-to-programs" id="toc-giving-directions-to-programs" class="nav-link" data-scroll-target="#giving-directions-to-programs">Giving Directions to Programs</a></li>
+  <li><a href="#relative-paths" id="toc-relative-paths" class="nav-link" data-scroll-target="#relative-paths">Relative Paths</a></li>
+  <li><a href="#absolute-paths" id="toc-absolute-paths" class="nav-link" data-scroll-target="#absolute-paths">Absolute Paths</a></li>
+  <li><a href="#important-note-on-naming" id="toc-important-note-on-naming" class="nav-link" data-scroll-target="#important-note-on-naming">Important Note on Naming</a></li>
+  <li><a href="#important-note-on-using-paths" id="toc-important-note-on-using-paths" class="nav-link" data-scroll-target="#important-note-on-using-paths">Important Note on Using Paths</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">What <em>is</em> Python?</h1>
+<h1 class="title">Understanding Directories</h1>
 </div>
 
 
@@ -242,192 +247,120 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>When talking about “Python” or other programming langauges, we often engage in a form of polysemy<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> that can be confusing at first. I’ll try to unpack the different meanings here.</p>
-<section id="python-is-set-of-rules-for-a-formal-language" class="level2">
-<h2 class="anchored" data-anchor-id="python-is-set-of-rules-for-a-formal-language">📕 Python is set of rules for a formal language</h2>
-<p>When we talk about “Python”, one thing we sometimes refer to is an abstract set of rules for a formal language.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-📕 The abstract language
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>When you say:</p>
-<blockquote class="blockquote">
-<p>I’m learning Python this semester.</p>
-</blockquote>
-<p>You’re talking about the abstract set of rules.</p>
-</div>
-</div>
-<p>We can describe some of these rules in natural language (this isn’t how they’re <em>actually</em> written).</p>
-<ul>
-<li>If a list of values has been assigned to a variable, when the variable’s name is followed <code>[0]</code>, return the first value in the list.</li>
-<li>If <code>print(</code> is followed by a value or variable, which is then followed by <code>)</code>, print the value, or the value assigned to the variable.</li>
-<li>If a <code>#</code> symbol is encountered on a line, ignore everything following it.</li>
-</ul>
-<p>These rules define very precisely how code should be written, and also define what should be <em>done</em> when certain patterns of code are encountered, but these rules are abstract, and don’t actually <em>do</em> anything.</p>
+<section id="directory-structure" class="level2">
+<h2 class="anchored" data-anchor-id="directory-structure">Directory Structure</h2>
+<p>There has recently been an uptick in discussion among college professors that students are <a href="https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z" class="inline_disabled" target="_blank">less familiar with the notions of files, folders, directories, and paths</a> than they used to be in the past. This is in part a natural consequence of shifting paradigms in computer use. Many people are exclusively using online services like Google Docs, and don’t save files to their computers ever. And even when we do save files on out computer, many operating systems have search based approaches to finding files.</p>
+<p>The problem for scientific computing purposes, or even just making some simple HTML pages on your local computer, is that you need to be able to navigate the hierarchical file system of your computer, in order to tell your programs how to navigate it.</p>
 </section>
-<section id="python-is-a-program-that-interprets-formal-language-input" class="level2">
-<h2 class="anchored" data-anchor-id="python-is-a-program-that-interprets-formal-language-input">🤖 Python is a program that interprets formal language input</h2>
-<p>Simply having a set of abstract rules can be fun, but it’s not so useful if you have no way to actually <em>do</em> things. To make code we write actually do anything, we need to use a program called an <strong>Interpreter</strong>.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<section id="files-in-folders" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="files-in-folders">Files in Folders</h2>
+<p>The first thing to be clear about is that all files you’ve saved on your computer are in a folder (a.k.a. a directory). “Documents” or “My Documents” is a folder. Even your Desktop is a folder. This is true for both macOS and Windows. For example, I have an account on my laptop called “Display” for when I want to show how my computer works without showing everyone all of my personal files. In the Display account, I saved a little text file called <code>Sampletext.txt</code> to the desktop. In this screenshot, you can see <code>Sampletext.txt</code> shown both on my desktop, <em>and</em> as a file in a folder.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="assets/Desktop.png" class="img-fluid figure-img" data-api-endpoint="https://uk.instructure.com/api/v1/courses/2027524/files/101193418" data-api-returntype="File"></p>
+<figcaption class="figure-caption margin-caption">Desktop is a folder</figcaption>
+</figure>
 </div>
-<div class="callout-title-container flex-fill">
-🤖 The Python Interpreter
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>When you say</p>
-<blockquote class="blockquote">
-<p>I’m having a hard time installing Python.</p>
-</blockquote>
-<p>you’re talking about a Python Interpreter.</p>
-</div>
-</div>
-<p>The Python interpreter processes code, determines whether or not it is valid, then does the things the code told it to do.</p>
-<p>Code can get passed to the interpreter many different ways, including</p>
-<ul>
-<li>In a single text file, called a python “script”, (usually named to end in <code>.py</code>)</li>
-<li>In an interactive python “shell”.</li>
-<li>Inside a Jupyter notebook.</li>
-</ul>
-<p>For example, the text in the shaded block below was passed to a Python interpreter, and the interpreter decided that it was invalid (because there is an opening quote <code>"</code>, but not a closing quote).</p>
-<div class="cell" data-filename="Python Code" data-execution_count="1">
-<div class="langname">
-<pre class="langname">python</pre>
-</div>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">"x</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>SyntaxError: unterminated string literal (detected at line 1) (20073044.py, line 1)</code></pre>
-</div>
-</div>
-<p>The text in this next shaded block was passed to a Python interpreter. This time, it was deemed valid, and the interpreter did what the code instructed.</p>
-<div class="cell" data-execution_count="2">
-<div class="langname">
-<pre class="langname">python</pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"hello! "</span> <span class="op">*</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>hello! hello! hello! </code></pre>
-</div>
-</div>
-</section>
-<section id="python-is-an-ecosystem" class="level2">
-<h2 class="anchored" data-anchor-id="python-is-an-ecosystem">⛰️ Python is an Ecosystem</h2>
-<p>People often say that Python comes “with batteries included”, meaning it can do a lot of different things out without needing to install any extensions. But you <em>can</em> install extensions in the form of additional libraries that extend Python’s capabilities.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-⛰️ The Ecosystem
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>When someone says</p>
-<blockquote class="blockquote">
-<p>Python is the most widely used language in natural language processing.</p>
-</blockquote>
-<p>They are talking about the <em>ecosystem</em> of libraries for Python hat have been built to do natural language processing.</p>
-</div>
-</div>
-<p>Some examples of additional libraries for Python are</p>
-<ul>
-<li><code>numpy</code>: Allows for effective computation with numbers</li>
-<li><code>matplotlib</code>: Makes graphs</li>
-</ul>
-<div class="cell" data-execution_count="3">
-<div class="langname">
-<pre class="langname">python</pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span> <span class="op">*</span> np.pi, <span class="dv">200</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.sin(x)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>ax.plot(x, y)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="what-is-python_files/figure-html/cell-4-output-1.png" class="" width="590" height="411"></p>
-</div>
-</div>
-</section>
-<section id="python-is-a-social-project" class="level2">
-<h2 class="anchored" data-anchor-id="python-is-a-social-project">🧑‍💻 Python is a social project</h2>
-<p>The meanings of “Python” we’ve already talked about are</p>
-<ul>
-<li>📕 The abstract language</li>
-<li>🤖 The Python Interpreter</li>
-<li>⛰️ The Python Ecosystem</li>
-</ul>
-<p>Understanding how to put all of these pieces together effectively is a <em>social</em> project.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-🧑‍💻 The social project
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>When you say</p>
-<blockquote class="blockquote">
-<p>So-n-so is really good at Python.</p>
-</blockquote>
-<p>You are talking about their involvement in the Python social project.</p>
-</div>
-</div>
-<ul>
-<li>❌ There is no part of the 📕 <em>abstract language</em> that will inform you that there is a very good Python library for doing a certain task.</li>
-<li>❌ The 🤖 <em>Python Interpreter</em> won’t tell you that there’s a better way to do what you’re trying to do.</li>
-<li>❌ There are nearly <a href="https://pypi.org/">half a million libraries on ⛰️ <em>the Python Package Index</em></a>, so you can’t just peruse it to find what’s relevant.</li>
-</ul>
-<p>In order to know newest or most effective way to do things, you need to be involved in 🧑‍💻 <em>the social project</em>. That begins within a classroom, then extends to keeping up with blogs and other discourses about changes and developments.</p>
-<p>One way people demonstrate that they are involved in the Python social project is by writing their code <em>idiomatically</em>. For example, in the code block above, I included the line <code>import numpy as np</code>. But <em>there’s no rule</em> that we import <code>numpy</code> as <code>np</code>, it’s simply convention.</p>
-<p>This code below will run just as well, but would cause problems for people trying to read your code, because it’s not idiomatic.</p>
-<div class="cell" data-execution_count="4">
-<div class="langname">
-<pre class="langname">python</pre>
-</div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> jokes</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> farts</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> farts.linspace(<span class="dv">0</span>, <span class="dv">2</span> <span class="op">*</span> farts.pi, <span class="dv">200</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> farts.sin(x)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> jokes.subplots()</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>ax.plot(x, y)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>jokes.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="what-is-python_files/figure-html/cell-5-output-1.png" class="" width="590" height="411"></p>
-</div>
-</div>
-</section>
-<section id="the-polysemy-is-ok" class="level2">
-<h2 class="anchored" data-anchor-id="the-polysemy-is-ok">📕, 🤖, ⛰️, 🧑‍💻 The Polysemy is Ok</h2>
-<p>It’s ok just say “Python” when you’re talking about one specific meaning.</p>
-
-
-</section>
-
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>A word is polysemous when it has more than one meaning.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<p>What’s nice about this image is that you can see where Sampletext.txt exists in the context of my whole hard drive. My “Desktop” is just a folder that my computer shows the content of on my main screen. The Desktop folder is inside of a folder called “Display”. There are other folders in there, including my main user account, joseffruehwald. All of these folders are grouped together in the “Users” folder, and the “Users” folder is one of the first folders immediately underneath my hard drive.</p>
+<p>The important thing to keep in mind here is that all files, programs, photos, etc are stored somewhere in a folder, inside of another folder, probably inside of another folder. You might not always&nbsp;<em>interact</em> with the files this way, and they might not always&nbsp;<em>look</em> like they’re in a folder, but they are.</p>
+<section id="viewing-the-folder-hierarchy-on-a-mac" class="level3">
+<h3 class="anchored" data-anchor-id="viewing-the-folder-hierarchy-on-a-mac">Viewing the folder hierarchy on a Mac</h3>
+<p>To be able to better view the full hierarchy of folders on a Mac, I would recommend the following:</p>
+<ol type="1">
+<li>Open Finder, and in the View menu, select “as Columns”</li>
+<li>Under the View menu again, select “Show Path Bar”</li>
 </ol>
-</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section></div></main> <!-- /main -->
+</section>
+<section id="viewing-the-folder-hierarchy-in-windows" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="viewing-the-folder-hierarchy-in-windows">Viewing the folder hierarchy in Windows</h3>
+<p>At the top of the file browser on Windows, you’ll see the sequence of files in which the current folder is embedded.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full" style="display: block; margin-left: auto; margin-right: auto;">
+<figure class="figure page-columns page-full">
+<p><img src="assets/VirtualDen_Desktop.png" class="img-fluid figure-img" data-api-endpoint="https://uk.instructure.com/api/v1/courses/2027524/files/101218990" data-api-returntype="File"></p>
+<figcaption class="figure-caption margin-caption">Windows directory structure</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="giving-directions-to-programs" class="level2">
+<h2 class="anchored" data-anchor-id="giving-directions-to-programs">Giving Directions to Programs</h2>
+<p>Programs are going to need directions for where to find things, and we can do this with “paths”. The concept of a path is so important, I’m going to really emphasize it</p>
+<p><span style="font-size: 36pt;"><strong>“paths”</strong></span>&nbsp;</p>
+<p>The “path” to a file is a written instruction for where to find a file on your specific computer.</p>
+</section>
+<section id="relative-paths" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="relative-paths">Relative Paths</h2>
+<p>Sometimes, we only need to tell a file where another file is&nbsp;<em>relative</em> to itself. For example, here is an HTML document and a CSS stylesheet for that document.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full" style="display: block; margin-left: auto; margin-right: auto;">
+<figure class="figure page-columns page-full">
+<p><img src="$IMS-CC-FILEBASE$/Uploaded Media 2/html_practice.png?canvas_download=1" class="figure-img" data-api-endpoint="https://uk.instructure.com/api/v1/courses/2027524/files/101193779" data-api-returntype="File" width="640" height="393"></p>
+<figcaption class="figure-caption margin-caption">html_practice.png</figcaption>
+</figure>
+</div>
+<p><span style="font-size: 18pt;">From <code>site.html</code> to <code>style.css</code>: <code>style.css</code></span></p>
+<p>Because style.css is in the same folder as site.html, we only need to tell site.html to look for style.css, like so</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;link</span> <span class="er">rel</span><span class="ot">=</span><span class="st">"stylesheet"</span> <span class="er">type</span><span class="ot">=</span><span class="st">"text/css"</span> <span class="er">href</span><span class="ot">=</span><span class="st">"style.css"</span><span class="kw">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Just telling the html file to look for “style.css”, it’s going to look inside of, and <em>only</em> inside of the same folder as itself.</p>
+<p>However, sometimes people like to put all of the stylesheets and images for a website inside of a folder called “assets,” like so:</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full" style="display: block; margin-left: auto; margin-right: auto;">
+<figure class="figure page-columns page-full">
+<p><img src="$IMS-CC-FILEBASE$/Uploaded Media 2/assets.png?canvas_download=1" class="figure-img" data-api-endpoint="https://uk.instructure.com/api/v1/courses/2027524/files/101193845" data-api-returntype="File" width="640" height="312"></p>
+<figcaption class="figure-caption margin-caption">assets.png</figcaption>
+</figure>
+</div>
+<p><span style="font-size: 18pt;">From <code>site.html</code> to <code>style.css</code>: <code>assets/style.css</code></span></p>
+<p>Now, if we tell site.html just to look for style.css, it’s not going to find it anymore! That’s because style.css is no longer in the same folder as site.html. We’ll need to update the link to the stylesheet to reflect the fact that it’s now in a different folder, like so:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;link</span> <span class="er">rel</span><span class="ot">=</span><span class="st">"stylesheet"</span> <span class="er">type</span><span class="ot">=</span><span class="st">"text/css"</span> <span class="er">href</span><span class="ot">=</span><span class="st">"assets/style.css"</span><span class="kw">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here’s how site.html interprets the string <code>assets/style.css</code>:</p>
+<ul>
+<li>Look inside the folder you’re currently in for a folder called <code>assets</code></li>
+<li>Then, look inside of that folder for a file called <code>style.css</code></li>
+</ul>
+<p>We could take it a step further, and create a new folder called “css” inside of “assets”, and put our stylesheet there instead.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="$IMS-CC-FILEBASE$/Uploaded Media 2/css.png?canvas_download=1" class="img-fluid figure-img" data-api-endpoint="https://uk.instructure.com/api/v1/courses/2027524/files/101193957" data-api-returntype="File"></p>
+<figcaption class="figure-caption margin-caption">css.png</figcaption>
+</figure>
+</div>
+<p><span style="font-size: 18pt;">From <code>site.html</code> to <code>style.css</code>: <code>assets/css/style.css</code></span></p>
+<p>Now, we’d need to update the link to the stylesheet to look like this</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;link</span> <span class="er">rel</span><span class="ot">=</span><span class="st">"stylesheet"</span> <span class="er">type</span><span class="ot">=</span><span class="st">"text/css"</span> <span class="er">href</span><span class="ot">=</span><span class="st">"assets/css/style.css"</span><span class="kw">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Again, breaking this down into how site.html interprets the string <code>assets/css/style.css</code>&nbsp;goes like this:</p>
+<ul>
+<li>Look inside of the same folder as yourself for a folder called <code>assets</code></li>
+<li>Look inside of that folder for a folder called <code>css</code></li>
+<li>Look inside of that folder for a file called <code>style.css</code></li>
+</ul>
+</section>
+<section id="absolute-paths" class="level2">
+<h2 class="anchored" data-anchor-id="absolute-paths">Absolute Paths</h2>
+<p>Relative paths define the location of a file relative to another file, usually the one you’re writing. However, we can also define the location of a file on our computer that will work no matter where we’re looking from. These are called “<strong>absolute paths</strong>.” Put simply, absolute paths just list all of the nested folders a file is in, all the way up to the hard drive. You can see the absolute path for <code>style.css</code>&nbsp;at the bottom of the very last screen shot.</p>
+<p>Different operating systems have different short hands for describing the top level, or hard drive level, of the path. On macOS, it’s simply a <code>/</code> at the beginning of the path. On Windows, it usually begins with <code>C:\</code>. For the final location of <code>style.css</code>&nbsp;in the screenshot above, the absolute path would be.</p>
+<pre><code>/Users/Display/Documents/html_practice/assets/css/style.css</code></pre>
+<p>If for some reason I didn’t want to move or copy this stylesheet from this location, and I wanted to link to it from an HTML file saved in some completely different location on my laptop, I could give it this absolute path, and it would find it.</p>
+</section>
+<section id="important-note-on-naming" class="level2">
+<h2 class="anchored" data-anchor-id="important-note-on-naming">Important Note on Naming</h2>
+<p>From here on out in the course, you should avoid using spaces in any of the files or folders you name. While you&nbsp;<em>can</em> take spaces into account when giving a path, it’s annoying. Instead, I’d recommend using an underscore <code>_</code>, a dash <code>-</code>, or naming files with “camel case”.</p>
+<ul>
+<li><code>my_file.txt</code></li>
+<li><code>my-file.txt</code></li>
+<li><code>myFile.txt</code></li>
+</ul>
+</section>
+<section id="important-note-on-using-paths" class="level2">
+<h2 class="anchored" data-anchor-id="important-note-on-using-paths">Important Note on Using Paths</h2>
+<p>There are two crucial things to remember about using paths that can be conceptually difficult when first getting started.</p>
+<ol type="1">
+<li>Relative paths always depend on where you’re coming&nbsp;<em>from</em> and where you’re going&nbsp;<em>to</em>. If either my HTML file was in a location I was confused about, or my CSS file was in a location I was confused about, my relative path might not work.</li>
+<li>Both relative paths and absolute paths <strong>depend on how files are organized inside of your own computer</strong>. A path copied from an example online, or a professor’s template&nbsp;<em>might not work</em> &nbsp;if your file structure is different.</li>
+</ol>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
