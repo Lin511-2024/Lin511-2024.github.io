@@ -1,5 +1,19 @@
 [
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2\n\n\n\n\n\nReuseCC-BY-SA 4.0"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Computational Linguistics (Spring 2024)",
+    "section": "",
+    "text": "Welcome to the Lin511 Computational Linguistics website. This course is being taught in the University of Kentucky’s Linguistics Department in Spring 2024\nIf you are visiting on a mobile device, site navigation can be found under the “hamburger” at the top.\n\n\n\nReuseCC-BY-SA 4.0"
+  },
+  {
     "objectID": "syllabus/syllabus.html",
     "href": "syllabus/syllabus.html",
     "title": "Lin511-001 - Computational Linguistics",
@@ -112,11 +126,53 @@
     "text": "15 Diversity, Equity and Inclusion\nUK Senate DEI Statement\nThe University of Kentucky is committed to our core values of diversity and inclusion, mutual respect and human dignity, and a sense of community (Governing Regulations XIV). We acknowledge and respect the seen and unseen diverse identities and experiences of all members of the university community (https://www.uky.edu/regs/gr14). These identities include but are not limited to those based on race, ethnicity, gender identity and expressions, ideas and perspectives, religious and cultural beliefs, sexual orientation, national origin, age, ability, and socioeconomic status. We are committed to equity and justice and providing a learning and engaging community in which every member is engaged, heard, and valued.\nWe strive to rectify and change behavior that is inconsistent with our principles and commitment to diversity, equity, and inclusion. If students encounter such behavior in a course, they are encouraged to speak with the instructor of record and/or the Office of Institutional Equity and Equal Opportunity. Students may also contact a faculty member within the department, program director, the director of undergraduate or graduate studies, the department chair, any college administrator, or the dean. All of these individuals are mandatory reporters under University policies."
   },
   {
-    "objectID": "notes/index.html",
-    "href": "notes/index.html",
-    "title": "Meeting Notes",
+    "objectID": "notes/concepts/01_what-is-python.html",
+    "href": "notes/concepts/01_what-is-python.html",
+    "title": "What is Python?",
     "section": "",
-    "text": "These are the notes for our regular meetings.\n\n\n\n\n\n\n\n\n  \n\n\n\n\nSetup Notes\n\n\n\n\n\n\n\n\n\n\n\n\nJan 8, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\nNo matching items\n\nReuseCC-BY-SA 4.0"
+    "text": "When talking about “Python” or other programming langauges, we often engage in a form of polysemy1 that can be confusing at first. I’ll try to unpack the different meanings here."
+  },
+  {
+    "objectID": "notes/concepts/01_what-is-python.html#python-is-set-of-rules-for-a-formal-language",
+    "href": "notes/concepts/01_what-is-python.html#python-is-set-of-rules-for-a-formal-language",
+    "title": "What is Python?",
+    "section": "📕 Python is set of rules for a formal language",
+    "text": "📕 Python is set of rules for a formal language\nWhen we talk about “Python”, one thing we sometimes refer to is an abstract set of rules for a formal language.\n\n\n\n\n\n\n📕 The abstract language\n\n\n\nWhen you say:\n\nI’m learning Python this semester.\n\nYou’re talking about the abstract set of rules.\n\n\nWe can describe some of these rules in natural language (this isn’t how they’re actually written).\n\nIf a list of values has been assigned to a variable, when the variable’s name is followed [0], return the first value in the list.\nIf print( is followed by a value or variable, which is then followed by ), print the value, or the value assigned to the variable.\nIf a # symbol is encountered on a line, ignore everything following it.\n\nThese rules define very precisely how code should be written, and also define what should be done when certain patterns of code are encountered, but these rules are abstract, and don’t actually do anything."
+  },
+  {
+    "objectID": "notes/concepts/01_what-is-python.html#python-is-a-program-that-interprets-formal-language-input",
+    "href": "notes/concepts/01_what-is-python.html#python-is-a-program-that-interprets-formal-language-input",
+    "title": "What is Python?",
+    "section": "🤖 Python is a program that interprets formal language input",
+    "text": "🤖 Python is a program that interprets formal language input\nSimply having a set of abstract rules can be fun, but it’s not so useful if you have no way to actually do things. To make code we write actually do anything, we need to use a program called an Interpreter.\n\n\n\n\n\n\n🤖 The Python Interpreter\n\n\n\nWhen you say\n\nI’m having a hard time installing Python.\n\nyou’re talking about a Python Interpreter.\n\n\nThe Python interpreter processes code, determines whether or not it is valid, then does the things the code told it to do.\nCode can get passed to the interpreter many different ways, including\n\nIn a single text file, called a python “script”, (usually named to end in .py)\nIn an interactive python “shell”.\nInside a Jupyter notebook.\n\nFor example, the text in the shaded block below was passed to a Python interpreter, and the interpreter decided that it was invalid (because there is an opening quote \", but not a closing quote).\n\n\npython\n\n\"x\n\nSyntaxError: unterminated string literal (detected at line 1) (20073044.py, line 1)\n\n\nThe text in this next shaded block was passed to a Python interpreter. This time, it was deemed valid, and the interpreter did what the code instructed.\n\n\npython\n\nprint(\"hello! \" * 3)\n\nhello! hello! hello!"
+  },
+  {
+    "objectID": "notes/concepts/01_what-is-python.html#python-is-an-ecosystem",
+    "href": "notes/concepts/01_what-is-python.html#python-is-an-ecosystem",
+    "title": "What is Python?",
+    "section": "⛰️ Python is an Ecosystem",
+    "text": "⛰️ Python is an Ecosystem\nPeople often say that Python comes “with batteries included”, meaning it can do a lot of different things out without needing to install any extensions. But you can install extensions in the form of additional libraries that extend Python’s capabilities.\n\n\n\n\n\n\n⛰️ The Ecosystem\n\n\n\nWhen someone says\n\nPython is the most widely used language in natural language processing.\n\nThey are talking about the ecosystem of libraries for Python hat have been built to do natural language processing.\n\n\nSome examples of additional libraries for Python are\n\nnumpy: Allows for effective computation with numbers\nmatplotlib: Makes graphs\n\n\n\npython\n\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nx = np.linspace(0, 2 * np.pi, 200)\ny = np.sin(x)\n\nfig, ax = plt.subplots()\nax.plot(x, y)\nplt.show()"
+  },
+  {
+    "objectID": "notes/concepts/01_what-is-python.html#python-is-a-social-project",
+    "href": "notes/concepts/01_what-is-python.html#python-is-a-social-project",
+    "title": "What is Python?",
+    "section": "🧑‍💻 Python is a social project",
+    "text": "🧑‍💻 Python is a social project\nThe meanings of “Python” we’ve already talked about are\n\n📕 The abstract language\n🤖 The Python Interpreter\n⛰️ The Python Ecosystem\n\nUnderstanding how to put all of these pieces together effectively is a social project.\n\n\n\n\n\n\n🧑‍💻 The social project\n\n\n\nWhen you say\n\nSo-n-so is really good at Python.\n\nYou are talking about their involvement in the Python social project.\n\n\n\n❌ There is no part of the 📕 abstract language that will inform you that there is a very good Python library for doing a certain task.\n❌ The 🤖 Python Interpreter won’t tell you that there’s a better way to do what you’re trying to do.\n❌ There are nearly half a million libraries on ⛰️ the Python Package Index, so you can’t just peruse it to find what’s relevant.\n\nIn order to know newest or most effective way to do things, you need to be involved in 🧑‍💻 the social project. That begins within a classroom, then extends to keeping up with blogs and other discourses about changes and developments.\nOne way people demonstrate that they are involved in the Python social project is by writing their code idiomatically. For example, in the code block above, I included the line import numpy as np. But there’s no rule that we import numpy as np, it’s simply convention.\nThis code below will run just as well, but would cause problems for people trying to read your code, because it’s not idiomatic.\n\n\npython\n\nimport matplotlib.pyplot as jokes\nimport numpy as farts\n\nx = farts.linspace(0, 2 * farts.pi, 200)\ny = farts.sin(x)\n\nfig, ax = jokes.subplots()\nax.plot(x, y)\njokes.show()"
+  },
+  {
+    "objectID": "notes/concepts/01_what-is-python.html#the-polysemy-is-ok",
+    "href": "notes/concepts/01_what-is-python.html#the-polysemy-is-ok",
+    "title": "What is Python?",
+    "section": "📕, 🤖, ⛰️, 🧑‍💻 The Polysemy is Ok",
+    "text": "📕, 🤖, ⛰️, 🧑‍💻 The Polysemy is Ok\nIt’s ok just say “Python” when you’re talking about one specific meaning."
+  },
+  {
+    "objectID": "notes/concepts/01_what-is-python.html#footnotes",
+    "href": "notes/concepts/01_what-is-python.html#footnotes",
+    "title": "What is Python?",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nA word is polysemous when it has more than one meaning.↩︎"
   },
   {
     "objectID": "notes/concepts/02_undersdanding-paths.html",
@@ -175,25 +231,25 @@
     "text": "Important Note on Using Paths\nThere are two crucial things to remember about using paths that can be conceptually difficult when first getting started.\n\nRelative paths always depend on where you’re coming from and where you’re going to. If either my HTML file was in a location I was confused about, or my CSS file was in a location I was confused about, my relative path might not work.\nBoth relative paths and absolute paths depend on how files are organized inside of your own computer. A path copied from an example online, or a professor’s template might not work  if your file structure is different."
   },
   {
-    "objectID": "notes/concepts/00_glossary.html",
-    "href": "notes/concepts/00_glossary.html",
-    "title": "Glossary",
+    "objectID": "notes/meetings/01_Paths.html",
+    "href": "notes/meetings/01_Paths.html",
+    "title": "Paths in Python",
     "section": "",
-    "text": "Copy-Paste\n\nCopying text to your computer’s ‘clipboard’ and pasting it into another location.\nCopying can be done many ways, including selecting text with your mouse, right-clicking then selecting ‘copy’, by selecting text and using your computer’s ‘hotkey’ for copying (Either Ctrl-C on Windows or ⌘-C on Mac), or, in the course documents, by clicking on the ‘copy’ icon in most code chunks.\nTo paste, you can either right-click and select ‘Paste’, or use your system’s ‘hotkey’ (Ctrl-V on Windows, or ⌘-V on Mac).\n\nFind, or Ctrl-F\n\nYou can find text in most pages or documents by either typing Ctrl-F or ⌘-F, then typing in the text you want to find in the dialogue box that pops up.\n\nTab Autocomplete\n\nMany programming applications have “Tab Autocomplete” suggestions that allow you to type in just a few letters of the command, function, or variable you want to use, and then hit Tab.\n\n\n\nReuseCC-BY-SA 4.0"
+    "text": "python\n\nfrom pathlib import Path\n\n\n\npython\n\nx = Path()\n\n\n\npython\n\nx.resolve()\n\nPosixPath('/Users/joseffruehwald/Library/CloudStorage/OneDrive-UniversityofKentucky/Courses/Lin511/Lin511-2024.github.io/notes/meetings')\n\n\n\n\n\nReuseCC-BY-SA 4.0"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Computational Linguistics (Spring 2024)",
+    "objectID": "notes/meetings/00_setup.html",
+    "href": "notes/meetings/00_setup.html",
+    "title": "Setup Notes",
     "section": "",
-    "text": "Welcome to the Lin511 Computational Linguistics website. This course is being taught in the University of Kentucky’s Linguistics Department in Spring 2024\nIf you are visiting on a mobile device, site navigation can be found under the “hamburger” at the top.\n\n\n\nReuseCC-BY-SA 4.0"
+    "text": "We’ll need to get our systems setup to work properly with the tools we’ll be using this semester.\n\n\n\n\n\n\nIf you ware using a windows computer, I’ll ask you to install Windows Subsystem for Linux like so:\n\nFollow the tutorial here for enabling and installing WSL\nInstall VS Code\nWork through the first section of this tutorial, stopping after you connect to WSL\n\n\n\n\n\n\n\n\nInstall VS Code\n\n\n\n\n\n\n\n\n\nWe’ll be using a program called pyenv to manage the versions of python we use. To install pyenv, open the VSCode Command Palette (with Shift+Ctrl+P) which will open the command line interface. Then,\n\ncopy this line of code code from this page (Ctrl-c or ⌘-c)\n\n\nbash\n\ncurl https://pyenv.run | bash\n\nPaste it into the terminal (Ctrl-v or ⌘-v)\nHit enter.\n\nOnce that has successfully finished:\n\n\n\n\n\n\n\nRun this\n\n\nbash\n\nopen ~/.zshrc\n\n\nIf you get an error.\n\n\nRun this\n\n\nbash\n\ntouch ~/.zshrc\nopen ~/.zshrc\n\n\n\n\n\n\n\n\nRun this\n\n\nbash\n\nopen ~/.bashrc\n\n\nIf you get an error\n\n\nRun ths\n\n\nbash\n\ntouch ~/.bashrc\nopen ~/.bashrc\n\n\n\n\n\n\nPaste the following into the window that opens.\n\n\nsh\n\nexport PYENV_ROOT=\"$HOME/.pyenv\"\n[[ -d $PYENV_ROOT/bin ]] && export PATH=\"$PYENV_ROOT/bin:$PATH\"\neval \"$(pyenv init -)\"\n\nSave it\n\n\n\n\nClose and reopen the terminal window\nCopy-Paste the following lines of code\n\n\nbash\n\npyenv install 3.11\npyenv global 3.11\npyenv virtualenv 3.11 Lin511\npyenv activate Lin511\nThis will have installed a recent version of python onto your computer, and created a “virtual environment” for the class.\n\n\n\n\n\n\n\nMake sure you change the email and name to the email and username you use for Github!\n\nIn the terminal, set your git email address:\n\n\nbash\n\ngit config --global user.email \"you@example.com\"\n\nSet your username.\n\n\nbash\n\ngit config --global user.name \"Your Name\"\nThen, follow these tutorials from github:\n\nGenerating a new SSH Key\nAdding your ssh key to github"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "notes/meetings/00_setup.html#setup",
+    "href": "notes/meetings/00_setup.html#setup",
+    "title": "Setup Notes",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2\n\n\n\n\n\nReuseCC-BY-SA 4.0"
+    "text": "We’ll need to get our systems setup to work properly with the tools we’ll be using this semester.\n\n\n\n\n\n\nIf you ware using a windows computer, I’ll ask you to install Windows Subsystem for Linux like so:\n\nFollow the tutorial here for enabling and installing WSL\nInstall VS Code\nWork through the first section of this tutorial, stopping after you connect to WSL\n\n\n\n\n\n\n\n\nInstall VS Code\n\n\n\n\n\n\n\n\n\nWe’ll be using a program called pyenv to manage the versions of python we use. To install pyenv, open the VSCode Command Palette (with Shift+Ctrl+P) which will open the command line interface. Then,\n\ncopy this line of code code from this page (Ctrl-c or ⌘-c)\n\n\nbash\n\ncurl https://pyenv.run | bash\n\nPaste it into the terminal (Ctrl-v or ⌘-v)\nHit enter.\n\nOnce that has successfully finished:\n\n\n\n\n\n\n\nRun this\n\n\nbash\n\nopen ~/.zshrc\n\n\nIf you get an error.\n\n\nRun this\n\n\nbash\n\ntouch ~/.zshrc\nopen ~/.zshrc\n\n\n\n\n\n\n\n\nRun this\n\n\nbash\n\nopen ~/.bashrc\n\n\nIf you get an error\n\n\nRun ths\n\n\nbash\n\ntouch ~/.bashrc\nopen ~/.bashrc\n\n\n\n\n\n\nPaste the following into the window that opens.\n\n\nsh\n\nexport PYENV_ROOT=\"$HOME/.pyenv\"\n[[ -d $PYENV_ROOT/bin ]] && export PATH=\"$PYENV_ROOT/bin:$PATH\"\neval \"$(pyenv init -)\"\n\nSave it\n\n\n\n\nClose and reopen the terminal window\nCopy-Paste the following lines of code\n\n\nbash\n\npyenv install 3.11\npyenv global 3.11\npyenv virtualenv 3.11 Lin511\npyenv activate Lin511\nThis will have installed a recent version of python onto your computer, and created a “virtual environment” for the class.\n\n\n\n\n\n\n\nMake sure you change the email and name to the email and username you use for Github!\n\nIn the terminal, set your git email address:\n\n\nbash\n\ngit config --global user.email \"you@example.com\"\n\nSet your username.\n\n\nbash\n\ngit config --global user.name \"Your Name\"\nThen, follow these tutorials from github:\n\nGenerating a new SSH Key\nAdding your ssh key to github"
   },
   {
     "objectID": "notes/concepts/03_navigating-directories.html",
@@ -238,67 +294,18 @@
     "text": "This is all going to matter a lot\nUsing the command line and navigating your computer is going to come up a lot more in this course. You should try as much as you can to get a handle on how this all works now."
   },
   {
-    "objectID": "notes/concepts/01_what-is-python.html",
-    "href": "notes/concepts/01_what-is-python.html",
-    "title": "What is Python?",
+    "objectID": "notes/concepts/00_glossary.html",
+    "href": "notes/concepts/00_glossary.html",
+    "title": "Glossary",
     "section": "",
-    "text": "When talking about “Python” or other programming langauges, we often engage in a form of polysemy1 that can be confusing at first. I’ll try to unpack the different meanings here."
+    "text": "Copy-Paste\n\nCopying text to your computer’s ‘clipboard’ and pasting it into another location.\nCopying can be done many ways, including selecting text with your mouse, right-clicking then selecting ‘copy’, by selecting text and using your computer’s ‘hotkey’ for copying (Either Ctrl-C on Windows or ⌘-C on Mac), or, in the course documents, by clicking on the ‘copy’ icon in most code chunks.\nTo paste, you can either right-click and select ‘Paste’, or use your system’s ‘hotkey’ (Ctrl-V on Windows, or ⌘-V on Mac).\n\nFind, or Ctrl-F\n\nYou can find text in most pages or documents by either typing Ctrl-F or ⌘-F, then typing in the text you want to find in the dialogue box that pops up.\n\nTab Autocomplete\n\nMany programming applications have “Tab Autocomplete” suggestions that allow you to type in just a few letters of the command, function, or variable you want to use, and then hit Tab.\n\n\n\nReuseCC-BY-SA 4.0"
   },
   {
-    "objectID": "notes/concepts/01_what-is-python.html#python-is-set-of-rules-for-a-formal-language",
-    "href": "notes/concepts/01_what-is-python.html#python-is-set-of-rules-for-a-formal-language",
-    "title": "What is Python?",
-    "section": "📕 Python is set of rules for a formal language",
-    "text": "📕 Python is set of rules for a formal language\nWhen we talk about “Python”, one thing we sometimes refer to is an abstract set of rules for a formal language.\n\n\n\n\n\n\n📕 The abstract language\n\n\n\nWhen you say:\n\nI’m learning Python this semester.\n\nYou’re talking about the abstract set of rules.\n\n\nWe can describe some of these rules in natural language (this isn’t how they’re actually written).\n\nIf a list of values has been assigned to a variable, when the variable’s name is followed [0], return the first value in the list.\nIf print( is followed by a value or variable, which is then followed by ), print the value, or the value assigned to the variable.\nIf a # symbol is encountered on a line, ignore everything following it.\n\nThese rules define very precisely how code should be written, and also define what should be done when certain patterns of code are encountered, but these rules are abstract, and don’t actually do anything."
-  },
-  {
-    "objectID": "notes/concepts/01_what-is-python.html#python-is-a-program-that-interprets-formal-language-input",
-    "href": "notes/concepts/01_what-is-python.html#python-is-a-program-that-interprets-formal-language-input",
-    "title": "What is Python?",
-    "section": "🤖 Python is a program that interprets formal language input",
-    "text": "🤖 Python is a program that interprets formal language input\nSimply having a set of abstract rules can be fun, but it’s not so useful if you have no way to actually do things. To make code we write actually do anything, we need to use a program called an Interpreter.\n\n\n\n\n\n\n🤖 The Python Interpreter\n\n\n\nWhen you say\n\nI’m having a hard time installing Python.\n\nyou’re talking about a Python Interpreter.\n\n\nThe Python interpreter processes code, determines whether or not it is valid, then does the things the code told it to do.\nCode can get passed to the interpreter many different ways, including\n\nIn a single text file, called a python “script”, (usually named to end in .py)\nIn an interactive python “shell”.\nInside a Jupyter notebook.\n\nFor example, the text in the shaded block below was passed to a Python interpreter, and the interpreter decided that it was invalid (because there is an opening quote \", but not a closing quote).\n\n\npython\n\n\"x\n\nSyntaxError: unterminated string literal (detected at line 1) (20073044.py, line 1)\n\n\nThe text in this next shaded block was passed to a Python interpreter. This time, it was deemed valid, and the interpreter did what the code instructed.\n\n\npython\n\nprint(\"hello! \" * 3)\n\nhello! hello! hello!"
-  },
-  {
-    "objectID": "notes/concepts/01_what-is-python.html#python-is-an-ecosystem",
-    "href": "notes/concepts/01_what-is-python.html#python-is-an-ecosystem",
-    "title": "What is Python?",
-    "section": "⛰️ Python is an Ecosystem",
-    "text": "⛰️ Python is an Ecosystem\nPeople often say that Python comes “with batteries included”, meaning it can do a lot of different things out without needing to install any extensions. But you can install extensions in the form of additional libraries that extend Python’s capabilities.\n\n\n\n\n\n\n⛰️ The Ecosystem\n\n\n\nWhen someone says\n\nPython is the most widely used language in natural language processing.\n\nThey are talking about the ecosystem of libraries for Python hat have been built to do natural language processing.\n\n\nSome examples of additional libraries for Python are\n\nnumpy: Allows for effective computation with numbers\nmatplotlib: Makes graphs\n\n\n\npython\n\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nx = np.linspace(0, 2 * np.pi, 200)\ny = np.sin(x)\n\nfig, ax = plt.subplots()\nax.plot(x, y)\nplt.show()"
-  },
-  {
-    "objectID": "notes/concepts/01_what-is-python.html#python-is-a-social-project",
-    "href": "notes/concepts/01_what-is-python.html#python-is-a-social-project",
-    "title": "What is Python?",
-    "section": "🧑‍💻 Python is a social project",
-    "text": "🧑‍💻 Python is a social project\nThe meanings of “Python” we’ve already talked about are\n\n📕 The abstract language\n🤖 The Python Interpreter\n⛰️ The Python Ecosystem\n\nUnderstanding how to put all of these pieces together effectively is a social project.\n\n\n\n\n\n\n🧑‍💻 The social project\n\n\n\nWhen you say\n\nSo-n-so is really good at Python.\n\nYou are talking about their involvement in the Python social project.\n\n\n\n❌ There is no part of the 📕 abstract language that will inform you that there is a very good Python library for doing a certain task.\n❌ The 🤖 Python Interpreter won’t tell you that there’s a better way to do what you’re trying to do.\n❌ There are nearly half a million libraries on ⛰️ the Python Package Index, so you can’t just peruse it to find what’s relevant.\n\nIn order to know newest or most effective way to do things, you need to be involved in 🧑‍💻 the social project. That begins within a classroom, then extends to keeping up with blogs and other discourses about changes and developments.\nOne way people demonstrate that they are involved in the Python social project is by writing their code idiomatically. For example, in the code block above, I included the line import numpy as np. But there’s no rule that we import numpy as np, it’s simply convention.\nThis code below will run just as well, but would cause problems for people trying to read your code, because it’s not idiomatic.\n\n\npython\n\nimport matplotlib.pyplot as jokes\nimport numpy as farts\n\nx = farts.linspace(0, 2 * farts.pi, 200)\ny = farts.sin(x)\n\nfig, ax = jokes.subplots()\nax.plot(x, y)\njokes.show()"
-  },
-  {
-    "objectID": "notes/concepts/01_what-is-python.html#the-polysemy-is-ok",
-    "href": "notes/concepts/01_what-is-python.html#the-polysemy-is-ok",
-    "title": "What is Python?",
-    "section": "📕, 🤖, ⛰️, 🧑‍💻 The Polysemy is Ok",
-    "text": "📕, 🤖, ⛰️, 🧑‍💻 The Polysemy is Ok\nIt’s ok just say “Python” when you’re talking about one specific meaning."
-  },
-  {
-    "objectID": "notes/concepts/01_what-is-python.html#footnotes",
-    "href": "notes/concepts/01_what-is-python.html#footnotes",
-    "title": "What is Python?",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nA word is polysemous when it has more than one meaning.↩︎"
-  },
-  {
-    "objectID": "notes/meetings/00_setup.html",
-    "href": "notes/meetings/00_setup.html",
-    "title": "Setup Notes",
+    "objectID": "notes/index.html",
+    "href": "notes/index.html",
+    "title": "Meeting Notes",
     "section": "",
-    "text": "We’ll need to get our systems setup to work properly with the tools we’ll be using this semester.\n\n\n\n\n\n\nIf you ware using a windows computer, I’ll ask you to install Windows Subsystem for Linux like so:\n\nFollow the tutorial here for enabling and installing WSL\nInstall VS Code\nWork through the first section of this tutorial, stopping after you connect to WSL\n\n\n\n\n\n\n\n\nInstall VS Code\n\n\n\n\n\n\n\n\n\nWe’ll be using a program called pyenv to manage the versions of python we use. To install pyenv, open the VSCode Command Palette (with Shift+Ctrl+P) which will open the command line interface. Then,\n\ncopy this line of code code from this page (Ctrl-c or ⌘-c)\n\n\nbash\n\ncurl https://pyenv.run | bash\n\nPaste it into the terminal (Ctrl-v or ⌘-v)\nHit enter.\n\nOnce that has successfully finished:\n\n\n\n\n\n\n\nRun this\n\n\nbash\n\nopen ~/.zshrc\n\n\nIf you get an error.\n\n\nRun this\n\n\nbash\n\ntouch ~/.zshrc\nopen ~/.zshrc\n\n\n\n\n\n\n\n\nRun this\n\n\nbash\n\nopen ~/.bashrc\n\n\nIf you get an error\n\n\nRun ths\n\n\nbash\n\ntouch ~/.bashrc\nopen ~/.bashrc\n\n\n\n\n\n\nPaste the following into the window that opens.\n\n\nsh\n\nexport PYENV_ROOT=\"$HOME/.pyenv\"\n[[ -d $PYENV_ROOT/bin ]] && export PATH=\"$PYENV_ROOT/bin:$PATH\"\neval \"$(pyenv init -)\"\n\nSave it\n\n\n\n\nClose and reopen the terminal window\nCopy-Paste the following lines of code\n\n\nbash\n\npyenv install 3.11\npyenv global 3.11\npyenv virtualenv 3.11 Lin511\npyenv activate Lin511\nThis will have installed a recent version of python onto your computer, and created a “virtual environment” for the class.\n\n\n\n\n\n\n\nMake sure you change the email and name to the email and username you use for Github!\n\nIn the terminal, set your git email address:\n\n\nbash\n\ngit config --global user.email \"you@example.com\"\n\nSet your username.\n\n\nbash\n\ngit config --global user.name \"Your Name\"\nThen, follow these tutorials from github:\n\nGenerating a new SSH Key\nAdding your ssh key to github"
-  },
-  {
-    "objectID": "notes/meetings/00_setup.html#setup",
-    "href": "notes/meetings/00_setup.html#setup",
-    "title": "Setup Notes",
-    "section": "",
-    "text": "We’ll need to get our systems setup to work properly with the tools we’ll be using this semester.\n\n\n\n\n\n\nIf you ware using a windows computer, I’ll ask you to install Windows Subsystem for Linux like so:\n\nFollow the tutorial here for enabling and installing WSL\nInstall VS Code\nWork through the first section of this tutorial, stopping after you connect to WSL\n\n\n\n\n\n\n\n\nInstall VS Code\n\n\n\n\n\n\n\n\n\nWe’ll be using a program called pyenv to manage the versions of python we use. To install pyenv, open the VSCode Command Palette (with Shift+Ctrl+P) which will open the command line interface. Then,\n\ncopy this line of code code from this page (Ctrl-c or ⌘-c)\n\n\nbash\n\ncurl https://pyenv.run | bash\n\nPaste it into the terminal (Ctrl-v or ⌘-v)\nHit enter.\n\nOnce that has successfully finished:\n\n\n\n\n\n\n\nRun this\n\n\nbash\n\nopen ~/.zshrc\n\n\nIf you get an error.\n\n\nRun this\n\n\nbash\n\ntouch ~/.zshrc\nopen ~/.zshrc\n\n\n\n\n\n\n\n\nRun this\n\n\nbash\n\nopen ~/.bashrc\n\n\nIf you get an error\n\n\nRun ths\n\n\nbash\n\ntouch ~/.bashrc\nopen ~/.bashrc\n\n\n\n\n\n\nPaste the following into the window that opens.\n\n\nsh\n\nexport PYENV_ROOT=\"$HOME/.pyenv\"\n[[ -d $PYENV_ROOT/bin ]] && export PATH=\"$PYENV_ROOT/bin:$PATH\"\neval \"$(pyenv init -)\"\n\nSave it\n\n\n\n\nClose and reopen the terminal window\nCopy-Paste the following lines of code\n\n\nbash\n\npyenv install 3.11\npyenv global 3.11\npyenv virtualenv 3.11 Lin511\npyenv activate Lin511\nThis will have installed a recent version of python onto your computer, and created a “virtual environment” for the class.\n\n\n\n\n\n\n\nMake sure you change the email and name to the email and username you use for Github!\n\nIn the terminal, set your git email address:\n\n\nbash\n\ngit config --global user.email \"you@example.com\"\n\nSet your username.\n\n\nbash\n\ngit config --global user.name \"Your Name\"\nThen, follow these tutorials from github:\n\nGenerating a new SSH Key\nAdding your ssh key to github"
+    "text": "These are the notes for our regular meetings.\n\n\n\n\n\n\n\n\n  \n\n\n\n\nPaths in Python\n\n\n\n\n\n\n\n\n\n\n\n\nJosef Fruehwald\n\n\n\n\n\n\n  \n\n\n\n\nSetup Notes\n\n\n\n\n\n\n\n\n\n\n\n\nJan 8, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\nNo matching items\n\nReuseCC-BY-SA 4.0"
   },
   {
     "objectID": "syllabus/schedule.html",
