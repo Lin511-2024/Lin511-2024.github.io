@@ -76,6 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/quarto-contrib/codenamelabel/codeblocklabel.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -292,19 +293,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Inside a Jupyter notebook.</li>
 </ul>
 <p>For example, the text in the shaded block below was passed to a Python interpreter, and the interpreter decided that it was invalid (because there is an opening quote <code>"</code>, but not a closing quote).</p>
-<div class="cell" data-execution_count="1">
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>Python Code</strong></pre>
+<div class="cell" data-filename="Python Code" data-execution_count="1">
+<div class="langname">
+<pre class="langname">python</pre>
 </div>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">"x</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <div class="cell-output cell-output-error">
 <pre><code>SyntaxError: unterminated string literal (detected at line 1) (20073044.py, line 1)</code></pre>
 </div>
 </div>
 <p>The text in this next shaded block was passed to a Python interpreter. This time, it was deemed valid, and the interpreter did what the code instructed.</p>
 <div class="cell" data-execution_count="2">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"hello! "</span> <span class="op">*</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>hello! hello! hello! </code></pre>
@@ -337,6 +339,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>matplotlib</code>: Makes graphs</li>
 </ul>
 <div class="cell" data-execution_count="3">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -386,6 +391,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>One way people demonstrate that they are involved in the Python social project is by writing their code <em>idiomatically</em>. For example, in the code block above, I included the line <code>import numpy as np</code>. But <em>there’s no rule</em> that we import <code>numpy</code> as <code>np</code>, it’s simply convention.</p>
 <p>This code below will run just as well, but would cause problems for people trying to read your code, because it’s not idiomatic.</p>
 <div class="cell" data-execution_count="4">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> jokes</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> farts</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
