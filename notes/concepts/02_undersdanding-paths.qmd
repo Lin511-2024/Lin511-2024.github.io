@@ -45,28 +45,34 @@ The "path" to a file is a written instruction for where to find a file on your s
 
 Sometimes, we only need to tell a file where another file is *relative* to itself. For example, here is an HTML document and a CSS stylesheet for that document.
 
-![html_practice.png]($IMS-CC-FILEBASE$/Uploaded%20Media%202/html_practice.png?canvas_download=1){style="display: block; margin-left: auto; margin-right: auto;" width="640" height="393" api-endpoint="https://uk.instructure.com/api/v1/courses/2027524/files/101193779" api-returntype="File"}
+![html and css in a dicectory](assets/html_practice.png){api-endpoint="https://uk.instructure.com/api/v1/courses/2027524/files/101193779" api-returntype="File" style="display: block; margin-left: auto; margin-right: auto;"}
 
 [From `site.html` to `style.css`: `style.css`]{style="font-size: 18pt;"}
 
 Because style.css is in the same folder as site.html, we only need to tell site.html to look for style.css, like so
 
 ``` html
-<link rel="stylesheet" type="text/css" href="style.css">
+<link 
+  rel="stylesheet" 
+  type="text/css" 
+  href="style.css">
 ```
 
-Just telling the html file to look for "style.css", it's going to look inside of, and *only* inside of the same folder as itself.
+Just telling the html file to look for `style.css`, it's going to look inside of, and *only* inside of the same folder as itself.
 
 However, sometimes people like to put all of the stylesheets and images for a website inside of a folder called "assets," like so:
 
-![assets.png]($IMS-CC-FILEBASE$/Uploaded%20Media%202/assets.png?canvas_download=1){style="display: block; margin-left: auto; margin-right: auto;" width="640" height="312" api-endpoint="https://uk.instructure.com/api/v1/courses/2027524/files/101193845" api-returntype="File"}
+![stylesheet in assets](assets/assets.png){api-endpoint="https://uk.instructure.com/api/v1/courses/2027524/files/101193845" api-returntype="File" style="display: block; margin-left: auto; margin-right: auto;" fig-align="center"}
 
 [From `site.html` to `style.css`: `assets/style.css`]{style="font-size: 18pt;"}
 
 Now, if we tell site.html just to look for style.css, it's not going to find it anymore! That's because style.css is no longer in the same folder as site.html. We'll need to update the link to the stylesheet to reflect the fact that it's now in a different folder, like so:
 
 ``` html
-<link rel="stylesheet" type="text/css" href="assets/style.css">
+<link 
+  rel="stylesheet" 
+  type="text/css" 
+  href="assets/style.css">
 ```
 
 Here's how site.html interprets the string `assets/style.css`:
@@ -76,14 +82,17 @@ Here's how site.html interprets the string `assets/style.css`:
 
 We could take it a step further, and create a new folder called "css" inside of "assets", and put our stylesheet there instead.
 
-![css.png]($IMS-CC-FILEBASE$/Uploaded%20Media%202/css.png?canvas_download=1){api-endpoint="https://uk.instructure.com/api/v1/courses/2027524/files/101193957" api-returntype="File"}
+![\`assets/css/style.css\`](assets/css.png){api-endpoint="https://uk.instructure.com/api/v1/courses/2027524/files/101193957" api-returntype="File" fig-align="center"}
 
 [From `site.html` to `style.css`: `assets/css/style.css`]{style="font-size: 18pt;"}
 
 Now, we'd need to update the link to the stylesheet to look like this
 
 ``` html
-<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+<link 
+  rel="stylesheet" 
+  type="text/css" 
+  href="assets/css/style.css">
 ```
 
 Again, breaking this down into how site.html interprets the string `assets/css/style.css` goes like this:

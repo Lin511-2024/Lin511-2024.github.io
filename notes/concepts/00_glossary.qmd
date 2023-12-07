@@ -1,5 +1,7 @@
 ---
 title: "Glossary"
+toc: true
+toc-depth: 4
 filters: 
   - codeblocklabel
 knitr: 
@@ -18,7 +20,7 @@ library(tidyverse)
 ```{r}
 values_to_p <- function(term, def){
   cat(str_c("<h3>", term, "</h3>"))
-  cat("\\n")
+  cat("\\n ")
   cat(def)
 }
 ```
@@ -27,7 +29,13 @@ values_to_p <- function(term, def){
 #| results: asis
 tribble(
   ~Term, ~Def,
-  "Copy-Paste", "Copying text to your computer's 'clipboard' and pasting it into another location. Copying can be done many ways, including selecting text with your mouse, right-clicking then selecting 'copy', by selecting text and using your computer's 'hotkey' for copying (Either `Ctrl-C` on Windows or `⌘-C` on Mac)"
+  "Copy-Paste", "Copying text to your computer's 'clipboard' and pasting it into another location. 
+  
+  Copying can be done many ways, including selecting text with your mouse, right-clicking then selecting 'copy', by selecting text and using your computer's 'hotkey' for copying (Either `Ctrl-C` on Windows or `⌘-C` on Mac), or, in the course documents, by clicking on the 'copy' icon in most code chunks.
+
+To paste, you can either right-click and select 'Paste', or use your system's 'hotkey' (`Ctrl-V` on Windows, or `⌘-V` on Mac).
+  ",
+  "Find, or `Ctrl-F`", "You can find text in most pages or documents by either typing `Ctrl-F` or `⌘-F`, then typing in the text you want to find in the dialogue box that pops up."
 ) |>
   arrange(
     Term

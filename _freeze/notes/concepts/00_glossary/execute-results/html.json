@@ -1,7 +1,7 @@
 {
-  "hash": "e7ecbb35afbddb5fdf86d894a6cb3c52",
+  "hash": "21afbbb80db0e014b729e29d88b7c0eb",
   "result": {
-    "markdown": "---\ntitle: \"Glossary\"\nfilters: \n  - codeblocklabel\nknitr: \n  opts_chunk: \n    echo: false\n    message: false\n    warning: false\n---\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n\n:::\n\n<h3>Copy-Paste</h3>\\nCopying text to your computer's 'clipboard' and pasting it into another location. Copying can be done many ways, including selecting text with your mouse, right-clicking then selecting 'copy', by selecting text and using your computer's 'hotkey' for copying (Either `Ctrl-C` on Windows or `⌘-C` on Mac)\n",
+    "markdown": "---\ntitle: \"Glossary\"\ntoc: true\ntoc-depth: 4\nfilters: \n  - codeblocklabel\nknitr: \n  opts_chunk: \n    echo: false\n    message: false\n    warning: false\n---\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n\n:::\n\n<h3>Copy-Paste</h3>\\n Copying text to your computer's 'clipboard' and pasting it into another location. \n  \n  Copying can be done many ways, including selecting text with your mouse, right-clicking then selecting 'copy', by selecting text and using your computer's 'hotkey' for copying (Either `Ctrl-C` on Windows or `⌘-C` on Mac), or, in the course documents, by clicking on the 'copy' icon in most code chunks.\n\nTo paste, you can either right-click and select 'Paste', or use your system's 'hotkey' (`Ctrl-V` on Windows, or `⌘-V` on Mac).\n  <h3>Find, or `Ctrl-F`</h3>\\n You can find text in most pages or documents by either typing `Ctrl-F` or `⌘-F`, then typing in the text you want to find in the dialogue box that pops up.\n",
     "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
