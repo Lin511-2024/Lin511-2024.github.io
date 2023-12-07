@@ -2,7 +2,9 @@ project:
   type: website
 
 license: CC-BY-SA 4.0
-author: Josef Fruehwald
+author: 
+  name: Josef Fruehwald
+  url: https://jofrhwld.github.io/
 execute: 
   freeze: auto
 

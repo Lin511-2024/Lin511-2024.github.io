@@ -1,5 +1,7 @@
 ---
 title: "Understanding Directories"
+filters: 
+  - codeblocklabel
 ---
 
 ## Directory Structure
