@@ -38,12 +38,12 @@ format:
 
 ### Instructor
 
-|                        |                            |
-|------------------------|----------------------------|
-|                        | Dr. Josef Fruehwald        |
-| email:                 | josef.fruehwald\@uky.edu   |
-| office hours:          | Mons, 12:00pm - 02:00pm    |
-| office hours location: | Breckinridge, Rm 10        |
+|                        |                          |
+|------------------------|--------------------------|
+|                        | Dr. Josef Fruehwald      |
+| email:                 | josef.fruehwald\@uky.edu |
+| office hours:          | Mons, 12:00pm - 02:00pm  |
+| office hours location: | Breckinridge, Rm 10      |
 
 </div>
 :::
@@ -82,32 +82,31 @@ Late Work Policy
 
 There are two important components to this course
 
-1. This is an introduction to computational linguistics, with an emphasis on **linguistics**. We'll be learning about approaches to computation as it relates to linguistic theory (e.g. phonological rules, syntactic parsing, etc) as well as computation involved in processing linguistic data (e.g. Large Language Models, Speech-to-Text etc.).
-2. This will be an introduction to some practical aspects of general purpose *computation*, including basics of file system organization, version control, Integrated Developent Environments, command-line interfaces, and program writing (specifically in Python).
-
+1.  This is an introduction to computational linguistics, with an emphasis on **linguistics**. We'll be learning about approaches to computation as it relates to linguistic theory (e.g. phonological rules, syntactic parsing, etc) as well as computation involved in processing linguistic data (e.g. Large Language Models, Speech-to-Text etc.).
+2.  This will be an introduction to some practical aspects of general purpose *computation*, including basics of file system organization, version control, Integrated Developent Environments, command-line interfaces, and program writing (specifically in Python).
 
 ### Have you ever said one these things?
 
-- "My computer hates me."
-- "I'm not a tech person."
+-   "My computer hates me."
+-   "I'm not a tech person."
 
 As part of our course meetings, I'll be labelling these and other similar statements as "negative self-talk". Instead, I'll encourage you to try different statements, like
 
-- "I'm not familiar with these concepts yet."
-- "Up to now, I've found these methods opaque."
+-   "I'm not familiar with these concepts yet."
+-   "Up to now, I've found these methods opaque."
 
 We can acknowledge your current struggle or confusion with computation or technology, while also acknowledging that their use is a skill, not a talent, and that skill can be built upon and improved with experience and *practice*.
 
---------------------------------------
+------------------------------------------------------------------------
 
 ## Learning Outcomes
 
 After attending class meetings and completion of the coursework, students should be able to
 
-- Describe the computational methods used to model and process linguistic structures.
-- Use Regular Expressions to search and match strings.
-- Write a python program to linguistically parse language data.
-- Critically evaluate claims made about modern natural language processing applications.
+-   Describe the computational methods used to model and process linguistic structures.
+-   Use Regular Expressions to search and match strings.
+-   Write a python program to linguistically parse language data.
+-   Critically evaluate claims made about modern natural language processing applications.
 
 ## Course Materials
 
@@ -115,18 +114,15 @@ We will be using a mixture of textbooks and online resources for the course. The
 
 SLP:
 
-: Daniel Jurafsky and James H Martin. 202`\d`. [*Speech and Language Processing: An Introduction to Natural Language Processing Computational Linguistics, and Speech Recognition* Third Edition.](https://web.stanford.edu/~jurafsky/slp3/)
+:   Daniel Jurafsky and James H Martin. 202`\d`. [*Speech and Language Processing: An Introduction to Natural Language Processing Computational Linguistics, and Speech Recognition* Third Edition.](https://web.stanford.edu/~jurafsky/slp3/)
 
 NLTK:
 
-: Steven Bird, Ewan Klein, and Edward Loper. 2009. [*Natural Language Processing with Python: Analyzing Text with the Natural Language Toolkit*](https://www.nltk.org/book/)
-
+:   Steven Bird, Ewan Klein, and Edward Loper. 2009. [*Natural Language Processing with Python: Analyzing Text with the Natural Language Toolkit*](https://www.nltk.org/book/)
 
 TP:
 
-: Allen B. Downey. 2015. [*Think Python*, 2nd edition](https://greenteapress.com/wp/think-python-2e/)
-
-
+:   Allen B. Downey. 2015. [*Think Python*, 2nd edition](https://greenteapress.com/wp/think-python-2e/)
 
 ## Course Technology
 
@@ -142,7 +138,7 @@ Python is the programming language that we'll be using to do most of our work an
 
 We'll be writing both *python scripts* as well as using *Jupyter notebooks* to interact with python.
 
-### Visual Studio Code
+### Visual Studio Code {#visual-studio-code}
 
 The fact we will be "writing" python scripts implies we will be writing them *in* something. The program we will be using for composing our programs will be Visual Studio Code. VS Code is a general purpose Integrated Development Environment (IDE).
 
@@ -158,40 +154,27 @@ There will be a number of course assignments that you will submit via commits to
 
 Canvas will be used to make course announcements, and to distribute assignment links.
 
------------------------------------
+------------------------------------------------------------------------
 
 ## Communications
 
 I will respond to emails in a timely manner during normal working hours, but it may take longer if you email me after 5pm on weekdays, or any time during the weekend.
 
-----------------------------------
+------------------------------------------------------------------------
 
 ## Course Schedule
 
 The topics and readings listed here are the tentative schedule for the course. We may find, in the room, that some topics will take longer than initially scheduled.
 
-{{< include weeks/_01_week1.qmd >}}
-{{< include weeks/_02_week2.qmd >}}
-{{< include weeks/_03_week3.qmd >}}
-{{< include weeks/_04_week4.qmd >}}
-{{< include weeks/_05_week5.qmd >}}
-{{< include weeks/_06_week6.qmd >}}
-{{< include weeks/_07_week7.qmd >}}
-{{< include weeks/_08_week8.qmd >}}
-{{< include weeks/_09_week9.qmd >}}
+{{< include weeks/_01_week1.qmd >}} {{< include weeks/_02_week2.qmd >}} {{< include weeks/_03_week3.qmd >}} {{< include weeks/_04_week4.qmd >}} {{< include weeks/_05_week5.qmd >}} {{< include weeks/_06_week6.qmd >}} {{< include weeks/_07_week7.qmd >}} {{< include weeks/_08_week8.qmd >}} {{< include weeks/_09_week9.qmd >}}
 
-----
+------------------------------------------------------------------------
 
 ##### Spring Break
 
-----
+------------------------------------------------------------------------
 
-{{< include weeks/_10_week10.qmd >}}
-{{< include weeks/_11_week11.qmd >}}
-{{< include weeks/_12_week12.qmd >}}
-{{< include weeks/_13_week13.qmd >}}
-{{< include weeks/_14_week14.qmd >}}
-{{< include weeks/_15_week15.qmd >}}
+{{< include weeks/_10_week10.qmd >}} {{< include weeks/_11_week11.qmd >}} {{< include weeks/_12_week12.qmd >}} {{< include weeks/_13_week13.qmd >}} {{< include weeks/_14_week14.qmd >}} {{< include weeks/_15_week15.qmd >}}
 
 ## Course Evaluation
 
@@ -201,7 +184,7 @@ The topics and readings listed here are the tentative schedule for the course. W
 ### Grade Components
 
 |                    |     |
-|---------------     |----:|
+|--------------------|----:|
 | Weekly Exercises   | 45% |
 | In-Class Exercises | 25% |
 | Final Project      | 20% |
@@ -228,7 +211,6 @@ The topics and readings listed here are the tentative schedule for the course. W
 
 Some assignments will be created in GitHub Classroom, and their invite code will be posted to canvas. Some of these assignments will have "autograding" tests enabled. These "autogrades" are intended to be feedback to help you fine tune your code, and **are not** meant to be the final grade you will get for the assignment. Only grades as they are appear on Canvas are your official grade.
 
-
 ### Final Project
 
 A final capstone project for the course. This could be a report, an extension of an earlier exercise, or some other agreed upon format.
@@ -241,7 +223,7 @@ Inspired by Kirby Conrod's approach to [Participation Grades](https://kconrod.me
 
 A well known process for solving programming problems is "[Rubber Duck Debugging](https://en.wikipedia.org/w/index.php?title=Rubber_duck_debugging&oldid=1111165654)." It works by describing how each step of a program is supposed to work to another person or, as the name suggests, a rubber duck. Often the solution to the problem or the typo causing the bug jumps out at you during the process. Having a study buddy or study group could be really helpful if only for this purpose.
 
-----------------------------------
+------------------------------------------------------------------------
 
 ## Late Submissions and Re-submissions
 
@@ -255,7 +237,7 @@ I will submit midterm grades on March 08, 2024, at the end of the midterm gradin
 
 The final-est deadline by which to submit any material to be graded is **April 30, 2024**. I have to set this hard deadline in order to have enough time to conclude final grading in time for the university's final grade submission deadline.
 
-----------------------------
+------------------------------------------------------------------------
 
 ## Group Work and Code Sources
 
@@ -275,7 +257,7 @@ Large Language Models have been found to generate code that looks superficially 
 
 As stated above, you should provide credit to any external sources you turned to for code help, and explain what the resulting code does.
 
-------------------------
+------------------------------------------------------------------------
 
 ## Attendance and Engagement
 
@@ -291,7 +273,7 @@ I will also expect all of us in the course to treat each other with respect and 
 
 -   On any course discussion boards or other forums.
 
--------------------------
+------------------------------------------------------------------------
 
 ## Academic Conduct
 
@@ -305,7 +287,7 @@ When students submit work purporting to be their own, but which in any way borro
 
 Students may discuss assignments among themselves or with an instructor or tutor, but when the actual work is done, it must be done by the student, and the student alone. When a student's assignment involves research in outside sources of information, the student must carefully acknowledge exactly what, where and how they employed them. If the words of someone else are used, the student must put quotation marks around the passage in question and add an appropriate indication of its origin. Making simple changes while leaving the organization, content and phraseology intact is plagiaristic. However, nothing in these Rules shall apply to those ideas which are so generally and freely circulated as to be a part of the public domain (University Senate Rules Section 6.3.1).
 
---------------------------
+------------------------------------------------------------------------
 
 ## University Academic Policy Statements
 
@@ -383,7 +365,7 @@ Reports of discrimination, harassment, or sexual misconduct may be made via the 
 
 <details>**Regular and Substantive Interaction**: All credit-bearing courses must support regular and substantive interaction (RSI) between the students and the instructor, regardless of the course's delivery mode (e.g., in-person, hybrid, or online). Courses satisfy this requirement when course participants meet regularly as prescribed in SR 10.6, and the Instructor of Record substantively interacts with students in at least two of the following ways: provides direct instruction; assesses students' learning; provides information or responds to students' questions; and facilitates student discussions. Some exceptions allowed as per SACSCOC. For further information about the RSI requirement, see the [[Compliance Resources]{.underline}](https://www.uky.edu/tlai/compliance-faculty) link on the Teaching, Learning and Academic Innovation Compliance page.</details>
 
--------------------------
+------------------------------------------------------------------------
 
 ## Diversity, Equity and Inclusion
 
