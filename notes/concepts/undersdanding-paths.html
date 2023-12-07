@@ -76,6 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/quarto-contrib/codenamelabel/codeblocklabel.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -236,7 +237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Josef Fruehwald </p>
+             <p><a href="https://jofrhwld.github.io/">Josef Fruehwald</a> </p>
           </div>
   </div>
     
@@ -299,6 +300,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><span style="font-size: 18pt;">From <code>site.html</code> to <code>style.css</code>: <code>style.css</code></span></p>
 <p>Because style.css is in the same folder as site.html, we only need to tell site.html to look for style.css, like so</p>
+<div class="langname">
+<pre class="langname">html</pre>
+</div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;link</span> <span class="er">rel</span><span class="ot">=</span><span class="st">"stylesheet"</span> <span class="er">type</span><span class="ot">=</span><span class="st">"text/css"</span> <span class="er">href</span><span class="ot">=</span><span class="st">"style.css"</span><span class="kw">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Just telling the html file to look for “style.css”, it’s going to look inside of, and <em>only</em> inside of the same folder as itself.</p>
 <p>However, sometimes people like to put all of the stylesheets and images for a website inside of a folder called “assets,” like so:</p>
@@ -310,6 +314,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><span style="font-size: 18pt;">From <code>site.html</code> to <code>style.css</code>: <code>assets/style.css</code></span></p>
 <p>Now, if we tell site.html just to look for style.css, it’s not going to find it anymore! That’s because style.css is no longer in the same folder as site.html. We’ll need to update the link to the stylesheet to reflect the fact that it’s now in a different folder, like so:</p>
+<div class="langname">
+<pre class="langname">html</pre>
+</div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;link</span> <span class="er">rel</span><span class="ot">=</span><span class="st">"stylesheet"</span> <span class="er">type</span><span class="ot">=</span><span class="st">"text/css"</span> <span class="er">href</span><span class="ot">=</span><span class="st">"assets/style.css"</span><span class="kw">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Here’s how site.html interprets the string <code>assets/style.css</code>:</p>
 <ul>
@@ -325,6 +332,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><span style="font-size: 18pt;">From <code>site.html</code> to <code>style.css</code>: <code>assets/css/style.css</code></span></p>
 <p>Now, we’d need to update the link to the stylesheet to look like this</p>
+<div class="langname">
+<pre class="langname">html</pre>
+</div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;link</span> <span class="er">rel</span><span class="ot">=</span><span class="st">"stylesheet"</span> <span class="er">type</span><span class="ot">=</span><span class="st">"text/css"</span> <span class="er">href</span><span class="ot">=</span><span class="st">"assets/css/style.css"</span><span class="kw">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Again, breaking this down into how site.html interprets the string <code>assets/css/style.css</code>&nbsp;goes like this:</p>
 <ul>
