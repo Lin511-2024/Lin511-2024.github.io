@@ -1,0 +1,11 @@
+{
+  "hash": "de346cec24e3a20ab5a7a18e3092d495",
+  "result": {
+    "markdown": "---\ntitle: \"Demo Of Filter\"\nfilters: \n  - codeblocklabel\n---\n\n``` bash\npip install numpy\n```\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\nimport numpy as np\nnp.array([1,2,3])\n```\n\n::: {.cell-output .cell-output-display execution_count=2}\n```\narray([1, 2, 3])\n```\n:::\n:::\n\n\n",
+    "supporting": [
+      "example_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

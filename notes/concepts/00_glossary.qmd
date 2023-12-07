@@ -1,0 +1,26 @@
+---
+title: "Glossary"
+filters: 
+  - codeblocklabel
+knitr: 
+  opts_chunk: 
+    echo: false
+    message: false
+    warning: false
+---
+
+```{r}
+#| echo: false
+library(gt)
+library(tidyverse)
+```
+
+```{r}
+tribble(
+  ~Term, ~Def,
+  "Copy-Paste", "Copying text fro"
+) |>
+  arrange(
+    Term
+  )
+```
