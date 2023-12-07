@@ -35,8 +35,8 @@ tribble(
 
 To paste, you can either right-click and select 'Paste', or use your system's 'hotkey' (`Ctrl-V` on Windows, or `⌘-V` on Mac).
   ",
-  "Find, or `Ctrl-F`", "You can find text in most pages or documents by either typing `Ctrl-F` or `⌘-F`, then typing in the text you want to find in the dialogue box that pops up."
-) |>
+  "Find, or `Ctrl-F`", "You can find text in most pages or documents by either typing `Ctrl-F` or `⌘-F`, then typing in the text you want to find in the dialogue box that pops up.",
+  "Tab Autocomplete", "Many programming applications have \"Tab Autocomplete\" suggestions that allow you to type in just a few letters of the command, function, or variable you want to use, and then hit `Tab`.") |>
   arrange(
     Term
   ) |>
