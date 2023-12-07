@@ -231,11 +231,18 @@
     "text": "Important Note on Using Paths\nThere are two crucial things to remember about using paths that can be conceptually difficult when first getting started.\n\nRelative paths always depend on where you’re coming from and where you’re going to. If either my HTML file was in a location I was confused about, or my CSS file was in a location I was confused about, my relative path might not work.\nBoth relative paths and absolute paths depend on how files are organized inside of your own computer. A path copied from an example online, or a professor’s template might not work  if your file structure is different."
   },
   {
-    "objectID": "notes/meetings/01_Paths.html",
-    "href": "notes/meetings/01_Paths.html",
+    "objectID": "notes/meetings/02_Paths.html",
+    "href": "notes/meetings/02_Paths.html",
     "title": "Paths in Python",
     "section": "",
-    "text": "python\n\nfrom pathlib import Path\n\n\n\npython\n\nx = Path()\n\n\n\npython\n\nx.resolve()\n\nPosixPath('/Users/joseffruehwald/Library/CloudStorage/OneDrive-UniversityofKentucky/Courses/Lin511/Lin511-2024.github.io/notes/meetings')\n\n\n\n\n\nReuseCC-BY-SA 4.0"
+    "text": "python\n\nfrom pathlib import Path\nPath() will return a relative path to the current directory, which is represented as ..\npython\n\nthis_directory = Path()\nprint(this_directory)\n\n.\nIf we use the .resolve() method on this_directory, we’ll get back the absolute path.\npython\n\nabsolute_path = this_directory.resolve()\nprint(absolute_path)\n\n/workspaces/Lin511-2024.github.io/notes/meetings\nWe can get the path to the directory above from the .parent attribute.\npython\n\nprint(\n    absolute_path.parent\n)\n\n/workspaces/Lin511-2024.github.io/notes\nWe can get a list of all of the files and directories in a directory with the .glob() method. For technical reasons, we need to wrap list() around this.\npython\n\nlist(\n    absolute_path.glob(\"*\")\n)\n\n[PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings/assets'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings/01_Paths.ipynb'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings/00_setup.qmd')]\nYou can get a list of all of the files and folders in the parent directory like so.\npython\n\nlist(\n    absolute_path\\\n        .parent\\\n        .glob(\"*\")\n)\n\n[PosixPath('/workspaces/Lin511-2024.github.io/notes/.gitignore'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/index.qmd')]\nWe can get a list of all of the files and directories in the concepts directory like so.\npython\n\nlist(\n    absolute_path\\\n        .parent\\\n        .joinpath(\"concepts\")\\\n        .glob(\"*\")\n)\n\n[PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/02_undersdanding-paths.qmd'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/assets'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/01_what-is-python.qmd'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/03_navigating-directories.qmd'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/00_glossary.qmd')]"
+  },
+  {
+    "objectID": "notes/meetings/02_Paths.html#opening-a-file",
+    "href": "notes/meetings/02_Paths.html#opening-a-file",
+    "title": "Paths in Python",
+    "section": "Opening a file",
+    "text": "Opening a file\nWe’re going to read in the text file here\n\n\npython\n\ntext_file_path = Path(\"assets\", \"sample.txt\")\n\nwith text_file_path.open() as file:\n    lines = file.readlines()\n\nprint(lines)\n\n['This is a sample file.\\n', 'It just has text.\\n', 'We can read and print its contents.']"
   },
   {
     "objectID": "notes/meetings/00_setup.html",
@@ -250,6 +257,13 @@
     "title": "Setup Notes",
     "section": "",
     "text": "We’ll need to get our systems setup to work properly with the tools we’ll be using this semester.\n\n\n\n\n\n\nIf you ware using a windows computer, I’ll ask you to install Windows Subsystem for Linux like so:\n\nFollow the tutorial here for enabling and installing WSL\nInstall VS Code\nWork through the first section of this tutorial, stopping after you connect to WSL\n\n\n\n\n\n\n\n\nInstall VS Code\n\n\n\n\n\n\n\n\n\nWe’ll be using a program called pyenv to manage the versions of python we use. To install pyenv, open the VSCode Command Palette (with Shift+Ctrl+P) which will open the command line interface. Then,\n\ncopy this line of code code from this page (Ctrl-c or ⌘-c)\n\n\nbash\n\ncurl https://pyenv.run | bash\n\nPaste it into the terminal (Ctrl-v or ⌘-v)\nHit enter.\n\nOnce that has successfully finished:\n\n\n\n\n\n\n\nRun this\n\n\nbash\n\nopen ~/.zshrc\n\n\nIf you get an error.\n\n\nRun this\n\n\nbash\n\ntouch ~/.zshrc\nopen ~/.zshrc\n\n\n\n\n\n\n\n\nRun this\n\n\nbash\n\nopen ~/.bashrc\n\n\nIf you get an error\n\n\nRun ths\n\n\nbash\n\ntouch ~/.bashrc\nopen ~/.bashrc\n\n\n\n\n\n\nPaste the following into the window that opens.\n\n\nsh\n\nexport PYENV_ROOT=\"$HOME/.pyenv\"\n[[ -d $PYENV_ROOT/bin ]] && export PATH=\"$PYENV_ROOT/bin:$PATH\"\neval \"$(pyenv init -)\"\n\nSave it\n\n\n\n\nClose and reopen the terminal window\nCopy-Paste the following lines of code\n\n\nbash\n\npyenv install 3.11\npyenv global 3.11\npyenv virtualenv 3.11 Lin511\npyenv activate Lin511\nThis will have installed a recent version of python onto your computer, and created a “virtual environment” for the class.\n\n\n\n\n\n\n\nMake sure you change the email and name to the email and username you use for Github!\n\nIn the terminal, set your git email address:\n\n\nbash\n\ngit config --global user.email \"you@example.com\"\n\nSet your username.\n\n\nbash\n\ngit config --global user.name \"Your Name\"\nThen, follow these tutorials from github:\n\nGenerating a new SSH Key\nAdding your ssh key to github"
+  },
+  {
+    "objectID": "notes/meetings/01_Python_basics.html",
+    "href": "notes/meetings/01_Python_basics.html",
+    "title": "Python basics",
+    "section": "",
+    "text": "print(1)\n\n1\n\n\n\nprint(\"hello\")\n\nhello\n\n\n\nprint(2 + 2)\n\n4\n\n\n\nx = 1\ny = 10\n\nprint(x + y)\n\n11\n\n\n\nword1 = \"Hello\"\nword2 = \" World!\"\n\nprint(word1 + word2)\n\nHello World!\n\n\n\nprint(True)\n\nTrue\n\n\n\nprint(False)\n\nFalse\n\n\n\nprint(True and False)\n\nFalse\n\n\n\n\n\nReuseCC-BY-SA 4.0"
   },
   {
     "objectID": "notes/concepts/03_navigating-directories.html",
@@ -305,7 +319,7 @@
     "href": "notes/index.html",
     "title": "Meeting Notes",
     "section": "",
-    "text": "These are the notes for our regular meetings.\n\n\n\n\n\n\n\n\n  \n\n\n\n\nPaths in Python\n\n\n\n\n\n\n\n\n\n\n\n\nJosef Fruehwald\n\n\n\n\n\n\n  \n\n\n\n\nSetup Notes\n\n\n\n\n\n\n\n\n\n\n\n\nJan 8, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\nNo matching items\n\nReuseCC-BY-SA 4.0"
+    "text": "These are the notes for our regular meetings.\n\n\n\n\n\n\n\n\n  \n\n\n\n\nPaths in Python\n\n\n\n\n\n\n\n\n\n\n\n\nJosef Fruehwald\n\n\n\n\n\n\n  \n\n\n\n\nPython basics\n\n\n\n\n\n\n\n\n\n\n\n\nJosef Fruehwald\n\n\n\n\n\n\n  \n\n\n\n\nSetup Notes\n\n\n\n\n\n\n\n\n\n\n\n\nJan 8, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\nNo matching items\n\nReuseCC-BY-SA 4.0"
   },
   {
     "objectID": "syllabus/schedule.html",

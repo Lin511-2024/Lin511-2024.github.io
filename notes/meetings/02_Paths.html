@@ -7,9 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Josef Fruehwald">
-<meta name="dcterms.date" content="2024-01-08">
 
-<title>Lin511-2024 - Setup Notes</title>
+<title>Lin511-2024 - Paths in Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -141,7 +140,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/meetings/00_setup.html">Class Meetings</a></li><li class="breadcrumb-item"><a href="../../notes/meetings/00_setup.html">Setup Notes</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/meetings/00_setup.html">Class Meetings</a></li><li class="breadcrumb-item"><a href="../../notes/meetings/02_Paths.html">Paths in Python</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -205,7 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notes/meetings/00_setup.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../notes/meetings/00_setup.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Setup Notes</span></a>
   </div>
 </li>
@@ -217,7 +216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notes/meetings/02_Paths.html" class="sidebar-item-text sidebar-link">
+  <a href="../../notes/meetings/02_Paths.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Paths in Python</span></a>
   </div>
 </li>
@@ -233,12 +232,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a>
-  <ul class="collapse">
-  <li><a href="#vscode-and-the-command-line" id="toc-vscode-and-the-command-line" class="nav-link" data-scroll-target="#vscode-and-the-command-line">VSCode and The Command Line</a></li>
-  <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python">Python</a></li>
-  <li><a href="#git-github-configuration" id="toc-git-github-configuration" class="nav-link" data-scroll-target="#git-github-configuration">Git &amp; Github Configuration</a></li>
-  </ul></li>
+  <li><a href="#opening-a-file" id="toc-opening-a-file" class="nav-link active" data-scroll-target="#opening-a-file">Opening a file</a></li>
   </ul>
 </nav>
     </div>
@@ -247,7 +241,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Setup Notes</h1>
+<h1 class="title">Paths in Python</h1>
 </div>
 
 
@@ -261,12 +255,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div>
   </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">January 8, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -274,163 +262,115 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="setup" class="level2">
-<h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<p>We’ll need to get our systems setup to work properly with the tools we’ll be using this semester.</p>
-<section id="vscode-and-the-command-line" class="level3">
-<h3 class="anchored" data-anchor-id="vscode-and-the-command-line">VSCode and The Command Line</h3>
-<div class="columns">
-<div class="column" style="width:45%;">
-<section id="windows-users" class="level4">
-<h4 class="anchored" data-anchor-id="windows-users">Windows Users</h4>
-<p>If you ware using a windows computer, I’ll ask you to install Windows Subsystem for Linux like so:</p>
-<ul class="task-list">
-<li><input type="checkbox"><a href="https://lingmethodshub.github.io/content/windows/wsl/00_installing_wsl.html">Follow the tutorial here for enabling and installing WSL</a></li>
-<li><input type="checkbox"><a href="https://code.visualstudio.com/">Install VS Code</a></li>
-<li><input type="checkbox"><a href="https://code.visualstudio.com/docs/remote/wsl-tutorial#_prerequisites">Work through the first section of this tutorial, stopping after you connect to WSL</a></li>
-</ul>
-</section>
-</div><div class="column" style="width:10%;">
-
-</div><div class="column" style="width:45%;">
-<section id="macoslinux-users" class="level4">
-<h4 class="anchored" data-anchor-id="macoslinux-users">MacOS/Linux Users</h4>
-<ul class="task-list">
-<li><input type="checkbox"><a href="https://code.visualstudio.com/">Install VS Code</a></li>
-</ul>
-</section>
-</div>
-</div>
-</section>
-<section id="python" class="level3">
-<h3 class="anchored" data-anchor-id="python">Python</h3>
-<section id="pyenv" class="level4">
-<h4 class="anchored" data-anchor-id="pyenv">pyenv</h4>
-<p>We’ll be using a program called <code>pyenv</code> to manage the versions of python we use. To install <code>pyenv</code>, open the VSCode Command Palette (with <code>Shift+Ctrl+P</code>) which will open the command line interface. Then,</p>
-<ul class="task-list">
-<li><input type="checkbox">copy this line of code code from this page (Ctrl-c or ⌘-c)</li>
-</ul>
+<div class="cell" data-execution_count="1">
 <div class="langname">
-<pre class="langname">bash</pre>
+<pre class="langname">python</pre>
 </div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> https://pyenv.run <span class="kw">|</span> <span class="fu">bash</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul class="task-list">
-<li><input type="checkbox">Paste it into the terminal (Ctrl-v or ⌘-v)</li>
-<li><input type="checkbox">Hit enter.</li>
-</ul>
-<p>Once that has successfully finished:</p>
-<hr>
-</section>
-<div class="columns">
-<div class="column" style="width:45%;">
-<section id="macos-users" class="level4">
-<h4 class="anchored" data-anchor-id="macos-users">MacOS Users</h4>
-<ul class="task-list">
-<li><input type="checkbox">Run this</li>
-</ul>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>Path()</code> will return a relative path to the current directory, which is represented as <code>.</code>.</p>
+<div class="cell" data-execution_count="2">
 <div class="langname">
-<pre class="langname">bash</pre>
+<pre class="langname">python</pre>
 </div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> ~/.zshrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<details>
-<summary>
-If you get an error.
-</summary>
-<ul class="task-list">
-<li><input type="checkbox">Run this</li>
-</ul>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>this_directory <span class="op">=</span> Path()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(this_directory)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>.</code></pre>
+</div>
+</div>
+<p>If we use the <code>.resolve()</code> method on <code>this_directory</code>, we’ll get back the <a href="../../notes/concepts/02_undersdanding-paths.html#absolute-paths">absolute path</a>.</p>
+<div class="cell" data-execution_count="3">
 <div class="langname">
-<pre class="langname">bash</pre>
+<pre class="langname">python</pre>
 </div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> ~/.zshrc</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> ~/.zshrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</section>
-</div><div class="column" style="width:10%;">
-
-</div><div class="column" style="width:45%;">
-<section id="wsl-users" class="level4">
-<h4 class="anchored" data-anchor-id="wsl-users">WSL users</h4>
-<ul class="task-list">
-<li><input type="checkbox">Run this</li>
-</ul>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>absolute_path <span class="op">=</span> this_directory.resolve()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(absolute_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/workspaces/Lin511-2024.github.io/notes/meetings</code></pre>
+</div>
+</div>
+<p>We can get the path to the directory above from the <code>.parent</code> attribute.</p>
+<div class="cell" data-execution_count="4">
 <div class="langname">
-<pre class="langname">bash</pre>
+<pre class="langname">python</pre>
 </div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> ~/.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<details>
-<summary>
-If you get an error
-</summary>
-<ul class="task-list">
-<li><input type="checkbox">Run ths</li>
-</ul>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    absolute_path.parent</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/workspaces/Lin511-2024.github.io/notes</code></pre>
+</div>
+</div>
+<p>We can get a list of all of the files and directories in a directory with the <code>.glob()</code> method. For technical reasons, we need to wrap <code>list()</code> around this.</p>
+<div class="cell" data-execution_count="5">
 <div class="langname">
-<pre class="langname">bash</pre>
+<pre class="langname">python</pre>
 </div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> ~/.bashrc</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> ~/.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</section>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    absolute_path.glob(<span class="st">"*"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>[PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings/assets'),
+ PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings/01_Paths.ipynb'),
+ PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings/00_setup.qmd')]</code></pre>
 </div>
 </div>
-<hr>
-<ul class="task-list">
-<li><input type="checkbox">Paste the following into the window that opens.</li>
-</ul>
+<p>You can get a list of all of the files and folders in the parent directory like so.</p>
+<div class="cell" data-execution_count="6">
 <div class="langname">
-<pre class="langname">sh</pre>
+<pre class="langname">python</pre>
 </div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PYENV_ROOT</span><span class="op">=</span><span class="st">"</span><span class="va">$HOME</span><span class="st">/.pyenv"</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">[[</span> <span class="ot">-d</span> <span class="va">$PYENV_ROOT</span>/bin <span class="kw">]]</span> <span class="kw">&amp;&amp;</span> <span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="st">"</span><span class="va">$PYENV_ROOT</span><span class="st">/bin:</span><span class="va">$PATH</span><span class="st">"</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="ex">pyenv</span> init <span class="at">-</span><span class="va">)</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul class="task-list">
-<li><input type="checkbox">Save it</li>
-</ul>
-<section id="installing-python" class="level4">
-<h4 class="anchored" data-anchor-id="installing-python">Installing Python</h4>
-<ul class="task-list">
-<li><input type="checkbox">Close and reopen the terminal window</li>
-<li><input type="checkbox">Copy-Paste the following lines of code</li>
-</ul>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    absolute_path<span class="op">\</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        .parent<span class="op">\</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>        .glob(<span class="st">"*"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>[PosixPath('/workspaces/Lin511-2024.github.io/notes/.gitignore'),
+ PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts'),
+ PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings'),
+ PosixPath('/workspaces/Lin511-2024.github.io/notes/index.qmd')]</code></pre>
+</div>
+</div>
+<p>We can get a list of all of the files and directories in the <code>concepts</code> directory like so.</p>
+<div class="cell" data-execution_count="7">
 <div class="langname">
-<pre class="langname">bash</pre>
+<pre class="langname">python</pre>
 </div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pyenv</span> install 3.11</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pyenv</span> global 3.11</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pyenv</span> virtualenv 3.11 Lin511</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pyenv</span> activate Lin511</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This will have installed a recent version of python onto your computer, and created a “virtual environment” for the class.</p>
-</section>
-<section id="installing-some" class="level4">
-<h4 class="anchored" data-anchor-id="installing-some">Installing some</h4>
-</section>
-</section>
-<section id="git-github-configuration" class="level3">
-<h3 class="anchored" data-anchor-id="git-github-configuration">Git &amp; Github Configuration</h3>
-<p><strong>Make sure you change the email and name to the email and username you use for Github!</strong></p>
-<ul class="task-list">
-<li><input type="checkbox">In the terminal, set your git email address:</li>
-</ul>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    absolute_path<span class="op">\</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        .parent<span class="op">\</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        .joinpath(<span class="st">"concepts"</span>)<span class="op">\</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        .glob(<span class="st">"*"</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>[PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/02_undersdanding-paths.qmd'),
+ PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/assets'),
+ PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/01_what-is-python.qmd'),
+ PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/03_navigating-directories.qmd'),
+ PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/00_glossary.qmd')]</code></pre>
+</div>
+</div>
+<section id="opening-a-file" class="level2">
+<h2 class="anchored" data-anchor-id="opening-a-file">Opening a file</h2>
+<p>We’re going to read in the <a href="assets/sample.txt">text file here</a></p>
+<div class="cell" data-execution_count="11">
 <div class="langname">
-<pre class="langname">bash</pre>
+<pre class="langname">python</pre>
 </div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"you@example.com"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul class="task-list">
-<li><input type="checkbox">Set your username.</li>
-</ul>
-<div class="langname">
-<pre class="langname">bash</pre>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>text_file_path <span class="op">=</span> Path(<span class="st">"assets"</span>, <span class="st">"sample.txt"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> text_file_path.<span class="bu">open</span>() <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    lines <span class="op">=</span> <span class="bu">file</span>.readlines()</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(lines)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['This is a sample file.\n', 'It just has text.\n', 'We can read and print its contents.']</code></pre>
 </div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Your Name"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Then, follow these tutorials from github:</p>
-<ul class="task-list">
-<li><input type="checkbox"><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Generating a new SSH Key</a></li>
-<li><input type="checkbox"><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Adding your ssh key to github</a></li>
-</ul>
+</div>
 
 
-</section>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section></div></main> <!-- /main -->

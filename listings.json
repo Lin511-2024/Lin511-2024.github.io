@@ -2,7 +2,8 @@
   {
     "listing": "/notes/index.html",
     "items": [
-      "/notes/meetings/01_Paths.html",
+      "/notes/meetings/02_Paths.html",
+      "/notes/meetings/01_Python_basics.html",
       "/notes/meetings/00_setup.html"
     ]
   }
