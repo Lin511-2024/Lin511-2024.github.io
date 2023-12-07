@@ -5,15 +5,15 @@ filters:
     - codeblocklabel
 ---
 
-When talking about "Python" or other programming langauges, we often engage in a form of polysemy[^poly-def] that can be confusing at first. I'll try to unpack the different meanings here.
+When talking about "Python" or other programming langauges, we often engage in a form of polysemy[^1] that can be confusing at first. I'll try to unpack the different meanings here.
 
-[^poly-def]: A word is polysemous when it has more than one meaning.
+[^1]: A word is polysemous when it has more than one meaning.
 
-## 📕 Python is set of rules for a formal language 
+## 📕 Python is set of rules for a formal language
 
-When we talk about "Python", one thing we sometimes refer to is an abstract set of rules for a formal language. 
+When we talk about "Python", one thing we sometimes refer to is an abstract set of rules for a formal language.
 
-::: {.callout   }
+::: callout
 ### 📕 The abstract language
 
 When you say:
@@ -21,39 +21,37 @@ When you say:
 > I'm learning Python this semester.
 
 You're talking about the abstract set of rules.
-
 :::
 
 We can describe some of these rules in natural language (this isn't how they're *actually* written).
 
-- If a list of values has been assigned to a variable, when the variable's name is followed `[0]`, return the first value in the list.
-- If `print(` is followed by a value or variable, which is then followed by `)`, print the value, or the value assigned to the variable.
-- If a `#` symbol is encountered on a line, ignore everything following it.
+-   If a list of values has been assigned to a variable, when the variable's name is followed `[0]`, return the first value in the list.
+-   If `print(` is followed by a value or variable, which is then followed by `)`, print the value, or the value assigned to the variable.
+-   If a `#` symbol is encountered on a line, ignore everything following it.
 
 These rules define very precisely how code should be written, and also define what should be *done* when certain patterns of code are encountered, but these rules are abstract, and don't actually *do* anything.
 
-## 🤖 Python is a program that interprets formal language input 
+## 🤖 Python is a program that interprets formal language input
 
-Simply having a set of abstract rules can be fun, but it's not so useful if you have no way to actually *do* things. 
-To make code we write actually do anything, we need to use a program called an **Interpreter**. 
+Simply having a set of abstract rules can be fun, but it's not so useful if you have no way to actually *do* things. To make code we write actually do anything, we need to use a program called an **Interpreter**.
 
-::: {.callout}
+::: callout
 ### 🤖 The Python Interpreter
+
 When you say
 
 > I'm having a hard time installing Python.
 
 you're talking about a Python Interpreter.
-
 :::
 
-The Python interpreter processes code, determines whether or not it is valid, then does the things the code told it to do. 
+The Python interpreter processes code, determines whether or not it is valid, then does the things the code told it to do.
 
 Code can get passed to the interpreter many different ways, including
 
-- In a single text file, called a python "script", (usually named to end in `.py`)
-- In an interactive python "shell".
-- Inside a Jupyter notebook.
+-   In a single text file, called a python "script", (usually named to end in `.py`)
+-   In an interactive python "shell".
+-   Inside a Jupyter notebook.
 
 For example, the text in the shaded block below was passed to a Python interpreter, and the interpreter decided that it was invalid (because there is an opening quote `"`, but not a closing quote).
 
@@ -69,12 +67,11 @@ The text in this next shaded block was passed to a Python interpreter. This time
 print("hello! " * 3)
 ```
 
-
 ## ⛰️ Python is an Ecosystem
 
-People often say that Python comes "with batteries included", meaning it can do a lot of different things out without needing to install any extensions. But you *can* install extensions in the form of additional libraries that extend Python's capabilities. 
+People often say that Python comes "with batteries included", meaning it can do a lot of different things out without needing to install any extensions. But you *can* install extensions in the form of additional libraries that extend Python's capabilities.
 
-::: {.callout}
+::: callout
 ### ⛰️ The Ecosystem
 
 When someone says
@@ -82,13 +79,12 @@ When someone says
 > Python is the most widely used language in natural language processing.
 
 They are talking about the *ecosystem* of libraries for Python hat have been built to do natural language processing.
-
 :::
 
 Some examples of additional libraries for Python are
 
-- `numpy`: Allows for effective computation with numbers
-- `matplotlib`: Makes graphs
+-   `numpy`: Allows for effective computation with numbers
+-   `matplotlib`: Makes graphs
 
 ```{python}
 import matplotlib.pyplot as plt
@@ -106,14 +102,13 @@ plt.show()
 
 The meanings of "Python" we've already talked about are
 
-- 📕 The abstract language
-- 🤖 The Python Interpreter
-- ⛰️ The Python Ecosystem
+-   📕 The abstract language
+-   🤖 The Python Interpreter
+-   ⛰️ The Python Ecosystem
 
 Understanding how to put all of these pieces together effectively is a *social* project.
 
-::: {.callout}
-
+::: callout
 ### 🧑‍💻 The social project
 
 When you say
@@ -121,16 +116,15 @@ When you say
 > So-n-so is really good at Python.
 
 You are talking about their involvement in the Python social project.
-
 :::
 
-- ❌ There is no part of the 📕 *abstract language* that will inform you that there is a very good Python library for doing a certain task.
-- ❌ The 🤖 *Python Interpreter* won't tell you that there's a better way to do what you're trying to do.
-- ❌ There are nearly [half a million libraries on ⛰️ *the Python Package Index*](https://pypi.org/), so you can't just peruse it to find what's relevant.
+-   ❌ There is no part of the 📕 *abstract language* that will inform you that there is a very good Python library for doing a certain task.
+-   ❌ The 🤖 *Python Interpreter* won't tell you that there's a better way to do what you're trying to do.
+-   ❌ There are nearly [half a million libraries on ⛰️ *the Python Package Index*](https://pypi.org/), so you can't just peruse it to find what's relevant.
 
 In order to know newest or most effective way to do things, you need to be involved in 🧑‍💻 *the social project*. That begins within a classroom, then extends to keeping up with blogs and other discourses about changes and developments.
 
-One way people demonstrate that they are involved in the Python social project is by writing their code *idiomatically*. For example, in the code block above, I included the line `import numpy as np`. But *there's no rule* that we import `numpy` as `np`, it's simply convention. 
+One way people demonstrate that they are involved in the Python social project is by writing their code *idiomatically*. For example, in the code block above, I included the line `import numpy as np`. But *there's no rule* that we import `numpy` as `np`, it's simply convention.
 
 This code below will run just as well, but would cause problems for people trying to read your code, because it's not idiomatic.
 
