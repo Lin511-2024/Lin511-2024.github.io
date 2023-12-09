@@ -1,0 +1,209 @@
+---
+title: '"Where is the ... key?"'
+knitr: 
+  opts_chunk: 
+    echo: false
+    message: false
+    warning: false
+    crop: true
+---
+
+```{r}
+library(tidyverse)
+library(ggkeyboard)
+knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
+```
+
+## Single Quotes vs Backticks
+
+It's important to distinguish between single quotes: `'` and backticks <code>\`</code>. They look similar, but aren't interchangeable.
+
+The backtick key is highlighted in the images of the keyboards below, in the top left side.
+
+::: panel-tabset
+## PC
+
+```{r}
+#| fig-width: 10
+#| fig-height: 4
+#| crop: true
+ ggkeyboard(palette = keyboard_palette("wahtsy")) %>%
+   highlight_keys(c("~`"),
+                  fill = "red", colour = "red",
+                  alpha = 0.3)
+```
+
+## Mac
+
+```{r}
+#| fig-width: 10
+#| fig-height: 4
+#| crop: true
+ggkeyboard(keyboard = mac,
+           palette = keyboard_palette("magic")) %>%
+   highlight_keys(c("~`"),
+                  fill = "red", colour = "red",
+                  alpha = 0.3)
+```
+:::
+
+## Slash (`/`) vs backslash (`\`).
+
+These different symbols will do different things, and aren't interchangeable!
+
+### Slash (`/`) location
+
+::: panel-tabset
+## PC
+
+```{r}
+#| fig-width: 10
+#| fig-height: 4
+ggkeyboard(palette = keyboard_palette("wahtsy")) %>%
+   highlight_keys(c("?/"),
+                  fill = "red", colour = "red",
+                  alpha = 0.3)
+```
+
+## Mac
+
+```{r}
+#| fig-width: 10
+#| fig-height: 4
+ggkeyboard(mac,
+           palette = keyboard_palette("magic")) %>%
+   highlight_keys(c("?/"),
+                  fill = "red", colour = "red",
+                  alpha = 0.3)
+```
+:::
+
+### Backslash (`\`) location
+
+::: panel-tabset
+## PC
+
+```{r}
+#| fig-width: 10
+#| fig-height: 4
+ggkeyboard(palette = keyboard_palette("wahtsy")) %>%
+   highlight_keys(c("|\\"),
+                  fill = "red", colour = "red",
+                  alpha = 0.3)
+```
+
+## Mac
+
+```{r}
+#| fig-width: 10
+#| fig-height: 4
+ggkeyboard(mac,
+           palette = keyboard_palette("magic")) %>%
+   highlight_keys(c("|\\"),
+                  fill = "red", colour = "red",
+                  alpha = 0.3)
+```
+:::
+
+## The tilde `~` key.
+
+To type the tilde[^1] key you have to hold {{< kbd Shift+` >}}.
+
+[^1]: Pronunciations include \[tɪl.də\] and \[tɪl.di\]
+
+::: panel-tabset
+## PC
+
+```{r}
+#| fig-width: 10
+#| fig-height: 4
+ggkeyboard(keyboard =tkl,
+           palette = keyboard_palette("wahtsy")) %>%
+   highlight_keys(c("Shift Left", "~`"),
+                  fill = "red", colour = "red",
+                  alpha = 0.3)
+```
+
+## Mac
+
+```{r}
+#| fig-width: 10
+#| fig-height: 4
+ggkeyboard(keyboard = mac,
+           palette = keyboard_palette("magic")) %>%
+   highlight_keys(c("Shift Left", "~`"),
+                  fill = "red", colour = "red",
+                  alpha = 0.3)
+```
+:::
+
+## The caret `^`
+
+You can get the caret symbol with {{< kbd Shift+6 >}}
+
+::: panel-tabset
+## PC
+
+```{r}
+#| fig-width: 10
+#| fig-height: 4
+ggkeyboard(keyboard =tkl,
+           palette = keyboard_palette("wahtsy")) %>%
+   highlight_keys(c("Shift Left", "6"),
+                  fill = "red", colour = "red",
+                  alpha = 0.3)
+```
+
+## Mac
+
+```{r}
+#| fig-width: 10
+#| fig-height: 4
+ggkeyboard(keyboard = mac,
+           palette = keyboard_palette("magic")) %>%
+   highlight_keys(c("Shift Left", "6"),
+                  fill = "red", colour = "red",
+                  alpha = 0.3)
+```
+:::
+
+## The Pipe `|`
+
+You can get the pipe, or vertical bar, with {{< kbd Shift+\\ >}}.
+
+::: panel-tabset
+## PC
+
+```{r}
+#| fig-width: 10
+#| fig-height: 4
+ggkeyboard(keyboard =tkl,
+           palette = keyboard_palette("wahtsy")) %>%
+   highlight_keys(c("Shift Left", "|\\"),
+                  fill = "red", colour = "red",
+                  alpha = 0.3)
+```
+
+## Mac
+
+```{r}
+#| fig-width: 10
+#| fig-height: 4
+ggkeyboard(keyboard = mac,
+           palette = keyboard_palette("magic")) %>%
+   highlight_keys(c("Shift Left", "|\\"),
+                  fill = "red", colour = "red",
+                  alpha = 0.3)
+```
+:::
+
+## Side Note: "Smart Quotes"
+
+If, at some point, you copy-paste text from the internet into your code or a text file, you might wind up with "smart quotes" that make things work weird!
+
+| Regular Quotes | Smart Quotes |
+|----------------|--------------|
+| `"regular"`    | `“smart”`      |
+| `'regular'`    | `‘smart’`   |
+
+Be careful not to have smart quotes cropping up in your code or data!

@@ -36,15 +36,15 @@ If you ware using a windows computer, I'll ask you to install Windows Subsystem 
 
 #### pyenv
 
-We'll be using a program called `pyenv` to manage the versions of python we use. To install `pyenv`, open the VSCode Command Palette (with `Shift+Ctrl+P`) which will open the command line interface. Then,
+We'll be using a program called `pyenv` to manage the versions of python we use. To install `pyenv`, open the VSCode Command Palette (with {{< kbd mac=Shift+Command+P windows=Shift+Control+P linux=Shift+Control+P >}}) which will open the command line interface. Then,
 
--   [ ] copy this line of code code from this page (Ctrl-c or ⌘-c)
+-   [ ] copy this line of code code from this page ({{< kbd mac=Command+C windows=Control+C, linux=Control+C >}})
 
 ``` bash
 curl https://pyenv.run | bash
 ```
 
--   [ ] Paste it into the terminal (Ctrl-v or ⌘-v)
+-   [ ] Paste it into the terminal (({{< kbd mac=Command+V windows=Control+V, linux=Control+V >}})
 -   [ ] Hit enter.
 
 Once that has successfully finished:
