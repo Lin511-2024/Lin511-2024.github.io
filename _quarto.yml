@@ -10,14 +10,19 @@ execute:
 
 website:
   title: "Lin511-2024"
+  favicon: assets/logo.svg
+  site-url: https://lin511-2024.github.io
   navbar:
     left:
       - text: "Home"
         href: index.qmd
       - text: "Notes"
         href: notes/index.qmd
+      - text: "About"
+        href: about.qmd
   sidebar: 
     - title: "Home"
+      logo: assets/logo.svg
       contents:
         - text: Home
           href: index.qmd

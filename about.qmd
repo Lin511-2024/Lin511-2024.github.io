@@ -2,8 +2,9 @@
 title: "About"
 ---
 
-About this site
+This is the website for Lin511, Computational Linguistics, taught at the University of Kentucky Spring 2024
 
-```{r}
-1 + 1
-```
+
+#### Attribution
+
+- The robot emoji in the course logo is modified from Open Emoji ([link](https://github.com/hfg-gmuend/openmoji)), licenced CC-BY-SA 4.0. Edited version [here(svg)](assets/1F916.svg).
