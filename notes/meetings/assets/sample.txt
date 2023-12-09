@@ -1,0 +1,3 @@
+This is a sample file.
+It just has text.
+We can read and print its contents.
