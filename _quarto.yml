@@ -8,6 +8,9 @@ author:
 execute: 
   freeze: auto
 
+citation:
+  container-title: "Lin511 2024: Computational Linguistics"
+
 website:
   title: "Lin511-2024"
   favicon: assets/logo.svg
@@ -54,6 +57,9 @@ format:
     fontsize: large
     smooth-scroll: true
     fig-cap-location: margin
+    citation: true
+
+date-modified: last-modified
 
 editor: visual
 
