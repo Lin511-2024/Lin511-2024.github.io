@@ -2,50 +2,54 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://lin511-2024.github.io/syllabus/syllabus.html</loc>
-    <lastmod>2023-12-09T16:04:02.988Z</lastmod>
+    <lastmod>2023-12-09T21:42:39.551Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/01_Python_basics.html</loc>
-    <lastmod>2023-12-09T16:03:50.859Z</lastmod>
+    <lastmod>2023-12-09T21:42:24.735Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/index.html</loc>
-    <lastmod>2023-12-09T16:03:49.455Z</lastmod>
+    <lastmod>2023-12-09T21:42:22.963Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/concepts/02_undersdanding-paths.html</loc>
-    <lastmod>2023-12-09T16:03:47.815Z</lastmod>
+    <lastmod>2023-12-09T21:42:20.939Z</lastmod>
   </url>
   <url>
-    <loc>https://lin511-2024.github.io/notes/concepts/00_glossary.html</loc>
-    <lastmod>2023-12-09T16:03:46.219Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/index.html</loc>
-    <lastmod>2023-12-09T16:03:43.467Z</lastmod>
+    <loc>https://lin511-2024.github.io/notes/concepts/01_keyboarding.html</loc>
+    <lastmod>2023-12-09T21:42:18.911Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/about.html</loc>
-    <lastmod>2023-12-09T16:03:45.671Z</lastmod>
+    <lastmod>2023-12-09T21:42:17.303Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/index.html</loc>
+    <lastmod>2023-12-09T21:42:14.663Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/notes/concepts/00_glossary.html</loc>
+    <lastmod>2023-12-09T21:42:17.995Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/concepts/03_navigating-directories.html</loc>
-    <lastmod>2023-12-09T16:03:47.051Z</lastmod>
+    <lastmod>2023-12-09T21:42:20.003Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/concepts/01_what-is-python.html</loc>
-    <lastmod>2023-12-09T16:03:48.795Z</lastmod>
+    <lastmod>2023-12-09T21:42:22.143Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/00_setup.html</loc>
-    <lastmod>2023-12-09T16:03:50.351Z</lastmod>
+    <lastmod>2023-12-09T21:42:24.091Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/02_Paths.html</loc>
-    <lastmod>2023-12-09T16:03:51.455Z</lastmod>
+    <lastmod>2023-12-09T21:42:25.459Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/syllabus/schedule.html</loc>
-    <lastmod>2023-12-09T16:03:52.527Z</lastmod>
+    <lastmod>2023-12-09T21:42:26.771Z</lastmod>
   </url>
 </urlset>
