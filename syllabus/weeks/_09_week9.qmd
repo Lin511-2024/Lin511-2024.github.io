@@ -1,21 +1,17 @@
 ### Week 9
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="50%"}
 
-Dates: 
+Dates:
 
-: Mar 04-08
-
+:   Mar 04-08
 :::
 
 ::: {.column width="50%"}
 
 Topics:
 
-: More
-
+:   More
 :::
-
-::::
+:::

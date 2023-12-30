@@ -1,21 +1,17 @@
 ### Week 15
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="50%"}
 
-Dates: 
+Dates:
 
-: Apr 22-26
-
+:   Apr 22-26
 :::
 
 ::: {.column width="50%"}
 
 Topics:
 
-: More
-
+:   More
 :::
-
-::::
+:::

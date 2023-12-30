@@ -1,21 +1,17 @@
 ### Week 6
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="50%"}
 
-Dates: 
+Dates:
 
-: Feb 12 - 16
-
+:   Feb 12 - 16
 :::
 
 ::: {.column width="50%"}
 
 Topics:
 
-: More
-
+:   More
 :::
-
-::::
+:::

@@ -1,21 +1,17 @@
 ### Week 8
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="50%"}
 
-Dates: 
+Dates:
 
-: Feb 26 - Mar 01
-
+:   Feb 26 - Mar 01
 :::
 
 ::: {.column width="50%"}
 
 Topics:
 
-: More
-
+:   More
 :::
-
-::::
+:::

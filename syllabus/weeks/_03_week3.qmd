@@ -12,13 +12,12 @@ Dates:
 
 Topics:
 
-:   Text Normalization, Tokenization, Python Variables, Python Functions
+:   Files, Text, Strings, Regular Expressions, Finite State Automata
 :::
 :::
 
-#### Readings
+#### Readings:
 
--   [SLP Chapter 2, sections 2.2, 2.3, 2.4](https://web.stanford.edu/~jurafsky/slp3/2.pdf)
--   [TP, Chapter 2](https://greenteapress.com/thinkpython2/html/thinkpython2003.html)
--   [TP Chapter 3](https://greenteapress.com/thinkpython2/html/thinkpython2004.html)
--   [NLTK Book, Chapter 3](https://www.nltk.org/book/ch03.html)
+-   [Course Notes: What *is* Python](../../notes/concepts/what-is-python.html)
+-   [SLP Chapter 2, section 2.1 (pdf)](https://web.stanford.edu/~jurafsky/slp3/2.pdf)
+-   [TP Chapter 1](https://greenteapress.com/thinkpython2/html/thinkpython2002.html)

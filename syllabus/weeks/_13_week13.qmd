@@ -1,21 +1,17 @@
 ### Week 13
 
-:::: {.columns}
-
+::: columns
 ::: {.column width="50%"}
 
-Dates: 
+Dates:
 
-: Apr 08-12
-
+:   Apr 08-12
 :::
 
 ::: {.column width="50%"}
 
 Topics:
 
-: More
-
+:   More
 :::
-
-::::
+:::
