@@ -16,12 +16,6 @@ Topics:
 :::
 :::
 
-**Alternative Office Hours**:
-
-|                |             |                                 |
-|----------------|-------------|---------------------------------|
-| Friday, Jan 12 | 12pm to 2pm | LinCoLab (Breckinridge, Room10) |
-
 #### Readings
 
 Follow posted tutorials for setting up our course technology.
