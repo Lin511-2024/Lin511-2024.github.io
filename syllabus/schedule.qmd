@@ -3,11 +3,21 @@ title: Course Schedule
 ---
 
 {{< include weeks/_01_week1.qmd >}}
+
+----
+
 {{< include weeks/_02_week2.qmd >}}
-{{< include weeks/_03_week3.qmd >}}
-{{< include weeks/_04_week4.qmd >}}
-{{< include weeks/_05_week5.qmd >}}
+
+----
+
+{{< include weeks/_03_week4.qmd >}}
+
+----
+
 {{< include weeks/_06_week6.qmd >}}
+
+-----
+
 {{< include weeks/_07_week7.qmd >}}
 {{< include weeks/_08_week8.qmd >}}
 {{< include weeks/_09_week9.qmd >}}
