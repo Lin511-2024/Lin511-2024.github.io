@@ -180,17 +180,11 @@ The topics and readings listed here are the tentative schedule for the course. W
 
 {{< include weeks/_06_week6.qmd >}} 
 
-----
-
-{{< include weeks/_07_week7.qmd >}} 
 
 ----
 
 {{< include weeks/_08_week8.qmd >}} 
 
-----
-
-{{< include weeks/_09_week9.qmd >}}
 
 ------------------------------------------------------------------------
 

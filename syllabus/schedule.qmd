@@ -18,9 +18,7 @@ title: Course Schedule
 
 -----
 
-{{< include weeks/_07_week7.qmd >}}
 {{< include weeks/_08_week8.qmd >}}
-{{< include weeks/_09_week9.qmd >}}
 
 ----
 

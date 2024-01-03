@@ -1,4 +1,4 @@
-### Week 8
+### Week 8-9
 
 :::: {.columns}
 
@@ -6,7 +6,7 @@
 
 Dates: 
 
-: Feb 26 - Mar 01
+: Feb 26 - Mar 08
 
 :::
 
@@ -14,8 +14,12 @@ Dates:
 
 Topics:
 
-: More
+: Hidden Markov Models
 
 :::
 
 ::::
+
+#### Readings
+
+- SLP Appendix A: Hidden Markov Models
