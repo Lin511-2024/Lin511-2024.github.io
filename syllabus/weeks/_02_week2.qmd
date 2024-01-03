@@ -1,11 +1,11 @@
-### Week 2
+### Week 2-3
 
 ::: columns
 ::: {.column width="50%"}
 
 Dates:
 
-:   Jan 15-19
+:   Jan 15-26
 :::
 
 ::: {.column width="50%"}
