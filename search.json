@@ -1,5 +1,138 @@
 [
   {
+    "objectID": "notes/meetings/02_Paths.html",
+    "href": "notes/meetings/02_Paths.html",
+    "title": "Paths in Python",
+    "section": "",
+    "text": "python\n\nfrom pathlib import Path\nPath() will return a relative path to the current directory, which is represented as ..\npython\n\nthis_directory = Path()\nprint(this_directory)\n\n.\nIf we use the .resolve() method on this_directory, we’ll get back the absolute path.\npython\n\nabsolute_path = this_directory.resolve()\nprint(absolute_path)\n\n/workspaces/Lin511-2024.github.io/notes/meetings\nWe can get the path to the directory above from the .parent attribute.\npython\n\nprint(\n    absolute_path.parent\n)\n\n/workspaces/Lin511-2024.github.io/notes\nWe can get a list of all of the files and directories in a directory with the .glob() method. For technical reasons, we need to wrap list() around this.\npython\n\nlist(\n    absolute_path.glob(\"*\")\n)\n\n[PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings/assets'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings/01_Paths.ipynb'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings/00_setup.qmd')]\nYou can get a list of all of the files and folders in the parent directory like so.\npython\n\nlist(\n    absolute_path\\\n        .parent\\\n        .glob(\"*\")\n)\n\n[PosixPath('/workspaces/Lin511-2024.github.io/notes/.gitignore'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/index.qmd')]\nWe can get a list of all of the files and directories in the concepts directory like so.\npython\n\nlist(\n    absolute_path\\\n        .parent\\\n        .joinpath(\"concepts\")\\\n        .glob(\"*\")\n)\n\n[PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/02_undersdanding-paths.qmd'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/assets'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/01_what-is-python.qmd'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/03_navigating-directories.qmd'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/00_glossary.qmd')]"
+  },
+  {
+    "objectID": "notes/meetings/02_Paths.html#opening-a-file",
+    "href": "notes/meetings/02_Paths.html#opening-a-file",
+    "title": "Paths in Python",
+    "section": "Opening a file",
+    "text": "Opening a file\nWe’re going to read in the text file here\n\n\npython\n\ntext_file_path = Path(\"assets\", \"sample.txt\")\n\nwith text_file_path.open() as file:\n    lines = file.readlines()\n\nprint(lines)\n\n['This is a sample file.\\n', 'It just has text.\\n', 'We can read and print its contents.']"
+  },
+  {
+    "objectID": "notes/meetings/01_Python_basics.html",
+    "href": "notes/meetings/01_Python_basics.html",
+    "title": "Python basics",
+    "section": "",
+    "text": "print(1)\n\n1\n\n\n\nprint(\"hello\")\n\nhello\n\n\n\nprint(2 + 2)\n\n4\n\n\n\nx = 1\ny = 10\n\nprint(x + y)\n\n11\n\n\n\nword1 = \"Hello\"\nword2 = \" World!\"\n\nprint(word1 + word2)\n\nHello World!\n\n\n\nprint(True)\n\nTrue\n\n\n\nprint(False)\n\nFalse\n\n\n\nprint(True and False)\n\nFalse\n\n\n\n\n\nReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Python Basics},\n  url = {https://lin511-2024.github.io/notes/meetings/01_Python_basics.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Python Basics.” https://lin511-2024.github.io/notes/meetings/01_Python_basics.html."
+  },
+  {
+    "objectID": "notes/concepts/02_undersdanding-paths.html",
+    "href": "notes/concepts/02_undersdanding-paths.html",
+    "title": "Understanding Directories",
+    "section": "",
+    "text": "There has recently been an uptick in discussion among college professors that students are less familiar with the notions of files, folders, directories, and paths than they used to be in the past. This is in part a natural consequence of shifting paradigms in computer use. Many people are exclusively using online services like Google Docs, and don’t save files to their computers ever. And even when we do save files on out computer, many operating systems have search based approaches to finding files.\nThe problem for scientific computing purposes, or even just making some simple HTML pages on your local computer, is that you need to be able to navigate the hierarchical file system of your computer, in order to tell your programs how to navigate it."
+  },
+  {
+    "objectID": "notes/concepts/02_undersdanding-paths.html#directory-structure",
+    "href": "notes/concepts/02_undersdanding-paths.html#directory-structure",
+    "title": "Understanding Directories",
+    "section": "",
+    "text": "There has recently been an uptick in discussion among college professors that students are less familiar with the notions of files, folders, directories, and paths than they used to be in the past. This is in part a natural consequence of shifting paradigms in computer use. Many people are exclusively using online services like Google Docs, and don’t save files to their computers ever. And even when we do save files on out computer, many operating systems have search based approaches to finding files.\nThe problem for scientific computing purposes, or even just making some simple HTML pages on your local computer, is that you need to be able to navigate the hierarchical file system of your computer, in order to tell your programs how to navigate it."
+  },
+  {
+    "objectID": "notes/concepts/02_undersdanding-paths.html#files-in-folders",
+    "href": "notes/concepts/02_undersdanding-paths.html#files-in-folders",
+    "title": "Understanding Directories",
+    "section": "Files in Folders",
+    "text": "Files in Folders\nThe first thing to be clear about is that all files you’ve saved on your computer are in a folder (a.k.a. a directory). “Documents” or “My Documents” is a folder. Even your Desktop is a folder. This is true for both macOS and Windows. For example, I have an account on my laptop called “Display” for when I want to show how my computer works without showing everyone all of my personal files. In the Display account, I saved a little text file called Sampletext.txt to the desktop. In this screenshot, you can see Sampletext.txt shown both on my desktop, and as a file in a folder.\n\n\n\nDesktop is a folder\n\n\nWhat’s nice about this image is that you can see where Sampletext.txt exists in the context of my whole hard drive. My “Desktop” is just a folder that my computer shows the content of on my main screen. The Desktop folder is inside of a folder called “Display”. There are other folders in there, including my main user account, joseffruehwald. All of these folders are grouped together in the “Users” folder, and the “Users” folder is one of the first folders immediately underneath my hard drive.\nThe important thing to keep in mind here is that all files, programs, photos, etc are stored somewhere in a folder, inside of another folder, probably inside of another folder. You might not always interact with the files this way, and they might not always look like they’re in a folder, but they are.\n\nViewing the folder hierarchy on a Mac\nTo be able to better view the full hierarchy of folders on a Mac, I would recommend the following:\n\nOpen Finder, and in the View menu, select “as Columns”\nUnder the View menu again, select “Show Path Bar”\n\n\n\nViewing the folder hierarchy in Windows\nAt the top of the file browser on Windows, you’ll see the sequence of files in which the current folder is embedded.\n\n\n\nWindows directory structure"
+  },
+  {
+    "objectID": "notes/concepts/02_undersdanding-paths.html#giving-directions-to-programs",
+    "href": "notes/concepts/02_undersdanding-paths.html#giving-directions-to-programs",
+    "title": "Understanding Directories",
+    "section": "Giving Directions to Programs",
+    "text": "Giving Directions to Programs\nPrograms are going to need directions for where to find things, and we can do this with “paths”. The concept of a path is so important, I’m going to really emphasize it\n“paths” \nThe “path” to a file is a written instruction for where to find a file on your specific computer."
+  },
+  {
+    "objectID": "notes/concepts/02_undersdanding-paths.html#relative-paths",
+    "href": "notes/concepts/02_undersdanding-paths.html#relative-paths",
+    "title": "Understanding Directories",
+    "section": "Relative Paths",
+    "text": "Relative Paths\nSometimes, we only need to tell a file where another file is relative to itself. For example, here is an HTML document and a CSS stylesheet for that document.\n\n\n\nhtml and css in a dicectory\n\n\nFrom site.html to style.css: style.css\nBecause style.css is in the same folder as site.html, we only need to tell site.html to look for style.css, like so\n\nhtml\n\n&lt;link \n  rel=\"stylesheet\" \n  type=\"text/css\" \n  href=\"style.css\"&gt;\nJust telling the html file to look for style.css, it’s going to look inside of, and only inside of the same folder as itself.\nHowever, sometimes people like to put all of the stylesheets and images for a website inside of a folder called “assets,” like so:\n\n\n\nstylesheet in assets\n\n\nFrom site.html to style.css: assets/style.css\nNow, if we tell site.html just to look for style.css, it’s not going to find it anymore! That’s because style.css is no longer in the same folder as site.html. We’ll need to update the link to the stylesheet to reflect the fact that it’s now in a different folder, like so:\n\nhtml\n\n&lt;link \n  rel=\"stylesheet\" \n  type=\"text/css\" \n  href=\"assets/style.css\"&gt;\nHere’s how site.html interprets the string assets/style.css:\n\nLook inside the folder you’re currently in for a folder called assets\nThen, look inside of that folder for a file called style.css\n\nWe could take it a step further, and create a new folder called “css” inside of “assets”, and put our stylesheet there instead.\n\n\n\n`assets/css/style.css`\n\n\nFrom site.html to style.css: assets/css/style.css\nNow, we’d need to update the link to the stylesheet to look like this\n\nhtml\n\n&lt;link \n  rel=\"stylesheet\" \n  type=\"text/css\" \n  href=\"assets/css/style.css\"&gt;\nAgain, breaking this down into how site.html interprets the string assets/css/style.css goes like this:\n\nLook inside of the same folder as yourself for a folder called assets\nLook inside of that folder for a folder called css\nLook inside of that folder for a file called style.css"
+  },
+  {
+    "objectID": "notes/concepts/02_undersdanding-paths.html#absolute-paths",
+    "href": "notes/concepts/02_undersdanding-paths.html#absolute-paths",
+    "title": "Understanding Directories",
+    "section": "Absolute Paths",
+    "text": "Absolute Paths\nRelative paths define the location of a file relative to another file, usually the one you’re writing. However, we can also define the location of a file on our computer that will work no matter where we’re looking from. These are called “absolute paths.” Put simply, absolute paths just list all of the nested folders a file is in, all the way up to the hard drive. You can see the absolute path for style.css at the bottom of the very last screen shot.\nDifferent operating systems have different short hands for describing the top level, or hard drive level, of the path. On macOS, it’s simply a / at the beginning of the path. On Windows, it usually begins with C:\\. For the final location of style.css in the screenshot above, the absolute path would be.\n/Users/Display/Documents/html_practice/assets/css/style.css\nIf for some reason I didn’t want to move or copy this stylesheet from this location, and I wanted to link to it from an HTML file saved in some completely different location on my laptop, I could give it this absolute path, and it would find it."
+  },
+  {
+    "objectID": "notes/concepts/02_undersdanding-paths.html#important-note-on-naming",
+    "href": "notes/concepts/02_undersdanding-paths.html#important-note-on-naming",
+    "title": "Understanding Directories",
+    "section": "Important Note on Naming",
+    "text": "Important Note on Naming\nFrom here on out in the course, you should avoid using spaces in any of the files or folders you name. While you can take spaces into account when giving a path, it’s annoying. Instead, I’d recommend using an underscore _, a dash -, or naming files with “camel case”.\n\nmy_file.txt\nmy-file.txt\nmyFile.txt"
+  },
+  {
+    "objectID": "notes/concepts/02_undersdanding-paths.html#important-note-on-using-paths",
+    "href": "notes/concepts/02_undersdanding-paths.html#important-note-on-using-paths",
+    "title": "Understanding Directories",
+    "section": "Important Note on Using Paths",
+    "text": "Important Note on Using Paths\nThere are two crucial things to remember about using paths that can be conceptually difficult when first getting started.\n\nRelative paths always depend on where you’re coming from and where you’re going to. If either my HTML file was in a location I was confused about, or my CSS file was in a location I was confused about, my relative path might not work.\nBoth relative paths and absolute paths depend on how files are organized inside of your own computer. A path copied from an example online, or a professor’s template might not work  if your file structure is different."
+  },
+  {
+    "objectID": "notes/concepts/01_keyboarding.html#single-quotes-vs-backticks",
+    "href": "notes/concepts/01_keyboarding.html#single-quotes-vs-backticks",
+    "title": "“Where is the … key?”",
+    "section": "Single Quotes vs Backticks",
+    "text": "Single Quotes vs Backticks\nIt’s important to distinguish between single quotes: ' and backticks `. They look similar, but aren’t interchangeable.\nThe backtick key is highlighted in the images of the keyboards below, in the top left side.\n\nPCMac"
+  },
+  {
+    "objectID": "notes/concepts/01_keyboarding.html#slash-vs-backslash-.",
+    "href": "notes/concepts/01_keyboarding.html#slash-vs-backslash-.",
+    "title": "“Where is the … key?”",
+    "section": "Slash (/) vs backslash (\\).",
+    "text": "Slash (/) vs backslash (\\).\nThese different symbols will do different things, and aren’t interchangeable!\n\nSlash (/) location\n\nPCMac\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBackslash (\\) location\n\nPCMac"
+  },
+  {
+    "objectID": "notes/concepts/01_keyboarding.html#the-tilde-key.",
+    "href": "notes/concepts/01_keyboarding.html#the-tilde-key.",
+    "title": "“Where is the … key?”",
+    "section": "The tilde ~ key.",
+    "text": "The tilde ~ key.\nTo type the tilde1 key you have to hold Shift+`.\n\nPCMac"
+  },
+  {
+    "objectID": "notes/concepts/01_keyboarding.html#the-caret",
+    "href": "notes/concepts/01_keyboarding.html#the-caret",
+    "title": "“Where is the … key?”",
+    "section": "The caret ^",
+    "text": "The caret ^\nYou can get the caret symbol with Shift+6\n\nPCMac"
+  },
+  {
+    "objectID": "notes/concepts/01_keyboarding.html#the-pipe",
+    "href": "notes/concepts/01_keyboarding.html#the-pipe",
+    "title": "“Where is the … key?”",
+    "section": "The Pipe |",
+    "text": "The Pipe |\nYou can get the pipe, or vertical bar, with Shift+\\.\n\nPCMac"
+  },
+  {
+    "objectID": "notes/concepts/01_keyboarding.html#side-note-smart-quotes",
+    "href": "notes/concepts/01_keyboarding.html#side-note-smart-quotes",
+    "title": "“Where is the … key?”",
+    "section": "Side Note: “Smart Quotes”",
+    "text": "Side Note: “Smart Quotes”\nIf, at some point, you copy-paste text from the internet into your code or a text file, you might wind up with “smart quotes” that make things work weird!\n\n\n\nRegular Quotes\nSmart Quotes\n\n\n\n\n\"regular\"\n“smart”\n\n\n'regular'\n‘smart’\n\n\n\nBe careful not to have smart quotes cropping up in your code or data!"
+  },
+  {
+    "objectID": "notes/concepts/01_keyboarding.html#footnotes",
+    "href": "notes/concepts/01_keyboarding.html#footnotes",
+    "title": "“Where is the … key?”",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nPronunciations include [tɪl.də] and [tɪl.di]↩︎"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Computational Linguistics (Spring 2024)",
+    "section": "",
+    "text": "Welcome to the Lin511 Computational Linguistics website. This course is being taught in the University of Kentucky’s Linguistics Department in Spring 2024\nIf you are visiting on a mobile device, site navigation can be found under the “hamburger” at the top.\n\n\n\nReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Computational {Linguistics} {(Spring} 2024)},\n  url = {https://lin511-2024.github.io/},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Computational Linguistics (Spring\n2024).” https://lin511-2024.github.io/."
+  },
+  {
     "objectID": "syllabus/syllabus.html",
     "href": "syllabus/syllabus.html",
     "title": "Lin511-001 - Computational Linguistics",
@@ -112,125 +245,6 @@
     "text": "15 Diversity, Equity and Inclusion\nUK Senate DEI Statement\nThe University of Kentucky is committed to our core values of diversity and inclusion, mutual respect and human dignity, and a sense of community (Governing Regulations XIV). We acknowledge and respect the seen and unseen diverse identities and experiences of all members of the university community (https://www.uky.edu/regs/gr14). These identities include but are not limited to those based on race, ethnicity, gender identity and expressions, ideas and perspectives, religious and cultural beliefs, sexual orientation, national origin, age, ability, and socioeconomic status. We are committed to equity and justice and providing a learning and engaging community in which every member is engaged, heard, and valued.\nWe strive to rectify and change behavior that is inconsistent with our principles and commitment to diversity, equity, and inclusion. If students encounter such behavior in a course, they are encouraged to speak with the instructor of record and/or the Office of Institutional Equity and Equal Opportunity. Students may also contact a faculty member within the department, program director, the director of undergraduate or graduate studies, the department chair, any college administrator, or the dean. All of these individuals are mandatory reporters under University policies."
   },
   {
-    "objectID": "notes/meetings/01_Python_basics.html",
-    "href": "notes/meetings/01_Python_basics.html",
-    "title": "Python basics",
-    "section": "",
-    "text": "print(1)\n\n1\n\n\n\nprint(\"hello\")\n\nhello\n\n\n\nprint(2 + 2)\n\n4\n\n\n\nx = 1\ny = 10\n\nprint(x + y)\n\n11\n\n\n\nword1 = \"Hello\"\nword2 = \" World!\"\n\nprint(word1 + word2)\n\nHello World!\n\n\n\nprint(True)\n\nTrue\n\n\n\nprint(False)\n\nFalse\n\n\n\nprint(True and False)\n\nFalse\n\n\n\n\n\nReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Python Basics},\n  url = {https://lin511-2024.github.io/notes/meetings/01_Python_basics.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Python Basics.” https://lin511-2024.github.io/notes/meetings/01_Python_basics.html."
-  },
-  {
-    "objectID": "notes/index.html",
-    "href": "notes/index.html",
-    "title": "Meeting Notes",
-    "section": "",
-    "text": "These are the notes for our regular meetings.\n\n\n\n\n\n\n\n\n  \n\n\n\n\nPaths in Python\n\n\n\n\n\n\n\n\n\n\n\n\nJosef Fruehwald\n\n\n\n\n\n\n  \n\n\n\n\nPython basics\n\n\n\n\n\n\n\n\n\n\n\n\nJosef Fruehwald\n\n\n\n\n\n\n  \n\n\n\n\nSetup Notes\n\n\n\n\n\n\n\n\n\n\n\n\nJan 8, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\nNo matching items\n\nReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Meeting {Notes}},\n  url = {https://lin511-2024.github.io/notes},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Meeting Notes.” https://lin511-2024.github.io/notes."
-  },
-  {
-    "objectID": "notes/concepts/02_undersdanding-paths.html",
-    "href": "notes/concepts/02_undersdanding-paths.html",
-    "title": "Understanding Directories",
-    "section": "",
-    "text": "There has recently been an uptick in discussion among college professors that students are less familiar with the notions of files, folders, directories, and paths than they used to be in the past. This is in part a natural consequence of shifting paradigms in computer use. Many people are exclusively using online services like Google Docs, and don’t save files to their computers ever. And even when we do save files on out computer, many operating systems have search based approaches to finding files.\nThe problem for scientific computing purposes, or even just making some simple HTML pages on your local computer, is that you need to be able to navigate the hierarchical file system of your computer, in order to tell your programs how to navigate it."
-  },
-  {
-    "objectID": "notes/concepts/02_undersdanding-paths.html#directory-structure",
-    "href": "notes/concepts/02_undersdanding-paths.html#directory-structure",
-    "title": "Understanding Directories",
-    "section": "",
-    "text": "There has recently been an uptick in discussion among college professors that students are less familiar with the notions of files, folders, directories, and paths than they used to be in the past. This is in part a natural consequence of shifting paradigms in computer use. Many people are exclusively using online services like Google Docs, and don’t save files to their computers ever. And even when we do save files on out computer, many operating systems have search based approaches to finding files.\nThe problem for scientific computing purposes, or even just making some simple HTML pages on your local computer, is that you need to be able to navigate the hierarchical file system of your computer, in order to tell your programs how to navigate it."
-  },
-  {
-    "objectID": "notes/concepts/02_undersdanding-paths.html#files-in-folders",
-    "href": "notes/concepts/02_undersdanding-paths.html#files-in-folders",
-    "title": "Understanding Directories",
-    "section": "Files in Folders",
-    "text": "Files in Folders\nThe first thing to be clear about is that all files you’ve saved on your computer are in a folder (a.k.a. a directory). “Documents” or “My Documents” is a folder. Even your Desktop is a folder. This is true for both macOS and Windows. For example, I have an account on my laptop called “Display” for when I want to show how my computer works without showing everyone all of my personal files. In the Display account, I saved a little text file called Sampletext.txt to the desktop. In this screenshot, you can see Sampletext.txt shown both on my desktop, and as a file in a folder.\n\n\n\nDesktop is a folder\n\n\nWhat’s nice about this image is that you can see where Sampletext.txt exists in the context of my whole hard drive. My “Desktop” is just a folder that my computer shows the content of on my main screen. The Desktop folder is inside of a folder called “Display”. There are other folders in there, including my main user account, joseffruehwald. All of these folders are grouped together in the “Users” folder, and the “Users” folder is one of the first folders immediately underneath my hard drive.\nThe important thing to keep in mind here is that all files, programs, photos, etc are stored somewhere in a folder, inside of another folder, probably inside of another folder. You might not always interact with the files this way, and they might not always look like they’re in a folder, but they are.\n\nViewing the folder hierarchy on a Mac\nTo be able to better view the full hierarchy of folders on a Mac, I would recommend the following:\n\nOpen Finder, and in the View menu, select “as Columns”\nUnder the View menu again, select “Show Path Bar”\n\n\n\nViewing the folder hierarchy in Windows\nAt the top of the file browser on Windows, you’ll see the sequence of files in which the current folder is embedded.\n\n\n\nWindows directory structure"
-  },
-  {
-    "objectID": "notes/concepts/02_undersdanding-paths.html#giving-directions-to-programs",
-    "href": "notes/concepts/02_undersdanding-paths.html#giving-directions-to-programs",
-    "title": "Understanding Directories",
-    "section": "Giving Directions to Programs",
-    "text": "Giving Directions to Programs\nPrograms are going to need directions for where to find things, and we can do this with “paths”. The concept of a path is so important, I’m going to really emphasize it\n“paths” \nThe “path” to a file is a written instruction for where to find a file on your specific computer."
-  },
-  {
-    "objectID": "notes/concepts/02_undersdanding-paths.html#relative-paths",
-    "href": "notes/concepts/02_undersdanding-paths.html#relative-paths",
-    "title": "Understanding Directories",
-    "section": "Relative Paths",
-    "text": "Relative Paths\nSometimes, we only need to tell a file where another file is relative to itself. For example, here is an HTML document and a CSS stylesheet for that document.\n\n\n\nhtml and css in a dicectory\n\n\nFrom site.html to style.css: style.css\nBecause style.css is in the same folder as site.html, we only need to tell site.html to look for style.css, like so\n\nhtml\n\n&lt;link \n  rel=\"stylesheet\" \n  type=\"text/css\" \n  href=\"style.css\"&gt;\nJust telling the html file to look for style.css, it’s going to look inside of, and only inside of the same folder as itself.\nHowever, sometimes people like to put all of the stylesheets and images for a website inside of a folder called “assets,” like so:\n\n\n\nstylesheet in assets\n\n\nFrom site.html to style.css: assets/style.css\nNow, if we tell site.html just to look for style.css, it’s not going to find it anymore! That’s because style.css is no longer in the same folder as site.html. We’ll need to update the link to the stylesheet to reflect the fact that it’s now in a different folder, like so:\n\nhtml\n\n&lt;link \n  rel=\"stylesheet\" \n  type=\"text/css\" \n  href=\"assets/style.css\"&gt;\nHere’s how site.html interprets the string assets/style.css:\n\nLook inside the folder you’re currently in for a folder called assets\nThen, look inside of that folder for a file called style.css\n\nWe could take it a step further, and create a new folder called “css” inside of “assets”, and put our stylesheet there instead.\n\n\n\n`assets/css/style.css`\n\n\nFrom site.html to style.css: assets/css/style.css\nNow, we’d need to update the link to the stylesheet to look like this\n\nhtml\n\n&lt;link \n  rel=\"stylesheet\" \n  type=\"text/css\" \n  href=\"assets/css/style.css\"&gt;\nAgain, breaking this down into how site.html interprets the string assets/css/style.css goes like this:\n\nLook inside of the same folder as yourself for a folder called assets\nLook inside of that folder for a folder called css\nLook inside of that folder for a file called style.css"
-  },
-  {
-    "objectID": "notes/concepts/02_undersdanding-paths.html#absolute-paths",
-    "href": "notes/concepts/02_undersdanding-paths.html#absolute-paths",
-    "title": "Understanding Directories",
-    "section": "Absolute Paths",
-    "text": "Absolute Paths\nRelative paths define the location of a file relative to another file, usually the one you’re writing. However, we can also define the location of a file on our computer that will work no matter where we’re looking from. These are called “absolute paths.” Put simply, absolute paths just list all of the nested folders a file is in, all the way up to the hard drive. You can see the absolute path for style.css at the bottom of the very last screen shot.\nDifferent operating systems have different short hands for describing the top level, or hard drive level, of the path. On macOS, it’s simply a / at the beginning of the path. On Windows, it usually begins with C:\\. For the final location of style.css in the screenshot above, the absolute path would be.\n/Users/Display/Documents/html_practice/assets/css/style.css\nIf for some reason I didn’t want to move or copy this stylesheet from this location, and I wanted to link to it from an HTML file saved in some completely different location on my laptop, I could give it this absolute path, and it would find it."
-  },
-  {
-    "objectID": "notes/concepts/02_undersdanding-paths.html#important-note-on-naming",
-    "href": "notes/concepts/02_undersdanding-paths.html#important-note-on-naming",
-    "title": "Understanding Directories",
-    "section": "Important Note on Naming",
-    "text": "Important Note on Naming\nFrom here on out in the course, you should avoid using spaces in any of the files or folders you name. While you can take spaces into account when giving a path, it’s annoying. Instead, I’d recommend using an underscore _, a dash -, or naming files with “camel case”.\n\nmy_file.txt\nmy-file.txt\nmyFile.txt"
-  },
-  {
-    "objectID": "notes/concepts/02_undersdanding-paths.html#important-note-on-using-paths",
-    "href": "notes/concepts/02_undersdanding-paths.html#important-note-on-using-paths",
-    "title": "Understanding Directories",
-    "section": "Important Note on Using Paths",
-    "text": "Important Note on Using Paths\nThere are two crucial things to remember about using paths that can be conceptually difficult when first getting started.\n\nRelative paths always depend on where you’re coming from and where you’re going to. If either my HTML file was in a location I was confused about, or my CSS file was in a location I was confused about, my relative path might not work.\nBoth relative paths and absolute paths depend on how files are organized inside of your own computer. A path copied from an example online, or a professor’s template might not work  if your file structure is different."
-  },
-  {
-    "objectID": "notes/concepts/01_keyboarding.html#single-quotes-vs-backticks",
-    "href": "notes/concepts/01_keyboarding.html#single-quotes-vs-backticks",
-    "title": "“Where is the … key?”",
-    "section": "Single Quotes vs Backticks",
-    "text": "Single Quotes vs Backticks\nIt’s important to distinguish between single quotes: ' and backticks `. They look similar, but aren’t interchangeable.\nThe backtick key is highlighted in the images of the keyboards below, in the top left side.\n\nPCMac"
-  },
-  {
-    "objectID": "notes/concepts/01_keyboarding.html#slash-vs-backslash-.",
-    "href": "notes/concepts/01_keyboarding.html#slash-vs-backslash-.",
-    "title": "“Where is the … key?”",
-    "section": "Slash (/) vs backslash (\\).",
-    "text": "Slash (/) vs backslash (\\).\nThese different symbols will do different things, and aren’t interchangeable!\n\nSlash (/) location\n\nPCMac\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBackslash (\\) location\n\nPCMac"
-  },
-  {
-    "objectID": "notes/concepts/01_keyboarding.html#the-tilde-key.",
-    "href": "notes/concepts/01_keyboarding.html#the-tilde-key.",
-    "title": "“Where is the … key?”",
-    "section": "The tilde ~ key.",
-    "text": "The tilde ~ key.\nTo type the tilde1 key you have to hold Shift+`.\n\nPCMac"
-  },
-  {
-    "objectID": "notes/concepts/01_keyboarding.html#the-caret",
-    "href": "notes/concepts/01_keyboarding.html#the-caret",
-    "title": "“Where is the … key?”",
-    "section": "The caret ^",
-    "text": "The caret ^\nYou can get the caret symbol with Shift+6\n\nPCMac"
-  },
-  {
-    "objectID": "notes/concepts/01_keyboarding.html#the-pipe",
-    "href": "notes/concepts/01_keyboarding.html#the-pipe",
-    "title": "“Where is the … key?”",
-    "section": "The Pipe |",
-    "text": "The Pipe |\nYou can get the pipe, or vertical bar, with Shift+\\.\n\nPCMac"
-  },
-  {
-    "objectID": "notes/concepts/01_keyboarding.html#side-note-smart-quotes",
-    "href": "notes/concepts/01_keyboarding.html#side-note-smart-quotes",
-    "title": "“Where is the … key?”",
-    "section": "Side Note: “Smart Quotes”",
-    "text": "Side Note: “Smart Quotes”\nIf, at some point, you copy-paste text from the internet into your code or a text file, you might wind up with “smart quotes” that make things work weird!\n\n\n\nRegular Quotes\nSmart Quotes\n\n\n\n\n\"regular\"\n“smart”\n\n\n'regular'\n‘smart’\n\n\n\nBe careful not to have smart quotes cropping up in your code or data!"
-  },
-  {
-    "objectID": "notes/concepts/01_keyboarding.html#footnotes",
-    "href": "notes/concepts/01_keyboarding.html#footnotes",
-    "title": "“Where is the … key?”",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nPronunciations include [tɪl.də] and [tɪl.di]↩︎"
-  },
-  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
@@ -238,18 +252,11 @@
     "text": "This is the website for Lin511, Computational Linguistics, taught at the University of Kentucky Spring 2024\n\nAttribution\n\nThe robot emoji in the course logo is modified from Open Emoji (link), licenced CC-BY-SA 4.0. Edited version here(svg).\n\n\n\n\n\nReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {About},\n  url = {https://lin511-2024.github.io/about.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “About.” https://lin511-2024.github.io/about.html."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Computational Linguistics (Spring 2024)",
+    "objectID": "syllabus/schedule.html",
+    "href": "syllabus/schedule.html",
+    "title": "Course Schedule",
     "section": "",
-    "text": "Welcome to the Lin511 Computational Linguistics website. This course is being taught in the University of Kentucky’s Linguistics Department in Spring 2024\nIf you are visiting on a mobile device, site navigation can be found under the “hamburger” at the top.\n\n\n\nReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Computational {Linguistics} {(Spring} 2024)},\n  url = {https://lin511-2024.github.io/},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Computational Linguistics (Spring\n2024).” https://lin511-2024.github.io/."
-  },
-  {
-    "objectID": "notes/concepts/00_glossary.html",
-    "href": "notes/concepts/00_glossary.html",
-    "title": "Glossary",
-    "section": "",
-    "text": "Copy-Paste\n\nCopying text to your computer’s ‘clipboard’ and pasting it into another location.\nCopying can be done many ways, including selecting text with your mouse, right-clicking then selecting ‘copy’, by selecting text and using your computer’s ‘hotkey’ for copying (), or, in the course documents, by clicking on the ‘copy’ icon in most code chunks.\nTo paste, you can either right-click and select ‘Paste’, or use your system’s ‘hotkey’ ().\n\nFind, or \n\nYou can find text in most pages or documents by either typing , then typing in the text you want to find in the dialogue box that pops up.\n\nTab Autocomplete\n\nMany programming applications have “Tab Autocomplete” suggestions that allow you to type in just a few letters of the command, function, or variable you want to use, and then hit Tab.\n\n\n\nReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Glossary},\n  url = {https://lin511-2024.github.io/notes/concepts/00_glossary.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Glossary.” https://lin511-2024.github.io/notes/concepts/00_glossary.html."
+    "text": "Week 1\n\n\n\nDates:\n\nJan 8-12\n\n\n\n\nTopics:\n\nSetup, What is Computational Linguistics?\n\n\n\n\nAlternative Office Hours:\n\n\n\nFriday, Jan 12\n12pm to 2pm\nLinCoLab (Breckinridge, Room10)\n\n\n\n\nReadings\nFollow posted tutorials for setting up our course technology.\n\n\n\nWeek 2-3\n\n\n\nDates:\n\nJan 15-26\n\n\n\n\nTopics:\n\nFiles, Text, Strings, Regular Expressions, Finite State Automata\n\n\n\n\nNo Office Hours for MLK Jr Day.\n\nReadings:\n\nCourse Notes: What is Python\nSLP Chapter 2, section 2.1 (pdf)\nTP Chapter 1\n\n\n\n\nWeek 3\n\n\n\nDates:\n\nJan 22-26\n\n\n\n\nTopics:\n\nText Normalization, Tokenization, Python Variables, Python Functions\n\n\n\n\n\nReadings\n\nSLP Chapter 2, sections 2.2, 2.3, 2.4\nTP, Chapter 2\nTP Chapter 3\nNLTK Book, Chapter 3\n\n\n\n\nWeek 4\n\n\n\nDates:\n\nJan 29 - Feb 02\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 5\n\n\n\nDates:\n\nFeb 05-09\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 6\n\n\n\nDates:\n\nFeb 12 - 16\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 7\n\n\n\nDates:\n\nFeb 19-23\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 8\n\n\n\nDates:\n\nFeb 26 - Mar 01\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 9\n\n\n\nDates:\n\nMar 04-08\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nSpring Break\n\n\n\n\nWeek 10\n\n\n\nDates:\n\nMar 18-22\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 11\n\n\n\nDates:\n\nMar 25-29\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 12\n\n\n\nDates:\n\nApr 01-05\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 13\n\n\n\nDates:\n\nApr 08-12\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 14\n\n\n\nDates:\n\nApr 15-19\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 15\n\n\n\nDates:\n\nApr 22-26\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\n\n\nReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Course {Schedule}},\n  url = {https://lin511-2024.github.io/syllabus/schedule.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Course Schedule.” https://lin511-2024.github.io/syllabus/schedule.html."
   },
   {
     "objectID": "notes/concepts/03_navigating-directories.html",
@@ -343,6 +350,13 @@
     "text": "Footnotes\n\n\nA word is polysemous when it has more than one meaning.↩︎"
   },
   {
+    "objectID": "notes/concepts/00_glossary.html",
+    "href": "notes/concepts/00_glossary.html",
+    "title": "Glossary",
+    "section": "",
+    "text": "Copy-Paste\n\nCopying text to your computer’s ‘clipboard’ and pasting it into another location.\nCopying can be done many ways, including selecting text with your mouse, right-clicking then selecting ‘copy’, by selecting text and using your computer’s ‘hotkey’ for copying (), or, in the course documents, by clicking on the ‘copy’ icon in most code chunks.\nTo paste, you can either right-click and select ‘Paste’, or use your system’s ‘hotkey’ ().\n\nFind, or \n\nYou can find text in most pages or documents by either typing , then typing in the text you want to find in the dialogue box that pops up.\n\nTab Autocomplete\n\nMany programming applications have “Tab Autocomplete” suggestions that allow you to type in just a few letters of the command, function, or variable you want to use, and then hit Tab.\n\n\n\nReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Glossary},\n  url = {https://lin511-2024.github.io/notes/concepts/00_glossary.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Glossary.” https://lin511-2024.github.io/notes/concepts/00_glossary.html."
+  },
+  {
     "objectID": "notes/meetings/00_setup.html",
     "href": "notes/meetings/00_setup.html",
     "title": "Setup Notes",
@@ -357,24 +371,10 @@
     "text": "We’ll need to get our systems setup to work properly with the tools we’ll be using this semester.\n\n\n\n\n\n\nIf you ware using a windows computer, I’ll ask you to install Windows Subsystem for Linux like so:\n\nFollow the tutorial here for enabling and installing WSL\nInstall VS Code\nWork through the first section of this tutorial, stopping after you connect to WSL\n\n\n\n\n\n\n\n\nInstall VS Code\n\n\n\n\n\n\n\n\n\nWe’ll be using a program called pyenv to manage the versions of python we use. To install pyenv, open the VSCode Command Palette (with ) which will open the command line interface. Then,\n\ncopy this line of code code from this page ()\n\n\nbash\n\ncurl https://pyenv.run | bash\n\nPaste it into the terminal (()\nHit enter.\n\nOnce that has successfully finished:\n\n\n\n\n\n\n\nRun this\n\n\nbash\n\nopen ~/.zshrc\n\n\nIf you get an error.\n\n\nRun this\n\n\nbash\n\ntouch ~/.zshrc\nopen ~/.zshrc\n\n\n\n\n\n\n\n\nRun this\n\n\nbash\n\nopen ~/.bashrc\n\n\nIf you get an error\n\n\nRun ths\n\n\nbash\n\ntouch ~/.bashrc\nopen ~/.bashrc\n\n\n\n\n\n\nPaste the following into the window that opens.\n\n\nsh\n\nexport PYENV_ROOT=\"$HOME/.pyenv\"\n[[ -d $PYENV_ROOT/bin ]] && export PATH=\"$PYENV_ROOT/bin:$PATH\"\neval \"$(pyenv init -)\"\n\nSave it\n\n\n\n\nClose and reopen the terminal window\nCopy-Paste the following lines of code\n\n\nbash\n\npyenv install 3.11\npyenv global 3.11\npyenv virtualenv 3.11 Lin511\npyenv activate Lin511\nThis will have installed a recent version of python onto your computer, and created a “virtual environment” for the class.\n\n\n\n\n\n\n\nMake sure you change the email and name to the email and username you use for Github!\n\nIn the terminal, set your git email address:\n\n\nbash\n\ngit config --global user.email \"you@example.com\"\n\nSet your username.\n\n\nbash\n\ngit config --global user.name \"Your Name\"\nThen, follow these tutorials from github:\n\nGenerating a new SSH Key\nAdding your ssh key to github"
   },
   {
-    "objectID": "notes/meetings/02_Paths.html",
-    "href": "notes/meetings/02_Paths.html",
-    "title": "Paths in Python",
+    "objectID": "notes/index.html",
+    "href": "notes/index.html",
+    "title": "Meeting Notes",
     "section": "",
-    "text": "python\n\nfrom pathlib import Path\nPath() will return a relative path to the current directory, which is represented as ..\npython\n\nthis_directory = Path()\nprint(this_directory)\n\n.\nIf we use the .resolve() method on this_directory, we’ll get back the absolute path.\npython\n\nabsolute_path = this_directory.resolve()\nprint(absolute_path)\n\n/workspaces/Lin511-2024.github.io/notes/meetings\nWe can get the path to the directory above from the .parent attribute.\npython\n\nprint(\n    absolute_path.parent\n)\n\n/workspaces/Lin511-2024.github.io/notes\nWe can get a list of all of the files and directories in a directory with the .glob() method. For technical reasons, we need to wrap list() around this.\npython\n\nlist(\n    absolute_path.glob(\"*\")\n)\n\n[PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings/assets'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings/01_Paths.ipynb'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings/00_setup.qmd')]\nYou can get a list of all of the files and folders in the parent directory like so.\npython\n\nlist(\n    absolute_path\\\n        .parent\\\n        .glob(\"*\")\n)\n\n[PosixPath('/workspaces/Lin511-2024.github.io/notes/.gitignore'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/index.qmd')]\nWe can get a list of all of the files and directories in the concepts directory like so.\npython\n\nlist(\n    absolute_path\\\n        .parent\\\n        .joinpath(\"concepts\")\\\n        .glob(\"*\")\n)\n\n[PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/02_undersdanding-paths.qmd'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/assets'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/01_what-is-python.qmd'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/03_navigating-directories.qmd'),\n PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/00_glossary.qmd')]"
-  },
-  {
-    "objectID": "notes/meetings/02_Paths.html#opening-a-file",
-    "href": "notes/meetings/02_Paths.html#opening-a-file",
-    "title": "Paths in Python",
-    "section": "Opening a file",
-    "text": "Opening a file\nWe’re going to read in the text file here\n\n\npython\n\ntext_file_path = Path(\"assets\", \"sample.txt\")\n\nwith text_file_path.open() as file:\n    lines = file.readlines()\n\nprint(lines)\n\n['This is a sample file.\\n', 'It just has text.\\n', 'We can read and print its contents.']"
-  },
-  {
-    "objectID": "syllabus/schedule.html",
-    "href": "syllabus/schedule.html",
-    "title": "Course Schedule",
-    "section": "",
-    "text": "Week 1\n\n\n\nDates:\n\nJan 8-12\n\n\n\n\nTopics:\n\nSetup, What is Computational Linguistics?\n\n\n\n\nAlternative Office Hours:\n\n\n\nFriday, Jan 12\n12pm to 2pm\nLinCoLab (Breckinridge, Room10)\n\n\n\n\nReadings\nFollow posted tutorials for setting up our course technology.\n\n\n\nWeek 2\n\n\n\nDates:\n\nJan 15-19\n\n\n\n\nTopics:\n\nFiles, Text, Strings, Regular Expressions, Finite State Automata\n\n\n\n\nNo Office Hours for MLK Jr Day.\n\nReadings:\n\nCourse Notes: What is Python\nSLP Chapter 2, section 2.1 (pdf)\nTP Chapter 1\n\n\n\n\nWeek 3\n\n\n\nDates:\n\nJan 22-26\n\n\n\n\nTopics:\n\nText Normalization, Tokenization, Python Variables, Python Functions\n\n\n\n\n\nReadings\n\nSLP Chapter 2, sections 2.2, 2.3, 2.4\nTP, Chapter 2\nTP Chapter 3\nNLTK Book, Chapter 3\n\n\n\n\nWeek 4\n\n\n\nDates:\n\nJan 29 - Feb 02\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 5\n\n\n\nDates:\n\nFeb 05-09\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 6\n\n\n\nDates:\n\nFeb 12 - 16\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 7\n\n\n\nDates:\n\nFeb 19-23\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 8\n\n\n\nDates:\n\nFeb 26 - Mar 01\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 9\n\n\n\nDates:\n\nMar 04-08\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nSpring Break\n\n\n\n\nWeek 10\n\n\n\nDates:\n\nMar 18-22\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 11\n\n\n\nDates:\n\nMar 25-29\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 12\n\n\n\nDates:\n\nApr 01-05\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 13\n\n\n\nDates:\n\nApr 08-12\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 14\n\n\n\nDates:\n\nApr 15-19\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\nWeek 15\n\n\n\nDates:\n\nApr 22-26\n\n\n\n\nTopics:\n\nMore\n\n\n\n\n\n\n\n\nReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Course {Schedule}},\n  url = {https://lin511-2024.github.io/syllabus/schedule.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Course Schedule.” https://lin511-2024.github.io/syllabus/schedule.html."
+    "text": "These are the notes for our regular meetings.\n\n\n\n\n\n\n\n\n  \n\n\n\n\nPaths in Python\n\n\n\n\n\n\n\n\n\n\n\n\nJosef Fruehwald\n\n\n\n\n\n\n  \n\n\n\n\nPython basics\n\n\n\n\n\n\n\n\n\n\n\n\nJosef Fruehwald\n\n\n\n\n\n\n  \n\n\n\n\nSetup Notes\n\n\n\n\n\n\n\n\n\n\n\n\nJan 8, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\nNo matching items\n\nReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Meeting {Notes}},\n  url = {https://lin511-2024.github.io/notes},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Meeting Notes.” https://lin511-2024.github.io/notes."
   }
 ]
