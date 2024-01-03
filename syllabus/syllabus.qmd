@@ -166,7 +166,31 @@ I will respond to emails in a timely manner during normal working hours, but it 
 
 The topics and readings listed here are the tentative schedule for the course. We may find, in the room, that some topics will take longer than initially scheduled.
 
-{{< include weeks/_01_week1.qmd >}} {{< include weeks/_02_week2.qmd >}} {{< include weeks/_03_week3.qmd >}} {{< include weeks/_04_week4.qmd >}} {{< include weeks/_05_week5.qmd >}} {{< include weeks/_06_week6.qmd >}} {{< include weeks/_07_week7.qmd >}} {{< include weeks/_08_week8.qmd >}} {{< include weeks/_09_week9.qmd >}}
+{{< include weeks/_01_week1.qmd >}}
+
+----
+
+{{< include weeks/_02_week2.qmd >}} 
+
+----
+
+{{< include weeks/_03_week4.qmd >}} 
+
+----
+
+{{< include weeks/_06_week6.qmd >}} 
+
+----
+
+{{< include weeks/_07_week7.qmd >}} 
+
+----
+
+{{< include weeks/_08_week8.qmd >}} 
+
+----
+
+{{< include weeks/_09_week9.qmd >}}
 
 ------------------------------------------------------------------------
 
