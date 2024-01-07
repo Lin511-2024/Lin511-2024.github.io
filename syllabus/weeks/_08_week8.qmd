@@ -1,17 +1,27 @@
-### Week 8
+### Week 8-9
 
-::: columns
+:::: columns
 ::: {.column width="50%"}
 
-Dates:
+Dates: 
 
-:   Feb 26 - Mar 01
+: Feb 26 - Mar 08
+>>>>>>> f7a679fe707d2e12a721f33e4593f8b279771568
+
 :::
 
 ::: {.column width="50%"}
 
 Topics:
 
-:   More
+: Hidden Markov Models
+
 :::
-:::
+
+::::
+
+#### Readings
+
+- SLP Appendix A: Hidden Markov Models
+- [TP Chapter 11, Dictionaries](https://greenteapress.com/thinkpython2/html/thinkpython2012.html)
+- [TP Chapter 15, Classes and Objects](https://greenteapress.com/thinkpython2/html/thinkpython2016.html)

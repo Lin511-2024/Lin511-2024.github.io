@@ -1,17 +1,26 @@
-### Week 6
+### Week 6-7
 
 ::: columns
 ::: {.column width="50%"}
 
 Dates:
+=======
+Dates: 
 
-:   Feb 12 - 16
+: Feb 12 - 23
 :::
 
 ::: {.column width="50%"}
 
 Topics:
 
-:   More
+: n-grams, Corpora, Document Classification, Python Loops and Conditionals
+
 :::
-:::
+
+::::
+
+#### Readings
+
+- SLP Chapters 3, 4, 5
+

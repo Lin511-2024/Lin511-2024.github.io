@@ -18,4 +18,5 @@ Topics:
 
 #### Readings
 
-Follow posted tutorials for setting up our course technology.
+-   Follow posted tutorials for setting up our course technology.
+-   [TP Chapter 1](https://greenteapress.com/thinkpython2/html/thinkpython2002.html)
