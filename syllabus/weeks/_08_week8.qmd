@@ -23,3 +23,5 @@ Topics:
 #### Readings
 
 - SLP Appendix A: Hidden Markov Models
+- [TP Chapter 11, Dictionaries](https://greenteapress.com/thinkpython2/html/thinkpython2012.html)
+- [TP Chapter 15, Classes and Objects](https://greenteapress.com/thinkpython2/html/thinkpython2016.html)

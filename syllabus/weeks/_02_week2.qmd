@@ -22,4 +22,5 @@ Topics:
 
 -   [Course Notes: What *is* Python](../../notes/concepts/what-is-python.html)
 -   [SLP Chapter 2, section 2.1 (pdf)](https://web.stanford.edu/~jurafsky/slp3/2.pdf)
--   [TP Chapter 1](https://greenteapress.com/thinkpython2/html/thinkpython2002.html)
+-   [TP, Chapter 2, Variables, expressions and statements](https://greenteapress.com/thinkpython2/html/thinkpython2003.html)
+-   [TP Chapter 3, Functions](https://greenteapress.com/thinkpython2/html/thinkpython2004.html)s
