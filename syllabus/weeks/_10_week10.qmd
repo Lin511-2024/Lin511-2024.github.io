@@ -1,17 +1,17 @@
-### Week 10
+### Week 10-11
 
 ::: columns
 ::: {.column width="50%"}
 
 Dates:
 
-:   Mar 18-22
+:   Mar 18-29
 :::
 
 ::: {.column width="50%"}
 
 Topics:
 
-:   More
+:   Parsing, Dependency trees
 :::
 :::

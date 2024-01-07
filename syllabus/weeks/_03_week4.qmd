@@ -12,7 +12,8 @@ Dates:
 
 Topics:
 
-:   Files, Text, Strings, Regular Expressions, Finite State Automata
+:   Text Normalization, Tokenization, Python Variables, Python Functions
+
 :::
 :::
 

@@ -1,17 +1,17 @@
-### Week 12
+### Week 12-13
 
 ::: columns
 ::: {.column width="50%"}
 
 Dates:
 
-:   Apr 01-05
+:   Apr 01-12
 :::
 
 ::: {.column width="50%"}
 
 Topics:
 
-:   More
+:   Distributional semantics, word "embeddings"
 :::
 :::

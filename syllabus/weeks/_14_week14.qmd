@@ -1,4 +1,4 @@
-### Week 14
+### Week 14-15
 
 ::: columns
 ::: {.column width="50%"}
@@ -12,6 +12,6 @@ Dates:
 
 Topics:
 
-:   More
+:   Neural Network Basics, Review
 :::
 :::
