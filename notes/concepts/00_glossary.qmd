@@ -36,8 +36,15 @@ tribble(
 To paste, you can either right-click and select 'Paste', or use your system's 'hotkey' ({{< kbd mac=Command+V win=Control+V linux=Control+V >}}).
   ",
   "Find, or {{< kbd mac=Command+F win=Control+F linux=Control+F >}}", "You can find text in most pages or documents by either typing {{< kbd mac=Command+F win=Control+F linux=Control+F >}}, then typing in the text you want to find in the dialogue box that pops up.",
-  "Tab Autocomplete", "Many programming applications have \"Tab Autocomplete\" suggestions that allow you to type in just a few letters of the command, function, or variable you want to use, and then hit {{< kbd Tab >}}."
-
+  "Tab Autocomplete", "Many programming applications have \"Tab Autocomplete\" suggestions that allow you to type in just a few letters of the command, function, or variable you want to use, and then hit {{< kbd Tab >}}.",
+  
+  "Virtual Machine/VM", "Virtual Machines are simulations of computers. It's like having an encapsulated computer, running its own operating system and programs, that borrows memory and computing resources from computers it's running on.",
+  
+  "GitHub Codespaces", "GitHub Codespaces are a 'development environment', running on a [Virtual Machine](#virtual-machine-vm). They're like mini computers you can access through your web browser that get created just for the repository you launch one in. The actual memory and computation are being run on GitHub's physical computers.",
+  
+  "Local (adj)", "Describes anything that exists or happens on the *actual* device you're interacting with. For example, if you have a Microsoft Word document on your computer that ends in .docx, it is probably 'local' (even if theres a ['remote'](#remote-adj) copy somewhere). These days, it's not always obvious if things happen locally or remotely. If you have a phone that does facial recognition on pictures you take, if the facial recognition program runs *on* your phone, it's 'local'. But if the picture needs to get uploaded to Apple or Google first, then the facial recognition is 'remote'.",
+  
+  "Remote (adj)", "Describes anything that exists or happens on a *different* device than the one you're interacting with. For example, if you edit a Google Doc, the actual document is stored on a Google computer, not on the device you're editing."
 
 ) |>
   arrange(
