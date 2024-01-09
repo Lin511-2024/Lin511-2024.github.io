@@ -33,10 +33,13 @@ tribble(
   
   Copying can be done many ways, including selecting text with your mouse, right-clicking then selecting 'copy', by selecting text and using your computer's 'hotkey' for copying ({{< kbd mac=Command+C win=Control+C, linux=Control+C >}}), or, in the course documents, by clicking on the 'copy' icon in most code chunks.
 
-To paste, you can either right-click and select 'Paste', or use your system's 'hotkey' ({{< kbd mac=Command+V win-Control+V linux=Control+V >}}).
+To paste, you can either right-click and select 'Paste', or use your system's 'hotkey' ({{< kbd mac=Command+V win=Control+V linux=Control+V >}}).
   ",
-  "Find, or {{< kbd mac=Command+F win-Control+F linux=Control+F >}}", "You can find text in most pages or documents by either typing {{< kbd mac=Command+F win-Control+F linux=Control+F >}}, then typing in the text you want to find in the dialogue box that pops up.",
-  "Tab Autocomplete", "Many programming applications have \"Tab Autocomplete\" suggestions that allow you to type in just a few letters of the command, function, or variable you want to use, and then hit {{< kbd Tab >}}.") |>
+  "Find, or {{< kbd mac=Command+F win=Control+F linux=Control+F >}}", "You can find text in most pages or documents by either typing {{< kbd mac=Command+F win=Control+F linux=Control+F >}}, then typing in the text you want to find in the dialogue box that pops up.",
+  "Tab Autocomplete", "Many programming applications have \"Tab Autocomplete\" suggestions that allow you to type in just a few letters of the command, function, or variable you want to use, and then hit {{< kbd Tab >}}."
+
+
+) |>
   arrange(
     Term
   ) |>
