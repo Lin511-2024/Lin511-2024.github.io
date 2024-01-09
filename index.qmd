@@ -3,6 +3,7 @@ title: "Computational Linguistics (Spring 2024)"
 author: 
   name: Josef Fruehwald
   url: https://jofrhwld.github.io/
+image: assets/logo.svg
 ---
 
 Welcome to the Lin511 Computational Linguistics website. This course is being taught in the University of Kentucky's Linguistics Department in Spring 2024

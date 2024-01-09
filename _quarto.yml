@@ -15,6 +15,7 @@ website:
   title: "Lin511-2024"
   favicon: assets/logo.svg
   site-url: https://lin511-2024.github.io
+  open-graph: true
   navbar:
     left:
       - text: "Home"
@@ -23,6 +24,9 @@ website:
         href: notes/index.qmd
       - text: "About"
         href: about.qmd
+    right:
+      - icon: github
+        href: https://github.com/Lin511-2024
   sidebar: 
     - title: "Home"
       logo: assets/logo.svg
