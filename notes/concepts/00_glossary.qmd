@@ -44,7 +44,9 @@ To paste, you can either right-click and select 'Paste', or use your system's 'h
   
   "Local (adj)", "Describes anything that exists or happens on the *actual* device you're interacting with. For example, if you have a Microsoft Word document on your computer that ends in .docx, it is probably 'local' (even if theres a ['remote'](#remote-adj) copy somewhere). These days, it's not always obvious if things happen locally or remotely. If you have a phone that does facial recognition on pictures you take, if the facial recognition program runs *on* your phone, it's 'local'. But if the picture needs to get uploaded to Apple or Google first, then the facial recognition is 'remote'.",
   
-  "Remote (adj)", "Describes anything that exists or happens on a *different* device than the one you're interacting with. For example, if you edit a Google Doc, the actual document is stored on a Google computer, not on the device you're editing."
+  "Remote (adj)", "Describes anything that exists or happens on a *different* device than the one you're interacting with. For example, if you edit a Google Doc, the actual document is stored on a Google computer, not on the device you're editing.",
+  
+  "Clone", "Making a copy of a git repository on another computer, whether [locally](#local-adj) or [remotely](#remote-adj)."
 
 ) |>
   arrange(
