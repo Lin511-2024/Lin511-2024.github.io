@@ -46,7 +46,9 @@ To paste, you can either right-click and select 'Paste', or use your system's 'h
   
   "Remote (adj)", "Describes anything that exists or happens on a *different* device than the one you're interacting with. For example, if you edit a Google Doc, the actual document is stored on a Google computer, not on the device you're editing.",
   
-  "Clone", "Making a copy of a git repository on another computer, whether [locally](#local-adj) or [remotely](#remote-adj)."
+  "Clone", "Making a copy of a git repository on another computer, whether [locally](#local-adj) or [remotely](#remote-adj).",
+  
+  "Formal", "In *computational* linguistics, 'formal' isn't the opposite of 'casual'. It's about any system or language which has a strict set of acceptable symbols, and how they can be combined."
 
 ) |>
   arrange(
