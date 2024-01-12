@@ -1,0 +1,17 @@
+---
+title: "Regular Languages and Finite State Machines"
+categories:
+  - compling
+---
+
+```{mermaid}
+stateDiagram
+  direction LR
+  [*] --> A: "Na"
+  A --> a: "na x 15"
+  a --> B: "Batman!"
+  B --> A: "Na"
+  B --> b: "Batman! x2"
+  b --> A: "Na"
+  B --> [*]
+```
