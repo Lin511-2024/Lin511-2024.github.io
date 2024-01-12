@@ -3,6 +3,8 @@ title: Setup Notes
 date: 2024-01-08
 filters: 
     - codeblocklabel
+categories:
+    - python
 ---
 
 ## Setup
