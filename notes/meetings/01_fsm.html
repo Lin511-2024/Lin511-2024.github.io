@@ -97,6 +97,7 @@ div.csl-indent {
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/quarto-contrib/codenamelabel/codeblocklabel.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -822,6 +823,9 @@ Batman!</p>
 <h3 class="anchored" data-anchor-id="limitations-of-regex">Limitations of RegEx</h3>
 <p>Because Regular Expressions define a finite state automaton, and FSAs can only successfully recognize regular languages, that means you can’t use Regular Expressions (reliably) to recognize any more complex language.</p>
 <p>For example, HTML pages use “tags” to define where text elements begin and end. In this code snippet, the opening <code>&lt;p&gt;</code> tag says a paragraph is beginning, and the closing <code>&lt;/p&gt;</code> says the paragraph is ending. The opening <code>&lt;strong&gt;</code> tag says the text is turning bold, and the closing <code>&lt;/strong&gt;</code> tag says the text is turning regular again.</p>
+<div class="langname">
+<pre class="langname">html</pre>
+</div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  This is a paragraph with </span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;strong&gt;</span></span>
