@@ -75,9 +75,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -228,19 +228,36 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/meetings/00_setup.html" class="sidebar-item-text sidebar-link">
+  <a href="../notes/meetings/01_fsm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Regular Languages and Finite State Machines</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Programming</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notes/programming/00_setup.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Setup Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/meetings/01_Python_basics.html" class="sidebar-item-text sidebar-link">
+  <a href="../notes/programming/01_Python_basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Python basics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/meetings/02_Paths.html" class="sidebar-item-text sidebar-link">
+  <a href="../notes/programming/02_Paths.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Paths in Python</span></a>
   </div>
 </li>
@@ -253,7 +270,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    </div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="compling">compling <span class="quarto-category-count">(1)</span></div><div class="category" data-category="python">python <span class="quarto-category-count">(3)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -293,78 +310,134 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="python" data-listing-file-modified-sort="1705065889361" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="0" data-categories="python" data-listing-date-sort="1704672000000" data-listing-file-modified-sort="1705100405066" data-listing-date-modified-sort="1705100405000" data-listing-reading-time-sort="2">
 <div class="thumbnail">
-<p><a href="../notes/meetings/02_Paths.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+<p><a href="../notes/programming/00_setup.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
 </div>
 <div class="body">
-<a href="../notes/meetings/02_Paths.html">
-<h3 class="no-anchor listing-title">
-Paths in Python
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-<code>Path()</code> will return a relative path to the current directory, which is represented as <code>.</code>.
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="../notes/meetings/02_Paths.html">
-<div class="listing-author">
-Josef Fruehwald
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="python" data-listing-file-modified-sort="1705065889361" data-listing-reading-time-sort="1">
-<div class="thumbnail">
-<p><a href="../notes/meetings/01_Python_basics.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="../notes/meetings/01_Python_basics.html">
-<h3 class="no-anchor listing-title">
-Python basics
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="../notes/meetings/01_Python_basics.html">
-<div class="listing-author">
-Josef Fruehwald
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="python" data-listing-date-sort="1704672000000" data-listing-file-modified-sort="1705065889361" data-listing-date-modified-sort="1705065889000" data-listing-reading-time-sort="2">
-<div class="thumbnail">
-<p><a href="../notes/meetings/00_setup.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="../notes/meetings/00_setup.html">
+<a href="../notes/programming/00_setup.html">
 <h3 class="no-anchor listing-title">
 Setup Notes
 </h3>
 <div class="listing-subtitle">
 
 </div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('python'); return false;">
+python
+</div>
+</div>
+<a href="../notes/programming/00_setup.html">
 <div class="listing-description">
 We’ll need to get our systems setup to work properly with the tools we’ll be using this semester.
 </div>
 </a>
 </div>
 <div class="metadata">
-<a href="../notes/meetings/00_setup.html">
+<a href="../notes/programming/00_setup.html">
 <div class="listing-date">
 Jan 8, 2024
 </div>
+<div class="listing-author">
+Josef Fruehwald
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="compling" data-listing-date-sort="1705363200000" data-listing-file-modified-sort="1705100405066" data-listing-date-modified-sort="1705100405000" data-listing-reading-time-sort="8">
+<div class="thumbnail">
+<p><a href="../notes/meetings/01_fsm.html"> <p class="card-img-top"><img src="meetings/assets/chomsky.png"  class="thumbnail-image card-img"/></p> </a></p>
+</div>
+<div class="body">
+<a href="../notes/meetings/01_fsm.html">
+<h3 class="no-anchor listing-title">
+Regular Languages and Finite State Machines
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('compling'); return false;">
+compling
+</div>
+</div>
+<a href="../notes/meetings/01_fsm.html">
+<div class="listing-description">
+In another class, we might just jump straight into learning about “Regular Expressions”, which are very useful tools for searching for patterns in text.
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="../notes/meetings/01_fsm.html">
+<div class="listing-date">
+Jan 16, 2024
+</div>
+<div class="listing-author">
+Josef Fruehwald
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="python" data-listing-file-modified-sort="1705100405066" data-listing-reading-time-sort="1">
+<div class="thumbnail">
+<p><a href="../notes/programming/01_Python_basics.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
+<div class="body">
+<a href="../notes/programming/01_Python_basics.html">
+<h3 class="no-anchor listing-title">
+Python basics
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('python'); return false;">
+python
+</div>
+</div>
+<a href="../notes/programming/01_Python_basics.html">
+<div class="listing-description">
+
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="../notes/programming/01_Python_basics.html">
+<div class="listing-author">
+Josef Fruehwald
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="python" data-listing-file-modified-sort="1705100405066" data-listing-reading-time-sort="1">
+<div class="thumbnail">
+<p><a href="../notes/programming/02_Paths.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+</div>
+<div class="body">
+<a href="../notes/programming/02_Paths.html">
+<h3 class="no-anchor listing-title">
+Paths in Python
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('python'); return false;">
+python
+</div>
+</div>
+<a href="../notes/programming/02_Paths.html">
+<div class="listing-description">
+<code>Path()</code> will return a relative path to the current directory, which is represented as <code>.</code>.
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="../notes/programming/02_Paths.html">
 <div class="listing-author">
 Josef Fruehwald
 </div>

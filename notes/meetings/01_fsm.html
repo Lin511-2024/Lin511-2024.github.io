@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Josef Fruehwald">
+<meta name="dcterms.date" content="2024-01-16">
 
-<title>Lin511-2024 - What is Python?</title>
+<title>Lin511-2024 - Regular Languages and Finite State Machines</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -55,7 +56,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -77,7 +97,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/quarto-contrib/codenamelabel/codeblocklabel.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -99,15 +118,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles/styles.css">
-<meta property="og:title" content="Lin511-2024 - What is Python?">
+<meta property="og:title" content="Lin511-2024 - Regular Languages and Finite State Machines">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://lin511-2024.github.io/notes/concepts/01_what-is-python_files/figure-html/cell-4-output-1.png">
+<meta property="og:image" content="https://lin511-2024.github.io/notes/meetings/assets/chomsky.png">
 <meta property="og:site-name" content="Lin511-2024">
-<meta property="og:image:height" content="822">
-<meta property="og:image:width" content="1180">
+<meta property="og:image:height" content="463">
+<meta property="og:image:width" content="942">
 </head>
 
 <body class="nav-sidebar floating nav-fixed">
@@ -158,7 +182,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/concepts/00_glossary.html">Concepts</a></li><li class="breadcrumb-item"><a href="../../notes/concepts/01_what-is-python.html">What <em>is</em> Python?</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/meetings/01_fsm.html">Class Meetings</a></li><li class="breadcrumb-item"><a href="../../notes/meetings/01_fsm.html">Regular Languages and Finite State Machines</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -204,7 +228,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notes/concepts/01_what-is-python.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../notes/concepts/01_what-is-python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">What <em>is</em> Python?</span></a>
   </div>
 </li>
@@ -233,7 +257,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notes/meetings/01_fsm.html" class="sidebar-item-text sidebar-link">
+  <a href="../../notes/meetings/01_fsm.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Regular Languages and Finite State Machines</span></a>
   </div>
 </li>
@@ -278,11 +302,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#python-is-set-of-rules-for-a-formal-language" id="toc-python-is-set-of-rules-for-a-formal-language" class="nav-link active" data-scroll-target="#python-is-set-of-rules-for-a-formal-language">📕 Python is set of rules for a formal language</a></li>
-  <li><a href="#python-is-a-program-that-interprets-formal-language-input" id="toc-python-is-a-program-that-interprets-formal-language-input" class="nav-link" data-scroll-target="#python-is-a-program-that-interprets-formal-language-input">🤖 Python is a program that interprets formal language input</a></li>
-  <li><a href="#python-is-an-ecosystem" id="toc-python-is-an-ecosystem" class="nav-link" data-scroll-target="#python-is-an-ecosystem">⛰️ Python is an Ecosystem</a></li>
-  <li><a href="#python-is-a-social-project" id="toc-python-is-a-social-project" class="nav-link" data-scroll-target="#python-is-a-social-project">🧑‍💻 Python is a social project</a></li>
-  <li><a href="#the-polysemy-is-ok" id="toc-the-polysemy-is-ok" class="nav-link" data-scroll-target="#the-polysemy-is-ok">📕, 🤖, ⛰️, 🧑‍💻 The Polysemy is Ok</a></li>
+  <li><a href="#where-were-going" id="toc-where-were-going" class="nav-link active" data-scroll-target="#where-were-going">Where we’re going:</a></li>
+  <li><a href="#formal-language-theory-and-abstract-machines" id="toc-formal-language-theory-and-abstract-machines" class="nav-link" data-scroll-target="#formal-language-theory-and-abstract-machines">“Formal Language Theory” and “Abstract Machines”</a></li>
+  <li><a href="#finite-state-automata" id="toc-finite-state-automata" class="nav-link" data-scroll-target="#finite-state-automata">Finite State Automata</a>
+  <ul>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a>
+  <ul class="collapse">
+  <li><a href="#a-light-switch." id="toc-a-light-switch." class="nav-link" data-scroll-target="#a-light-switch.">A light switch.</a></li>
+  <li><a href="#a-metro-turnstile" id="toc-a-metro-turnstile" class="nav-link" data-scroll-target="#a-metro-turnstile">A metro turnstile</a></li>
+  <li><a href="#a-github-repo" id="toc-a-github-repo" class="nav-link" data-scroll-target="#a-github-repo">A Github Repo!</a></li>
+  <li><a href="#the-batman-theme-song" id="toc-the-batman-theme-song" class="nav-link" data-scroll-target="#the-batman-theme-song">The Batman Theme Song</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#automata-and-formal-grammars" id="toc-automata-and-formal-grammars" class="nav-link" data-scroll-target="#automata-and-formal-grammars">Automata and Formal Grammars</a></li>
+  <li><a href="#returning-to-our-small-formal-language" id="toc-returning-to-our-small-formal-language" class="nav-link" data-scroll-target="#returning-to-our-small-formal-language">Returning to our small formal language</a>
+  <ul>
+  <li><a href="#using-the-grammar-to-generate-a-string" id="toc-using-the-grammar-to-generate-a-string" class="nav-link" data-scroll-target="#using-the-grammar-to-generate-a-string">Using the grammar to generate a string</a></li>
+  <li><a href="#defining-a-fsa-to-recognize-the-language" id="toc-defining-a-fsa-to-recognize-the-language" class="nav-link" data-scroll-target="#defining-a-fsa-to-recognize-the-language">Defining a FSA to recognize the language</a></li>
+  </ul></li>
+  <li><a href="#what-does-this-have-to-do-with-regular-expressions" id="toc-what-does-this-have-to-do-with-regular-expressions" class="nav-link" data-scroll-target="#what-does-this-have-to-do-with-regular-expressions">What does this have to do with “Regular Expressions?”</a>
+  <ul>
+  <li><a href="#limitations-of-regex" id="toc-limitations-of-regex" class="nav-link" data-scroll-target="#limitations-of-regex">Limitations of RegEx</a></li>
+  </ul></li>
+  <li><a href="#some-further-reading" id="toc-some-further-reading" class="nav-link" data-scroll-target="#some-further-reading">Some further reading</a></li>
   </ul>
 </nav>
     </div>
@@ -291,8 +333,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">What <em>is</em> Python?</h1>
-</div>
+<h1 class="title">Regular Languages and Finite State Machines</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">compling</div>
+  </div>
+  </div>
 
 
 
@@ -305,6 +350,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 16, 2024</p>
+    </div>
+  </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
@@ -318,199 +369,503 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>When talking about “Python” or other programming langauges, we often engage in a form of polysemy<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> that can be confusing at first. I’ll try to unpack the different meanings here.</p>
-<section id="python-is-set-of-rules-for-a-formal-language" class="level2">
-<h2 class="anchored" data-anchor-id="python-is-set-of-rules-for-a-formal-language">📕 Python is set of rules for a formal language</h2>
-<p>When we talk about “Python”, one thing we sometimes refer to is an abstract set of rules for a formal language.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<section id="where-were-going" class="level2">
+<h2 class="anchored" data-anchor-id="where-were-going">Where we’re going:</h2>
+<p>In another class, we might just jump straight into learning about “Regular Expressions”, which are very useful tools for searching for patterns in text.</p>
+<p>But since this is <em>Computational</em> Linguistics, we should probably learn about what is “regular” about “regular” expressions, because it’s related to formal language theory!</p>
+</section>
+<section id="formal-language-theory-and-abstract-machines" class="level2">
+<h2 class="anchored" data-anchor-id="formal-language-theory-and-abstract-machines">“Formal Language Theory” and “Abstract Machines”</h2>
+<ul>
+<li><a href="../../notes/concepts/00_glossary.html#formal">Formal</a> Languages are systems of rules (i.e.&nbsp;a formal “grammar”) for combining a set of strictly defined symbols.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-📕 The abstract language
+A small formal language
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>When you say:</p>
-<blockquote class="blockquote">
-<p>I’m learning Python this semester.</p>
-</blockquote>
-<p>You’re talking about the abstract set of rules.</p>
-</div>
-</div>
-<p>We can describe some of these rules in natural language (this isn’t how they’re <em>actually</em> written).</p>
 <ul>
-<li>If a list of values has been assigned to a variable, when the variable’s name is followed <code>[0]</code>, return the first value in the list.</li>
-<li>If <code>print(</code> is followed by a value or variable, which is then followed by <code>)</code>, print the value, or the value assigned to the variable.</li>
-<li>If a <code>#</code> symbol is encountered on a line, ignore everything following it.</li>
+<li><p><span class="math inline">\(\mathcal{L}\)</span> is the language, which is a set that contains all, and only, the possible strings of <span class="math inline">\(\mathcal{L}\)</span>.</p></li>
+<li><p><span class="math inline">\(\Sigma\)</span> is the vocabulary of <span class="math inline">\(\mathcal{L}\)</span>.</p>
+<ul>
+<li><span class="math inline">\(\Sigma = \{a,b\}\)</span></li>
+</ul></li>
+<li><p><span class="math inline">\(\mathcal{N}\)</span> Are the “non-terminal nodes” of <span class="math inline">\(\mathcal{L}\)</span>, of which we have 3.</p>
+<ul>
+<li><span class="math inline">\(\mathcal{N} = \{S, A, B\}\)</span></li>
+</ul></li>
+<li><p><span class="math inline">\(\mathcal{G}\)</span> is the grammar of <span class="math inline">\(\mathcal{L}\)</span>. It contains 4 rules</p>
+<ol type="1">
+<li><p><span class="math inline">\(S \rightarrow aA\)</span></p></li>
+<li><p><span class="math inline">\(A \rightarrow aB\)</span></p></li>
+<li><p><span class="math inline">\(A \rightarrow aA\)</span></p></li>
+<li><p><span class="math inline">\(B \rightarrow b\)</span></p></li>
+</ol></li>
 </ul>
-<p>These rules define very precisely how code should be written, and also define what should be <em>done</em> when certain patterns of code are encountered, but these rules are abstract, and don’t actually <em>do</em> anything.</p>
+<p>With the sets <span class="math inline">\(\mathcal{N}\)</span>, <span class="math inline">\(\mathcal{\Sigma}\)</span>, and <span class="math inline">\(\mathcal{G}\)</span>, can we figure out which strings are, or are <em>not</em> in <span class="math inline">\(\mathcal{L}\)</span>?</p>
+<ul class="task-list">
+<li><p><input type="checkbox"><span class="math inline">\(ab\)</span>?</p></li>
+<li><p><input type="checkbox"><span class="math inline">\(aab\)</span>?</p></li>
+<li><p><input type="checkbox"><span class="math inline">\(b\)</span>?</p></li>
+<li><p><input type="checkbox"><span class="math inline">\(aabb\)</span>?</p></li>
+<li><p><input type="checkbox"><span class="math inline">\(abba\)</span>?</p></li>
+<li><p><input type="checkbox"><span class="math inline">\(cab\)</span>?</p></li>
+</ul>
+</div>
+</div>
+<ul>
+<li>“Automata” and other abstract machines are ways of conceptualizing the possible or necessary computational operations and resources needed for different tasks, like identifying whether or not a string is in a language!</li>
+</ul>
+<p>We’ll start with the least complex<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> machines, “Finite State Automata”</p>
 </section>
-<section id="python-is-a-program-that-interprets-formal-language-input" class="level2">
-<h2 class="anchored" data-anchor-id="python-is-a-program-that-interprets-formal-language-input">🤖 Python is a program that interprets formal language input</h2>
-<p>Simply having a set of abstract rules can be fun, but it’s not so useful if you have no way to actually <em>do</em> things. To make code we write actually do anything, we need to use a program called an <strong>Interpreter</strong>.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
+<section id="finite-state-automata" class="level2">
+<h2 class="anchored" data-anchor-id="finite-state-automata">Finite State Automata</h2>
+<dl>
+<dt>Finite</dt>
+<dd>
+<p>Having a fixed, or <em>non infinite</em> amount of things</p>
+</dd>
+<dt>State</dt>
+<dd>
+<p>The current state, or status, of a system.</p>
+</dd>
+<dt>Automaton</dt>
+<dd>
+<p>A machine</p>
+</dd>
+</dl>
+<p>FSAs have</p>
+<ul>
+<li><p>a fixed number of states</p></li>
+<li><p>a fixed number of <em>inputs</em> they can accept</p></li>
+<li><p>rules about how to change their state given an input.</p></li>
+</ul>
+<section id="examples" class="level3">
+<h3 class="anchored" data-anchor-id="examples">Examples</h3>
+<section id="a-light-switch." class="level4">
+<h4 class="anchored" data-anchor-id="a-light-switch.">A light switch.</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram
+  direction LR
+  state "Off" as off
+  state "On 💡" as on
+  
+  [*] --&gt; off
+  on --&gt; off: switch flip
+  off --&gt; on: switch flip
+</pre>
+</div>
+</div>
+</div>
+</div>
+<dl>
+<dt>States</dt>
+<dd>
+<p>On, Off</p>
+</dd>
+<dt>Inputs</dt>
+<dd>
+<p>switch flip</p>
+</dd>
+</dl>
+</section>
+<section id="a-metro-turnstile" class="level4">
+<h4 class="anchored" data-anchor-id="a-metro-turnstile">A metro turnstile</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram
+  direction LR
+  state "Locked" as l
+  state "Unlocked" as u
+  
+  [*] --&gt; l
+  l --&gt; l: push
+  l --&gt; u: coin
+  u --&gt; u: coin
+  u --&gt; l: push
+</pre>
+</div>
+</div>
+</div>
+</div>
+<dl>
+<dt>states</dt>
+<dd>
+<p>Locked, Unlocked</p>
+</dd>
+<dt>inputs</dt>
+<dd>
+<p>coin, push</p>
+</dd>
+</dl>
+</section>
+<section id="a-github-repo" class="level4">
+<h4 class="anchored" data-anchor-id="a-github-repo">A Github Repo!</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram
+  state "Local Synced with Remote" as s
+  state "Unstaged Changes" as us
+  state "All changes staged" as st
+  state "No uncommitted changes" as com
+  [*] --&gt; s
+  s --&gt; us: Editing &amp; Saving
+  us --&gt; us: Editing &amp; Saving
+  us --&gt; st: Staging all changes
+  st --&gt; us: Editing &amp; Saving
+  st --&gt; com: Committing
+  com --&gt; us: Editing &amp; Saving
+  com --&gt; s: Push
+</pre>
+</div>
+</div>
+</div>
+</div>
+<dl>
+<dt>states</dt>
+<dd>
+<p>Local Synced with Remote, Unstaged Changes, All Changes Staged, No Uncommitted Changes</p>
+</dd>
+<dt>inputs</dt>
+<dd>
+<p>Editing &amp; Saving, Staging all Changes, Committing, Push</p>
+</dd>
+</dl>
+</section>
+<section id="the-batman-theme-song" class="level4">
+<h4 class="anchored" data-anchor-id="the-batman-theme-song">The Batman Theme Song</h4>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-🤖 The Python Interpreter
+Batman!
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>When you say</p>
-<blockquote class="blockquote">
-<p>I’m having a hard time installing Python.</p>
-</blockquote>
-<p>you’re talking about a Python Interpreter.</p>
+<p>Na na na na na na na na na na na na<br>
+Batman!<br>
+Na na na na na na na na na na na na<br>
+Batman!<br>
+Na na na na na na na na na na na na<br>
+Batman!<br>
+Na na na na na na na na na na na na<br>
+Batman!<br>
+Na na na na na na na na na na na na<br>
+Batman! Batman! Batman!<br>
+Na na na na na na na na na na na na<br>
+Batman!</p>
 </div>
 </div>
-<p>The Python interpreter processes code, determines whether or not it is valid, then does the things the code told it to do.</p>
-<p>Code can get passed to the interpreter many different ways, including</p>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram
+  direction LR
+  [*] --&gt; a: Na
+  a --&gt; b: na
+  b --&gt; c: na
+  c --&gt; d: na
+  d --&gt; e: na
+  e --&gt; f: na
+  f --&gt; g: na
+  g --&gt; h: na
+  h --&gt; i: na
+  i --&gt; j: na
+  j --&gt; k: na
+  k --&gt; l: na
+  l --&gt; batman1: Batman!
+  batman1 --&gt; a: Na
+  batman1 --&gt; batman2: Batman!
+  batman2 --&gt; batman3: Batman!
+  batman3 --&gt; a: Na
+  batman1 --&gt; [*]: ε
+</pre>
+</div>
+</div>
+</div>
+</div>
+<dl>
+<dt>States</dt>
+<dd>
+<p>a-l, batman1, batman2, batman3</p>
+</dd>
+<dt>Inputs</dt>
+<dd>
+<p>Na, na, Batman!</p>
+</dd>
+</dl>
+</section>
+</section>
+</section>
+<section id="automata-and-formal-grammars" class="level2">
+<h2 class="anchored" data-anchor-id="automata-and-formal-grammars">Automata and Formal Grammars</h2>
+<p>If you have</p>
 <ul>
-<li>In a single text file, called a python “script”, (usually named to end in <code>.py</code>)</li>
-<li>In an interactive python “shell”.</li>
-<li>Inside a Jupyter notebook.</li>
+<li>some formal Grammar <span class="math inline">\(\mathcal{G}\)</span></li>
 </ul>
-<p>For example, the text in the shaded block below was passed to a Python interpreter, and the interpreter decided that it was invalid (because there is an opening quote <code>"</code>, but not a closing quote).</p>
-<div class="cell" data-filename="Python Code" data-execution_count="1">
-<div class="langname">
-<pre class="langname">python</pre>
-</div>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">"x</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<pre><code>SyntaxError: unterminated string literal (detected at line 1) (20073044.py, line 1)</code></pre>
-</div>
-</div>
-<p>The text in this next shaded block was passed to a Python interpreter. This time, it was deemed valid, and the interpreter did what the code instructed.</p>
-<div class="cell" data-execution_count="2">
-<div class="langname">
-<pre class="langname">python</pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"hello! "</span> <span class="op">*</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>hello! hello! hello! </code></pre>
-</div>
+<p>that you use to generate</p>
+<ul>
+<li>the strings of language <span class="math inline">\(\mathcal{L}\)</span></li>
+</ul>
+<p>There is <em>some</em> Automaton (maybe <em>not</em> a finite state automaton!) that can decide whether nor not a string is in <span class="math inline">\(\mathcal{L}\)</span> or not.</p>
+<p>This relationship between automata of various complexity and formal grammars/languages is called the “Chomsky Hierarchy.”</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/chomsky.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
 </div>
 </section>
-<section id="python-is-an-ecosystem" class="level2">
-<h2 class="anchored" data-anchor-id="python-is-an-ecosystem">⛰️ Python is an Ecosystem</h2>
-<p>People often say that Python comes “with batteries included”, meaning it can do a lot of different things out without needing to install any extensions. But you <em>can</em> install extensions in the form of additional libraries that extend Python’s capabilities.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-⛰️ The Ecosystem
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>When someone says</p>
-<blockquote class="blockquote">
-<p>Python is the most widely used language in natural language processing.</p>
-</blockquote>
-<p>They are talking about the <em>ecosystem</em> of libraries for Python hat have been built to do natural language processing.</p>
-</div>
-</div>
-<p>Some examples of additional libraries for Python are</p>
+<section id="returning-to-our-small-formal-language" class="level2">
+<h2 class="anchored" data-anchor-id="returning-to-our-small-formal-language">Returning to our small formal language</h2>
+<p>Here’s the grammar rules we had for our grammar</p>
 <ul>
-<li><code>numpy</code>: Allows for effective computation with numbers</li>
-<li><code>matplotlib</code>: Makes graphs</li>
+<li><p><span class="math inline">\(\mathcal{G}\)</span> is the grammar of <span class="math inline">\(\mathcal{L}\)</span>. It contains 4 rules</p>
+<ol type="1">
+<li><p><span class="math inline">\(S \rightarrow aA\)</span></p></li>
+<li><p><span class="math inline">\(A \rightarrow aB\)</span></p></li>
+<li><p><span class="math inline">\(A \rightarrow aA\)</span></p></li>
+<li><p><span class="math inline">\(B \rightarrow b\)</span></p></li>
+</ol></li>
 </ul>
-<div class="cell" data-execution_count="3">
-<div class="langname">
-<pre class="langname">python</pre>
+<section id="using-the-grammar-to-generate-a-string" class="level3">
+<h3 class="anchored" data-anchor-id="using-the-grammar-to-generate-a-string">Using the grammar to generate a string</h3>
+<p>We can build up a string by choosing rules and applying them</p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p>Start</p>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  S
+</pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span> <span class="op">*</span> np.pi, <span class="dv">200</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.sin(x)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>ax.plot(x, y)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="01_what-is-python_files/figure-html/cell-4-output-1.png" class="" width="590" height="411"></p>
 </div>
 </div>
+</div>
+</div>
+</div>
+<hr>
+<div class="columns">
+<div class="column" style="width:30%;">
+<ol type="1">
+<li><span class="math inline">\(S\rightarrow aA\)</span></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  S --&gt; a1["a"]
+  S --&gt; A1["A"]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
+<div class="columns">
+<div class="column" style="width:30%;">
+<ol start="3" type="1">
+<li><span class="math inline">\(A \rightarrow aA\)</span></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  S --&gt; a1["a"]
+  S --&gt; A1["A"]
+  A1 --&gt; a2["a"]
+  A1 --&gt; A3["A"]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
+<div class="columns">
+<div class="column" style="width:30%;">
+<ol start="2" type="1">
+<li><span class="math inline">\(A \rightarrow aB\)</span></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  S --&gt; a1["a"]
+  S --&gt; A1["A"]
+  A1 --&gt; a2["a"]
+  A1 --&gt; A2["A"]
+  A2 --&gt; a3["a"]
+  A2 --&gt; B
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
+<div class="columns">
+<div class="column" style="width:30%;">
+<ol start="4" type="1">
+<li><span class="math inline">\(B \rightarrow b\)</span></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  S --&gt; a1["a"]
+  S --&gt; A1["A"]
+  A1 --&gt; a2["a"]
+  A1 --&gt; A2["A"]
+  A2 --&gt; a3["a"]
+  A2 --&gt; B
+  B --&gt; b
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
+<p>Result: <span class="math inline">\(aaab\)</span></p>
 </section>
-<section id="python-is-a-social-project" class="level2">
-<h2 class="anchored" data-anchor-id="python-is-a-social-project">🧑‍💻 Python is a social project</h2>
-<p>The meanings of “Python” we’ve already talked about are</p>
+<section id="defining-a-fsa-to-recognize-the-language" class="level3">
+<h3 class="anchored" data-anchor-id="defining-a-fsa-to-recognize-the-language">Defining a FSA to recognize the language</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram
+  direction LR
+  
+  [*]--&gt;p
+  p --&gt; q: a
+  q --&gt; q: a
+  q --&gt; [*]: b
+  
+</pre>
+</div>
+</div>
+</div>
+</div>
 <ul>
-<li>📕 The abstract language</li>
-<li>🤖 The Python Interpreter</li>
-<li>⛰️ The Python Ecosystem</li>
+<li><p>If we take strings, generated by <span class="math inline">\(\mathcal{G}\)</span> and feed them to this FSA one-by-one, we should arrive at the “accepting” state without any symbols left over.</p></li>
+<li><p>If we take a string, generated by some unknown grammar, pass it through this FSA, and arrive at the “accepting” state without any symbols left over, then it <em>could</em> have been generated by <span class="math inline">\(\mathcal{G}\)</span>.</p></li>
+<li><p>If we take a string, and pass it through this FSA, and either never get to the accepting state, or have symbols left over, then it <em>couldn’t</em> have been generated by <span class="math inline">\(\mathcal{G}\)</span>, and isn’t in <span class="math inline">\(\mathcal{L}\)</span>.</p></li>
 </ul>
-<p>Understanding how to put all of these pieces together effectively is a <em>social</em> project.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+</section>
+</section>
+<section id="what-does-this-have-to-do-with-regular-expressions" class="level2">
+<h2 class="anchored" data-anchor-id="what-does-this-have-to-do-with-regular-expressions">What does this have to do with “Regular Expressions?”</h2>
+<p>“Regular Expressions” are a concise, computery way to define finite state automata that take text as input strings and return matches. That is, regular expressions can identify strings that belong to “regular” languages.</p>
+<p>We’ll talk about details later, but if I wasn’t sure of someone was using British spelling or American spelling, I could write a RegEx to match either <code>color</code> or <code>colour</code>.</p>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p><code>colou?r</code></p>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram
+  direction LR
+  [*] --&gt; 1
+  1 --&gt; 2: c
+  2 --&gt; 3: o
+  3 --&gt; 4: l
+  4 --&gt; 5: o
+  5 --&gt; 6: u
+  5 --&gt; [*]: r
+  6 --&gt; [*]: r
+</pre>
 </div>
-<div class="callout-title-container flex-fill">
-🧑‍💻 The social project
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>When you say</p>
-<blockquote class="blockquote">
-<p>So-n-so is really good at Python.</p>
-</blockquote>
-<p>You are talking about their involvement in the Python social project.</p>
 </div>
 </div>
+</div>
+<section id="limitations-of-regex" class="level3">
+<h3 class="anchored" data-anchor-id="limitations-of-regex">Limitations of RegEx</h3>
+<p>Because Regular Expressions define a finite state automaton, and FSAs can only successfully recognize regular languages, that means you can’t use Regular Expressions (reliably) to recognize any more complex language.</p>
+<p>For example, HTML pages use “tags” to define where text elements begin and end. In this code snippet, the opening <code>&lt;p&gt;</code> tag says a paragraph is beginning, and the closing <code>&lt;/p&gt;</code> says the paragraph is ending. The opening <code>&lt;strong&gt;</code> tag says the text is turning bold, and the closing <code>&lt;/strong&gt;</code> tag says the text is turning regular again.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  This is a paragraph with </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;strong&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    bold text</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/strong&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  .</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/p&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>❌ There is no part of the 📕 <em>abstract language</em> that will inform you that there is a very good Python library for doing a certain task.</li>
-<li>❌ The 🤖 <em>Python Interpreter</em> won’t tell you that there’s a better way to do what you’re trying to do.</li>
-<li>❌ There are nearly <a href="https://pypi.org/">half a million libraries on ⛰️ <em>the Python Package Index</em></a>, so you can’t just peruse it to find what’s relevant.</li>
+<li><p>For an html page to be valid, every opening tag, <code>&lt;tag&gt;</code> needs to have a matching closing tag <code>&lt;/tag&gt;</code>.</p></li>
+<li><p>You you can embed another opening and closing tag set within another opening and closing tag set.</p></li>
+<li><p>This kind of long distance “bracket matching”, where you can have intervening brackets, requires at least a push-down automaton to recognize.</p></li>
+<li><p>That means html is a context-sensitive language.</p></li>
+<li><p><a href="https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags/1732454#1732454">You cannot use RegEx to successfully validate html.</a></p></li>
 </ul>
-<p>In order to know newest or most effective way to do things, you need to be involved in 🧑‍💻 <em>the social project</em>. That begins within a classroom, then extends to keeping up with blogs and other discourses about changes and developments.</p>
-<p>One way people demonstrate that they are involved in the Python social project is by writing their code <em>idiomatically</em>. For example, in the code block above, I included the line <code>import numpy as np</code>. But <em>there’s no rule</em> that we import <code>numpy</code> as <code>np</code>, it’s simply convention.</p>
-<p>This code below will run just as well, but would cause problems for people trying to read your code, because it’s not idiomatic.</p>
-<div class="cell" data-execution_count="4">
-<div class="langname">
-<pre class="langname">python</pre>
-</div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> jokes</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> farts</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> farts.linspace(<span class="dv">0</span>, <span class="dv">2</span> <span class="op">*</span> farts.pi, <span class="dv">200</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> farts.sin(x)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> jokes.subplots()</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>ax.plot(x, y)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>jokes.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="01_what-is-python_files/figure-html/cell-5-output-1.png" class="" width="590" height="411"></p>
-</div>
-</div>
 </section>
-<section id="the-polysemy-is-ok" class="level2">
-<h2 class="anchored" data-anchor-id="the-polysemy-is-ok">📕, 🤖, ⛰️, 🧑‍💻 The Polysemy is Ok</h2>
-<p>It’s ok just say “Python” when you’re talking about one specific meaning.</p>
+</section>
+<section id="some-further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="some-further-reading">Some further reading</h2>
+<p><span class="citation" data-cites="jäger2012">Jäger and Rogers (<a href="#ref-jäger2012" role="doc-biblioref">2012</a>)</span></p>
+
 
 
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-jäger2012" class="csl-entry" role="listitem">
+Jäger, Gerhard, and James Rogers. 2012. <span>“Formal Language Theory: Refining the Chomsky Hierarchy.”</span> <em>Philosophical Transactions of the Royal Society B: Biological Sciences</em> 367 (1598): 1956–70. <a href="https://doi.org/10.1098/rstb.2012.0077">https://doi.org/10.1098/rstb.2012.0077</a>.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>A word is polysemous when it has more than one meaning.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Complex in the sense of what they can <em>do</em>, not necessarily how easy it is to understand them.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald,
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
   author = {Fruehwald, Josef},
-  title = {What *Is* {Python?}},
-  url = {https://lin511-2024.github.io/notes/concepts/01_what-is-python.html},
+  title = {Regular {Languages} and {Finite} {State} {Machines}},
+  date = {2024-01-16},
+  url = {https://lin511-2024.github.io/notes/meetings/01_fsm.html},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald" class="csl-entry quarto-appendix-citeas" role="listitem">
-Fruehwald, Josef. n.d. <span>“What *Is* Python?”</span> <a href="https://lin511-2024.github.io/notes/concepts/01_what-is-python.html">https://lin511-2024.github.io/notes/concepts/01_what-is-python.html</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Fruehwald, Josef. 2024. <span>“Regular Languages and Finite State
+Machines.”</span> January 16, 2024. <a href="https://lin511-2024.github.io/notes/meetings/01_fsm.html">https://lin511-2024.github.io/notes/meetings/01_fsm.html</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
