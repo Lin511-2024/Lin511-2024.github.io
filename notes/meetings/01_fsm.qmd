@@ -401,6 +401,8 @@ For example, HTML pages use "tags" to define where text elements begin and end. 
 
 -   For an html page to be valid, every opening tag, `<tag>` needs to have a matching closing tag `</tag>`.
 
+-   You can't have a closing tag `</tag>` without a preceding opening `<tag>`.
+
 -   You you can embed another opening and closing tag set within another opening and closing tag set.
 
 -   This kind of long distance "bracket matching", where you can have intervening brackets, requires at least a push-down automaton to recognize.
