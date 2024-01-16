@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Josef Fruehwald">
-<meta name="dcterms.date" content="2024-01-08">
+<meta name="dcterms.date" content="2024-01-16">
 
-<title>Lin511-2024 - Setup Notes</title>
+<title>Lin511-2024 - FSA in-class notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -79,8 +45,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="../../site_libs/quarto-contrib/codenamelabel/codeblocklabel.css" rel="stylesheet">
-<script src="../../site_libs/quarto-contrib/kbd/kbd.js"></script>
-<link href="../../site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -102,10 +66,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../../styles/styles.css">
-<meta property="og:title" content="Lin511-2024 - Setup Notes">
+<meta property="og:title" content="Lin511-2024 - FSA in-class notes">
 <meta property="og:description" content="">
 <meta property="og:site-name" content="Lin511-2024">
 </head>
@@ -158,7 +125,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/programming/00_setup.html">Programming</a></li><li class="breadcrumb-item"><a href="../../notes/programming/00_setup.html">Setup Notes</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/meetings/01_fsm.html">Class Meetings</a></li><li class="breadcrumb-item"><a href="../../notes/meetings/01-1_fsm_addenda.html">FSA in-class notes</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -239,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notes/meetings/01-1_fsm_addenda.html" class="sidebar-item-text sidebar-link">
+  <a href="../../notes/meetings/01-1_fsm_addenda.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">FSA in-class notes</span></a>
   </div>
 </li>
@@ -256,7 +223,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notes/programming/00_setup.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../notes/programming/00_setup.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Setup Notes</span></a>
   </div>
 </li>
@@ -284,28 +251,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a>
-  <ul>
-  <li><a href="#vscode-and-the-command-line" id="toc-vscode-and-the-command-line" class="nav-link" data-scroll-target="#vscode-and-the-command-line">VSCode and The Command Line</a></li>
-  <li><a href="#python" id="toc-python" class="nav-link" data-scroll-target="#python">Python</a>
-  <ul class="collapse">
-  <li><a href="#pyenv" id="toc-pyenv" class="nav-link" data-scroll-target="#pyenv">pyenv</a></li>
-  <li><a href="#installing-python" id="toc-installing-python" class="nav-link" data-scroll-target="#installing-python">Installing Python</a></li>
-  <li><a href="#installing-some" id="toc-installing-some" class="nav-link" data-scroll-target="#installing-some">Installing some</a></li>
-  </ul></li>
-  <li><a href="#git-github-configuration" id="toc-git-github-configuration" class="nav-link" data-scroll-target="#git-github-configuration">Git &amp; Github Configuration</a></li>
-  </ul></li>
+  <li><a href="#finite-state-automata-and-regex" id="toc-finite-state-automata-and-regex" class="nav-link active" data-scroll-target="#finite-state-automata-and-regex">Finite State Automata and RegEx</a></li>
+  <li><a href="#the-regex-for-batman" id="toc-the-regex-for-batman" class="nav-link" data-scroll-target="#the-regex-for-batman">The RegEx for Batman</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Lin511-2024/Lin511-2024.github.io/blob/main/notes/programming/00_setup.qmd" class="toc-action">View source</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Lin511-2024/Lin511-2024.github.io/blob/main/notes/meetings/01-1_fsm_addenda.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Setup Notes</h1>
+<h1 class="title">FSA in-class notes</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">python</div>
+    <div class="quarto-category">compling</div>
   </div>
   </div>
 
@@ -323,7 +281,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 8, 2024</p>
+      <p class="date">January 16, 2024</p>
     </div>
   </div>
   
@@ -339,174 +297,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="setup" class="level2">
-<h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<p>We’ll need to get our systems setup to work properly with the tools we’ll be using this semester.</p>
-<section id="vscode-and-the-command-line" class="level3">
-<h3 class="anchored" data-anchor-id="vscode-and-the-command-line">VSCode and The Command Line</h3>
-<div class="columns">
-<div class="column" style="width:45%;">
-<section id="windows-users" class="level4">
-<h4 class="anchored" data-anchor-id="windows-users">Windows Users</h4>
-<p>If you ware using a windows computer, I’ll ask you to install Windows Subsystem for Linux like so:</p>
-<ul class="task-list">
-<li><input type="checkbox"><a href="https://lingmethodshub.github.io/content/windows/wsl/00_installing_wsl.html">Follow the tutorial here for enabling and installing WSL</a></li>
-<li><input type="checkbox"><a href="https://code.visualstudio.com/">Install VS Code</a></li>
-<li><input type="checkbox"><a href="https://code.visualstudio.com/docs/remote/wsl-tutorial#_prerequisites">Work through the first section of this tutorial, stopping after you connect to WSL</a></li>
-</ul>
-</section>
-</div><div class="column" style="width:10%;">
+<section id="finite-state-automata-and-regex" class="level2">
+<h2 class="anchored" data-anchor-id="finite-state-automata-and-regex">Finite State Automata and RegEx</h2>
+<p><code>ok(a+y)?</code></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram
+    direction LR
+    [*] --&gt; 1
+    1 --&gt; 2: o
+    2 --&gt; 3: k
 
-</div><div class="column" style="width:45%;">
-<section id="macoslinux-users" class="level4">
-<h4 class="anchored" data-anchor-id="macoslinux-users">MacOS/Linux Users</h4>
-<ul class="task-list">
-<li><input type="checkbox"><a href="https://code.visualstudio.com/">Install VS Code</a></li>
-</ul>
-</section>
-</div>
-</div>
-</section>
-<section id="python" class="level3">
-<h3 class="anchored" data-anchor-id="python">Python</h3>
-<section id="pyenv" class="level4">
-<h4 class="anchored" data-anchor-id="pyenv">pyenv</h4>
-<p>We’ll be using a program called <code>pyenv</code> to manage the versions of python we use. To install <code>pyenv</code>, open the VSCode Command Palette (with <kbd data-windows="Shift+Control+P" data-mac="Shift+Command+P" data-linux="Shift+Control+P"></kbd>) which will open the command line interface. Then,</p>
-<ul class="task-list">
-<li><input type="checkbox">copy this line of code code from this page (<kbd data-windows="Control+C," data-mac="Command+C" data-linux="Control+C"></kbd>)</li>
-</ul>
-<div class="langname">
-<pre class="langname">bash</pre>
-</div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> https://pyenv.run <span class="kw">|</span> <span class="fu">bash</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul class="task-list">
-<li><input type="checkbox">Paste it into the terminal ((<kbd data-windows="Control+V," data-mac="Command+V" data-linux="Control+V"></kbd>)</li>
-<li><input type="checkbox">Hit enter.</li>
-</ul>
-<p>Once that has successfully finished:</p>
-<hr>
-</section>
-<div class="columns">
-<div class="column" style="width:45%;">
-<section id="macos-users" class="level4">
-<h4 class="anchored" data-anchor-id="macos-users">MacOS Users</h4>
-<ul class="task-list">
-<li><input type="checkbox">Run this</li>
-</ul>
-<div class="langname">
-<pre class="langname">bash</pre>
-</div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> ~/.zshrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<details>
-<summary>
-If you get an error.
-</summary>
-<ul class="task-list">
-<li><input type="checkbox">Run this</li>
-</ul>
-<div class="langname">
-<pre class="langname">bash</pre>
-</div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> ~/.zshrc</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> ~/.zshrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</section>
-</div><div class="column" style="width:10%;">
+    3 --&gt; group1
 
-</div><div class="column" style="width:45%;">
-<section id="wsl-users" class="level4">
-<h4 class="anchored" data-anchor-id="wsl-users">WSL users</h4>
-<ul class="task-list">
-<li><input type="checkbox">Run this</li>
-</ul>
-<div class="langname">
-<pre class="langname">bash</pre>
+    state group1{
+        [*] --&gt; 4
+        4 --&gt; 4: a
+        4 --&gt; [*]: y
+    }
+    group1 --&gt; [*]: ε
+
+    3 --&gt; [*]: ε
+</pre>
 </div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> ~/.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<details>
-<summary>
-If you get an error
-</summary>
-<ul class="task-list">
-<li><input type="checkbox">Run ths</li>
-</ul>
-<div class="langname">
-<pre class="langname">bash</pre>
 </div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> ~/.bashrc</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">open</span> ~/.bashrc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+</div>
+</div>
 </section>
-</div>
-</div>
-<hr>
-<ul class="task-list">
-<li><input type="checkbox">Paste the following into the window that opens.</li>
-</ul>
+<section id="the-regex-for-batman" class="level2">
+<h2 class="anchored" data-anchor-id="the-regex-for-batman">The RegEx for Batman</h2>
 <div class="langname">
-<pre class="langname">sh</pre>
+<pre class="langname">regex</pre>
 </div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PYENV_ROOT</span><span class="op">=</span><span class="st">"</span><span class="va">$HOME</span><span class="st">/.pyenv"</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">[[</span> <span class="ot">-d</span> <span class="va">$PYENV_ROOT</span>/bin <span class="kw">]]</span> <span class="kw">&amp;&amp;</span> <span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="st">"</span><span class="va">$PYENV_ROOT</span><span class="st">/bin:</span><span class="va">$PATH</span><span class="st">"</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> <span class="st">"</span><span class="va">$(</span><span class="ex">pyenv</span> init <span class="at">-</span><span class="va">)</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul class="task-list">
-<li><input type="checkbox">Save it</li>
-</ul>
-<section id="installing-python" class="level4">
-<h4 class="anchored" data-anchor-id="installing-python">Installing Python</h4>
-<ul class="task-list">
-<li><input type="checkbox">Close and reopen the terminal window</li>
-<li><input type="checkbox">Copy-Paste the following lines of code</li>
-</ul>
-<div class="langname">
-<pre class="langname">bash</pre>
-</div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pyenv</span> install 3.11</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pyenv</span> global 3.11</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pyenv</span> virtualenv 3.11 Lin511</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pyenv</span> activate Lin511</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This will have installed a recent version of python onto your computer, and created a “virtual environment” for the class.</p>
-</section>
-<section id="installing-some" class="level4">
-<h4 class="anchored" data-anchor-id="installing-some">Installing some</h4>
-</section>
-</section>
-<section id="git-github-configuration" class="level3">
-<h3 class="anchored" data-anchor-id="git-github-configuration">Git &amp; Github Configuration</h3>
-<p><strong>Make sure you change the email and name to the email and username you use for Github!</strong></p>
-<ul class="task-list">
-<li><input type="checkbox">In the terminal, set your git email address:</li>
-</ul>
-<div class="langname">
-<pre class="langname">bash</pre>
-</div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"you@example.com"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul class="task-list">
-<li><input type="checkbox">Set your username.</li>
-</ul>
-<div class="langname">
-<pre class="langname">bash</pre>
-</div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Your Name"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Then, follow these tutorials from github:</p>
-<ul class="task-list">
-<li><input type="checkbox"><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Generating a new SSH Key</a></li>
-<li><input type="checkbox"><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Adding your ssh key to github</a></li>
-</ul>
+<pre class="regex"><code>Na (na){15} Batman!( Batman! Batman!)?</code></pre>
 
 
-</section>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
   author = {Fruehwald, Josef},
-  title = {Setup {Notes}},
-  date = {2024-01-08},
-  url = {https://lin511-2024.github.io/notes/programming/00_setup.html},
+  title = {FSA in-Class Notes},
+  date = {2024-01-16},
+  url = {https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html},
   langid = {en}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2024" class="csl-entry quarto-appendix-citeas" role="listitem">
-Fruehwald, Josef. 2024. <span>“Setup Notes.”</span> January 8, 2024. <a href="https://lin511-2024.github.io/notes/programming/00_setup.html">https://lin511-2024.github.io/notes/programming/00_setup.html</a>.
+Fruehwald, Josef. 2024. <span>“FSA in-Class Notes.”</span> January 16,
+2024. <a href="https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html">https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
