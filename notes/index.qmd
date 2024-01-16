@@ -6,6 +6,11 @@ listing:
       - meetings
       - programming
     sort: [date, file]
+    feed:
+      items: 20
+      type: full
+      title: "Lin511 Course Notes"
+      language: en
 ---
 
-These are the notes for our regular meetings.
+These are the notes for our regular meetings. [{{< fa rss >}}](index.xml)
