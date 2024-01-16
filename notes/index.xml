@@ -1,0 +1,1195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Lin511 Course Notes</title>
+<link>https://lin511-2024.github.io/notes/index.html</link>
+<atom:link href="https://lin511-2024.github.io/notes/index.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<language>en</language>
+<generator>quarto-1.3.450</generator>
+<lastBuildDate>Tue, 16 Jan 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Regular Languages and Finite State Machines</title>
+  <dc:creator>Josef Fruehwald</dc:creator>
+  <link>https://lin511-2024.github.io/notes/meetings/01_fsm.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="where-were-going" class="level2">
+<h2 class="anchored" data-anchor-id="where-were-going">Where we’re going:</h2>
+<p>In another class, we might just jump straight into learning about “Regular Expressions”, which are very useful tools for searching for patterns in text.</p>
+<p>But since this is <em>Computational</em> Linguistics, we should probably learn about what is “regular” about “regular” expressions, because it’s related to formal language theory!</p>
+</section>
+<section id="formal-language-theory-and-abstract-machines" class="level2">
+<h2 class="anchored" data-anchor-id="formal-language-theory-and-abstract-machines">“Formal Language Theory” and “Abstract Machines”</h2>
+<ul>
+<li><a href="../../notes/concepts/00_glossary.html#formal">Formal</a> Languages are systems of rules (i.e.&nbsp;a formal “grammar”) for combining a set of strictly defined symbols.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+A small formal language
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%7D"> is the language, which is a set that contains all, and only, the possible strings of <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%7D">.</p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?%5CSigma"> is the vocabulary of <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%7D">.</p>
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?%5CSigma%20=%20%5C%7Ba,b%5C%7D"></li>
+</ul></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BN%7D"> Are the “non-terminal nodes” of <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%7D">, of which we have 3.</p>
+<ul>
+<li><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BN%7D%20=%20%5C%7BS,%20A,%20B%5C%7D"></li>
+</ul></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BG%7D"> is the grammar of <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%7D">. It contains 4 rules</p>
+<ol type="1">
+<li><p><img src="https://latex.codecogs.com/png.latex?S%20%5Crightarrow%20aA"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?A%20%5Crightarrow%20aB"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?A%20%5Crightarrow%20aA"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?B%20%5Crightarrow%20b"></p></li>
+</ol></li>
+</ul>
+<p>With the sets <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BN%7D">, <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7B%5CSigma%7D">, and <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BG%7D">, can we figure out which strings are, or are <em>not</em> in <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%7D">?</p>
+<ul class="task-list">
+<li><p><input type="checkbox"><img src="https://latex.codecogs.com/png.latex?ab">?</p></li>
+<li><p><input type="checkbox"><img src="https://latex.codecogs.com/png.latex?aab">?</p></li>
+<li><p><input type="checkbox"><img src="https://latex.codecogs.com/png.latex?b">?</p></li>
+<li><p><input type="checkbox"><img src="https://latex.codecogs.com/png.latex?aabb">?</p></li>
+<li><p><input type="checkbox"><img src="https://latex.codecogs.com/png.latex?abba">?</p></li>
+<li><p><input type="checkbox"><img src="https://latex.codecogs.com/png.latex?cab">?</p></li>
+</ul>
+</div>
+</div>
+<ul>
+<li>“Automata” and other abstract machines are ways of conceptualizing the possible or necessary computational operations and resources needed for different tasks, like identifying whether or not a string is in a language!</li>
+</ul>
+<p>We’ll start with the least complex<sup>1</sup> machines, “Finite State Automata”</p>
+</section>
+<section id="finite-state-automata" class="level2">
+<h2 class="anchored" data-anchor-id="finite-state-automata">Finite State Automata</h2>
+<dl>
+<dt>Finite</dt>
+<dd>
+<p>Having a fixed, or <em>non infinite</em> amount of things</p>
+</dd>
+<dt>State</dt>
+<dd>
+<p>The current state, or status, of a system.</p>
+</dd>
+<dt>Automaton</dt>
+<dd>
+<p>A machine</p>
+</dd>
+</dl>
+<p>FSAs have</p>
+<ul>
+<li><p>a fixed number of states</p></li>
+<li><p>a fixed number of <em>inputs</em> they can accept</p></li>
+<li><p>rules about how to change their state given an input.</p></li>
+</ul>
+<section id="examples" class="level3">
+<h3 class="anchored" data-anchor-id="examples">Examples</h3>
+<section id="a-light-switch." class="level4">
+<h4 class="anchored" data-anchor-id="a-light-switch.">A light switch.</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram
+  direction LR
+  state "Off" as off
+  state "On 💡" as on
+  
+  [*] --&gt; off
+  on --&gt; off: switch flip
+  off --&gt; on: switch flip
+</pre>
+</div>
+</div>
+</div>
+</div>
+<dl>
+<dt>States</dt>
+<dd>
+<p>On, Off</p>
+</dd>
+<dt>Inputs</dt>
+<dd>
+<p>switch flip</p>
+</dd>
+</dl>
+</section>
+<section id="a-metro-turnstile" class="level4">
+<h4 class="anchored" data-anchor-id="a-metro-turnstile">A metro turnstile</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram
+  direction LR
+  state "Locked" as l
+  state "Unlocked" as u
+  
+  [*] --&gt; l
+  l --&gt; l: push
+  l --&gt; u: coin
+  u --&gt; u: coin
+  u --&gt; l: push
+</pre>
+</div>
+</div>
+</div>
+</div>
+<dl>
+<dt>states</dt>
+<dd>
+<p>Locked, Unlocked</p>
+</dd>
+<dt>inputs</dt>
+<dd>
+<p>coin, push</p>
+</dd>
+</dl>
+</section>
+<section id="a-github-repo" class="level4">
+<h4 class="anchored" data-anchor-id="a-github-repo">A Github Repo!</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram
+  state "Local Synced with Remote" as s
+  state "Unstaged Changes" as us
+  state "All changes staged" as st
+  state "No uncommitted changes" as com
+  [*] --&gt; s
+  s --&gt; us: Editing &amp; Saving
+  us --&gt; us: Editing &amp; Saving
+  us --&gt; st: Staging all changes
+  st --&gt; us: Editing &amp; Saving
+  st --&gt; com: Committing
+  com --&gt; us: Editing &amp; Saving
+  com --&gt; s: Push
+</pre>
+</div>
+</div>
+</div>
+</div>
+<dl>
+<dt>states</dt>
+<dd>
+<p>Local Synced with Remote, Unstaged Changes, All Changes Staged, No Uncommitted Changes</p>
+</dd>
+<dt>inputs</dt>
+<dd>
+<p>Editing &amp; Saving, Staging all Changes, Committing, Push</p>
+</dd>
+</dl>
+</section>
+<section id="the-batman-theme-song" class="level4">
+<h4 class="anchored" data-anchor-id="the-batman-theme-song">The Batman Theme Song</h4>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Batman!
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Na na na na na na na na na na na na<br>
+Batman!<br>
+Na na na na na na na na na na na na<br>
+Batman!<br>
+Na na na na na na na na na na na na<br>
+Batman!<br>
+Na na na na na na na na na na na na<br>
+Batman!<br>
+Na na na na na na na na na na na na<br>
+Batman! Batman! Batman!<br>
+Na na na na na na na na na na na na<br>
+Batman!</p>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram
+  direction LR
+  [*] --&gt; a: Na
+  a --&gt; b: na
+  b --&gt; c: na
+  c --&gt; d: na
+  d --&gt; e: na
+  e --&gt; f: na
+  f --&gt; g: na
+  g --&gt; h: na
+  h --&gt; i: na
+  i --&gt; j: na
+  j --&gt; k: na
+  k --&gt; l: na
+  l --&gt; batman1: Batman!
+  batman1 --&gt; a: Na
+  batman1 --&gt; batman2: Batman!
+  batman2 --&gt; batman3: Batman!
+  batman3 --&gt; a: Na
+  batman1 --&gt; [*]: ε
+</pre>
+</div>
+</div>
+</div>
+</div>
+<dl>
+<dt>States</dt>
+<dd>
+<p>a-l, batman1, batman2, batman3</p>
+</dd>
+<dt>Inputs</dt>
+<dd>
+<p>Na, na, Batman!</p>
+</dd>
+</dl>
+</section>
+</section>
+</section>
+<section id="automata-and-formal-grammars" class="level2">
+<h2 class="anchored" data-anchor-id="automata-and-formal-grammars">Automata and Formal Grammars</h2>
+<p>If you have</p>
+<ul>
+<li>some formal Grammar <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BG%7D"></li>
+</ul>
+<p>that you use to generate</p>
+<ul>
+<li>the strings of language <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%7D"></li>
+</ul>
+<p>There is <em>some</em> Automaton (maybe <em>not</em> a finite state automaton!) that can decide whether nor not a string is in <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%7D"> or not.</p>
+<p>This relationship between automata of various complexity and formal grammars/languages is called the “Chomsky Hierarchy.”</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://lin511-2024.github.io/notes/meetings/assets/chomsky.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</section>
+<section id="returning-to-our-small-formal-language" class="level2">
+<h2 class="anchored" data-anchor-id="returning-to-our-small-formal-language">Returning to our small formal language</h2>
+<p>Here’s the grammar rules we had for our grammar</p>
+<ul>
+<li><p><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BG%7D"> is the grammar of <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%7D">. It contains 4 rules</p>
+<ol type="1">
+<li><p><img src="https://latex.codecogs.com/png.latex?S%20%5Crightarrow%20aA"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?A%20%5Crightarrow%20aB"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?A%20%5Crightarrow%20aA"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?B%20%5Crightarrow%20b"></p></li>
+</ol></li>
+</ul>
+<section id="using-the-grammar-to-generate-a-string" class="level3">
+<h3 class="anchored" data-anchor-id="using-the-grammar-to-generate-a-string">Using the grammar to generate a string</h3>
+<p>We can build up a string by choosing rules and applying them</p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p>Start</p>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  S
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
+<div class="columns">
+<div class="column" style="width:30%;">
+<ol type="1">
+<li><img src="https://latex.codecogs.com/png.latex?S%5Crightarrow%20aA"></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  S --&gt; a1["a"]
+  S --&gt; A1["A"]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
+<div class="columns">
+<div class="column" style="width:30%;">
+<ol start="3" type="1">
+<li><img src="https://latex.codecogs.com/png.latex?A%20%5Crightarrow%20aA"></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  S --&gt; a1["a"]
+  S --&gt; A1["A"]
+  A1 --&gt; a2["a"]
+  A1 --&gt; A3["A"]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
+<div class="columns">
+<div class="column" style="width:30%;">
+<ol start="2" type="1">
+<li><img src="https://latex.codecogs.com/png.latex?A%20%5Crightarrow%20aB"></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  S --&gt; a1["a"]
+  S --&gt; A1["A"]
+  A1 --&gt; a2["a"]
+  A1 --&gt; A2["A"]
+  A2 --&gt; a3["a"]
+  A2 --&gt; B
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
+<div class="columns">
+<div class="column" style="width:30%;">
+<ol start="4" type="1">
+<li><img src="https://latex.codecogs.com/png.latex?B%20%5Crightarrow%20b"></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  S --&gt; a1["a"]
+  S --&gt; A1["A"]
+  A1 --&gt; a2["a"]
+  A1 --&gt; A2["A"]
+  A2 --&gt; a3["a"]
+  A2 --&gt; B
+  B --&gt; b
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
+<p>Result: <img src="https://latex.codecogs.com/png.latex?aaab"></p>
+</section>
+<section id="defining-a-fsa-to-recognize-the-language" class="level3">
+<h3 class="anchored" data-anchor-id="defining-a-fsa-to-recognize-the-language">Defining a FSA to recognize the language</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram
+  direction LR
+  
+  [*]--&gt;p
+  p --&gt; q: a
+  q --&gt; q: a
+  q --&gt; [*]: b
+  
+</pre>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li><p>If we take strings, generated by <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BG%7D"> and feed them to this FSA one-by-one, we should arrive at the “accepting” state without any symbols left over.</p></li>
+<li><p>If we take a string, generated by some unknown grammar, pass it through this FSA, and arrive at the “accepting” state without any symbols left over, then it <em>could</em> have been generated by <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BG%7D">.</p></li>
+<li><p>If we take a string, and pass it through this FSA, and either never get to the accepting state, or have symbols left over, then it <em>couldn’t</em> have been generated by <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BG%7D">, and isn’t in <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%7D">.</p></li>
+</ul>
+</section>
+</section>
+<section id="what-does-this-have-to-do-with-regular-expressions" class="level2">
+<h2 class="anchored" data-anchor-id="what-does-this-have-to-do-with-regular-expressions">What does this have to do with “Regular Expressions?”</h2>
+<p>“Regular Expressions” are a concise, computery way to define finite state automata that take text as input strings and return matches. That is, regular expressions can identify strings that belong to “regular” languages.</p>
+<p>We’ll talk about details later, but if I wasn’t sure of someone was using British spelling or American spelling, I could write a RegEx to match either <code>color</code> or <code>colour</code>.</p>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p><code>colou?r</code></p>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram
+  direction LR
+  [*] --&gt; 1
+  1 --&gt; 2: c
+  2 --&gt; 3: o
+  3 --&gt; 4: l
+  4 --&gt; 5: o
+  5 --&gt; 6: u
+  5 --&gt; [*]: r
+  6 --&gt; [*]: r
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="limitations-of-regex" class="level3">
+<h3 class="anchored" data-anchor-id="limitations-of-regex">Limitations of RegEx</h3>
+<p>Because Regular Expressions define a finite state automaton, and FSAs can only successfully recognize regular languages, that means you can’t use Regular Expressions (reliably) to recognize any more complex language.</p>
+<p>For example, HTML pages use “tags” to define where text elements begin and end. In this code snippet, the opening <code>&lt;p&gt;</code> tag says a paragraph is beginning, and the closing <code>&lt;/p&gt;</code> says the paragraph is ending. The opening <code>&lt;strong&gt;</code> tag says the text is turning bold, and the closing <code>&lt;/strong&gt;</code> tag says the text is turning regular again.</p>
+<div class="langname">
+<pre class="langname">html</pre>
+</div>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb1-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;p&gt;</span></span>
+<span id="cb1-2">  This is a paragraph with </span>
+<span id="cb1-3">  <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;strong&gt;</span></span>
+<span id="cb1-4">    bold text</span>
+<span id="cb1-5">  <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;/strong&gt;</span></span>
+<span id="cb1-6">  .</span>
+<span id="cb1-7"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;/p&gt;</span></span></code></pre></div>
+<ul>
+<li><p>For an html page to be valid, every opening tag, <code>&lt;tag&gt;</code> needs to have a matching closing tag <code>&lt;/tag&gt;</code>.</p></li>
+<li><p>You can’t have a closing tag <code>&lt;/tag&gt;</code> without a preceding opening <code>&lt;tag&gt;</code>.</p></li>
+<li><p>You you can embed another opening and closing tag set within another opening and closing tag set.</p></li>
+<li><p>This kind of long distance “bracket matching”, where you can have intervening brackets, requires at least a push-down automaton to recognize.</p></li>
+<li><p>That means html is a context-sensitive language.</p></li>
+<li><p><a href="https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags/1732454#1732454">You cannot use RegEx to successfully validate html.</a></p></li>
+</ul>
+</section>
+</section>
+<section id="some-further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="some-further-reading">Some further reading</h2>
+<p><span class="citation" data-cites="jäger2012">Jäger and Rogers (2012)</span></p>
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-jäger2012" class="csl-entry">
+Jäger, Gerhard, and James Rogers. 2012. <span>“Formal Language Theory: Refining the Chomsky Hierarchy.”</span> <em>Philosophical Transactions of the Royal Society B: Biological Sciences</em> 367 (1598): 1956–70. <a href="https://doi.org/10.1098/rstb.2012.0077">https://doi.org/10.1098/rstb.2012.0077</a>.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Complex in the sense of what they can <em>do</em>, not necessarily how easy it is to understand them.↩︎</p></li>
+</ol>
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
+  author = {Fruehwald, Josef},
+  title = {Regular {Languages} and {Finite} {State} {Machines}},
+  date = {2024-01-16},
+  url = {https://lin511-2024.github.io/notes/meetings/01_fsm.html},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2024" class="csl-entry quarto-appendix-citeas">
+Fruehwald, Josef. 2024. <span>“Regular Languages and Finite State
+Machines.”</span> January 16, 2024. <a href="https://lin511-2024.github.io/notes/meetings/01_fsm.html">https://lin511-2024.github.io/notes/meetings/01_fsm.html</a>.
+</div></div></section></div> ]]></description>
+  <category>compling</category>
+  <guid>https://lin511-2024.github.io/notes/meetings/01_fsm.html</guid>
+  <pubDate>Tue, 16 Jan 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>FSA in-class notes</title>
+  <dc:creator>Josef Fruehwald</dc:creator>
+  <link>https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="finite-state-automata-and-regex" class="level2">
+<h2 class="anchored" data-anchor-id="finite-state-automata-and-regex">Finite State Automata and RegEx</h2>
+<p><code>ok(a+y)?</code></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram
+    direction LR
+    [*] --&gt; 1
+    1 --&gt; 2: o
+    2 --&gt; 3: k
+
+    3 --&gt; group1
+
+    state group1{
+        [*] --&gt; 4
+        4 --&gt; 4: a
+        4 --&gt; [*]: y
+    }
+    group1 --&gt; [*]: ε
+
+    3 --&gt; [*]: ε
+</pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-regex-for-batman" class="level2">
+<h2 class="anchored" data-anchor-id="the-regex-for-batman">The RegEx for Batman</h2>
+<div class="langname">
+<pre class="langname">regex</pre>
+</div>
+<pre class="regex"><code>Na (na){15} Batman!( Batman! Batman!)?</code></pre>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
+  author = {Fruehwald, Josef},
+  title = {FSA in-Class Notes},
+  date = {2024-01-16},
+  url = {https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2024" class="csl-entry quarto-appendix-citeas">
+Fruehwald, Josef. 2024. <span>“FSA in-Class Notes.”</span> January 16,
+2024. <a href="https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html">https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html</a>.
+</div></div></section></div> ]]></description>
+  <category>compling</category>
+  <guid>https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html</guid>
+  <pubDate>Tue, 16 Jan 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Setup Notes</title>
+  <dc:creator>Josef Fruehwald</dc:creator>
+  <link>https://lin511-2024.github.io/notes/programming/00_setup.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>We’ll need to get our systems setup to work properly with the tools we’ll be using this semester.</p>
+<section id="vscode-and-the-command-line" class="level3">
+<h3 class="anchored" data-anchor-id="vscode-and-the-command-line">VSCode and The Command Line</h3>
+<div class="columns">
+<div class="column" style="width:45%;">
+<section id="windows-users" class="level4">
+<h4 class="anchored" data-anchor-id="windows-users">Windows Users</h4>
+<p>If you ware using a windows computer, I’ll ask you to install Windows Subsystem for Linux like so:</p>
+<ul class="task-list">
+<li><input type="checkbox"><a href="https://lingmethodshub.github.io/content/windows/wsl/00_installing_wsl.html">Follow the tutorial here for enabling and installing WSL</a></li>
+<li><input type="checkbox"><a href="https://code.visualstudio.com/">Install VS Code</a></li>
+<li><input type="checkbox"><a href="https://code.visualstudio.com/docs/remote/wsl-tutorial#_prerequisites">Work through the first section of this tutorial, stopping after you connect to WSL</a></li>
+</ul>
+</section>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<section id="macoslinux-users" class="level4">
+<h4 class="anchored" data-anchor-id="macoslinux-users">MacOS/Linux Users</h4>
+<ul class="task-list">
+<li><input type="checkbox"><a href="https://code.visualstudio.com/">Install VS Code</a></li>
+</ul>
+</section>
+</div>
+</div>
+</section>
+<section id="python" class="level3">
+<h3 class="anchored" data-anchor-id="python">Python</h3>
+<section id="pyenv" class="level4">
+<h4 class="anchored" data-anchor-id="pyenv">pyenv</h4>
+<p>We’ll be using a program called <code>pyenv</code> to manage the versions of python we use. To install <code>pyenv</code>, open the VSCode Command Palette (with <kbd data-mac="Shift+Command+P" data-linux="Shift+Control+P" data-windows="Shift+Control+P"></kbd>) which will open the command line interface. Then,</p>
+<ul class="task-list">
+<li><input type="checkbox">copy this line of code code from this page (<kbd data-mac="Command+C" data-linux="Control+C" data-windows="Control+C,"></kbd>)</li>
+</ul>
+<div class="langname">
+<pre class="langname">bash</pre>
+</div>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">curl</span> https://pyenv.run <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">|</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">bash</span></span></code></pre></div>
+<ul class="task-list">
+<li><input type="checkbox">Paste it into the terminal ((<kbd data-mac="Command+V" data-linux="Control+V" data-windows="Control+V,"></kbd>)</li>
+<li><input type="checkbox">Hit enter.</li>
+</ul>
+<p>Once that has successfully finished:</p>
+<hr>
+</section>
+<div class="columns">
+<div class="column" style="width:45%;">
+<section id="macos-users" class="level4">
+<h4 class="anchored" data-anchor-id="macos-users">MacOS Users</h4>
+<ul class="task-list">
+<li><input type="checkbox">Run this</li>
+</ul>
+<div class="langname">
+<pre class="langname">bash</pre>
+</div>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">open</span> ~/.zshrc</span></code></pre></div>
+<details>
+<summary>
+If you get an error.
+</summary>
+<ul class="task-list">
+<li><input type="checkbox">Run this</li>
+</ul>
+<div class="langname">
+<pre class="langname">bash</pre>
+</div>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">touch</span> ~/.zshrc</span>
+<span id="cb3-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">open</span> ~/.zshrc</span></code></pre></div>
+</details>
+</section>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<section id="wsl-users" class="level4">
+<h4 class="anchored" data-anchor-id="wsl-users">WSL users</h4>
+<ul class="task-list">
+<li><input type="checkbox">Run this</li>
+</ul>
+<div class="langname">
+<pre class="langname">bash</pre>
+</div>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">open</span> ~/.bashrc</span></code></pre></div>
+<details>
+<summary>
+If you get an error
+</summary>
+<ul class="task-list">
+<li><input type="checkbox">Run ths</li>
+</ul>
+<div class="langname">
+<pre class="langname">bash</pre>
+</div>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">touch</span> ~/.bashrc</span>
+<span id="cb5-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">open</span> ~/.bashrc</span></code></pre></div>
+</details>
+</section>
+</div>
+</div>
+<hr>
+<ul class="task-list">
+<li><input type="checkbox">Paste the following into the window that opens.</li>
+</ul>
+<div class="langname">
+<pre class="langname">sh</pre>
+</div>
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">export</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">PYENV_ROOT</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$HOME</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">/.pyenv"</span></span>
+<span id="cb6-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">[[</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-d</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$PYENV_ROOT</span>/bin <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">]]</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&amp;&amp;</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">export</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">PATH</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$PYENV_ROOT</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">/bin:</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$PATH</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span></span>
+<span id="cb6-3"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">eval</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pyenv</span> init <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">-</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">)</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span></span></code></pre></div>
+<ul class="task-list">
+<li><input type="checkbox">Save it</li>
+</ul>
+<section id="installing-python" class="level4">
+<h4 class="anchored" data-anchor-id="installing-python">Installing Python</h4>
+<ul class="task-list">
+<li><input type="checkbox">Close and reopen the terminal window</li>
+<li><input type="checkbox">Copy-Paste the following lines of code</li>
+</ul>
+<div class="langname">
+<pre class="langname">bash</pre>
+</div>
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pyenv</span> install 3.11</span>
+<span id="cb7-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pyenv</span> global 3.11</span>
+<span id="cb7-3"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pyenv</span> virtualenv 3.11 Lin511</span>
+<span id="cb7-4"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pyenv</span> activate Lin511</span></code></pre></div>
+<p>This will have installed a recent version of python onto your computer, and created a “virtual environment” for the class.</p>
+</section>
+<section id="installing-some" class="level4">
+<h4 class="anchored" data-anchor-id="installing-some">Installing some</h4>
+</section>
+</section>
+<section id="git-github-configuration" class="level3">
+<h3 class="anchored" data-anchor-id="git-github-configuration">Git &amp; Github Configuration</h3>
+<p><strong>Make sure you change the email and name to the email and username you use for Github!</strong></p>
+<ul class="task-list">
+<li><input type="checkbox">In the terminal, set your git email address:</li>
+</ul>
+<div class="langname">
+<pre class="langname">bash</pre>
+</div>
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">git</span> config <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--global</span> user.email <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"you@example.com"</span></span></code></pre></div>
+<ul class="task-list">
+<li><input type="checkbox">Set your username.</li>
+</ul>
+<div class="langname">
+<pre class="langname">bash</pre>
+</div>
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">git</span> config <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--global</span> user.name <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Your Name"</span></span></code></pre></div>
+<p>Then, follow these tutorials from github:</p>
+<ul class="task-list">
+<li><input type="checkbox"><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Generating a new SSH Key</a></li>
+<li><input type="checkbox"><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Adding your ssh key to github</a></li>
+</ul>
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
+  author = {Fruehwald, Josef},
+  title = {Setup {Notes}},
+  date = {2024-01-08},
+  url = {https://lin511-2024.github.io/notes/programming/00_setup.html},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2024" class="csl-entry quarto-appendix-citeas">
+Fruehwald, Josef. 2024. <span>“Setup Notes.”</span> January 8, 2024. <a href="https://lin511-2024.github.io/notes/programming/00_setup.html">https://lin511-2024.github.io/notes/programming/00_setup.html</a>.
+</div></div></section></div> ]]></description>
+  <category>python</category>
+  <guid>https://lin511-2024.github.io/notes/programming/00_setup.html</guid>
+  <pubDate>Mon, 08 Jan 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Python basics</title>
+  <dc:creator>Josef Fruehwald</dc:creator>
+  <link>https://lin511-2024.github.io/notes/programming/01_Python_basics.html</link>
+  <description><![CDATA[ 
+
+
+
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"hello"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>hello</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>4</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">x <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb7-2">y <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span></span>
+<span id="cb7-3"></span>
+<span id="cb7-4"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(x <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> y)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>11</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">word1 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Hello"</span></span>
+<span id="cb9-2">word2 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">" World!"</span></span>
+<span id="cb9-3"></span>
+<span id="cb9-4"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(word1 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> word2)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hello World!</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>True</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>False</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">and</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">False</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>False</code></pre>
+</div>
+</div>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald,
+  author = {Fruehwald, Josef},
+  title = {Python Basics},
+  url = {https://lin511-2024.github.io/notes/programming/01_Python_basics.html},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald" class="csl-entry quarto-appendix-citeas">
+Fruehwald, Josef. n.d. <span>“Python Basics.”</span> <a href="https://lin511-2024.github.io/notes/programming/01_Python_basics.html">https://lin511-2024.github.io/notes/programming/01_Python_basics.html</a>.
+</div></div></section></div> ]]></description>
+  <category>python</category>
+  <guid>https://lin511-2024.github.io/notes/programming/01_Python_basics.html</guid>
+  <pubDate>Tue, 16 Jan 2024 17:18:38 GMT</pubDate>
+</item>
+<item>
+  <title>Paths in Python</title>
+  <dc:creator>Josef Fruehwald</dc:creator>
+  <link>https://lin511-2024.github.io/notes/programming/02_Paths.html</link>
+  <description><![CDATA[ 
+
+
+
+<div class="cell" data-execution_count="1">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> pathlib <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> Path</span></code></pre></div>
+</div>
+<p><code>Path()</code> will return a relative path to the current directory, which is represented as <code>.</code>.</p>
+<div class="cell" data-execution_count="2">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">this_directory <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Path()</span>
+<span id="cb2-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(this_directory)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>.</code></pre>
+</div>
+</div>
+<p>If we use the <code>.resolve()</code> method on <code>this_directory</code>, we’ll get back the <a href="../../notes/concepts/02_undersdanding-paths.html#absolute-paths">absolute path</a>.</p>
+<div class="cell" data-execution_count="3">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">absolute_path <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> this_directory.resolve()</span>
+<span id="cb4-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(absolute_path)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/workspaces/Lin511-2024.github.io/notes/meetings</code></pre>
+</div>
+</div>
+<p>We can get the path to the directory above from the <code>.parent</code> attribute.</p>
+<div class="cell" data-execution_count="4">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(</span>
+<span id="cb6-2">    absolute_path.parent</span>
+<span id="cb6-3">)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/workspaces/Lin511-2024.github.io/notes</code></pre>
+</div>
+</div>
+<p>We can get a list of all of the files and directories in a directory with the <code>.glob()</code> method. For technical reasons, we need to wrap <code>list()</code> around this.</p>
+<div class="cell" data-execution_count="5">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">list</span>(</span>
+<span id="cb8-2">    absolute_path.glob(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"*"</span>)</span>
+<span id="cb8-3">)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>[PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings/assets'),
+ PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings/01_Paths.ipynb'),
+ PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings/00_setup.qmd')]</code></pre>
+</div>
+</div>
+<p>You can get a list of all of the files and folders in the parent directory like so.</p>
+<div class="cell" data-execution_count="6">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">list</span>(</span>
+<span id="cb10-2">    absolute_path<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb10-3">        .parent<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb10-4">        .glob(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"*"</span>)</span>
+<span id="cb10-5">)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>[PosixPath('/workspaces/Lin511-2024.github.io/notes/.gitignore'),
+ PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts'),
+ PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings'),
+ PosixPath('/workspaces/Lin511-2024.github.io/notes/index.qmd')]</code></pre>
+</div>
+</div>
+<p>We can get a list of all of the files and directories in the <code>concepts</code> directory like so.</p>
+<div class="cell" data-execution_count="7">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">list</span>(</span>
+<span id="cb12-2">    absolute_path<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb12-3">        .parent<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb12-4">        .joinpath(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"concepts"</span>)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb12-5">        .glob(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"*"</span>)</span>
+<span id="cb12-6">)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>[PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/02_undersdanding-paths.qmd'),
+ PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/assets'),
+ PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/01_what-is-python.qmd'),
+ PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/03_navigating-directories.qmd'),
+ PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/00_glossary.qmd')]</code></pre>
+</div>
+</div>
+<section id="opening-a-file" class="level2">
+<h2 class="anchored" data-anchor-id="opening-a-file">Opening a file</h2>
+<p>We’re going to read in the <a href="assets/sample.txt">text file here</a></p>
+<div class="cell" data-execution_count="11">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">text_file_path <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Path(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"assets"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sample.txt"</span>)</span>
+<span id="cb14-2"></span>
+<span id="cb14-3"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">with</span> text_file_path.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">open</span>() <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">file</span>:</span>
+<span id="cb14-4">    lines <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">file</span>.readlines()</span>
+<span id="cb14-5"></span>
+<span id="cb14-6"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(lines)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['This is a sample file.\n', 'It just has text.\n', 'We can read and print its contents.']</code></pre>
+</div>
+</div>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald,
+  author = {Fruehwald, Josef},
+  title = {Paths in {Python}},
+  url = {https://lin511-2024.github.io/notes/programming/02_Paths.html},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald" class="csl-entry quarto-appendix-citeas">
+Fruehwald, Josef. n.d. <span>“Paths in Python.”</span> <a href="https://lin511-2024.github.io/notes/programming/02_Paths.html">https://lin511-2024.github.io/notes/programming/02_Paths.html</a>.
+</div></div></section></div> ]]></description>
+  <category>python</category>
+  <guid>https://lin511-2024.github.io/notes/programming/02_Paths.html</guid>
+  <pubDate>Tue, 16 Jan 2024 17:18:38 GMT</pubDate>
+</item>
+</channel>
+</rss>
