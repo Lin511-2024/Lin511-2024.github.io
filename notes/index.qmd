@@ -5,7 +5,7 @@ listing:
     contents: 
       - meetings
       - programming
-    sort: date
+    sort: [date, file]
 ---
 
 These are the notes for our regular meetings.

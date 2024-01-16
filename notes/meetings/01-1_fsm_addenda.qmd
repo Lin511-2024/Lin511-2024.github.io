@@ -1,0 +1,37 @@
+---
+title: "FSA in-class notes"
+date: 2024-01-16
+categories:
+  - compling
+filters: 
+    - codeblocklabel  
+---
+
+## Finite State Automata and RegEx
+
+`ok(a+y)?`
+
+```{mermaid}
+stateDiagram
+	direction LR
+	[*] --> 1
+	1 --> 2: o
+	2 --> 3: k
+
+	3 --> group1
+
+	state group1{
+		[*] --> 4
+		4 --> 4: a
+		4 --> [*]: y
+	}
+	group1 --> [*]: ε
+
+	3 --> [*]: ε
+```
+
+## The RegEx for Batman
+
+``` regex
+Na (na){15} Batman!( Batman! Batman!)?
+```

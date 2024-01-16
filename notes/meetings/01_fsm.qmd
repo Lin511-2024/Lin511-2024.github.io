@@ -337,7 +337,7 @@ flowchart TD
 
 Result: $aaab$
 
-### Defining a FSA to recognize the language 
+### Defining a FSA to recognize the language
 
 ```{mermaid}
 stateDiagram
