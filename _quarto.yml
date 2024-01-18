@@ -54,7 +54,7 @@ website:
             - auto: notes/programming/*
         - section: In-class
           contents: 
-            - auto: notes/in-class/*        
+            - auto: notes/in_class/*        
     # contents:
     #   - href: syllabus.qmd
     #     text: Syllabus
