@@ -5,6 +5,7 @@ listing:
     contents: 
       - meetings
       - programming
+      - in-class
     sort: [date, file]
     feed:
       items: 20
