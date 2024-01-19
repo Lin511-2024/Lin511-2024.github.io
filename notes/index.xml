@@ -636,9 +636,9 @@ Fruehwald, Josef. 2024. <span>“FSA in-Class Notes.”</span> January 16,
 <h3 class="anchored" data-anchor-id="python">Python</h3>
 <section id="pyenv" class="level4">
 <h4 class="anchored" data-anchor-id="pyenv">pyenv</h4>
-<p>We’ll be using a program called <code>pyenv</code> to manage the versions of python we use. To install <code>pyenv</code>, open the VSCode Command Palette (with <kbd data-mac="Shift+Command+P" data-linux="Shift+Control+P" data-windows="Shift+Control+P"></kbd>) which will open the command line interface. Then,</p>
+<p>We’ll be using a program called <code>pyenv</code> to manage the versions of python we use. To install <code>pyenv</code>, open the VSCode Command Palette (with <kbd data-windows="Shift+Control+P" data-mac="Shift+Command+P" data-linux="Shift+Control+P"></kbd>) which will open the command line interface. Then,</p>
 <ul class="task-list">
-<li><input type="checkbox">copy this line of code code from this page (<kbd data-mac="Command+C" data-linux="Control+C" data-windows="Control+C,"></kbd>)</li>
+<li><input type="checkbox">copy this line of code code from this page (<kbd data-windows="Control+C," data-mac="Command+C" data-linux="Control+C"></kbd>)</li>
 </ul>
 <div class="langname">
 <pre class="langname">bash</pre>
@@ -651,7 +651,7 @@ font-style: inherit;">|</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">bash</span></span></code></pre></div>
 <ul class="task-list">
-<li><input type="checkbox">Paste it into the terminal ((<kbd data-mac="Command+V" data-linux="Control+V" data-windows="Control+V,"></kbd>)</li>
+<li><input type="checkbox">Paste it into the terminal ((<kbd data-windows="Control+V," data-mac="Command+V" data-linux="Control+V"></kbd>)</li>
 <li><input type="checkbox">Hit enter.</li>
 </ul>
 <p>Once that has successfully finished:</p>
@@ -999,7 +999,7 @@ Fruehwald, Josef. n.d. <span>“Python Basics.”</span> <a href="https://lin511
 </div></div></section></div> ]]></description>
   <category>python</category>
   <guid>https://lin511-2024.github.io/notes/programming/01_Python_basics.html</guid>
-  <pubDate>Tue, 16 Jan 2024 17:18:38 GMT</pubDate>
+  <pubDate>Fri, 19 Jan 2024 13:50:08 GMT</pubDate>
 </item>
 <item>
   <title>Paths in Python</title>
@@ -1189,7 +1189,7 @@ Fruehwald, Josef. n.d. <span>“Paths in Python.”</span> <a href="https://lin5
 </div></div></section></div> ]]></description>
   <category>python</category>
   <guid>https://lin511-2024.github.io/notes/programming/02_Paths.html</guid>
-  <pubDate>Tue, 16 Jan 2024 17:18:38 GMT</pubDate>
+  <pubDate>Fri, 19 Jan 2024 13:50:08 GMT</pubDate>
 </item>
 </channel>
 </rss>
