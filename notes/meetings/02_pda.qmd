@@ -1,0 +1,288 @@
+---
+title: "Pushdown Automata and Context Free Languages"
+date: 2024-01-23
+categories:
+  - compling
+bibliography: references.bib
+---
+
+## More like a rip-off machine
+
+In the notes on [Finite State Automata](01_fsm.qmd), we looked at this turnstile finite state automaton.
+
+```{mermaid}
+stateDiagram
+  direction LR
+  state "Locked" as l
+  state "Unlocked" as u
+  
+  [*] --> l
+  l --> l: push
+  l --> u: coin
+  u --> u: coin
+  u --> l: push
+```
+
+An annoying thing about this turnstile is that if you don't know how it works, it will rip you off!
+
+::: callout-tip
+## A scenario
+
+Robin approaches the finite-state turnstile with two of their friends. They think
+
+> There's three of us, and I have three tokens. I'll speed things up and be a good friend by popping three tokens into the machine, and then all three of us can pop through.
+:::
+
+Robin is expecting a pattern like this to happen
+
+{{< fa coins >}}, {{< fa coins >}}, {{< fa coins >}}, {{< fa person >}}, {{< fa person >}}, {{< fa person >}}
+
+Little does Robin know that the way this turnstile works is that after you put a coin into the slot, the coin rolls past and triggers the unlocking mechanism and goes straight into the collection bin. If the turnstile is already unlocked, the coin just rolls into the collection bin. It doesn't have any "memory" of how many coins it's been fed, so after one person walks through, the turnstile relocks.
+
+So here's what happens to Robin and their friends
+
+| Input             | New State |
+|-------------------|-----------|
+|                   | Locked    |
+| {{< fa coins >}}  | Unlocked  |
+| {{< fa coins >}}  | Unlocked  |
+| {{< fa coins >}}  | Unlocked  |
+| {{< fa person >}} | Locked    |
+
+With the turnstile locked again, Robin's two friends can't get through unless they insert yet another token!
+
+## A Pushdown Automaton
+
+Robin was really upset and embarrassed at losing two whole tokens to the rip-off (finite state) machine in front of their friends. They vowed to invent a better turnstile so no one would ever have to face that kind of embarrassment again.
+
+### Incorporating a memory
+
+The problem with the finite-state turnstile is that it has no "memory" of how many coins it's been fed. Robin's new prototype works like so:
+
+-   Every time someone inserts a coin into Robin's turnstile, it lands in a little collection tray. If someone inserts multiple coins, they form a stack of coins.
+
+-   If there is even one coin in the stack, the turnstile is unlocked.
+
+-   Any time someone pushes through the turnstile, the collection tray bounces one coin off of the stack.
+
+Even this simple system gets a little unwieldy to represent in the same kind of state diagram. So, here's the last one of these we'll see for a bit.
+
+```{mermaid}
+stateDiagram
+  direction LR
+  state "Locked" as l
+  state "Unlocked" as u
+  state coin_fork1 <<fork>>
+  state coin_fork2 <<fork>>
+  state pop1 <<fork>>
+  state pop2 <<fork>>
+  state choice_state <<choice>>
+  state "Stack" as s
+  
+  [*] --> l
+  l --> l : push
+  l --> coin_fork1: coin
+  coin_fork1 --> u
+  coin_fork1 --> s: +1
+  u --> coin_fork2: coin
+  coin_fork2 --> u
+  coin_fork2 --> s: +1
+  
+  u --> choice_state: push
+  choice_state --> pop1: if Stack > 1
+  pop1 --> s: -1
+  pop1 --> u
+  
+  choice_state --> pop2: if Stack == 1
+  pop2 --> s: -1
+  pop2 --> l
+```
+
+### Using the Pushdown Turnstile
+
+With Robin's new Pushdown Turnstile installed at metro stations everywhere, they bring their two friends back to the scene of the crime, and retry their three-coins, three-people strategy. Here's what happens.
+
+| Input             | New State | Coin Stack |
+|-------------------|-----------|------------|
+|                   | Locked    | 0          |
+| {{< fa coins >}}  | Unlocked  | 1          |
+| {{< fa coins >}}  | Unlocked  | 2          |
+| {{< fa coins >}}  | Unlocked  | 3          |
+| {{< fa person >}} | Unlocked  | 2          |
+| {{< fa person >}} | Unlocked  | 1          |
+| {{< fa person >}} | Locked    | 0          |
+
+### Generalizing the pattern
+
+The way this turnstile works, generally, is that if you put in $n$ coins, $n$ people will be able to push through. Another way of notating that sequence of events is {{< fa coins >}}$^n${{< fa person >}}$^n$. In the more formal-language-theory world, these kinds of patterns are usually labeled $a^nb^n$.
+
+Another way to think about these $a^nb^n$ systems is in terms of bracket matching. If we replace each {{< fa coins >}} symbol with `[` and each {{< fa persopn >}} symbol with `]`, then we get a pattern that looks like this:
+
+```         
+[
+[
+[
+]
+]
+]
+```
+
+The requirement for the language is that every opening bracket `[` needs to get matched with a closing bracket `]`.
+
+## Context Free Grammars
+
+We get nested, bracket matching patterns in natural language all the time. For example the person-number agreement in this sentence.
+
+::: {style="font-size: 1.2em"}
+The [person]{style="color: white;background: #4477AA; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"} who [I]{style="color: white;background: #CC6677; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"}, the guy [you]{style="color: white;background: #117733; display: inline-block; border-radius:10%; padding-left:1%; padding-right:1%;"} [are]{style="color: white;background: #117733; display: inline-block; border-radius:10%; padding-left:1%; padding-right:1%;"} looking at, [am]{style="color: white;background: #CC6677; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"} talking to [is]{style="color: white;background: #4477AA; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"} not listening.
+:::
+
+If the form of *be* in this sentence were generated by a Regular Grammar, to be parsed with a Finite State Automaton, once the "you" subject appears in the sentence, every following form of *be* would have to be "are" the rest of the way.
+
+::: {style="font-size: 1.2em"}
+**\***The [person]{style="color: white;background: #4477AA; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"} who [I]{style="color: white;background: #CC6677; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"}, the guy [you]{style="color: white;background: #117733; display: inline-block; border-radius:10%; padding-left:1%; padding-right:1%;"} [are]{style="color: white;background: #117733; display: inline-block; border-radius:10%; padding-left:1%; padding-right:1%;"} looking at, [are]{style="color: white;background: #117733; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"} talking to [are]{style="color: white;background: #117733; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"} not listening.
+:::
+
+Since the first sentence *is* how English and other languages work, we'd conclude that natural language is, at least, Context Free.
+
+### Context Free Rules
+
+::: columns
+::: {.column width="45%"}
+Regular rules can look like this:
+
+$$
+A \rightarrow aA
+$$
+:::
+
+::: {.column width="45%"}
+Context free rules can look like this: $$
+A \rightarrow aAb
+$$
+:::
+:::
+
+Returning to this html snippit:
+
+``` html
+<p>
+  This is a paragraph with 
+  <strong>
+    bold text.
+  </strong>
+</p>
+```
+
+Rules of a context free grammar that could give rise to this well-formed html are:
+
+$$
+D \rightarrow <p>C</p>
+$$
+
+$$
+C \rightarrow words
+$$
+
+$$
+C \rightarrow words S
+$$
+
+$$
+S \rightarrow <strong>C</strong>
+$$
+
+```{mermaid}
+flowchart TD
+
+  D --> p1["p"]
+  D --> C1["C"]
+  D --> p2["/p"]
+
+  C1 --> w1["This is a paragraph with"]
+  C1 --> S
+
+  S --> s1["strong"]
+  S --> C2["C"]
+  S --> s2["/strong"]
+
+  C2 --> w2["bold text."]
+
+```
+
+### A PDA for this grammar
+
+Here's a way we'd describe a Pushdown Automaton that decides whether or not a document is generated by this grammar:
+
+-   Each time it encounters an opening `<tag>`, it adds it to the stack, and when it encounters a closing `</tag>`, it pops it from the stack.
+
+<!-- -->
+
+-   When it encounters a closing `</tag>`, it *has* to match the opening `<tag>` that's at the top of the stack.
+
+-   When it gets to the end of the document, the stack needs to be empty.
+
+Here's a table showing how that'd play out
+
+| Input                                  | event           | Stack                                                                          |
+|------------------------|------------------------|------------------------|
+| `<p>`                                  | push `<p>`      | [`<p>`]{style="display: inline-block; border: 1px solid #CC6677;"}             |
+| `This`, `is`, `a`, `paragraph`, `with` |                 | [`<p>`]{style="display: inline-block; border: 1px solid #CC6677;"}             |
+| `<strong>`                             | push `<strong>` | [`<strong>`]{style="display: inline-block; border: 1px solid #CC6677;"}, `<p>` |
+| `bold`, `text.`                        |                 | [`<strong>`]{style="display: inline-block; border: 1px solid #CC6677;"}, `<p>` |
+| `</strong>`                            | pop `<strong>`  | [`<p>`]{style="display: inline-block; border: 1px solid #CC6677;"}             |
+| `</p>`                                 | pop `<p>`       |                                                                                |
+
+One consequence of the rule that tags need to match when you pop them is that the following is *not* valid html.
+
+``` html
+<p>
+  This is <strong>invalid!
+</p>
+</strong>
+```
+
+If you were to reason through the state of the stack after the opening `<strong>` tag, it would look like
+
+> [`<strong>`]{style="display: inline-block; border: 1px solid #CC6677;"}, `<p>`
+
+Then, when you feed it `</p>`, it doen't match the tag at the top of the stack, so we'd get an error of some sort.
+
+## Limits of Pushdown Automata
+
+An office building has installed a version of Robin's turnstile. Each person who enters the building has to insert their id card, and the machine scans it and spits it out the other side when a person pushes through.
+
+[Robin]{style="color: white;background: #4477AA; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"} approaches the turnstile with their friends [Skylar]{style="color: white;background: #CC6677; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"} and [Alex]{style="color: white;background: #117733; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"}. Both [Skylar]{style="color: white;background: #CC6677; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"} and [Alex]{style="color: white;background: #117733; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"} have their hands full carrying packages into the building, so [Robin]{style="color: white;background: #4477AA; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"} tries to be helpful and insert all of their id cards first, so they can then pass through. They're walking through in the order
+
+1.  [Robin]{style="color: white;background: #4477AA; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"}
+2.  [Skylar]{style="color: white;background: #CC6677; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"}
+3.  [Alex]{style="color: white;background: #117733; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"}
+
+So Robin puts their ID cards into the turnstile in that order. Here's how it works out
+
+| Input                                          | Action                                              | Stack                                                                                                                                       |
+|-------------------|-------------------|-----------------------------------|
+| [{{< fa id-card >}}]{style="color: #4477AA;"}  | push [{{< fa id-card >}}]{style="color: #4477AA;"}  | [{{< fa id-card >}}]{style="color: #4477AA;"}                                                                                               |
+| [{{< fa id-card >}}]{style="color: #CC6677;;"} | push [{{< fa id-card >}}]{style="color: #CC6677;;"} | [{{< fa id-card >}}]{style="color: #CC6677;;"}, [{{< fa id-card >}}]{style="color: #4477AA;"}                                               |
+| [{{< fa id-card >}}]{style="color: #117733"}   | push [{{< fa id-card >}}]{style="color: #117733"}   | [{{< fa id-card >}}]{style="color: #117733"}, [{{< fa id-card >}}]{style="color: #CC6677;;"}, [{{< fa id-card >}}]{style="color: #4477AA;"} |
+| [{{< fa person >}}]{style="color: #4477AA;"}   | pop [{{< fa id-card >}}]{style="color: #117733"}    | [{{< fa id-card >}}]{style="color: #CC6677;;"}, [{{< fa id-card >}}]{style="color: #4477AA;"}                                               |
+|                                                | 🚨                                                  |                                                                                                                                             |
+
+Oh no! The turnstile has handed [Robin]{style="color: white;background: #4477AA; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"} [Alex's]{style="color: white;background: #117733; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"} id card! What a mess!
+
+### Beyond Context Free
+
+Robin was expecting a sequence like this
+
+> [{{< fa id-card >}}]{style="color: #4477AA;"}, [{{< fa id-card >}}]{style="color: #CC6677;;"}, [{{< fa id-card >}}]{style="color: #117733"}, [{{< fa person >}}]{style="color: #4477AA;"}, [{{< fa person >}}]{style="color: #CC6677;;"}, [{{< fa person >}}]{style="color: #117733"}
+
+This involves so-called "crossing dependencies", which can't be recognized by a Pushdown Automaton, which means they involve a more complex grammar than context free rules.
+
+There are some examples of crossing dependencies in human language as well, like this example in Swiss German from @shieber1985 (cited in @jäger2012)
+
+|      |     |                                                                                                                                 |                                                                                                                                |                                                                                                                                |                                                                                                                             |                                                                                                                              |                                                                                                                                    |
+|------|-----|---------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| dass | mer | [d' chind]{style="color: white;background: #4477AA; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"} | [em Hans]{style="color: white;background: #CC6677; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"} | [es Huus]{style="color: white;background: #117733; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"} | [lönd]{style="color: white;background: #4477AA; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"} | [hälfe]{style="color: white;background: #CC6677; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"} | [aanstriiche]{style="color: white;background: #117733; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;"} |
+| that | we  | the children-ACC                                                                                                                | Hans-DAT                                                                                                                       | the house-ACC                                                                                                                  | let                                                                                                                         | help                                                                                                                         | paint                                                                                                                              |
+
+: "that we let the children help Hans paint the house"
