@@ -1,6 +1,9 @@
 /*-- scss:defaults --*/
 
 /*-- scss:rules --*/
+
+
+
 /*-- scss:rules --*/
 code:not(pre *){
     color: $orange;
@@ -9,4 +12,9 @@ code:not(pre *){
   
 .kbd{
   color: $gray-700;
+}
+
+:root {
+  --mermaid-edge-color: white;
+  --mermaid-label-bg-color: white;
 }
