@@ -63,116 +63,151 @@
     "text": "The RegEx for Batman\n\nregex\n\nNa (na){15} Batman!( Batman! Batman!)?"
   },
   {
-    "objectID": "notes/concepts/00_glossary.html",
-    "href": "notes/concepts/00_glossary.html",
-    "title": "Glossary",
+    "objectID": "notes/meetings/02_pda.html",
+    "href": "notes/meetings/02_pda.html",
+    "title": "Pushdown Automata and Context Free Languages",
     "section": "",
-    "text": "Clone\n\nMaking a copy of a git repository on another computer, whether locally or remotely.\n\nCopy-Paste\n\nCopying text to your computer’s ‘clipboard’ and pasting it into another location.\nCopying can be done many ways, including selecting text with your mouse, right-clicking then selecting ‘copy’, by selecting text and using your computer’s ‘hotkey’ for copying (), or, in the course documents, by clicking on the ‘copy’ icon in most code chunks.\nTo paste, you can either right-click and select ‘Paste’, or use your system’s ‘hotkey’ ().\n\nFind, or \n\nYou can find text in most pages or documents by either typing , then typing in the text you want to find in the dialogue box that pops up.\n\nFormal\n\nIn computational linguistics, ‘formal’ isn’t the opposite of ‘casual’. It’s about any system or language which has a strict set of acceptable symbols, and how they can be combined.\n\nGitHub Codespaces\n\nGitHub Codespaces are a ‘development environment’, running on a Virtual Machine. They’re like mini computers you can access through your web browser that get created just for the repository you launch one in. The actual memory and computation are being run on GitHub’s physical computers.\n\nLocal (adj)\n\nDescribes anything that exists or happens on the actual device you’re interacting with. For example, if you have a Microsoft Word document on your computer that ends in .docx, it is probably ‘local’ (even if theres a ‘remote’ copy somewhere). These days, it’s not always obvious if things happen locally or remotely. If you have a phone that does facial recognition on pictures you take, if the facial recognition program runs on your phone, it’s ‘local’. But if the picture needs to get uploaded to Apple or Google first, then the facial recognition is ‘remote’.\n\nRemote (adj)\n\nDescribes anything that exists or happens on a different device than the one you’re interacting with. For example, if you edit a Google Doc, the actual document is stored on a Google computer, not on the device you’re editing.\n\nTab Autocomplete\n\nMany programming applications have “Tab Autocomplete” suggestions that allow you to type in just a few letters of the command, function, or variable you want to use, and then hit Tab.\n\nVirtual Machine/VM\n\nVirtual Machines are simulations of computers. It’s like having an encapsulated computer, running its own operating system and programs, that borrows memory and computing resources from computers it’s running on.\n\n\n\nReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Glossary},\n  url = {https://lin511-2024.github.io/notes/concepts/00_glossary.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Glossary.” https://lin511-2024.github.io/notes/concepts/00_glossary.html."
+    "text": "In the notes on Finite State Automata, we looked at this turnstile finite state automaton.\n\n\n\n\nstateDiagram\n  direction LR\n  state \"Locked\" as l\n  state \"Unlocked\" as u\n  \n  [*] --&gt; l\n  l --&gt; l: push\n  l --&gt; u: coin\n  u --&gt; u: coin\n  u --&gt; l: push\n\n\n\n\n\nAn annoying thing about this turnstile is that if you don’t know how it works, it will rip you off!\n\n\n\n\n\n\nA scenario\n\n\n\nRobin approaches the finite-state turnstile with two of their friends. They think\n\nThere’s three of us, and I have three tokens. I’ll speed things up and be a good friend by popping three tokens into the machine, and then all three of us can pop through.\n\n\n\nRobin is expecting a pattern like this to happen\n, , , , , \nLittle does Robin know that the way this turnstile works is that after you put a coin into the slot, the coin rolls past and triggers the unlocking mechanism and goes straight into the collection bin. If the turnstile is already unlocked, the coin just rolls into the collection bin. It doesn’t have any “memory” of how many coins it’s been fed, so after one person walks through, the turnstile relocks.\nSo here’s what happens to Robin and their friends\n\n\n\nInput\nNew State\n\n\n\n\n\nLocked\n\n\n\nUnlocked\n\n\n\nUnlocked\n\n\n\nUnlocked\n\n\n\nLocked\n\n\n\nWith the turnstile locked again, Robin’s two friends can’t get through unless they insert yet another token!"
   },
   {
-    "objectID": "notes/concepts/01_what-is-python.html",
-    "href": "notes/concepts/01_what-is-python.html",
-    "title": "What is Python?",
+    "objectID": "notes/meetings/02_pda.html#more-like-a-rip-off-machine",
+    "href": "notes/meetings/02_pda.html#more-like-a-rip-off-machine",
+    "title": "Pushdown Automata and Context Free Languages",
     "section": "",
-    "text": "When talking about “Python” or other programming langauges, we often engage in a form of polysemy1 that can be confusing at first. I’ll try to unpack the different meanings here."
+    "text": "In the notes on Finite State Automata, we looked at this turnstile finite state automaton.\n\n\n\n\nstateDiagram\n  direction LR\n  state \"Locked\" as l\n  state \"Unlocked\" as u\n  \n  [*] --&gt; l\n  l --&gt; l: push\n  l --&gt; u: coin\n  u --&gt; u: coin\n  u --&gt; l: push\n\n\n\n\n\nAn annoying thing about this turnstile is that if you don’t know how it works, it will rip you off!\n\n\n\n\n\n\nA scenario\n\n\n\nRobin approaches the finite-state turnstile with two of their friends. They think\n\nThere’s three of us, and I have three tokens. I’ll speed things up and be a good friend by popping three tokens into the machine, and then all three of us can pop through.\n\n\n\nRobin is expecting a pattern like this to happen\n, , , , , \nLittle does Robin know that the way this turnstile works is that after you put a coin into the slot, the coin rolls past and triggers the unlocking mechanism and goes straight into the collection bin. If the turnstile is already unlocked, the coin just rolls into the collection bin. It doesn’t have any “memory” of how many coins it’s been fed, so after one person walks through, the turnstile relocks.\nSo here’s what happens to Robin and their friends\n\n\n\nInput\nNew State\n\n\n\n\n\nLocked\n\n\n\nUnlocked\n\n\n\nUnlocked\n\n\n\nUnlocked\n\n\n\nLocked\n\n\n\nWith the turnstile locked again, Robin’s two friends can’t get through unless they insert yet another token!"
   },
   {
-    "objectID": "notes/concepts/01_what-is-python.html#python-is-set-of-rules-for-a-formal-language",
-    "href": "notes/concepts/01_what-is-python.html#python-is-set-of-rules-for-a-formal-language",
-    "title": "What is Python?",
-    "section": "📕 Python is set of rules for a formal language",
-    "text": "📕 Python is set of rules for a formal language\nWhen we talk about “Python”, one thing we sometimes refer to is an abstract set of rules for a formal language.\n\n\n\n\n\n\n📕 The abstract language\n\n\n\nWhen you say:\n\nI’m learning Python this semester.\n\nYou’re talking about the abstract set of rules.\n\n\nWe can describe some of these rules in natural language (this isn’t how they’re actually written).\n\nIf a list of values has been assigned to a variable, when the variable’s name is followed [0], return the first value in the list.\nIf print( is followed by a value or variable, which is then followed by ), print the value, or the value assigned to the variable.\nIf a # symbol is encountered on a line, ignore everything following it.\n\nThese rules define very precisely how code should be written, and also define what should be done when certain patterns of code are encountered, but these rules are abstract, and don’t actually do anything."
+    "objectID": "notes/meetings/02_pda.html#a-pushdown-automaton",
+    "href": "notes/meetings/02_pda.html#a-pushdown-automaton",
+    "title": "Pushdown Automata and Context Free Languages",
+    "section": "A Pushdown Automaton",
+    "text": "A Pushdown Automaton\nRobin was really upset and embarrassed at losing two whole tokens to the rip-off (finite state) machine in front of their friends. They vowed to invent a better turnstile so no one would ever have to face that kind of embarrassment again.\n\nIncorporating a memory\nThe problem with the finite-state turnstile is that it has no “memory” of how many coins it’s been fed. Robin’s new prototype works like so:\n\nEvery time someone inserts a coin into Robin’s turnstile, it lands in a little collection tray. If someone inserts multiple coins, they form a stack of coins.\nIf there is even one coin in the stack, the turnstile is unlocked.\nAny time someone pushes through the turnstile, the collection tray bounces one coin off of the stack.\n\nEven this simple system gets a little unwieldy to represent in the same kind of state diagram. So, here’s the last one of these we’ll see for a bit.\n\n\n\n\nstateDiagram\n  direction LR\n  state \"Locked\" as l\n  state \"Unlocked\" as u\n  state coin_fork1 &lt;&lt;fork&gt;&gt;\n  state coin_fork2 &lt;&lt;fork&gt;&gt;\n  state pop1 &lt;&lt;fork&gt;&gt;\n  state pop2 &lt;&lt;fork&gt;&gt;\n  state choice_state &lt;&lt;choice&gt;&gt;\n  state \"Stack\" as s\n  \n  [*] --&gt; l\n  l --&gt; l : push\n  l --&gt; coin_fork1: coin\n  coin_fork1 --&gt; u\n  coin_fork1 --&gt; s: +1\n  u --&gt; coin_fork2: coin\n  coin_fork2 --&gt; u\n  coin_fork2 --&gt; s: +1\n  \n  u --&gt; choice_state: push\n  choice_state --&gt; pop1: if Stack &gt; 1\n  pop1 --&gt; s: -1\n  pop1 --&gt; u\n  \n  choice_state --&gt; pop2: if Stack == 1\n  pop2 --&gt; s: -1\n  pop2 --&gt; l\n\n\n\n\n\n\n\nUsing the Pushdown Turnstile\nWith Robin’s new Pushdown Turnstile installed at metro stations everywhere, they bring their two friends back to the scene of the crime, and retry their three-coins, three-people strategy. Here’s what happens.\n\n\n\nInput\nNew State\nCoin Stack\n\n\n\n\n\nLocked\n0\n\n\n\nUnlocked\n1\n\n\n\nUnlocked\n2\n\n\n\nUnlocked\n3\n\n\n\nUnlocked\n2\n\n\n\nUnlocked\n1\n\n\n\nLocked\n0\n\n\n\n\n\nGeneralizing the pattern\nThe way this turnstile works, generally, is that if you put in \\(n\\) coins, \\(n\\) people will be able to push through. Another way of notating that sequence of events is \\(^n\\)\\(^n\\). In the more formal-language-theory world, these kinds of patterns are usually labeled \\(a^nb^n\\).\nAnother way to think about these \\(a^nb^n\\) systems is in terms of bracket matching. If we replace each  symbol with [ and each  symbol with ], then we get a pattern that looks like this:\n[\n[\n[\n]\n]\n]\nThe requirement for the language is that every opening bracket [ needs to get matched with a closing bracket ]."
   },
   {
-    "objectID": "notes/concepts/01_what-is-python.html#python-is-a-program-that-interprets-formal-language-input",
-    "href": "notes/concepts/01_what-is-python.html#python-is-a-program-that-interprets-formal-language-input",
-    "title": "What is Python?",
-    "section": "🤖 Python is a program that interprets formal language input",
-    "text": "🤖 Python is a program that interprets formal language input\nSimply having a set of abstract rules can be fun, but it’s not so useful if you have no way to actually do things. To make code we write actually do anything, we need to use a program called an Interpreter.\n\n\n\n\n\n\n🤖 The Python Interpreter\n\n\n\nWhen you say\n\nI’m having a hard time installing Python.\n\nyou’re talking about a Python Interpreter.\n\n\nThe Python interpreter processes code, determines whether or not it is valid, then does the things the code told it to do.\nCode can get passed to the interpreter many different ways, including\n\nIn a single text file, called a python “script”, (usually named to end in .py)\nIn an interactive python “shell”.\nInside a Jupyter notebook.\n\nFor example, the text in the shaded block below was passed to a Python interpreter, and the interpreter decided that it was invalid (because there is an opening quote \", but not a closing quote).\n\n\npython\n\n\"x\n\nSyntaxError: unterminated string literal (detected at line 1) (20073044.py, line 1)\n\n\nThe text in this next shaded block was passed to a Python interpreter. This time, it was deemed valid, and the interpreter did what the code instructed.\n\n\npython\n\nprint(\"hello! \" * 3)\n\nhello! hello! hello!"
+    "objectID": "notes/meetings/02_pda.html#context-free-grammars",
+    "href": "notes/meetings/02_pda.html#context-free-grammars",
+    "title": "Pushdown Automata and Context Free Languages",
+    "section": "Context Free Grammars",
+    "text": "Context Free Grammars\nWe get nested, bracket matching patterns in natural language all the time. For example the person-number agreement in this sentence.\n\nThe person who I, the guy you are looking at, am talking to is not listening.\n\nIf the form of be in this sentence were generated by a Regular Grammar, to be parsed with a Finite State Automaton, once the “you” subject appears in the sentence, every following form of be would have to be “are” the rest of the way.\n\n*The person who I, the guy you are looking at, are talking to are not listening.\n\nSince the first sentence is how English and other languages work, we’d conclude that natural language is, at least, Context Free.\n\nContext Free Rules\n\n\nRegular rules can look like this:\n\\[\nA \\rightarrow aA\n\\]\n\nContext free rules can look like this: \\[\nA \\rightarrow aAb\n\\]\n\n\nReturning to this html snippit:\n&lt;p&gt;\n  This is a paragraph with \n  &lt;strong&gt;\n    bold text.\n  &lt;/strong&gt;\n&lt;/p&gt;\nRules of a context free grammar that could give rise to this well-formed html are:\n\\[\nD \\rightarrow &lt;p&gt;C&lt;/p&gt;\n\\]\n\\[\nC \\rightarrow words\n\\]\n\\[\nC \\rightarrow words S\n\\]\n\\[\nS \\rightarrow &lt;strong&gt;C&lt;/strong&gt;\n\\]\n\n\n\n\nflowchart TD\n\n  D --&gt; p1[\"p\"]\n  D --&gt; C1[\"C\"]\n  D --&gt; p2[\"/p\"]\n\n  C1 --&gt; w1[\"This is a paragraph with\"]\n  C1 --&gt; S\n\n  S --&gt; s1[\"strong\"]\n  S --&gt; C2[\"C\"]\n  S --&gt; s2[\"/strong\"]\n\n  C2 --&gt; w2[\"bold text.\"]\n\n\n\n\n\n\n\n\nA PDA for this grammar\nHere’s a way we’d describe a Pushdown Automaton that decides whether or not a document is generated by this grammar:\n\nEach time it encounters an opening &lt;tag&gt;, it adds it to the stack, and when it encounters a closing &lt;/tag&gt;, it pops it from the stack.\n\n\n\nWhen it encounters a closing &lt;/tag&gt;, it has to match the opening &lt;tag&gt; that’s at the top of the stack.\nWhen it gets to the end of the document, the stack needs to be empty.\n\nHere’s a table showing how that’d play out\n\n\n\n\n\n\n\n\nInput\nevent\nStack\n\n\n\n\n&lt;p&gt;\npush &lt;p&gt;\n&lt;p&gt;\n\n\nThis, is, a, paragraph, with\n\n&lt;p&gt;\n\n\n&lt;strong&gt;\npush &lt;strong&gt;\n&lt;strong&gt;, &lt;p&gt;\n\n\nbold, text.\n\n&lt;strong&gt;, &lt;p&gt;\n\n\n&lt;/strong&gt;\npop &lt;strong&gt;\n&lt;p&gt;\n\n\n&lt;/p&gt;\npop &lt;p&gt;\n\n\n\n\nOne consequence of the rule that tags need to match when you pop them is that the following is not valid html.\n&lt;p&gt;\n  This is &lt;strong&gt;invalid!\n&lt;/p&gt;\n&lt;/strong&gt;\nIf you were to reason through the state of the stack after the opening &lt;strong&gt; tag, it would look like\n\n&lt;strong&gt;, &lt;p&gt;\n\nThen, when you feed it &lt;/p&gt;, it doen’t match the tag at the top of the stack, so we’d get an error of some sort."
   },
   {
-    "objectID": "notes/concepts/01_what-is-python.html#python-is-an-ecosystem",
-    "href": "notes/concepts/01_what-is-python.html#python-is-an-ecosystem",
-    "title": "What is Python?",
-    "section": "⛰️ Python is an Ecosystem",
-    "text": "⛰️ Python is an Ecosystem\nPeople often say that Python comes “with batteries included”, meaning it can do a lot of different things out without needing to install any extensions. But you can install extensions in the form of additional libraries that extend Python’s capabilities.\n\n\n\n\n\n\n⛰️ The Ecosystem\n\n\n\nWhen someone says\n\nPython is the most widely used language in natural language processing.\n\nThey are talking about the ecosystem of libraries for Python hat have been built to do natural language processing.\n\n\nSome examples of additional libraries for Python are\n\nnumpy: Allows for effective computation with numbers\nmatplotlib: Makes graphs\n\n\n\npython\n\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nx = np.linspace(0, 2 * np.pi, 200)\ny = np.sin(x)\n\nfig, ax = plt.subplots()\nax.plot(x, y)\nplt.show()"
+    "objectID": "notes/meetings/02_pda.html#limits-of-pushdown-automata",
+    "href": "notes/meetings/02_pda.html#limits-of-pushdown-automata",
+    "title": "Pushdown Automata and Context Free Languages",
+    "section": "Limits of Pushdown Automata",
+    "text": "Limits of Pushdown Automata\nAn office building has installed a version of Robin’s turnstile. Each person who enters the building has to insert their id card, and the machine scans it and spits it out the other side when a person pushes through.\nRobin approaches the turnstile with their friends Skylar and Alex. Both Skylar and Alex have their hands full carrying packages into the building, so Robin tries to be helpful and insert all of their id cards first, so they can then pass through. They’re walking through in the order\n\nRobin\nSkylar\nAlex\n\nSo Robin puts their ID cards into the turnstile in that order. Here’s how it works out\n\n\n\n\n\n\n\n\nInput\nAction\nStack\n\n\n\n\n\npush \n\n\n\n\npush \n, \n\n\n\npush \n, , \n\n\n\npop \n, \n\n\n\n🚨\n\n\n\n\nOh no! The turnstile has handed Robin Alex’s id card! What a mess!\n\nBeyond Context Free\nRobin was expecting a sequence like this\n\n, , , , , \n\nThis involves so-called “crossing dependencies”, which can’t be recognized by a Pushdown Automaton, which means they involve a more complex grammar than context free rules.\nThere are some examples of crossing dependencies in human language as well, like this example in Swiss German from Shieber (1985) (cited in Jäger and Rogers (2012))\n\n“that we let the children help Hans paint the house”\n\n\n\n\n\n\n\n\n\n\n\n\ndass\nmer\nd’ chind\nem Hans\nes Huus\nlönd\nhälfe\naanstriiche\n\n\nthat\nwe\nthe children-ACC\nHans-DAT\nthe house-ACC\nlet\nhelp\npaint"
   },
   {
-    "objectID": "notes/concepts/01_what-is-python.html#python-is-a-social-project",
-    "href": "notes/concepts/01_what-is-python.html#python-is-a-social-project",
-    "title": "What is Python?",
-    "section": "🧑‍💻 Python is a social project",
-    "text": "🧑‍💻 Python is a social project\nThe meanings of “Python” we’ve already talked about are\n\n📕 The abstract language\n🤖 The Python Interpreter\n⛰️ The Python Ecosystem\n\nUnderstanding how to put all of these pieces together effectively is a social project.\n\n\n\n\n\n\n🧑‍💻 The social project\n\n\n\nWhen you say\n\nSo-n-so is really good at Python.\n\nYou are talking about their involvement in the Python social project.\n\n\n\n❌ There is no part of the 📕 abstract language that will inform you that there is a very good Python library for doing a certain task.\n❌ The 🤖 Python Interpreter won’t tell you that there’s a better way to do what you’re trying to do.\n❌ There are nearly half a million libraries on ⛰️ the Python Package Index, so you can’t just peruse it to find what’s relevant.\n\nIn order to know newest or most effective way to do things, you need to be involved in 🧑‍💻 the social project. That begins within a classroom, then extends to keeping up with blogs and other discourses about changes and developments.\nOne way people demonstrate that they are involved in the Python social project is by writing their code idiomatically. For example, in the code block above, I included the line import numpy as np. But there’s no rule that we import numpy as np, it’s simply convention.\nThis code below will run just as well, but would cause problems for people trying to read your code, because it’s not idiomatic.\n\n\npython\n\nimport matplotlib.pyplot as jokes\nimport numpy as farts\n\nx = farts.linspace(0, 2 * farts.pi, 200)\ny = farts.sin(x)\n\nfig, ax = jokes.subplots()\nax.plot(x, y)\njokes.show()"
+    "objectID": "notes/concepts/02_undersdanding-paths.html",
+    "href": "notes/concepts/02_undersdanding-paths.html",
+    "title": "Understanding Directories",
+    "section": "",
+    "text": "There has recently been an uptick in discussion among college professors that students are less familiar with the notions of files, folders, directories, and paths than they used to be in the past. This is in part a natural consequence of shifting paradigms in computer use. Many people are exclusively using online services like Google Docs, and don’t save files to their computers ever. And even when we do save files on out computer, many operating systems have search based approaches to finding files.\nThe problem for scientific computing purposes, or even just making some simple HTML pages on your local computer, is that you need to be able to navigate the hierarchical file system of your computer, in order to tell your programs how to navigate it."
   },
   {
-    "objectID": "notes/concepts/01_what-is-python.html#the-polysemy-is-ok",
-    "href": "notes/concepts/01_what-is-python.html#the-polysemy-is-ok",
-    "title": "What is Python?",
-    "section": "📕, 🤖, ⛰️, 🧑‍💻 The Polysemy is Ok",
-    "text": "📕, 🤖, ⛰️, 🧑‍💻 The Polysemy is Ok\nIt’s ok just say “Python” when you’re talking about one specific meaning."
+    "objectID": "notes/concepts/02_undersdanding-paths.html#directory-structure",
+    "href": "notes/concepts/02_undersdanding-paths.html#directory-structure",
+    "title": "Understanding Directories",
+    "section": "",
+    "text": "There has recently been an uptick in discussion among college professors that students are less familiar with the notions of files, folders, directories, and paths than they used to be in the past. This is in part a natural consequence of shifting paradigms in computer use. Many people are exclusively using online services like Google Docs, and don’t save files to their computers ever. And even when we do save files on out computer, many operating systems have search based approaches to finding files.\nThe problem for scientific computing purposes, or even just making some simple HTML pages on your local computer, is that you need to be able to navigate the hierarchical file system of your computer, in order to tell your programs how to navigate it."
   },
   {
-    "objectID": "notes/concepts/01_what-is-python.html#footnotes",
-    "href": "notes/concepts/01_what-is-python.html#footnotes",
-    "title": "What is Python?",
+    "objectID": "notes/concepts/02_undersdanding-paths.html#files-in-folders",
+    "href": "notes/concepts/02_undersdanding-paths.html#files-in-folders",
+    "title": "Understanding Directories",
+    "section": "Files in Folders",
+    "text": "Files in Folders\nThe first thing to be clear about is that all files you’ve saved on your computer are in a folder (a.k.a. a directory). “Documents” or “My Documents” is a folder. Even your Desktop is a folder. This is true for both macOS and Windows. For example, I have an account on my laptop called “Display” for when I want to show how my computer works without showing everyone all of my personal files. In the Display account, I saved a little text file called Sampletext.txt to the desktop. In this screenshot, you can see Sampletext.txt shown both on my desktop, and as a file in a folder.\n\n\n\nDesktop is a folder\n\n\nWhat’s nice about this image is that you can see where Sampletext.txt exists in the context of my whole hard drive. My “Desktop” is just a folder that my computer shows the content of on my main screen. The Desktop folder is inside of a folder called “Display”. There are other folders in there, including my main user account, joseffruehwald. All of these folders are grouped together in the “Users” folder, and the “Users” folder is one of the first folders immediately underneath my hard drive.\nThe important thing to keep in mind here is that all files, programs, photos, etc are stored somewhere in a folder, inside of another folder, probably inside of another folder. You might not always interact with the files this way, and they might not always look like they’re in a folder, but they are.\n\nViewing the folder hierarchy on a Mac\nTo be able to better view the full hierarchy of folders on a Mac, I would recommend the following:\n\nOpen Finder, and in the View menu, select “as Columns”\nUnder the View menu again, select “Show Path Bar”\n\n\n\nViewing the folder hierarchy in Windows\nAt the top of the file browser on Windows, you’ll see the sequence of files in which the current folder is embedded.\n\n\n\nWindows directory structure"
+  },
+  {
+    "objectID": "notes/concepts/02_undersdanding-paths.html#giving-directions-to-programs",
+    "href": "notes/concepts/02_undersdanding-paths.html#giving-directions-to-programs",
+    "title": "Understanding Directories",
+    "section": "Giving Directions to Programs",
+    "text": "Giving Directions to Programs\nPrograms are going to need directions for where to find things, and we can do this with “paths”. The concept of a path is so important, I’m going to really emphasize it\n“paths” \nThe “path” to a file is a written instruction for where to find a file on your specific computer."
+  },
+  {
+    "objectID": "notes/concepts/02_undersdanding-paths.html#relative-paths",
+    "href": "notes/concepts/02_undersdanding-paths.html#relative-paths",
+    "title": "Understanding Directories",
+    "section": "Relative Paths",
+    "text": "Relative Paths\nSometimes, we only need to tell a file where another file is relative to itself. For example, here is an HTML document and a CSS stylesheet for that document.\n\n\n\nhtml and css in a dicectory\n\n\nFrom site.html to style.css: style.css\nBecause style.css is in the same folder as site.html, we only need to tell site.html to look for style.css, like so\n\nhtml\n\n&lt;link \n  rel=\"stylesheet\" \n  type=\"text/css\" \n  href=\"style.css\"&gt;\nJust telling the html file to look for style.css, it’s going to look inside of, and only inside of the same folder as itself.\nHowever, sometimes people like to put all of the stylesheets and images for a website inside of a folder called “assets,” like so:\n\n\n\nstylesheet in assets\n\n\nFrom site.html to style.css: assets/style.css\nNow, if we tell site.html just to look for style.css, it’s not going to find it anymore! That’s because style.css is no longer in the same folder as site.html. We’ll need to update the link to the stylesheet to reflect the fact that it’s now in a different folder, like so:\n\nhtml\n\n&lt;link \n  rel=\"stylesheet\" \n  type=\"text/css\" \n  href=\"assets/style.css\"&gt;\nHere’s how site.html interprets the string assets/style.css:\n\nLook inside the folder you’re currently in for a folder called assets\nThen, look inside of that folder for a file called style.css\n\nWe could take it a step further, and create a new folder called “css” inside of “assets”, and put our stylesheet there instead.\n\n\n\n`assets/css/style.css`\n\n\nFrom site.html to style.css: assets/css/style.css\nNow, we’d need to update the link to the stylesheet to look like this\n\nhtml\n\n&lt;link \n  rel=\"stylesheet\" \n  type=\"text/css\" \n  href=\"assets/css/style.css\"&gt;\nAgain, breaking this down into how site.html interprets the string assets/css/style.css goes like this:\n\nLook inside of the same folder as yourself for a folder called assets\nLook inside of that folder for a folder called css\nLook inside of that folder for a file called style.css"
+  },
+  {
+    "objectID": "notes/concepts/02_undersdanding-paths.html#absolute-paths",
+    "href": "notes/concepts/02_undersdanding-paths.html#absolute-paths",
+    "title": "Understanding Directories",
+    "section": "Absolute Paths",
+    "text": "Absolute Paths\nRelative paths define the location of a file relative to another file, usually the one you’re writing. However, we can also define the location of a file on our computer that will work no matter where we’re looking from. These are called “absolute paths.” Put simply, absolute paths just list all of the nested folders a file is in, all the way up to the hard drive. You can see the absolute path for style.css at the bottom of the very last screen shot.\nDifferent operating systems have different short hands for describing the top level, or hard drive level, of the path. On macOS, it’s simply a / at the beginning of the path. On Windows, it usually begins with C:\\. For the final location of style.css in the screenshot above, the absolute path would be.\n/Users/Display/Documents/html_practice/assets/css/style.css\nIf for some reason I didn’t want to move or copy this stylesheet from this location, and I wanted to link to it from an HTML file saved in some completely different location on my laptop, I could give it this absolute path, and it would find it."
+  },
+  {
+    "objectID": "notes/concepts/02_undersdanding-paths.html#important-note-on-naming",
+    "href": "notes/concepts/02_undersdanding-paths.html#important-note-on-naming",
+    "title": "Understanding Directories",
+    "section": "Important Note on Naming",
+    "text": "Important Note on Naming\nFrom here on out in the course, you should avoid using spaces in any of the files or folders you name. While you can take spaces into account when giving a path, it’s annoying. Instead, I’d recommend using an underscore _, a dash -, or naming files with “camel case”.\n\nmy_file.txt\nmy-file.txt\nmyFile.txt"
+  },
+  {
+    "objectID": "notes/concepts/02_undersdanding-paths.html#important-note-on-using-paths",
+    "href": "notes/concepts/02_undersdanding-paths.html#important-note-on-using-paths",
+    "title": "Understanding Directories",
+    "section": "Important Note on Using Paths",
+    "text": "Important Note on Using Paths\nThere are two crucial things to remember about using paths that can be conceptually difficult when first getting started.\n\nRelative paths always depend on where you’re coming from and where you’re going to. If either my HTML file was in a location I was confused about, or my CSS file was in a location I was confused about, my relative path might not work.\nBoth relative paths and absolute paths depend on how files are organized inside of your own computer. A path copied from an example online, or a professor’s template might not work  if your file structure is different."
+  },
+  {
+    "objectID": "notes/concepts/01_keyboarding.html#single-quotes-vs-backticks",
+    "href": "notes/concepts/01_keyboarding.html#single-quotes-vs-backticks",
+    "title": "“Where is the … key?”",
+    "section": "Single Quotes vs Backticks",
+    "text": "Single Quotes vs Backticks\nIt’s important to distinguish between single quotes: ' and backticks `. They look similar, but aren’t interchangeable.\nThe backtick key is highlighted in the images of the keyboards below, in the top left side.\n\nPCMac"
+  },
+  {
+    "objectID": "notes/concepts/01_keyboarding.html#slash-vs-backslash-.",
+    "href": "notes/concepts/01_keyboarding.html#slash-vs-backslash-.",
+    "title": "“Where is the … key?”",
+    "section": "Slash (/) vs backslash (\\).",
+    "text": "Slash (/) vs backslash (\\).\nThese different symbols will do different things, and aren’t interchangeable!\n\nSlash (/) location\n\nPCMac\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBackslash (\\) location\n\nPCMac"
+  },
+  {
+    "objectID": "notes/concepts/01_keyboarding.html#the-tilde-key.",
+    "href": "notes/concepts/01_keyboarding.html#the-tilde-key.",
+    "title": "“Where is the … key?”",
+    "section": "The tilde ~ key.",
+    "text": "The tilde ~ key.\nTo type the tilde1 key you have to hold Shift+`.\n\nPCMac"
+  },
+  {
+    "objectID": "notes/concepts/01_keyboarding.html#the-caret",
+    "href": "notes/concepts/01_keyboarding.html#the-caret",
+    "title": "“Where is the … key?”",
+    "section": "The caret ^",
+    "text": "The caret ^\nYou can get the caret symbol with Shift+6\n\nPCMac"
+  },
+  {
+    "objectID": "notes/concepts/01_keyboarding.html#the-pipe",
+    "href": "notes/concepts/01_keyboarding.html#the-pipe",
+    "title": "“Where is the … key?”",
+    "section": "The Pipe |",
+    "text": "The Pipe |\nYou can get the pipe, or vertical bar, with Shift+\\.\n\nPCMac"
+  },
+  {
+    "objectID": "notes/concepts/01_keyboarding.html#side-note-smart-quotes",
+    "href": "notes/concepts/01_keyboarding.html#side-note-smart-quotes",
+    "title": "“Where is the … key?”",
+    "section": "Side Note: “Smart Quotes”",
+    "text": "Side Note: “Smart Quotes”\nIf, at some point, you copy-paste text from the internet into your code or a text file, you might wind up with “smart quotes” that make things work weird!\n\n\n\nRegular Quotes\nSmart Quotes\n\n\n\n\n\"regular\"\n“smart”\n\n\n'regular'\n‘smart’\n\n\n\nBe careful not to have smart quotes cropping up in your code or data!"
+  },
+  {
+    "objectID": "notes/concepts/01_keyboarding.html#footnotes",
+    "href": "notes/concepts/01_keyboarding.html#footnotes",
+    "title": "“Where is the … key?”",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nA word is polysemous when it has more than one meaning.↩︎"
+    "text": "Footnotes\n\n\nPronunciations include [tɪl.də] and [tɪl.di]↩︎"
   },
   {
-    "objectID": "notes/concepts/03_navigating-directories.html",
-    "href": "notes/concepts/03_navigating-directories.html",
-    "title": "Navigating Directories",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Computational Linguistics (Spring 2024)",
     "section": "",
-    "text": "Some of what we’ll be doing in class will involve interacting with your computer through a “Command Line Interface.” Command line interacts are purely text based way to interact with your computer. It’s your same exact computer, just a different way of using it without using icons, or clicking. \n\n\nIn macOS, we can access a command line interface using the program Terminal. You can find Terminal in your Applications inside the folder called Utilities, or just by typing in “Terminal” into Spotlight search.\n\n\n\nFor now, on Windows, I’d recommend using PowerShell. You can launch PowerShell by searching for it in the Start menu."
-  },
-  {
-    "objectID": "notes/concepts/03_navigating-directories.html#command-line-interface",
-    "href": "notes/concepts/03_navigating-directories.html#command-line-interface",
-    "title": "Navigating Directories",
-    "section": "",
-    "text": "Some of what we’ll be doing in class will involve interacting with your computer through a “Command Line Interface.” Command line interacts are purely text based way to interact with your computer. It’s your same exact computer, just a different way of using it without using icons, or clicking. \n\n\nIn macOS, we can access a command line interface using the program Terminal. You can find Terminal in your Applications inside the folder called Utilities, or just by typing in “Terminal” into Spotlight search.\n\n\n\nFor now, on Windows, I’d recommend using PowerShell. You can launch PowerShell by searching for it in the Start menu."
-  },
-  {
-    "objectID": "notes/concepts/03_navigating-directories.html#getting-your-bearings",
-    "href": "notes/concepts/03_navigating-directories.html#getting-your-bearings",
-    "title": "Navigating Directories",
-    "section": "Getting your Bearings",
-    "text": "Getting your Bearings\nWhen you first launch your command line interface, it will look something like this:\n\n\n\nCommand Line Interface\n\n\nThis is obviously scary looking, and it doesn’t give you much hint as to what to do next. The important to thing to keep in mind is that while you are using the command line interface you are inside of a folder. There are two commands I recommend using over and over again to figure out where you are, and where you can go.\n\n“The Prompt”\nWe call the the space waiting for us to type in something the “prompt”. It usually has a symbol before it. Depending on your system, it might be any of the following: $, %, or &gt;. If you type something in here, your computer will interpret it as a command, and try to run it. \n\n\npwd\nIf you type in pwd into the terminal and hit enter, it will print out the absolute path to where you currently are. When you first launch a terminal, it usually starts you off in your home directory, which is usually going to be named after your username.\n\nbash\n\npwd\n/Users/Display\nUse pwd early, and use it often. It stands for present working directory. \n\n\nls\nIf you type in ls into the terminal and hit enter, it will print out a list of all of the directories and files inside the folder you are currently in. Here’s how it prints out on my own computer when I first launch Terminal:\n\nbash\n\nls\nDesktop      Library    Pictures\nDocuments    Movies     Public\nDownloads    Music      Sites  \nEach of the items listed here is another directory inside of my current directory. I can look inside and get a list of all the files inside of these directories by typing in ls and the name of the directory I want to see inside of. For example, if I wanted to get a list of all of the files on my desktop, this is what I would type:\n\nbash\n\nls Desktop\nSampletext.txt\nI only have one file on my desktop right now, and it’s a document called Sampletext.txt. \n\n\nKnow your surroundings\nReally skilled and accomplished programmers use the commands pwd and ls constantly, and so should you! It’s the only way to keep track of your surroundings on the command line. \nIf you ever are looking at a terminal, and don’t know what to do next, just type in pwd and ls. \nEvery time you do a new thing in the terminal, type in type in pwd and ls afterwards.\nJust type in pwd and ls all the time. :::"
-  },
-  {
-    "objectID": "notes/concepts/03_navigating-directories.html#getting-around",
-    "href": "notes/concepts/03_navigating-directories.html#getting-around",
-    "title": "Navigating Directories",
-    "section": "Getting around",
-    "text": "Getting around\nYou’re not always going to want to hang around in your home directory the whole time. You may want to get to a specific directory where some code or a script is to run it. To do this, we use the cd command, which stands for change directory.\n\ncd : Moving down 1 level\nTo change the folder you’re in, you just need to type in cd and then the name of the folder. For example to move from my home directory into my Documents folder, it would look like this:\n\nbash\n\nls\nDesktop     Library   Pictures\nDocuments   Movies    Public\nDownloads   Music     Sites\n\nbash\n\ncd Documents\nls\nFranklinInstituteSamples.pptx   Zoom\nFranklinInstituteSounds         html_practice\n\nbash\n\npwd\n/Users/Display/Documents\n\nFirst, I double checked which directories were in the folder I was currently in with ls.\nSecond, I moved into the Documents directory with cd Documents.\nThird, I checked what files and directories were in my new location with ls.\nFourth, I double checked my current location with pwd, which gave my the absolute path to where I was.\n\n\n\ncd : Moving up 1 level\nIf after moving into my documents folder, I wanted to move back to my home directory, that would involve moving up one level, because my Documents folder is inside of my home directory. We can do this using cd again, but instead of the name of a directory, we follow it with ... The two dots, .., is a short hand for “one level up from where I am.” Here’s how that works out on my system.\n\nbash\n\npwd\n/Users/Display/Documents\n\nbash\n\ncd ..\npwd\n/Users/Display\n\nFirst, I double checked where I was with pwd.\nSecond, I moved up one level with cd ..\nThird, I double checked where I would up with pwd again, confirming that I was now in my home directory again.\n\n\n\ncd : Moving down multiple levels\nYou don’t have to move down just one level at a time. For example, right now we’re in my home directory, but inside of my documents there’s a directory called html_practice. That’s two levels down. To get into html_practice, I just need to enter cd followed by the relative path to it. Remember, the relative path is the sequence of directory names that lie between where we are and where we want to go. Here’s how that looks on my system.\n\nbash\n\npwd\n/Users/Display\n\nbash\n\ncd Documents/html_practice\npwd\n/Users/Display/Documents/html_practice\n\nbash\n\nls\nsite.html  style.css\n\nFirst, I double checked my location with pwd\nSecond, I moved down two levels through Documents into html_practice with cd.\nThird, I double checked where I had moved to with pwd.\nLastly, I checked what files were in my new directory with ls.\n\n\n\nMoving up and over\nNow, we’re inside html_practice which is inside Documents. But what if we wanted to move into another directory that is also inside of Documents. For example, the directory Zoom is also inside of Documents, which is where Zoom saves all of the chat logs from our class meetings.\n\n\n\nWhere we want to move\n\n\nWe could do this in a two step process, using cd .. to move up one level, then cd Zoom to move into the zoom directory. But we can also combine the two into one step.\n\nbash\n\npwd\n/Users/Display/Documents/html_practice\n\nbash\n\ncd ../Zoom\npwd\n/Users/Display/Documents/Zoom\n\nFirst, I double checked where I was with pwd.\nThen, I moved up into Documents and down into Zoom in one go with cd ../Zoom\nFinally, I double checked where I wound up with pwd."
-  },
-  {
-    "objectID": "notes/concepts/03_navigating-directories.html#very-useful-tips",
-    "href": "notes/concepts/03_navigating-directories.html#very-useful-tips",
-    "title": "Navigating Directories",
-    "section": "Very useful tips!",
-    "text": "Very useful tips!\nThere are a few tips, tricks, and shortcuts that can make using the command line a little bit easier.\n\nTab autocomplete\nWhen using a command line interface, “tab autocomplete” is a crucial tool to help you get around. For example, if you are in your home directory and you want to move into your documents directory, all you really need to type is cd Doc and the terminal should autocomplete the rest of the file name! \nIf you have multiple directories that start with Doc, it will list all of them, and then you’ll only need to type in a few more characters before it will be able to autocomplete. \nTab autocomplete works for ls as well, which can let you explore through directories without needing to move around.\n\n\nGet back home!\nTechnically, your home directory is a directory with a long absolute path. But because it’s a directory you’ll probably want to keep getting back to often, there’s a shortcut built in. If you run cd ~, it will zip you back to your home directory from wherever you are.\n\n\nAbsolute paths\nIf, for some reason, you don’t know what the relative path is to a directory you want to get to from where you are (or maybe it’s very complicated), you can always run cd followed by the absolute path to where you want to go."
-  },
-  {
-    "objectID": "notes/concepts/03_navigating-directories.html#this-is-all-going-to-matter-a-lot",
-    "href": "notes/concepts/03_navigating-directories.html#this-is-all-going-to-matter-a-lot",
-    "title": "Navigating Directories",
-    "section": "This is all going to matter a lot",
-    "text": "This is all going to matter a lot\nUsing the command line and navigating your computer is going to come up a lot more in this course. You should try as much as you can to get a handle on how this all works now."
-  },
-  {
-    "objectID": "syllabus/schedule.html",
-    "href": "syllabus/schedule.html",
-    "title": "Course Schedule",
-    "section": "",
-    "text": "Week 1\n\n\n\nDates:\n\nJan 8-12\n\n\n\n\nTopics:\n\nSetup, What is Computational Linguistics?\n\n\n\n\n\nReadings\n\nFollow posted tutorials for setting up our course technology.\nTP Chapter 1\n\n\n\n\n\nWeek 2-3\n\n\n\nDates:\n\nJan 15-26\n\n\n\n\nTopics:\n\nFiles, Text, Strings, Regular Expressions, Finite State Automata\n\n\n\n\nNo Office Hours for MLK Jr Day.\n\nReadings:\n\nCourse Notes: What is Python\nSLP Chapter 2, section 2.1 (pdf)\nTP, Chapter 2, Variables, expressions and statements\nTP Chapter 3, Functionss\n\n\n\n\n\nWeek 4-5\n\n\n\nDates:\n\nJan 29-Feb 09\n\n\n\n\nTopics:\n\nText Normalization, Tokenization, Python Variables, Python Functions\n\n\n\n\n\nReadings:\n\nSLP Chapter 2, sections 2.2, 2.3, 2.4\nTP, Chapter 10, Lists\nTP, Chapter 7, Iteration\nTP, Chapter 5, Conditionals\nNLTK Book, Chapter 3\n\n\n\n\n\nWeek 6-7\n\n\n\nDates:\n\nFeb 12 - 23\n\n\n\n\nTopics:\n\nn-grams, Corpora, Document Classification, Python Loops and Conditionals\n\n\n\n\n\nReadings\n\nSLP Chapters 3, 4, 5\n\n\n\n\n\nWeek 8-9\n\n\n\nDates:\n\nFeb 26 - Mar 08\n\n\n\n\nTopics:\n\nHidden Markov Models\n\n\n\n\n\nReadings\n\nSLP Appendix A: Hidden Markov Models\nTP Chapter 11, Dictionaries\nTP Chapter 15, Classes and Objects\n\n\n\nSpring Break\n\n\n\n\n\nWeek 10-11\n\n\n\nDates:\n\nMar 18-29\n\n\n\n\nTopics:\n\nParsing, Dependency trees\n\n\n\n\n\n\n\nWeek 12-13\n\n\n\nDates:\n\nApr 01-12\n\n\n\n\nTopics:\n\nDistributional semantics, word “embeddings”\n\n\n\n\n\n\n\nWeek 14-15\n\n\n\nDates:\n\nApr 15-19\n\n\n\n\nTopics:\n\nNeural Network Basics, Review\n\n\n\n\n\n\n\n\nReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Course {Schedule}},\n  url = {https://lin511-2024.github.io/syllabus/schedule.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Course Schedule.” https://lin511-2024.github.io/syllabus/schedule.html."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "This is the website for Lin511, Computational Linguistics, taught at the University of Kentucky Spring 2024\n\nAttribution\n\nThe robot emoji in the course logo is modified from Open Emoji (link), licenced CC-BY-SA 4.0. Edited version here(svg).\n\n\n\n\n\nReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {About},\n  url = {https://lin511-2024.github.io/about.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “About.” https://lin511-2024.github.io/about.html."
+    "text": "Welcome to the Lin511 Computational Linguistics website. This course is being taught in the University of Kentucky’s Linguistics Department in Spring 2024\nIf you are visiting on a mobile device, site navigation can be found under the “hamburger” at the top.\n\n\n\nReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Computational {Linguistics} {(Spring} 2024)},\n  url = {https://lin511-2024.github.io/},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Computational Linguistics (Spring\n2024).” https://lin511-2024.github.io/."
   },
   {
     "objectID": "syllabus/syllabus.html",
@@ -287,116 +322,116 @@
     "text": "15 Diversity, Equity and Inclusion\nUK Senate DEI Statement\nThe University of Kentucky is committed to our core values of diversity and inclusion, mutual respect and human dignity, and a sense of community (Governing Regulations XIV). We acknowledge and respect the seen and unseen diverse identities and experiences of all members of the university community (https://www.uky.edu/regs/gr14). These identities include but are not limited to those based on race, ethnicity, gender identity and expressions, ideas and perspectives, religious and cultural beliefs, sexual orientation, national origin, age, ability, and socioeconomic status. We are committed to equity and justice and providing a learning and engaging community in which every member is engaged, heard, and valued.\nWe strive to rectify and change behavior that is inconsistent with our principles and commitment to diversity, equity, and inclusion. If students encounter such behavior in a course, they are encouraged to speak with the instructor of record and/or the Office of Institutional Equity and Equal Opportunity. Students may also contact a faculty member within the department, program director, the director of undergraduate or graduate studies, the department chair, any college administrator, or the dean. All of these individuals are mandatory reporters under University policies."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Computational Linguistics (Spring 2024)",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "Welcome to the Lin511 Computational Linguistics website. This course is being taught in the University of Kentucky’s Linguistics Department in Spring 2024\nIf you are visiting on a mobile device, site navigation can be found under the “hamburger” at the top.\n\n\n\nReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Computational {Linguistics} {(Spring} 2024)},\n  url = {https://lin511-2024.github.io/},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Computational Linguistics (Spring\n2024).” https://lin511-2024.github.io/."
+    "text": "This is the website for Lin511, Computational Linguistics, taught at the University of Kentucky Spring 2024\n\nAttribution\n\nThe robot emoji in the course logo is modified from Open Emoji (link), licenced CC-BY-SA 4.0. Edited version here(svg).\n\n\n\n\n\nReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {About},\n  url = {https://lin511-2024.github.io/about.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “About.” https://lin511-2024.github.io/about.html."
   },
   {
-    "objectID": "notes/concepts/01_keyboarding.html#single-quotes-vs-backticks",
-    "href": "notes/concepts/01_keyboarding.html#single-quotes-vs-backticks",
-    "title": "“Where is the … key?”",
-    "section": "Single Quotes vs Backticks",
-    "text": "Single Quotes vs Backticks\nIt’s important to distinguish between single quotes: ' and backticks `. They look similar, but aren’t interchangeable.\nThe backtick key is highlighted in the images of the keyboards below, in the top left side.\n\nPCMac"
+    "objectID": "syllabus/schedule.html",
+    "href": "syllabus/schedule.html",
+    "title": "Course Schedule",
+    "section": "",
+    "text": "Week 1\n\n\n\nDates:\n\nJan 8-12\n\n\n\n\nTopics:\n\nSetup, What is Computational Linguistics?\n\n\n\n\n\nReadings\n\nFollow posted tutorials for setting up our course technology.\nTP Chapter 1\n\n\n\n\n\nWeek 2-3\n\n\n\nDates:\n\nJan 15-26\n\n\n\n\nTopics:\n\nFiles, Text, Strings, Regular Expressions, Finite State Automata\n\n\n\n\nNo Office Hours for MLK Jr Day.\n\nReadings:\n\nCourse Notes: What is Python\nSLP Chapter 2, section 2.1 (pdf)\nTP, Chapter 2, Variables, expressions and statements\nTP Chapter 3, Functionss\n\n\n\n\n\nWeek 4-5\n\n\n\nDates:\n\nJan 29-Feb 09\n\n\n\n\nTopics:\n\nText Normalization, Tokenization, Python Variables, Python Functions\n\n\n\n\n\nReadings:\n\nSLP Chapter 2, sections 2.2, 2.3, 2.4\nTP, Chapter 10, Lists\nTP, Chapter 7, Iteration\nTP, Chapter 5, Conditionals\nNLTK Book, Chapter 3\n\n\n\n\n\nWeek 6-7\n\n\n\nDates:\n\nFeb 12 - 23\n\n\n\n\nTopics:\n\nn-grams, Corpora, Document Classification, Python Loops and Conditionals\n\n\n\n\n\nReadings\n\nSLP Chapters 3, 4, 5\n\n\n\n\n\nWeek 8-9\n\n\n\nDates:\n\nFeb 26 - Mar 08\n\n\n\n\nTopics:\n\nHidden Markov Models\n\n\n\n\n\nReadings\n\nSLP Appendix A: Hidden Markov Models\nTP Chapter 11, Dictionaries\nTP Chapter 15, Classes and Objects\n\n\n\nSpring Break\n\n\n\n\n\nWeek 10-11\n\n\n\nDates:\n\nMar 18-29\n\n\n\n\nTopics:\n\nParsing, Dependency trees\n\n\n\n\n\n\n\nWeek 12-13\n\n\n\nDates:\n\nApr 01-12\n\n\n\n\nTopics:\n\nDistributional semantics, word “embeddings”\n\n\n\n\n\n\n\nWeek 14-15\n\n\n\nDates:\n\nApr 15-19\n\n\n\n\nTopics:\n\nNeural Network Basics, Review\n\n\n\n\n\n\n\n\nReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Course {Schedule}},\n  url = {https://lin511-2024.github.io/syllabus/schedule.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Course Schedule.” https://lin511-2024.github.io/syllabus/schedule.html."
   },
   {
-    "objectID": "notes/concepts/01_keyboarding.html#slash-vs-backslash-.",
-    "href": "notes/concepts/01_keyboarding.html#slash-vs-backslash-.",
-    "title": "“Where is the … key?”",
-    "section": "Slash (/) vs backslash (\\).",
-    "text": "Slash (/) vs backslash (\\).\nThese different symbols will do different things, and aren’t interchangeable!\n\nSlash (/) location\n\nPCMac\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBackslash (\\) location\n\nPCMac"
+    "objectID": "notes/concepts/03_navigating-directories.html",
+    "href": "notes/concepts/03_navigating-directories.html",
+    "title": "Navigating Directories",
+    "section": "",
+    "text": "Some of what we’ll be doing in class will involve interacting with your computer through a “Command Line Interface.” Command line interacts are purely text based way to interact with your computer. It’s your same exact computer, just a different way of using it without using icons, or clicking. \n\n\nIn macOS, we can access a command line interface using the program Terminal. You can find Terminal in your Applications inside the folder called Utilities, or just by typing in “Terminal” into Spotlight search.\n\n\n\nFor now, on Windows, I’d recommend using PowerShell. You can launch PowerShell by searching for it in the Start menu."
   },
   {
-    "objectID": "notes/concepts/01_keyboarding.html#the-tilde-key.",
-    "href": "notes/concepts/01_keyboarding.html#the-tilde-key.",
-    "title": "“Where is the … key?”",
-    "section": "The tilde ~ key.",
-    "text": "The tilde ~ key.\nTo type the tilde1 key you have to hold Shift+`.\n\nPCMac"
+    "objectID": "notes/concepts/03_navigating-directories.html#command-line-interface",
+    "href": "notes/concepts/03_navigating-directories.html#command-line-interface",
+    "title": "Navigating Directories",
+    "section": "",
+    "text": "Some of what we’ll be doing in class will involve interacting with your computer through a “Command Line Interface.” Command line interacts are purely text based way to interact with your computer. It’s your same exact computer, just a different way of using it without using icons, or clicking. \n\n\nIn macOS, we can access a command line interface using the program Terminal. You can find Terminal in your Applications inside the folder called Utilities, or just by typing in “Terminal” into Spotlight search.\n\n\n\nFor now, on Windows, I’d recommend using PowerShell. You can launch PowerShell by searching for it in the Start menu."
   },
   {
-    "objectID": "notes/concepts/01_keyboarding.html#the-caret",
-    "href": "notes/concepts/01_keyboarding.html#the-caret",
-    "title": "“Where is the … key?”",
-    "section": "The caret ^",
-    "text": "The caret ^\nYou can get the caret symbol with Shift+6\n\nPCMac"
+    "objectID": "notes/concepts/03_navigating-directories.html#getting-your-bearings",
+    "href": "notes/concepts/03_navigating-directories.html#getting-your-bearings",
+    "title": "Navigating Directories",
+    "section": "Getting your Bearings",
+    "text": "Getting your Bearings\nWhen you first launch your command line interface, it will look something like this:\n\n\n\nCommand Line Interface\n\n\nThis is obviously scary looking, and it doesn’t give you much hint as to what to do next. The important to thing to keep in mind is that while you are using the command line interface you are inside of a folder. There are two commands I recommend using over and over again to figure out where you are, and where you can go.\n\n“The Prompt”\nWe call the the space waiting for us to type in something the “prompt”. It usually has a symbol before it. Depending on your system, it might be any of the following: $, %, or &gt;. If you type something in here, your computer will interpret it as a command, and try to run it. \n\n\npwd\nIf you type in pwd into the terminal and hit enter, it will print out the absolute path to where you currently are. When you first launch a terminal, it usually starts you off in your home directory, which is usually going to be named after your username.\n\nbash\n\npwd\n/Users/Display\nUse pwd early, and use it often. It stands for present working directory. \n\n\nls\nIf you type in ls into the terminal and hit enter, it will print out a list of all of the directories and files inside the folder you are currently in. Here’s how it prints out on my own computer when I first launch Terminal:\n\nbash\n\nls\nDesktop      Library    Pictures\nDocuments    Movies     Public\nDownloads    Music      Sites  \nEach of the items listed here is another directory inside of my current directory. I can look inside and get a list of all the files inside of these directories by typing in ls and the name of the directory I want to see inside of. For example, if I wanted to get a list of all of the files on my desktop, this is what I would type:\n\nbash\n\nls Desktop\nSampletext.txt\nI only have one file on my desktop right now, and it’s a document called Sampletext.txt. \n\n\nKnow your surroundings\nReally skilled and accomplished programmers use the commands pwd and ls constantly, and so should you! It’s the only way to keep track of your surroundings on the command line. \nIf you ever are looking at a terminal, and don’t know what to do next, just type in pwd and ls. \nEvery time you do a new thing in the terminal, type in type in pwd and ls afterwards.\nJust type in pwd and ls all the time. :::"
   },
   {
-    "objectID": "notes/concepts/01_keyboarding.html#the-pipe",
-    "href": "notes/concepts/01_keyboarding.html#the-pipe",
-    "title": "“Where is the … key?”",
-    "section": "The Pipe |",
-    "text": "The Pipe |\nYou can get the pipe, or vertical bar, with Shift+\\.\n\nPCMac"
+    "objectID": "notes/concepts/03_navigating-directories.html#getting-around",
+    "href": "notes/concepts/03_navigating-directories.html#getting-around",
+    "title": "Navigating Directories",
+    "section": "Getting around",
+    "text": "Getting around\nYou’re not always going to want to hang around in your home directory the whole time. You may want to get to a specific directory where some code or a script is to run it. To do this, we use the cd command, which stands for change directory.\n\ncd : Moving down 1 level\nTo change the folder you’re in, you just need to type in cd and then the name of the folder. For example to move from my home directory into my Documents folder, it would look like this:\n\nbash\n\nls\nDesktop     Library   Pictures\nDocuments   Movies    Public\nDownloads   Music     Sites\n\nbash\n\ncd Documents\nls\nFranklinInstituteSamples.pptx   Zoom\nFranklinInstituteSounds         html_practice\n\nbash\n\npwd\n/Users/Display/Documents\n\nFirst, I double checked which directories were in the folder I was currently in with ls.\nSecond, I moved into the Documents directory with cd Documents.\nThird, I checked what files and directories were in my new location with ls.\nFourth, I double checked my current location with pwd, which gave my the absolute path to where I was.\n\n\n\ncd : Moving up 1 level\nIf after moving into my documents folder, I wanted to move back to my home directory, that would involve moving up one level, because my Documents folder is inside of my home directory. We can do this using cd again, but instead of the name of a directory, we follow it with ... The two dots, .., is a short hand for “one level up from where I am.” Here’s how that works out on my system.\n\nbash\n\npwd\n/Users/Display/Documents\n\nbash\n\ncd ..\npwd\n/Users/Display\n\nFirst, I double checked where I was with pwd.\nSecond, I moved up one level with cd ..\nThird, I double checked where I would up with pwd again, confirming that I was now in my home directory again.\n\n\n\ncd : Moving down multiple levels\nYou don’t have to move down just one level at a time. For example, right now we’re in my home directory, but inside of my documents there’s a directory called html_practice. That’s two levels down. To get into html_practice, I just need to enter cd followed by the relative path to it. Remember, the relative path is the sequence of directory names that lie between where we are and where we want to go. Here’s how that looks on my system.\n\nbash\n\npwd\n/Users/Display\n\nbash\n\ncd Documents/html_practice\npwd\n/Users/Display/Documents/html_practice\n\nbash\n\nls\nsite.html  style.css\n\nFirst, I double checked my location with pwd\nSecond, I moved down two levels through Documents into html_practice with cd.\nThird, I double checked where I had moved to with pwd.\nLastly, I checked what files were in my new directory with ls.\n\n\n\nMoving up and over\nNow, we’re inside html_practice which is inside Documents. But what if we wanted to move into another directory that is also inside of Documents. For example, the directory Zoom is also inside of Documents, which is where Zoom saves all of the chat logs from our class meetings.\n\n\n\nWhere we want to move\n\n\nWe could do this in a two step process, using cd .. to move up one level, then cd Zoom to move into the zoom directory. But we can also combine the two into one step.\n\nbash\n\npwd\n/Users/Display/Documents/html_practice\n\nbash\n\ncd ../Zoom\npwd\n/Users/Display/Documents/Zoom\n\nFirst, I double checked where I was with pwd.\nThen, I moved up into Documents and down into Zoom in one go with cd ../Zoom\nFinally, I double checked where I wound up with pwd."
   },
   {
-    "objectID": "notes/concepts/01_keyboarding.html#side-note-smart-quotes",
-    "href": "notes/concepts/01_keyboarding.html#side-note-smart-quotes",
-    "title": "“Where is the … key?”",
-    "section": "Side Note: “Smart Quotes”",
-    "text": "Side Note: “Smart Quotes”\nIf, at some point, you copy-paste text from the internet into your code or a text file, you might wind up with “smart quotes” that make things work weird!\n\n\n\nRegular Quotes\nSmart Quotes\n\n\n\n\n\"regular\"\n“smart”\n\n\n'regular'\n‘smart’\n\n\n\nBe careful not to have smart quotes cropping up in your code or data!"
+    "objectID": "notes/concepts/03_navigating-directories.html#very-useful-tips",
+    "href": "notes/concepts/03_navigating-directories.html#very-useful-tips",
+    "title": "Navigating Directories",
+    "section": "Very useful tips!",
+    "text": "Very useful tips!\nThere are a few tips, tricks, and shortcuts that can make using the command line a little bit easier.\n\nTab autocomplete\nWhen using a command line interface, “tab autocomplete” is a crucial tool to help you get around. For example, if you are in your home directory and you want to move into your documents directory, all you really need to type is cd Doc and the terminal should autocomplete the rest of the file name! \nIf you have multiple directories that start with Doc, it will list all of them, and then you’ll only need to type in a few more characters before it will be able to autocomplete. \nTab autocomplete works for ls as well, which can let you explore through directories without needing to move around.\n\n\nGet back home!\nTechnically, your home directory is a directory with a long absolute path. But because it’s a directory you’ll probably want to keep getting back to often, there’s a shortcut built in. If you run cd ~, it will zip you back to your home directory from wherever you are.\n\n\nAbsolute paths\nIf, for some reason, you don’t know what the relative path is to a directory you want to get to from where you are (or maybe it’s very complicated), you can always run cd followed by the absolute path to where you want to go."
   },
   {
-    "objectID": "notes/concepts/01_keyboarding.html#footnotes",
-    "href": "notes/concepts/01_keyboarding.html#footnotes",
-    "title": "“Where is the … key?”",
+    "objectID": "notes/concepts/03_navigating-directories.html#this-is-all-going-to-matter-a-lot",
+    "href": "notes/concepts/03_navigating-directories.html#this-is-all-going-to-matter-a-lot",
+    "title": "Navigating Directories",
+    "section": "This is all going to matter a lot",
+    "text": "This is all going to matter a lot\nUsing the command line and navigating your computer is going to come up a lot more in this course. You should try as much as you can to get a handle on how this all works now."
+  },
+  {
+    "objectID": "notes/concepts/01_what-is-python.html",
+    "href": "notes/concepts/01_what-is-python.html",
+    "title": "What is Python?",
+    "section": "",
+    "text": "When talking about “Python” or other programming langauges, we often engage in a form of polysemy1 that can be confusing at first. I’ll try to unpack the different meanings here."
+  },
+  {
+    "objectID": "notes/concepts/01_what-is-python.html#python-is-set-of-rules-for-a-formal-language",
+    "href": "notes/concepts/01_what-is-python.html#python-is-set-of-rules-for-a-formal-language",
+    "title": "What is Python?",
+    "section": "📕 Python is set of rules for a formal language",
+    "text": "📕 Python is set of rules for a formal language\nWhen we talk about “Python”, one thing we sometimes refer to is an abstract set of rules for a formal language.\n\n\n\n\n\n\n📕 The abstract language\n\n\n\nWhen you say:\n\nI’m learning Python this semester.\n\nYou’re talking about the abstract set of rules.\n\n\nWe can describe some of these rules in natural language (this isn’t how they’re actually written).\n\nIf a list of values has been assigned to a variable, when the variable’s name is followed [0], return the first value in the list.\nIf print( is followed by a value or variable, which is then followed by ), print the value, or the value assigned to the variable.\nIf a # symbol is encountered on a line, ignore everything following it.\n\nThese rules define very precisely how code should be written, and also define what should be done when certain patterns of code are encountered, but these rules are abstract, and don’t actually do anything."
+  },
+  {
+    "objectID": "notes/concepts/01_what-is-python.html#python-is-a-program-that-interprets-formal-language-input",
+    "href": "notes/concepts/01_what-is-python.html#python-is-a-program-that-interprets-formal-language-input",
+    "title": "What is Python?",
+    "section": "🤖 Python is a program that interprets formal language input",
+    "text": "🤖 Python is a program that interprets formal language input\nSimply having a set of abstract rules can be fun, but it’s not so useful if you have no way to actually do things. To make code we write actually do anything, we need to use a program called an Interpreter.\n\n\n\n\n\n\n🤖 The Python Interpreter\n\n\n\nWhen you say\n\nI’m having a hard time installing Python.\n\nyou’re talking about a Python Interpreter.\n\n\nThe Python interpreter processes code, determines whether or not it is valid, then does the things the code told it to do.\nCode can get passed to the interpreter many different ways, including\n\nIn a single text file, called a python “script”, (usually named to end in .py)\nIn an interactive python “shell”.\nInside a Jupyter notebook.\n\nFor example, the text in the shaded block below was passed to a Python interpreter, and the interpreter decided that it was invalid (because there is an opening quote \", but not a closing quote).\n\n\npython\n\n\"x\n\nSyntaxError: unterminated string literal (detected at line 1) (20073044.py, line 1)\n\n\nThe text in this next shaded block was passed to a Python interpreter. This time, it was deemed valid, and the interpreter did what the code instructed.\n\n\npython\n\nprint(\"hello! \" * 3)\n\nhello! hello! hello!"
+  },
+  {
+    "objectID": "notes/concepts/01_what-is-python.html#python-is-an-ecosystem",
+    "href": "notes/concepts/01_what-is-python.html#python-is-an-ecosystem",
+    "title": "What is Python?",
+    "section": "⛰️ Python is an Ecosystem",
+    "text": "⛰️ Python is an Ecosystem\nPeople often say that Python comes “with batteries included”, meaning it can do a lot of different things out without needing to install any extensions. But you can install extensions in the form of additional libraries that extend Python’s capabilities.\n\n\n\n\n\n\n⛰️ The Ecosystem\n\n\n\nWhen someone says\n\nPython is the most widely used language in natural language processing.\n\nThey are talking about the ecosystem of libraries for Python hat have been built to do natural language processing.\n\n\nSome examples of additional libraries for Python are\n\nnumpy: Allows for effective computation with numbers\nmatplotlib: Makes graphs\n\n\n\npython\n\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nx = np.linspace(0, 2 * np.pi, 200)\ny = np.sin(x)\n\nfig, ax = plt.subplots()\nax.plot(x, y)\nplt.show()"
+  },
+  {
+    "objectID": "notes/concepts/01_what-is-python.html#python-is-a-social-project",
+    "href": "notes/concepts/01_what-is-python.html#python-is-a-social-project",
+    "title": "What is Python?",
+    "section": "🧑‍💻 Python is a social project",
+    "text": "🧑‍💻 Python is a social project\nThe meanings of “Python” we’ve already talked about are\n\n📕 The abstract language\n🤖 The Python Interpreter\n⛰️ The Python Ecosystem\n\nUnderstanding how to put all of these pieces together effectively is a social project.\n\n\n\n\n\n\n🧑‍💻 The social project\n\n\n\nWhen you say\n\nSo-n-so is really good at Python.\n\nYou are talking about their involvement in the Python social project.\n\n\n\n❌ There is no part of the 📕 abstract language that will inform you that there is a very good Python library for doing a certain task.\n❌ The 🤖 Python Interpreter won’t tell you that there’s a better way to do what you’re trying to do.\n❌ There are nearly half a million libraries on ⛰️ the Python Package Index, so you can’t just peruse it to find what’s relevant.\n\nIn order to know newest or most effective way to do things, you need to be involved in 🧑‍💻 the social project. That begins within a classroom, then extends to keeping up with blogs and other discourses about changes and developments.\nOne way people demonstrate that they are involved in the Python social project is by writing their code idiomatically. For example, in the code block above, I included the line import numpy as np. But there’s no rule that we import numpy as np, it’s simply convention.\nThis code below will run just as well, but would cause problems for people trying to read your code, because it’s not idiomatic.\n\n\npython\n\nimport matplotlib.pyplot as jokes\nimport numpy as farts\n\nx = farts.linspace(0, 2 * farts.pi, 200)\ny = farts.sin(x)\n\nfig, ax = jokes.subplots()\nax.plot(x, y)\njokes.show()"
+  },
+  {
+    "objectID": "notes/concepts/01_what-is-python.html#the-polysemy-is-ok",
+    "href": "notes/concepts/01_what-is-python.html#the-polysemy-is-ok",
+    "title": "What is Python?",
+    "section": "📕, 🤖, ⛰️, 🧑‍💻 The Polysemy is Ok",
+    "text": "📕, 🤖, ⛰️, 🧑‍💻 The Polysemy is Ok\nIt’s ok just say “Python” when you’re talking about one specific meaning."
+  },
+  {
+    "objectID": "notes/concepts/01_what-is-python.html#footnotes",
+    "href": "notes/concepts/01_what-is-python.html#footnotes",
+    "title": "What is Python?",
     "section": "Footnotes",
-    "text": "Footnotes\n\n\nPronunciations include [tɪl.də] and [tɪl.di]↩︎"
+    "text": "Footnotes\n\n\nA word is polysemous when it has more than one meaning.↩︎"
   },
   {
-    "objectID": "notes/concepts/02_undersdanding-paths.html",
-    "href": "notes/concepts/02_undersdanding-paths.html",
-    "title": "Understanding Directories",
+    "objectID": "notes/concepts/00_glossary.html",
+    "href": "notes/concepts/00_glossary.html",
+    "title": "Glossary",
     "section": "",
-    "text": "There has recently been an uptick in discussion among college professors that students are less familiar with the notions of files, folders, directories, and paths than they used to be in the past. This is in part a natural consequence of shifting paradigms in computer use. Many people are exclusively using online services like Google Docs, and don’t save files to their computers ever. And even when we do save files on out computer, many operating systems have search based approaches to finding files.\nThe problem for scientific computing purposes, or even just making some simple HTML pages on your local computer, is that you need to be able to navigate the hierarchical file system of your computer, in order to tell your programs how to navigate it."
-  },
-  {
-    "objectID": "notes/concepts/02_undersdanding-paths.html#directory-structure",
-    "href": "notes/concepts/02_undersdanding-paths.html#directory-structure",
-    "title": "Understanding Directories",
-    "section": "",
-    "text": "There has recently been an uptick in discussion among college professors that students are less familiar with the notions of files, folders, directories, and paths than they used to be in the past. This is in part a natural consequence of shifting paradigms in computer use. Many people are exclusively using online services like Google Docs, and don’t save files to their computers ever. And even when we do save files on out computer, many operating systems have search based approaches to finding files.\nThe problem for scientific computing purposes, or even just making some simple HTML pages on your local computer, is that you need to be able to navigate the hierarchical file system of your computer, in order to tell your programs how to navigate it."
-  },
-  {
-    "objectID": "notes/concepts/02_undersdanding-paths.html#files-in-folders",
-    "href": "notes/concepts/02_undersdanding-paths.html#files-in-folders",
-    "title": "Understanding Directories",
-    "section": "Files in Folders",
-    "text": "Files in Folders\nThe first thing to be clear about is that all files you’ve saved on your computer are in a folder (a.k.a. a directory). “Documents” or “My Documents” is a folder. Even your Desktop is a folder. This is true for both macOS and Windows. For example, I have an account on my laptop called “Display” for when I want to show how my computer works without showing everyone all of my personal files. In the Display account, I saved a little text file called Sampletext.txt to the desktop. In this screenshot, you can see Sampletext.txt shown both on my desktop, and as a file in a folder.\n\n\n\nDesktop is a folder\n\n\nWhat’s nice about this image is that you can see where Sampletext.txt exists in the context of my whole hard drive. My “Desktop” is just a folder that my computer shows the content of on my main screen. The Desktop folder is inside of a folder called “Display”. There are other folders in there, including my main user account, joseffruehwald. All of these folders are grouped together in the “Users” folder, and the “Users” folder is one of the first folders immediately underneath my hard drive.\nThe important thing to keep in mind here is that all files, programs, photos, etc are stored somewhere in a folder, inside of another folder, probably inside of another folder. You might not always interact with the files this way, and they might not always look like they’re in a folder, but they are.\n\nViewing the folder hierarchy on a Mac\nTo be able to better view the full hierarchy of folders on a Mac, I would recommend the following:\n\nOpen Finder, and in the View menu, select “as Columns”\nUnder the View menu again, select “Show Path Bar”\n\n\n\nViewing the folder hierarchy in Windows\nAt the top of the file browser on Windows, you’ll see the sequence of files in which the current folder is embedded.\n\n\n\nWindows directory structure"
-  },
-  {
-    "objectID": "notes/concepts/02_undersdanding-paths.html#giving-directions-to-programs",
-    "href": "notes/concepts/02_undersdanding-paths.html#giving-directions-to-programs",
-    "title": "Understanding Directories",
-    "section": "Giving Directions to Programs",
-    "text": "Giving Directions to Programs\nPrograms are going to need directions for where to find things, and we can do this with “paths”. The concept of a path is so important, I’m going to really emphasize it\n“paths” \nThe “path” to a file is a written instruction for where to find a file on your specific computer."
-  },
-  {
-    "objectID": "notes/concepts/02_undersdanding-paths.html#relative-paths",
-    "href": "notes/concepts/02_undersdanding-paths.html#relative-paths",
-    "title": "Understanding Directories",
-    "section": "Relative Paths",
-    "text": "Relative Paths\nSometimes, we only need to tell a file where another file is relative to itself. For example, here is an HTML document and a CSS stylesheet for that document.\n\n\n\nhtml and css in a dicectory\n\n\nFrom site.html to style.css: style.css\nBecause style.css is in the same folder as site.html, we only need to tell site.html to look for style.css, like so\n\nhtml\n\n&lt;link \n  rel=\"stylesheet\" \n  type=\"text/css\" \n  href=\"style.css\"&gt;\nJust telling the html file to look for style.css, it’s going to look inside of, and only inside of the same folder as itself.\nHowever, sometimes people like to put all of the stylesheets and images for a website inside of a folder called “assets,” like so:\n\n\n\nstylesheet in assets\n\n\nFrom site.html to style.css: assets/style.css\nNow, if we tell site.html just to look for style.css, it’s not going to find it anymore! That’s because style.css is no longer in the same folder as site.html. We’ll need to update the link to the stylesheet to reflect the fact that it’s now in a different folder, like so:\n\nhtml\n\n&lt;link \n  rel=\"stylesheet\" \n  type=\"text/css\" \n  href=\"assets/style.css\"&gt;\nHere’s how site.html interprets the string assets/style.css:\n\nLook inside the folder you’re currently in for a folder called assets\nThen, look inside of that folder for a file called style.css\n\nWe could take it a step further, and create a new folder called “css” inside of “assets”, and put our stylesheet there instead.\n\n\n\n`assets/css/style.css`\n\n\nFrom site.html to style.css: assets/css/style.css\nNow, we’d need to update the link to the stylesheet to look like this\n\nhtml\n\n&lt;link \n  rel=\"stylesheet\" \n  type=\"text/css\" \n  href=\"assets/css/style.css\"&gt;\nAgain, breaking this down into how site.html interprets the string assets/css/style.css goes like this:\n\nLook inside of the same folder as yourself for a folder called assets\nLook inside of that folder for a folder called css\nLook inside of that folder for a file called style.css"
-  },
-  {
-    "objectID": "notes/concepts/02_undersdanding-paths.html#absolute-paths",
-    "href": "notes/concepts/02_undersdanding-paths.html#absolute-paths",
-    "title": "Understanding Directories",
-    "section": "Absolute Paths",
-    "text": "Absolute Paths\nRelative paths define the location of a file relative to another file, usually the one you’re writing. However, we can also define the location of a file on our computer that will work no matter where we’re looking from. These are called “absolute paths.” Put simply, absolute paths just list all of the nested folders a file is in, all the way up to the hard drive. You can see the absolute path for style.css at the bottom of the very last screen shot.\nDifferent operating systems have different short hands for describing the top level, or hard drive level, of the path. On macOS, it’s simply a / at the beginning of the path. On Windows, it usually begins with C:\\. For the final location of style.css in the screenshot above, the absolute path would be.\n/Users/Display/Documents/html_practice/assets/css/style.css\nIf for some reason I didn’t want to move or copy this stylesheet from this location, and I wanted to link to it from an HTML file saved in some completely different location on my laptop, I could give it this absolute path, and it would find it."
-  },
-  {
-    "objectID": "notes/concepts/02_undersdanding-paths.html#important-note-on-naming",
-    "href": "notes/concepts/02_undersdanding-paths.html#important-note-on-naming",
-    "title": "Understanding Directories",
-    "section": "Important Note on Naming",
-    "text": "Important Note on Naming\nFrom here on out in the course, you should avoid using spaces in any of the files or folders you name. While you can take spaces into account when giving a path, it’s annoying. Instead, I’d recommend using an underscore _, a dash -, or naming files with “camel case”.\n\nmy_file.txt\nmy-file.txt\nmyFile.txt"
-  },
-  {
-    "objectID": "notes/concepts/02_undersdanding-paths.html#important-note-on-using-paths",
-    "href": "notes/concepts/02_undersdanding-paths.html#important-note-on-using-paths",
-    "title": "Understanding Directories",
-    "section": "Important Note on Using Paths",
-    "text": "Important Note on Using Paths\nThere are two crucial things to remember about using paths that can be conceptually difficult when first getting started.\n\nRelative paths always depend on where you’re coming from and where you’re going to. If either my HTML file was in a location I was confused about, or my CSS file was in a location I was confused about, my relative path might not work.\nBoth relative paths and absolute paths depend on how files are organized inside of your own computer. A path copied from an example online, or a professor’s template might not work  if your file structure is different."
+    "text": "Clone\n\nMaking a copy of a git repository on another computer, whether locally or remotely.\n\nCopy-Paste\n\nCopying text to your computer’s ‘clipboard’ and pasting it into another location.\nCopying can be done many ways, including selecting text with your mouse, right-clicking then selecting ‘copy’, by selecting text and using your computer’s ‘hotkey’ for copying (), or, in the course documents, by clicking on the ‘copy’ icon in most code chunks.\nTo paste, you can either right-click and select ‘Paste’, or use your system’s ‘hotkey’ ().\n\nFind, or \n\nYou can find text in most pages or documents by either typing , then typing in the text you want to find in the dialogue box that pops up.\n\nFormal\n\nIn computational linguistics, ‘formal’ isn’t the opposite of ‘casual’. It’s about any system or language which has a strict set of acceptable symbols, and how they can be combined.\n\nGitHub Codespaces\n\nGitHub Codespaces are a ‘development environment’, running on a Virtual Machine. They’re like mini computers you can access through your web browser that get created just for the repository you launch one in. The actual memory and computation are being run on GitHub’s physical computers.\n\nLocal (adj)\n\nDescribes anything that exists or happens on the actual device you’re interacting with. For example, if you have a Microsoft Word document on your computer that ends in .docx, it is probably ‘local’ (even if theres a ‘remote’ copy somewhere). These days, it’s not always obvious if things happen locally or remotely. If you have a phone that does facial recognition on pictures you take, if the facial recognition program runs on your phone, it’s ‘local’. But if the picture needs to get uploaded to Apple or Google first, then the facial recognition is ‘remote’.\n\nRemote (adj)\n\nDescribes anything that exists or happens on a different device than the one you’re interacting with. For example, if you edit a Google Doc, the actual document is stored on a Google computer, not on the device you’re editing.\n\nTab Autocomplete\n\nMany programming applications have “Tab Autocomplete” suggestions that allow you to type in just a few letters of the command, function, or variable you want to use, and then hit Tab.\n\nVirtual Machine/VM\n\nVirtual Machines are simulations of computers. It’s like having an encapsulated computer, running its own operating system and programs, that borrows memory and computing resources from computers it’s running on.\n\n\n\nReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Glossary},\n  url = {https://lin511-2024.github.io/notes/concepts/00_glossary.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Glossary.” https://lin511-2024.github.io/notes/concepts/00_glossary.html."
   },
   {
     "objectID": "notes/meetings/01_fsm.html",
@@ -466,7 +501,7 @@
     "href": "notes/index.html",
     "title": "Meeting Notes",
     "section": "",
-    "text": "These are the notes for our regular meetings. \n\n\n\n\n\n\n\n\n  \n\n\n\n\nSetup Notes\n\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\n\n\nJan 8, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n  \n\n\n\n\nRegular Languages and Finite State Machines\n\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n  \n\n\n\n\nFSA in-class notes\n\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n  \n\n\n\n\nPython basics\n\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\n\n\nJosef Fruehwald\n\n\n\n\n\n\n  \n\n\n\n\nPaths in Python\n\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\n\n\nJosef Fruehwald\n\n\n\n\n\n\nNo matching items\n\nReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Meeting {Notes}},\n  url = {https://lin511-2024.github.io/notes},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Meeting Notes.” https://lin511-2024.github.io/notes."
+    "text": "These are the notes for our regular meetings. \n\n\n\n\n\n\n\n\n  \n\n\n\n\nSetup Notes\n\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\n\n\nJan 8, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n  \n\n\n\n\nRegular Languages and Finite State Machines\n\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n  \n\n\n\n\nFSA in-class notes\n\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n  \n\n\n\n\nPushdown Automata and Context Free Languages\n\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\n\n\nJan 23, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n  \n\n\n\n\nPython basics\n\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\n\n\nJosef Fruehwald\n\n\n\n\n\n\n  \n\n\n\n\nPaths in Python\n\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\n\n\nJosef Fruehwald\n\n\n\n\n\n\nNo matching items\n\nReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Meeting {Notes}},\n  url = {https://lin511-2024.github.io/notes},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Meeting Notes.” https://lin511-2024.github.io/notes."
   },
   {
     "objectID": "notes/programming/01_Python_basics.html",

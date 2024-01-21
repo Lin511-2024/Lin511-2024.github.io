@@ -11,7 +11,470 @@
 <description></description>
 <language>en</language>
 <generator>quarto-1.3.450</generator>
-<lastBuildDate>Tue, 16 Jan 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 23 Jan 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Pushdown Automata and Context Free Languages</title>
+  <dc:creator>Josef Fruehwald</dc:creator>
+  <link>https://lin511-2024.github.io/notes/meetings/02_pda.html</link>
+  <description><![CDATA[ 
+
+
+
+<section id="more-like-a-rip-off-machine" class="level2">
+<h2 class="anchored" data-anchor-id="more-like-a-rip-off-machine">More like a rip-off machine</h2>
+<p>In the notes on <a href="../../notes/meetings/01_fsm.html">Finite State Automata</a>, we looked at this turnstile finite state automaton.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram
+  direction LR
+  state "Locked" as l
+  state "Unlocked" as u
+  
+  [*] --&gt; l
+  l --&gt; l: push
+  l --&gt; u: coin
+  u --&gt; u: coin
+  u --&gt; l: push
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>An annoying thing about this turnstile is that if you don’t know how it works, it will rip you off!</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+A scenario
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Robin approaches the finite-state turnstile with two of their friends. They think</p>
+<blockquote class="blockquote">
+<p>There’s three of us, and I have three tokens. I’ll speed things up and be a good friend by popping three tokens into the machine, and then all three of us can pop through.</p>
+</blockquote>
+</div>
+</div>
+<p>Robin is expecting a pattern like this to happen</p>
+<p><i class="fa-solid fa-coins" aria-label="coins"></i>, <i class="fa-solid fa-coins" aria-label="coins"></i>, <i class="fa-solid fa-coins" aria-label="coins"></i>, <i class="fa-solid fa-person" aria-label="person"></i>, <i class="fa-solid fa-person" aria-label="person"></i>, <i class="fa-solid fa-person" aria-label="person"></i></p>
+<p>Little does Robin know that the way this turnstile works is that after you put a coin into the slot, the coin rolls past and triggers the unlocking mechanism and goes straight into the collection bin. If the turnstile is already unlocked, the coin just rolls into the collection bin. It doesn’t have any “memory” of how many coins it’s been fed, so after one person walks through, the turnstile relocks.</p>
+<p>So here’s what happens to Robin and their friends</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Input</th>
+<th>New State</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>Locked</td>
+</tr>
+<tr class="even">
+<td><p><i class="fa-solid fa-coins" aria-label="coins"></i></p></td>
+<td>Unlocked</td>
+</tr>
+<tr class="odd">
+<td><p><i class="fa-solid fa-coins" aria-label="coins"></i></p></td>
+<td>Unlocked</td>
+</tr>
+<tr class="even">
+<td><p><i class="fa-solid fa-coins" aria-label="coins"></i></p></td>
+<td>Unlocked</td>
+</tr>
+<tr class="odd">
+<td><p><i class="fa-solid fa-person" aria-label="person"></i></p></td>
+<td>Locked</td>
+</tr>
+</tbody>
+</table>
+<p>With the turnstile locked again, Robin’s two friends can’t get through unless they insert yet another token!</p>
+</section>
+<section id="a-pushdown-automaton" class="level2">
+<h2 class="anchored" data-anchor-id="a-pushdown-automaton">A Pushdown Automaton</h2>
+<p>Robin was really upset and embarrassed at losing two whole tokens to the rip-off (finite state) machine in front of their friends. They vowed to invent a better turnstile so no one would ever have to face that kind of embarrassment again.</p>
+<section id="incorporating-a-memory" class="level3">
+<h3 class="anchored" data-anchor-id="incorporating-a-memory">Incorporating a memory</h3>
+<p>The problem with the finite-state turnstile is that it has no “memory” of how many coins it’s been fed. Robin’s new prototype works like so:</p>
+<ul>
+<li><p>Every time someone inserts a coin into Robin’s turnstile, it lands in a little collection tray. If someone inserts multiple coins, they form a stack of coins.</p></li>
+<li><p>If there is even one coin in the stack, the turnstile is unlocked.</p></li>
+<li><p>Any time someone pushes through the turnstile, the collection tray bounces one coin off of the stack.</p></li>
+</ul>
+<p>Even this simple system gets a little unwieldy to represent in the same kind of state diagram. So, here’s the last one of these we’ll see for a bit.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram
+  direction LR
+  state "Locked" as l
+  state "Unlocked" as u
+  state coin_fork1 &lt;&lt;fork&gt;&gt;
+  state coin_fork2 &lt;&lt;fork&gt;&gt;
+  state pop1 &lt;&lt;fork&gt;&gt;
+  state pop2 &lt;&lt;fork&gt;&gt;
+  state choice_state &lt;&lt;choice&gt;&gt;
+  state "Stack" as s
+  
+  [*] --&gt; l
+  l --&gt; l : push
+  l --&gt; coin_fork1: coin
+  coin_fork1 --&gt; u
+  coin_fork1 --&gt; s: +1
+  u --&gt; coin_fork2: coin
+  coin_fork2 --&gt; u
+  coin_fork2 --&gt; s: +1
+  
+  u --&gt; choice_state: push
+  choice_state --&gt; pop1: if Stack &gt; 1
+  pop1 --&gt; s: -1
+  pop1 --&gt; u
+  
+  choice_state --&gt; pop2: if Stack == 1
+  pop2 --&gt; s: -1
+  pop2 --&gt; l
+</pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-the-pushdown-turnstile" class="level3">
+<h3 class="anchored" data-anchor-id="using-the-pushdown-turnstile">Using the Pushdown Turnstile</h3>
+<p>With Robin’s new Pushdown Turnstile installed at metro stations everywhere, they bring their two friends back to the scene of the crime, and retry their three-coins, three-people strategy. Here’s what happens.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Input</th>
+<th>New State</th>
+<th>Coin Stack</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>Locked</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td><p><i class="fa-solid fa-coins" aria-label="coins"></i></p></td>
+<td>Unlocked</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td><p><i class="fa-solid fa-coins" aria-label="coins"></i></p></td>
+<td>Unlocked</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td><p><i class="fa-solid fa-coins" aria-label="coins"></i></p></td>
+<td>Unlocked</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td><p><i class="fa-solid fa-person" aria-label="person"></i></p></td>
+<td>Unlocked</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td><p><i class="fa-solid fa-person" aria-label="person"></i></p></td>
+<td>Unlocked</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td><p><i class="fa-solid fa-person" aria-label="person"></i></p></td>
+<td>Locked</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="generalizing-the-pattern" class="level3">
+<h3 class="anchored" data-anchor-id="generalizing-the-pattern">Generalizing the pattern</h3>
+<p>The way this turnstile works, generally, is that if you put in <img src="https://latex.codecogs.com/png.latex?n"> coins, <img src="https://latex.codecogs.com/png.latex?n"> people will be able to push through. Another way of notating that sequence of events is <i class="fa-solid fa-coins" aria-label="coins"></i><img src="https://latex.codecogs.com/png.latex?%5En"><i class="fa-solid fa-person" aria-label="person"></i><img src="https://latex.codecogs.com/png.latex?%5En">. In the more formal-language-theory world, these kinds of patterns are usually labeled <img src="https://latex.codecogs.com/png.latex?a%5Enb%5En">.</p>
+<p>Another way to think about these <img src="https://latex.codecogs.com/png.latex?a%5Enb%5En"> systems is in terms of bracket matching. If we replace each <i class="fa-solid fa-coins" aria-label="coins"></i> symbol with <code>[</code> and each <i class="fa-solid fa-persopn" aria-label="persopn"></i> symbol with <code>]</code>, then we get a pattern that looks like this:</p>
+<pre><code>[
+[
+[
+]
+]
+]</code></pre>
+<p>The requirement for the language is that every opening bracket <code>[</code> needs to get matched with a closing bracket <code>]</code>.</p>
+</section>
+</section>
+<section id="context-free-grammars" class="level2">
+<h2 class="anchored" data-anchor-id="context-free-grammars">Context Free Grammars</h2>
+<p>We get nested, bracket matching patterns in natural language all the time. For example the person-number agreement in this sentence.</p>
+<div style="font-size: 1.2em">
+<p>The <span style="color: white;background: #4477AA; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">person</span> who <span style="color: white;background: #CC6677; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">I</span>, the guy <span style="color: white;background: #117733; display: inline-block; border-radius:10%; padding-left:1%; padding-right:1%;">you</span> <span style="color: white;background: #117733; display: inline-block; border-radius:10%; padding-left:1%; padding-right:1%;">are</span> looking at, <span style="color: white;background: #CC6677; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">am</span> talking to <span style="color: white;background: #4477AA; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">is</span> not listening.</p>
+</div>
+<p>If the form of <em>be</em> in this sentence were generated by a Regular Grammar, to be parsed with a Finite State Automaton, once the “you” subject appears in the sentence, every following form of <em>be</em> would have to be “are” the rest of the way.</p>
+<div style="font-size: 1.2em">
+<p><strong>*</strong>The <span style="color: white;background: #4477AA; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">person</span> who <span style="color: white;background: #CC6677; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">I</span>, the guy <span style="color: white;background: #117733; display: inline-block; border-radius:10%; padding-left:1%; padding-right:1%;">you</span> <span style="color: white;background: #117733; display: inline-block; border-radius:10%; padding-left:1%; padding-right:1%;">are</span> looking at, <span style="color: white;background: #117733; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">are</span> talking to <span style="color: white;background: #117733; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">are</span> not listening.</p>
+</div>
+<p>Since the first sentence <em>is</em> how English and other languages work, we’d conclude that natural language is, at least, Context Free.</p>
+<section id="context-free-rules" class="level3">
+<h3 class="anchored" data-anchor-id="context-free-rules">Context Free Rules</h3>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p>Regular rules can look like this:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AA%20%5Crightarrow%20aA%0A"></p>
+</div><div class="column" style="width:45%;">
+<p>Context free rules can look like this: <img src="https://latex.codecogs.com/png.latex?%0AA%20%5Crightarrow%20aAb%0A"></p>
+</div>
+</div>
+<p>Returning to this html snippit:</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb2-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;p&gt;</span></span>
+<span id="cb2-2">  This is a paragraph with </span>
+<span id="cb2-3">  <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;strong&gt;</span></span>
+<span id="cb2-4">    bold text.</span>
+<span id="cb2-5">  <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;/strong&gt;</span></span>
+<span id="cb2-6"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;/p&gt;</span></span></code></pre></div>
+<p>Rules of a context free grammar that could give rise to this well-formed html are:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AD%20%5Crightarrow%20%3Cp%3EC%3C/p%3E%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AC%20%5Crightarrow%20words%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AC%20%5Crightarrow%20words%20S%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AS%20%5Crightarrow%20%3Cstrong%3EC%3C/strong%3E%0A"></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+
+  D --&gt; p1["p"]
+  D --&gt; C1["C"]
+  D --&gt; p2["/p"]
+
+  C1 --&gt; w1["This is a paragraph with"]
+  C1 --&gt; S
+
+  S --&gt; s1["strong"]
+  S --&gt; C2["C"]
+  S --&gt; s2["/strong"]
+
+  C2 --&gt; w2["bold text."]
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="a-pda-for-this-grammar" class="level3">
+<h3 class="anchored" data-anchor-id="a-pda-for-this-grammar">A PDA for this grammar</h3>
+<p>Here’s a way we’d describe a Pushdown Automaton that decides whether or not a document is generated by this grammar:</p>
+<ul>
+<li>Each time it encounters an opening <code>&lt;tag&gt;</code>, it adds it to the stack, and when it encounters a closing <code>&lt;/tag&gt;</code>, it pops it from the stack.</li>
+</ul>
+<!-- -->
+<ul>
+<li><p>When it encounters a closing <code>&lt;/tag&gt;</code>, it <em>has</em> to match the opening <code>&lt;tag&gt;</code> that’s at the top of the stack.</p></li>
+<li><p>When it gets to the end of the document, the stack needs to be empty.</p></li>
+</ul>
+<p>Here’s a table showing how that’d play out</p>
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Input</th>
+<th>event</th>
+<th>Stack</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&lt;p&gt;</code></td>
+<td>push <code>&lt;p&gt;</code></td>
+<td><span style="display: inline-block; border: 1px solid #CC6677;"><code>&lt;p&gt;</code></span></td>
+</tr>
+<tr class="even">
+<td><code>This</code>, <code>is</code>, <code>a</code>, <code>paragraph</code>, <code>with</code></td>
+<td></td>
+<td><span style="display: inline-block; border: 1px solid #CC6677;"><code>&lt;p&gt;</code></span></td>
+</tr>
+<tr class="odd">
+<td><code>&lt;strong&gt;</code></td>
+<td>push <code>&lt;strong&gt;</code></td>
+<td><span style="display: inline-block; border: 1px solid #CC6677;"><code>&lt;strong&gt;</code></span>, <code>&lt;p&gt;</code></td>
+</tr>
+<tr class="even">
+<td><code>bold</code>, <code>text.</code></td>
+<td></td>
+<td><span style="display: inline-block; border: 1px solid #CC6677;"><code>&lt;strong&gt;</code></span>, <code>&lt;p&gt;</code></td>
+</tr>
+<tr class="odd">
+<td><code>&lt;/strong&gt;</code></td>
+<td>pop <code>&lt;strong&gt;</code></td>
+<td><span style="display: inline-block; border: 1px solid #CC6677;"><code>&lt;p&gt;</code></span></td>
+</tr>
+<tr class="even">
+<td><code>&lt;/p&gt;</code></td>
+<td>pop <code>&lt;p&gt;</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>One consequence of the rule that tags need to match when you pop them is that the following is <em>not</em> valid html.</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb3-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;p&gt;</span></span>
+<span id="cb3-2">  This is <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;strong&gt;</span>invalid!</span>
+<span id="cb3-3"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;/p&gt;</span></span>
+<span id="cb3-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;/strong&gt;</span></span></code></pre></div>
+<p>If you were to reason through the state of the stack after the opening <code>&lt;strong&gt;</code> tag, it would look like</p>
+<blockquote class="blockquote">
+<p><span style="display: inline-block; border: 1px solid #CC6677;"><code>&lt;strong&gt;</code></span>, <code>&lt;p&gt;</code></p>
+</blockquote>
+<p>Then, when you feed it <code>&lt;/p&gt;</code>, it doen’t match the tag at the top of the stack, so we’d get an error of some sort.</p>
+</section>
+</section>
+<section id="limits-of-pushdown-automata" class="level2">
+<h2 class="anchored" data-anchor-id="limits-of-pushdown-automata">Limits of Pushdown Automata</h2>
+<p>An office building has installed a version of Robin’s turnstile. Each person who enters the building has to insert their id card, and the machine scans it and spits it out the other side when a person pushes through.</p>
+<p><span style="color: white;background: #4477AA; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">Robin</span> approaches the turnstile with their friends <span style="color: white;background: #CC6677; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">Skylar</span> and <span style="color: white;background: #117733; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">Alex</span>. Both <span style="color: white;background: #CC6677; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">Skylar</span> and <span style="color: white;background: #117733; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">Alex</span> have their hands full carrying packages into the building, so <span style="color: white;background: #4477AA; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">Robin</span> tries to be helpful and insert all of their id cards first, so they can then pass through. They’re walking through in the order</p>
+<ol type="1">
+<li><span style="color: white;background: #4477AA; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">Robin</span></li>
+<li><span style="color: white;background: #CC6677; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">Skylar</span></li>
+<li><span style="color: white;background: #117733; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">Alex</span></li>
+</ol>
+<p>So Robin puts their ID cards into the turnstile in that order. Here’s how it works out</p>
+<table class="table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 47%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Input</th>
+<th>Action</th>
+<th>Stack</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span style="color: #4477AA;"><i class="fa-solid fa-id-card" aria-label="id-card"></i></span></td>
+<td>push <span style="color: #4477AA;"><i class="fa-solid fa-id-card" aria-label="id-card"></i></span></td>
+<td><span style="color: #4477AA;"><i class="fa-solid fa-id-card" aria-label="id-card"></i></span></td>
+</tr>
+<tr class="even">
+<td><span style="color: #CC6677;;"><i class="fa-solid fa-id-card" aria-label="id-card"></i></span></td>
+<td>push <span style="color: #CC6677;;"><i class="fa-solid fa-id-card" aria-label="id-card"></i></span></td>
+<td><span style="color: #CC6677;;"><i class="fa-solid fa-id-card" aria-label="id-card"></i></span>, <span style="color: #4477AA;"><i class="fa-solid fa-id-card" aria-label="id-card"></i></span></td>
+</tr>
+<tr class="odd">
+<td><span style="color: #117733"><i class="fa-solid fa-id-card" aria-label="id-card"></i></span></td>
+<td>push <span style="color: #117733"><i class="fa-solid fa-id-card" aria-label="id-card"></i></span></td>
+<td><span style="color: #117733"><i class="fa-solid fa-id-card" aria-label="id-card"></i></span>, <span style="color: #CC6677;;"><i class="fa-solid fa-id-card" aria-label="id-card"></i></span>, <span style="color: #4477AA;"><i class="fa-solid fa-id-card" aria-label="id-card"></i></span></td>
+</tr>
+<tr class="even">
+<td><span style="color: #4477AA;"><i class="fa-solid fa-person" aria-label="person"></i></span></td>
+<td>pop <span style="color: #117733"><i class="fa-solid fa-id-card" aria-label="id-card"></i></span></td>
+<td><span style="color: #CC6677;;"><i class="fa-solid fa-id-card" aria-label="id-card"></i></span>, <span style="color: #4477AA;"><i class="fa-solid fa-id-card" aria-label="id-card"></i></span></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>🚨</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Oh no! The turnstile has handed <span style="color: white;background: #4477AA; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">Robin</span> <span style="color: white;background: #117733; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">Alex’s</span> id card! What a mess!</p>
+<section id="beyond-context-free" class="level3">
+<h3 class="anchored" data-anchor-id="beyond-context-free">Beyond Context Free</h3>
+<p>Robin was expecting a sequence like this</p>
+<blockquote class="blockquote">
+<p><span style="color: #4477AA;"><i class="fa-solid fa-id-card" aria-label="id-card"></i></span>, <span style="color: #CC6677;;"><i class="fa-solid fa-id-card" aria-label="id-card"></i></span>, <span style="color: #117733"><i class="fa-solid fa-id-card" aria-label="id-card"></i></span>, <span style="color: #4477AA;"><i class="fa-solid fa-person" aria-label="person"></i></span>, <span style="color: #CC6677;;"><i class="fa-solid fa-person" aria-label="person"></i></span>, <span style="color: #117733"><i class="fa-solid fa-person" aria-label="person"></i></span></p>
+</blockquote>
+<p>This involves so-called “crossing dependencies”, which can’t be recognized by a Pushdown Automaton, which means they involve a more complex grammar than context free rules.</p>
+<p>There are some examples of crossing dependencies in human language as well, like this example in Swiss German from <span class="citation" data-cites="shieber1985">Shieber (1985)</span> (cited in <span class="citation" data-cites="jäger2012">Jäger and Rogers (2012)</span>)</p>
+<table class="table">
+<caption>“that we let the children help Hans paint the house”</caption>
+<colgroup>
+<col style="width: 0%">
+<col style="width: 0%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>dass</td>
+<td>mer</td>
+<td><span style="color: white;background: #4477AA; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">d’ chind</span></td>
+<td><span style="color: white;background: #CC6677; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">em Hans</span></td>
+<td><span style="color: white;background: #117733; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">es Huus</span></td>
+<td><span style="color: white;background: #4477AA; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">lönd</span></td>
+<td><span style="color: white;background: #CC6677; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">hälfe</span></td>
+<td><span style="color: white;background: #117733; display: inline-block;border-radius:10%;padding-left:1%;padding-right:1%;">aanstriiche</span></td>
+</tr>
+<tr class="even">
+<td>that</td>
+<td>we</td>
+<td>the children-ACC</td>
+<td>Hans-DAT</td>
+<td>the house-ACC</td>
+<td>let</td>
+<td>help</td>
+<td>paint</td>
+</tr>
+</tbody>
+</table>
+
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-jäger2012" class="csl-entry">
+Jäger, Gerhard, and James Rogers. 2012. <span>“Formal Language Theory: Refining the Chomsky Hierarchy.”</span> <em>Philosophical Transactions of the Royal Society B: Biological Sciences</em> 367 (1598): 1956–70. <a href="https://doi.org/10.1098/rstb.2012.0077">https://doi.org/10.1098/rstb.2012.0077</a>.
+</div>
+<div id="ref-shieber1985" class="csl-entry">
+Shieber, Stuart M. 1985. <span>“Evidence Against the Context-Freeness of Natural Language.”</span> <em>Linguistics and Philosophy</em> 8 (3): 333–43. <a href="https://doi.org/10.1007/BF00630917">https://doi.org/10.1007/BF00630917</a>.
+</div>
+</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
+  author = {Fruehwald, Josef},
+  title = {Pushdown {Automata} and {Context} {Free} {Languages}},
+  date = {2024-01-23},
+  url = {https://lin511-2024.github.io/notes/meetings/02_pda.html},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2024" class="csl-entry quarto-appendix-citeas">
+Fruehwald, Josef. 2024. <span>“Pushdown Automata and Context Free
+Languages.”</span> January 23, 2024. <a href="https://lin511-2024.github.io/notes/meetings/02_pda.html">https://lin511-2024.github.io/notes/meetings/02_pda.html</a>.
+</div></div></section></div> ]]></description>
+  <category>compling</category>
+  <guid>https://lin511-2024.github.io/notes/meetings/02_pda.html</guid>
+  <pubDate>Tue, 23 Jan 2024 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Regular Languages and Finite State Machines</title>
   <dc:creator>Josef Fruehwald</dc:creator>
@@ -636,9 +1099,9 @@ Fruehwald, Josef. 2024. <span>“FSA in-Class Notes.”</span> January 16,
 <h3 class="anchored" data-anchor-id="python">Python</h3>
 <section id="pyenv" class="level4">
 <h4 class="anchored" data-anchor-id="pyenv">pyenv</h4>
-<p>We’ll be using a program called <code>pyenv</code> to manage the versions of python we use. To install <code>pyenv</code>, open the VSCode Command Palette (with <kbd data-windows="Shift+Control+P" data-mac="Shift+Command+P" data-linux="Shift+Control+P"></kbd>) which will open the command line interface. Then,</p>
+<p>We’ll be using a program called <code>pyenv</code> to manage the versions of python we use. To install <code>pyenv</code>, open the VSCode Command Palette (with <kbd data-windows="Shift+Control+P" data-linux="Shift+Control+P" data-mac="Shift+Command+P"></kbd>) which will open the command line interface. Then,</p>
 <ul class="task-list">
-<li><input type="checkbox">copy this line of code code from this page (<kbd data-windows="Control+C," data-mac="Command+C" data-linux="Control+C"></kbd>)</li>
+<li><input type="checkbox">copy this line of code code from this page (<kbd data-windows="Control+C," data-linux="Control+C" data-mac="Command+C"></kbd>)</li>
 </ul>
 <div class="langname">
 <pre class="langname">bash</pre>
@@ -651,7 +1114,7 @@ font-style: inherit;">|</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">bash</span></span></code></pre></div>
 <ul class="task-list">
-<li><input type="checkbox">Paste it into the terminal ((<kbd data-windows="Control+V," data-mac="Command+V" data-linux="Control+V"></kbd>)</li>
+<li><input type="checkbox">Paste it into the terminal ((<kbd data-windows="Control+V," data-linux="Control+V" data-mac="Command+V"></kbd>)</li>
 <li><input type="checkbox">Hit enter.</li>
 </ul>
 <p>Once that has successfully finished:</p>
@@ -999,7 +1462,7 @@ Fruehwald, Josef. n.d. <span>“Python Basics.”</span> <a href="https://lin511
 </div></div></section></div> ]]></description>
   <category>python</category>
   <guid>https://lin511-2024.github.io/notes/programming/01_Python_basics.html</guid>
-  <pubDate>Fri, 19 Jan 2024 13:50:08 GMT</pubDate>
+  <pubDate>Sun, 21 Jan 2024 20:57:20 GMT</pubDate>
 </item>
 <item>
   <title>Paths in Python</title>
@@ -1189,7 +1652,7 @@ Fruehwald, Josef. n.d. <span>“Paths in Python.”</span> <a href="https://lin5
 </div></div></section></div> ]]></description>
   <category>python</category>
   <guid>https://lin511-2024.github.io/notes/programming/02_Paths.html</guid>
-  <pubDate>Fri, 19 Jan 2024 13:50:08 GMT</pubDate>
+  <pubDate>Sun, 21 Jan 2024 20:57:20 GMT</pubDate>
 </item>
 </channel>
 </rss>
