@@ -71,6 +71,7 @@ format:
     smooth-scroll: true
     fig-cap-location: margin
     citation: true
+    highlight-style: github
 
 date-modified: last-modified
 
