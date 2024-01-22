@@ -1,0 +1,70 @@
+---
+title: "Git Errors"
+filters: 
+  - codeblocklabel
+---
+
+When you clicked on "Sync", did you get an error window that looked like this?
+
+![](assets/git_error.png){fig-align="center" width="60%"}
+
+If you clock on "Show Command Output", a file will pop open that looks like this.
+
+::: {.callout-warning collapse="true"}
+## The git warning is in this collapsible callout
+
+```         
+> git pull --tags origin main
+From https://github.com/Lin511-2024/testting_git_error
+ * branch            main       -> FETCH_HEAD
+hint: You have divergent branches and need to specify how to reconcile them.
+hint: You can do so by running one of the following commands sometime before
+hint: your next pull:
+hint: 
+hint:   git config pull.rebase false  # merge
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint: 
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+fatal: Need to specify how to reconcile divergent branches.
+```
+:::
+
+Important things to note:
+
+1.  [This isn't your "fault". (It's probably mine.)]{style="font-size: 1.2em"}
+2.  If you google the phrase ["You have divergent branches and need to specify how to reconcile them"](https://www.google.com/search?q=%22You+have+divergent+branches+and+need+to+specify+how+to+reconcile+them%22), you'll find that *lots* of people get this message.
+3.  This is very fixable.
+4.  I hope to fix things up so that in future assignmenrs you open in CodeSpaces, this won't show up again.
+
+## How to fix it.
+
+1.  Hit the key combination {{< kbd mac=Shift+Command+P win=Shift+Control+P linux=Shift+Control+P >}} to pop open the VSCode Command Palette. It should look like this:
+
+![](assets/command_palette.png){fig-align="center" width="90%"}
+
+2.  Type in `terminal editor` to find the command "Terminal: Create New Terminal in Editor Area". It should probably be the top result. If it's highlighted, just hit enter to open [a new terminal](00_glossary.qmd#terminal).
+
+![](assets/terminal_editor.png){fig-align="center" width="90%"}
+
+3.  [Copy-paste](00_glossary.qmd#copy-paste) the following code into the terminal window that opened, then hit enter.
+
+``` bash
+git config pull.rebase false
+```
+
+4.  That's it. You should be able to Sync successfully.
+
+## What's going on.
+
+The "problem" is that the repository history in your codespace and the version on github don't completely match up. The most likely scenario is
+
+1.  You accepted the assignment link, created your code space, made some changes and committed your changes.
+2.  After you created your code space, *I* made some changes to the assignment (e.g fixed a misspelling in the README, or fixed an error in one of the tests), which then got merged into your GitHub repository.
+
+All git is asking for is clarity in how to resolve the different histories between the version in your codespace and the version up on GitHub.
+
+I'm going to try to make sure that the command `git config pull.rebase false` gets run automatically when you create the Codespace for any future assignments.
