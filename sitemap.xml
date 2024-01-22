@@ -2,70 +2,74 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://lin511-2024.github.io/notes/programming/00_setup.html</loc>
-    <lastmod>2024-01-21T20:57:22.448Z</lastmod>
+    <lastmod>2024-01-22T19:16:06.344Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/in_class/00_python.html</loc>
-    <lastmod>2024-01-21T20:57:21.324Z</lastmod>
+    <lastmod>2024-01-22T19:16:05.264Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html</loc>
-    <lastmod>2024-01-21T20:57:20.192Z</lastmod>
+    <lastmod>2024-01-22T19:16:04.168Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/02_pda.html</loc>
-    <lastmod>2024-01-21T20:57:18.856Z</lastmod>
+    <lastmod>2024-01-22T19:16:02.868Z</lastmod>
   </url>
   <url>
-    <loc>https://lin511-2024.github.io/notes/concepts/02_undersdanding-paths.html</loc>
-    <lastmod>2024-01-21T20:57:17.492Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/notes/concepts/01_keyboarding.html</loc>
-    <lastmod>2024-01-21T20:57:16.116Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/index.html</loc>
-    <lastmod>2024-01-21T20:57:14.872Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/syllabus/syllabus.html</loc>
-    <lastmod>2024-01-21T20:57:14.020Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/about.html</loc>
-    <lastmod>2024-01-21T20:57:05.644Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/syllabus/schedule.html</loc>
-    <lastmod>2024-01-21T20:57:14.492Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/notes/concepts/03_navigating-directories.html</loc>
-    <lastmod>2024-01-21T20:57:15.556Z</lastmod>
+    <loc>https://lin511-2024.github.io/notes/concepts/04_git_errors.html</loc>
+    <lastmod>2024-01-22T19:16:01.500Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/concepts/01_what-is-python.html</loc>
-    <lastmod>2024-01-21T20:57:16.876Z</lastmod>
+    <lastmod>2024-01-22T19:16:00.400Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/notes/concepts/03_navigating-directories.html</loc>
+    <lastmod>2024-01-22T19:15:59.115Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/syllabus/schedule.html</loc>
+    <lastmod>2024-01-22T19:15:58.087Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/about.html</loc>
+    <lastmod>2024-01-22T19:15:49.175Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/syllabus/syllabus.html</loc>
+    <lastmod>2024-01-22T19:15:57.635Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/index.html</loc>
+    <lastmod>2024-01-22T19:15:58.467Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/notes/concepts/01_keyboarding.html</loc>
+    <lastmod>2024-01-22T19:15:59.664Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/notes/concepts/02_undersdanding-paths.html</loc>
+    <lastmod>2024-01-22T19:16:01.012Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/concepts/00_glossary.html</loc>
-    <lastmod>2024-01-21T20:57:17.996Z</lastmod>
+    <lastmod>2024-01-22T19:16:02.000Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/01_fsm.html</loc>
-    <lastmod>2024-01-21T20:57:19.580Z</lastmod>
+    <lastmod>2024-01-22T19:16:03.576Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/index.html</loc>
-    <lastmod>2024-01-21T20:57:20.900Z</lastmod>
+    <lastmod>2024-01-22T19:16:04.848Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/programming/01_Python_basics.html</loc>
-    <lastmod>2024-01-21T20:57:21.732Z</lastmod>
+    <lastmod>2024-01-22T19:16:05.660Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/programming/02_Paths.html</loc>
-    <lastmod>2024-01-21T20:57:22.880Z</lastmod>
+    <lastmod>2024-01-22T19:16:06.796Z</lastmod>
   </url>
 </urlset>

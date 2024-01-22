@@ -8,7 +8,7 @@
 
 <meta name="author" content="Josef Fruehwald">
 
-<title>Lin511-2024 - Python basics</title>
+<title>Lin511-2024 - Git Errors</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -77,6 +77,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/quarto-contrib/codenamelabel/codeblocklabel.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/kbd/kbd.js"></script>
+<link href="../../site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -101,8 +104,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../../styles/styles.css">
-<meta property="og:title" content="Lin511-2024 - Python basics">
+<meta property="og:title" content="Lin511-2024 - Git Errors">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://lin511-2024.github.io/notes/concepts/assets/git_error.png">
 <meta property="og:site-name" content="Lin511-2024">
+<meta property="og:image:height" content="330">
+<meta property="og:image:width" content="1038">
 </head>
 
 <body class="nav-sidebar floating nav-fixed">
@@ -153,7 +160,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/programming/00_setup.html">Programming</a></li><li class="breadcrumb-item"><a href="../../notes/programming/01_Python_basics.html">Python basics</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/concepts/00_glossary.html">Concepts</a></li><li class="breadcrumb-item"><a href="../../notes/concepts/04_git_errors.html">Git Errors</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -217,7 +224,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notes/concepts/04_git_errors.html" class="sidebar-item-text sidebar-link">
+  <a href="../../notes/concepts/04_git_errors.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Git Errors</span></a>
   </div>
 </li>
@@ -269,7 +276,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notes/programming/01_Python_basics.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../notes/programming/01_Python_basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Python basics</span></a>
   </div>
 </li>
@@ -304,18 +311,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#how-to-fix-it." id="toc-how-to-fix-it." class="nav-link active" data-scroll-target="#how-to-fix-it.">How to fix it.</a></li>
+  <li><a href="#whats-going-on." id="toc-whats-going-on." class="nav-link" data-scroll-target="#whats-going-on.">What’s going on.</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Lin511-2024/Lin511-2024.github.io/blob/main/notes/concepts/04_git_errors.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Python basics</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">python</div>
-  </div>
-  </div>
+<h1 class="title">Git Errors</h1>
+</div>
 
 
 
@@ -341,71 +352,101 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>1</code></pre>
+<p>When you clicked on “Sync”, did you get an error window that looked like this?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/git_error.png" class="img-fluid figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+<p>If you clock on “Show Command Output”, a file will pop open that looks like this.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The git warning is in this collapsible callout
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<pre><code>&gt; git pull --tags origin main
+From https://github.com/Lin511-2024/testting_git_error
+ * branch            main       -&gt; FETCH_HEAD
+hint: You have divergent branches and need to specify how to reconcile them.
+hint: You can do so by running one of the following commands sometime before
+hint: your next pull:
+hint: 
+hint:   git config pull.rebase false  # merge
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint: 
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+fatal: Need to specify how to reconcile divergent branches.</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"hello"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>hello</code></pre>
 </div>
+<p>Important things to note:</p>
+<ol type="1">
+<li><span style="font-size: 1.2em">This isn’t your “fault”. (It’s probably mine.)</span></li>
+<li>If you google the phrase <a href="https://www.google.com/search?q=%22You+have+divergent+branches+and+need+to+specify+how+to+reconcile+them%22">“You have divergent branches and need to specify how to reconcile them”</a>, you’ll find that <em>lots</em> of people get this message.</li>
+<li>This is very fixable.</li>
+<li>I hope to fix things up so that in future assignmenrs you open in CodeSpaces, this won’t show up again.</li>
+</ol>
+<section id="how-to-fix-it." class="level2">
+<h2 class="anchored" data-anchor-id="how-to-fix-it.">How to fix it.</h2>
+<ol type="1">
+<li>Hit the key combination <kbd data-windows="Shift+Control+P" data-mac="Shift+Command+P" data-linux="Shift+Control+P"></kbd> to pop open the VSCode Command Palette. It should look like this:</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/command_palette.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
 </div>
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>4</code></pre>
+<ol start="2" type="1">
+<li>Type in <code>terminal editor</code> to find the command “Terminal: Create New Terminal in Editor Area”. It should probably be the top result. If it’s highlighted, just hit enter to open <a href="../../notes/concepts/00_glossary.html#terminal">a new terminal</a>.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="assets/terminal_editor.png" class="img-fluid figure-img" style="width:90.0%"></p>
+</figure>
 </div>
+<ol start="3" type="1">
+<li><a href="../../notes/concepts/00_glossary.html#copy-paste">Copy-paste</a> the following code into the terminal window that opened, then hit enter.</li>
+</ol>
+<div class="langname">
+<pre class="langname">bash</pre>
 </div>
-<div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x <span class="op">+</span> y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>11</code></pre>
-</div>
-</div>
-<div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>word1 <span class="op">=</span> <span class="st">"Hello"</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>word2 <span class="op">=</span> <span class="st">" World!"</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(word1 <span class="op">+</span> word2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Hello World!</code></pre>
-</div>
-</div>
-<div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>True</code></pre>
-</div>
-</div>
-<div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>False</code></pre>
-</div>
-</div>
-<div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="va">True</span> <span class="kw">and</span> <span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>False</code></pre>
-</div>
-</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config pull.rebase false</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="4" type="1">
+<li>That’s it. You should be able to Sync successfully.</li>
+</ol>
+</section>
+<section id="whats-going-on." class="level2">
+<h2 class="anchored" data-anchor-id="whats-going-on.">What’s going on.</h2>
+<p>The “problem” is that the repository history in your codespace and the version on github don’t completely match up. The most likely scenario is</p>
+<ol type="1">
+<li>You accepted the assignment link, created your code space, made some changes and committed your changes.</li>
+<li>After you created your code space, <em>I</em> made some changes to the assignment (e.g fixed a misspelling in the README, or fixed an error in one of the tests), which then got merged into your GitHub repository.</li>
+</ol>
+<p>All git is asking for is clarity in how to resolve the different histories between the version in your codespace and the version up on GitHub.</p>
+<p>I’m going to try to make sure that the command <code>git config pull.rebase false</code> gets run automatically when you create the Codespace for any future assignments.</p>
 
 
+</section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald,
   author = {Fruehwald, Josef},
-  title = {Python Basics},
-  url = {https://lin511-2024.github.io/notes/programming/01_Python_basics.html},
+  title = {Git {Errors}},
+  url = {https://lin511-2024.github.io/notes/concepts/04_git_errors.html},
   langid = {en}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald" class="csl-entry quarto-appendix-citeas" role="listitem">
-Fruehwald, Josef. n.d. <span>“Python Basics.”</span> <a href="https://lin511-2024.github.io/notes/programming/01_Python_basics.html">https://lin511-2024.github.io/notes/programming/01_Python_basics.html</a>.
+Fruehwald, Josef. n.d. <span>“Git Errors.”</span> <a href="https://lin511-2024.github.io/notes/concepts/04_git_errors.html">https://lin511-2024.github.io/notes/concepts/04_git_errors.html</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -759,5 +800,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Lin511-2024/Lin511-2024.github.io/blob/main/notes/programming/01_Python_basics.ipynb" class="toc-action">View source</a></p></div></div></div></div></footer><script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
