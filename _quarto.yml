@@ -51,6 +51,8 @@ website:
           text: Syllabus
         - href: syllabus/schedule.qmd
           text: Schedule
+        - href: https://github.com/orgs/Lin511-2024/discussions/1
+          text: Assignments (Class Members Only)
     - title: "Notes"
       contents:
         - text: Notes Home
