@@ -18,6 +18,18 @@ website:
   repo-url: https://github.com/Lin511-2024/Lin511-2024.github.io
   repo-actions: source
   open-graph: true
+  page-navigation: true
+  back-to-top-navigation: true
+  page-footer:
+    center:
+      - icon: github
+        href: https://github.com/orgs/Lin511-2024/
+      - icon: file-text-fill
+        href: syllabus/syllabus.html
+      - icon: calendar-check-fill
+        href: syllabus/schedule.html
+    background: light
+    border: true  
   navbar:
     left:
       - text: "Home"
