@@ -1099,9 +1099,9 @@ Fruehwald, Josef. 2024. <span>“FSA in-Class Notes.”</span> January 16,
 <h3 class="anchored" data-anchor-id="python">Python</h3>
 <section id="pyenv" class="level4">
 <h4 class="anchored" data-anchor-id="pyenv">pyenv</h4>
-<p>We’ll be using a program called <code>pyenv</code> to manage the versions of python we use. To install <code>pyenv</code>, open the VSCode Command Palette (with <kbd data-mac="Shift+Command+P" data-windows="Shift+Control+P" data-linux="Shift+Control+P"></kbd>) which will open the command line interface. Then,</p>
+<p>We’ll be using a program called <code>pyenv</code> to manage the versions of python we use. To install <code>pyenv</code>, open the VSCode Command Palette (with <kbd data-linux="Shift+Control+P" data-mac="Shift+Command+P" data-windows="Shift+Control+P"></kbd>) which will open the command line interface. Then,</p>
 <ul class="task-list">
-<li><input type="checkbox">copy this line of code code from this page (<kbd data-mac="Command+C" data-windows="Control+C," data-linux="Control+C"></kbd>)</li>
+<li><input type="checkbox">copy this line of code code from this page (<kbd data-linux="Control+C" data-mac="Command+C" data-windows="Control+C,"></kbd>)</li>
 </ul>
 <div class="langname">
 <pre class="langname">bash</pre>
@@ -1114,7 +1114,7 @@ font-style: inherit;">|</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">bash</span></span></code></pre></div>
 <ul class="task-list">
-<li><input type="checkbox">Paste it into the terminal ((<kbd data-mac="Command+V" data-windows="Control+V," data-linux="Control+V"></kbd>)</li>
+<li><input type="checkbox">Paste it into the terminal ((<kbd data-linux="Control+V" data-mac="Command+V" data-windows="Control+V,"></kbd>)</li>
 <li><input type="checkbox">Hit enter.</li>
 </ul>
 <p>Once that has successfully finished:</p>
@@ -1462,197 +1462,7 @@ Fruehwald, Josef. n.d. <span>“Python Basics.”</span> <a href="https://lin511
 </div></div></section></div> ]]></description>
   <category>python</category>
   <guid>https://lin511-2024.github.io/notes/programming/01_Python_basics.html</guid>
-  <pubDate>Tue, 23 Jan 2024 00:52:56 GMT</pubDate>
-</item>
-<item>
-  <title>Paths in Python</title>
-  <dc:creator>Josef Fruehwald</dc:creator>
-  <link>https://lin511-2024.github.io/notes/programming/02_Paths.html</link>
-  <description><![CDATA[ 
-
-
-
-<div class="cell" data-execution_count="1">
-<div class="langname">
-<pre class="langname">python</pre>
-</div>
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">from</span> pathlib <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">import</span> Path</span></code></pre></div>
-</div>
-<p><code>Path()</code> will return a relative path to the current directory, which is represented as <code>.</code>.</p>
-<div class="cell" data-execution_count="2">
-<div class="langname">
-<pre class="langname">python</pre>
-</div>
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">this_directory <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> Path()</span>
-<span id="cb2-2"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(this_directory)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>.</code></pre>
-</div>
-</div>
-<p>If we use the <code>.resolve()</code> method on <code>this_directory</code>, we’ll get back the <a href="../../notes/concepts/02_undersdanding-paths.html#absolute-paths">absolute path</a>.</p>
-<div class="cell" data-execution_count="3">
-<div class="langname">
-<pre class="langname">python</pre>
-</div>
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">absolute_path <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> this_directory.resolve()</span>
-<span id="cb4-2"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(absolute_path)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>/workspaces/Lin511-2024.github.io/notes/meetings</code></pre>
-</div>
-</div>
-<p>We can get the path to the directory above from the <code>.parent</code> attribute.</p>
-<div class="cell" data-execution_count="4">
-<div class="langname">
-<pre class="langname">python</pre>
-</div>
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(</span>
-<span id="cb6-2">    absolute_path.parent</span>
-<span id="cb6-3">)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>/workspaces/Lin511-2024.github.io/notes</code></pre>
-</div>
-</div>
-<p>We can get a list of all of the files and directories in a directory with the <code>.glob()</code> method. For technical reasons, we need to wrap <code>list()</code> around this.</p>
-<div class="cell" data-execution_count="5">
-<div class="langname">
-<pre class="langname">python</pre>
-</div>
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">list</span>(</span>
-<span id="cb8-2">    absolute_path.glob(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"*"</span>)</span>
-<span id="cb8-3">)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>[PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings/assets'),
- PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings/01_Paths.ipynb'),
- PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings/00_setup.qmd')]</code></pre>
-</div>
-</div>
-<p>You can get a list of all of the files and folders in the parent directory like so.</p>
-<div class="cell" data-execution_count="6">
-<div class="langname">
-<pre class="langname">python</pre>
-</div>
-<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">list</span>(</span>
-<span id="cb10-2">    absolute_path<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\</span></span>
-<span id="cb10-3">        .parent<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\</span></span>
-<span id="cb10-4">        .glob(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"*"</span>)</span>
-<span id="cb10-5">)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>[PosixPath('/workspaces/Lin511-2024.github.io/notes/.gitignore'),
- PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts'),
- PosixPath('/workspaces/Lin511-2024.github.io/notes/meetings'),
- PosixPath('/workspaces/Lin511-2024.github.io/notes/index.qmd')]</code></pre>
-</div>
-</div>
-<p>We can get a list of all of the files and directories in the <code>concepts</code> directory like so.</p>
-<div class="cell" data-execution_count="7">
-<div class="langname">
-<pre class="langname">python</pre>
-</div>
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">list</span>(</span>
-<span id="cb12-2">    absolute_path<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\</span></span>
-<span id="cb12-3">        .parent<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\</span></span>
-<span id="cb12-4">        .joinpath(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"concepts"</span>)<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">\</span></span>
-<span id="cb12-5">        .glob(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"*"</span>)</span>
-<span id="cb12-6">)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
-<pre><code>[PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/02_undersdanding-paths.qmd'),
- PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/assets'),
- PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/01_what-is-python.qmd'),
- PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/03_navigating-directories.qmd'),
- PosixPath('/workspaces/Lin511-2024.github.io/notes/concepts/00_glossary.qmd')]</code></pre>
-</div>
-</div>
-<section id="opening-a-file" class="level2">
-<h2 class="anchored" data-anchor-id="opening-a-file">Opening a file</h2>
-<p>We’re going to read in the <a href="assets/sample.txt">text file here</a></p>
-<div class="cell" data-execution_count="11">
-<div class="langname">
-<pre class="langname">python</pre>
-</div>
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">text_file_path <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> Path(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"assets"</span>, <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"sample.txt"</span>)</span>
-<span id="cb14-2"></span>
-<span id="cb14-3"><span class="cf" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">with</span> text_file_path.<span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">open</span>() <span class="im" style="color: #00769E;
-background-color: null;
-font-style: inherit;">as</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">file</span>:</span>
-<span id="cb14-4">    lines <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">file</span>.readlines()</span>
-<span id="cb14-5"></span>
-<span id="cb14-6"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(lines)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>['This is a sample file.\n', 'It just has text.\n', 'We can read and print its contents.']</code></pre>
-</div>
-</div>
-
-
-</section>
-
-<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald,
-  author = {Fruehwald, Josef},
-  title = {Paths in {Python}},
-  url = {https://lin511-2024.github.io/notes/programming/02_Paths.html},
-  langid = {en}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald" class="csl-entry quarto-appendix-citeas">
-Fruehwald, Josef. n.d. <span>“Paths in Python.”</span> <a href="https://lin511-2024.github.io/notes/programming/02_Paths.html">https://lin511-2024.github.io/notes/programming/02_Paths.html</a>.
-</div></div></section></div> ]]></description>
-  <category>python</category>
-  <guid>https://lin511-2024.github.io/notes/programming/02_Paths.html</guid>
-  <pubDate>Tue, 23 Jan 2024 00:52:56 GMT</pubDate>
+  <pubDate>Tue, 23 Jan 2024 16:44:13 GMT</pubDate>
 </item>
 </channel>
 </rss>
