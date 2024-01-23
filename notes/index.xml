@@ -453,7 +453,7 @@ font-style: inherit;">&lt;/strong&gt;</span></span></code></pre></div>
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent">
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-jäger2012" class="csl-entry">
 Jäger, Gerhard, and James Rogers. 2012. <span>“Formal Language Theory: Refining the Chomsky Hierarchy.”</span> <em>Philosophical Transactions of the Royal Society B: Biological Sciences</em> 367 (1598): 1956–70. <a href="https://doi.org/10.1098/rstb.2012.0077">https://doi.org/10.1098/rstb.2012.0077</a>.
 </div>
@@ -973,7 +973,7 @@ font-style: inherit;">&lt;/p&gt;</span></span></code></pre></div>
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent">
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-jäger2012" class="csl-entry">
 Jäger, Gerhard, and James Rogers. 2012. <span>“Formal Language Theory: Refining the Chomsky Hierarchy.”</span> <em>Philosophical Transactions of the Royal Society B: Biological Sciences</em> 367 (1598): 1956–70. <a href="https://doi.org/10.1098/rstb.2012.0077">https://doi.org/10.1098/rstb.2012.0077</a>.
 </div>
@@ -1044,7 +1044,7 @@ Machines.”</span> January 16, 2024. <a href="https://lin511-2024.github.io/not
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
   author = {Fruehwald, Josef},
   title = {FSA in-Class Notes},
   date = {2024-01-16},
@@ -1099,9 +1099,9 @@ Fruehwald, Josef. 2024. <span>“FSA in-Class Notes.”</span> January 16,
 <h3 class="anchored" data-anchor-id="python">Python</h3>
 <section id="pyenv" class="level4">
 <h4 class="anchored" data-anchor-id="pyenv">pyenv</h4>
-<p>We’ll be using a program called <code>pyenv</code> to manage the versions of python we use. To install <code>pyenv</code>, open the VSCode Command Palette (with <kbd data-windows="Shift+Control+P" data-linux="Shift+Control+P" data-mac="Shift+Command+P"></kbd>) which will open the command line interface. Then,</p>
+<p>We’ll be using a program called <code>pyenv</code> to manage the versions of python we use. To install <code>pyenv</code>, open the VSCode Command Palette (with <kbd data-mac="Shift+Command+P" data-linux="Shift+Control+P" data-windows="Shift+Control+P"></kbd>) which will open the command line interface. Then,</p>
 <ul class="task-list">
-<li><input type="checkbox">copy this line of code code from this page (<kbd data-windows="Control+C," data-linux="Control+C" data-mac="Command+C"></kbd>)</li>
+<li><input type="checkbox">copy this line of code code from this page (<kbd data-mac="Command+C" data-linux="Control+C" data-windows="Control+C,"></kbd>)</li>
 </ul>
 <div class="langname">
 <pre class="langname">bash</pre>
@@ -1114,7 +1114,7 @@ font-style: inherit;">|</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">bash</span></span></code></pre></div>
 <ul class="task-list">
-<li><input type="checkbox">Paste it into the terminal ((<kbd data-windows="Control+V," data-linux="Control+V" data-mac="Command+V"></kbd>)</li>
+<li><input type="checkbox">Paste it into the terminal ((<kbd data-mac="Command+V" data-linux="Control+V" data-windows="Control+V,"></kbd>)</li>
 <li><input type="checkbox">Hit enter.</li>
 </ul>
 <p>Once that has successfully finished:</p>
@@ -1316,7 +1316,7 @@ font-style: inherit;">"Your Name"</span></span></code></pre></div>
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
   author = {Fruehwald, Josef},
   title = {Setup {Notes}},
   date = {2024-01-08},
@@ -1451,7 +1451,7 @@ font-style: inherit;">False</span>)</span></code></pre></div>
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald,
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald,
   author = {Fruehwald, Josef},
   title = {Python Basics},
   url = {https://lin511-2024.github.io/notes/programming/01_Python_basics.html},
@@ -1462,7 +1462,7 @@ Fruehwald, Josef. n.d. <span>“Python Basics.”</span> <a href="https://lin511
 </div></div></section></div> ]]></description>
   <category>python</category>
   <guid>https://lin511-2024.github.io/notes/programming/01_Python_basics.html</guid>
-  <pubDate>Mon, 22 Jan 2024 19:16:04 GMT</pubDate>
+  <pubDate>Tue, 23 Jan 2024 00:42:51 GMT</pubDate>
 </item>
 <item>
   <title>Paths in Python</title>
@@ -1641,7 +1641,7 @@ font-style: inherit;">print</span>(lines)</span></code></pre></div>
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald,
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald,
   author = {Fruehwald, Josef},
   title = {Paths in {Python}},
   url = {https://lin511-2024.github.io/notes/programming/02_Paths.html},
@@ -1652,7 +1652,7 @@ Fruehwald, Josef. n.d. <span>“Paths in Python.”</span> <a href="https://lin5
 </div></div></section></div> ]]></description>
   <category>python</category>
   <guid>https://lin511-2024.github.io/notes/programming/02_Paths.html</guid>
-  <pubDate>Mon, 22 Jan 2024 19:16:04 GMT</pubDate>
+  <pubDate>Tue, 23 Jan 2024 00:42:51 GMT</pubDate>
 </item>
 </channel>
 </rss>
