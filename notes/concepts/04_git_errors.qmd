@@ -67,4 +67,53 @@ The "problem" is that the repository history in your codespace and the version o
 
 All git is asking for is clarity in how to resolve the different histories between the version in your codespace and the version up on GitHub.
 
+
+
 I'm going to try to make sure that the command `git config pull.rebase false` gets run automatically when you create the Codespace for any future assignments.
+
+### Details
+
+:::{.callout-warning}
+
+This is *only* if you're still curious!
+
+:::
+
+This warning pops up when you have a situation like this,
+where "main" is the version on github, and "local" is the 
+version on your computer, or in your codespace.
+
+```{mermaid}
+gitGraph
+  commit id: "assignment created"
+  branch local
+  commit id: "local copy"
+  commit id: "edits"
+  checkout main
+  commit id: "text fixes"
+```
+
+By setting `pull.rebase false`, this is what happens:
+
+```{mermaid}
+gitGraph
+  commit id: "assignment created"
+  branch local
+  commit id: "local copy"
+  commit id: "edits"
+  checkout main
+  commit id: "text fixes"
+  checkout local
+  merge main
+```
+
+The other option, a "rebase", basically re-writes the history of your local version to look like this:
+
+```{mermaid}
+gitGraph
+  commit id: "assignment created"
+  branch local
+  commit id: "text fixes" type: HIGHLIGHT
+  commit id: "local copy"
+  commit id: "edits"
+```
