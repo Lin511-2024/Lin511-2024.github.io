@@ -103,6 +103,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../../styles/styles.css">
@@ -312,7 +315,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#how-to-fix-it." id="toc-how-to-fix-it." class="nav-link active" data-scroll-target="#how-to-fix-it.">How to fix it.</a></li>
-  <li><a href="#whats-going-on." id="toc-whats-going-on." class="nav-link" data-scroll-target="#whats-going-on.">What’s going on.</a></li>
+  <li><a href="#whats-going-on." id="toc-whats-going-on." class="nav-link" data-scroll-target="#whats-going-on.">What’s going on.</a>
+  <ul>
+  <li><a href="#details" id="toc-details" class="nav-link" data-scroll-target="#details">Details</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Lin511-2024/Lin511-2024.github.io/blob/main/notes/concepts/04_git_errors.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
@@ -339,7 +345,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">January 23, 2024</p>
+      <p class="date-modified">January 24, 2024</p>
     </div>
   </div>
     
@@ -396,7 +402,7 @@ fatal: Need to specify how to reconcile divergent branches.</code></pre>
 <section id="how-to-fix-it." class="level2">
 <h2 class="anchored" data-anchor-id="how-to-fix-it.">How to fix it.</h2>
 <ol type="1">
-<li>Hit the key combination <kbd data-mac="Shift+Command+P" data-linux="Shift+Control+P" data-windows="Shift+Control+P"></kbd> to pop open the VSCode Command Palette. It should look like this:</li>
+<li>Hit the key combination <kbd data-windows="Shift+Control+P" data-mac="Shift+Command+P" data-linux="Shift+Control+P"></kbd> to pop open the VSCode Command Palette. It should look like this:</li>
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -431,8 +437,76 @@ fatal: Need to specify how to reconcile divergent branches.</code></pre>
 </ol>
 <p>All git is asking for is clarity in how to resolve the different histories between the version in your codespace and the version up on GitHub.</p>
 <p>I’m going to try to make sure that the command <code>git config pull.rebase false</code> gets run automatically when you create the Codespace for any future assignments.</p>
+<section id="details" class="level3">
+<h3 class="anchored" data-anchor-id="details">Details</h3>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is <em>only</em> if you’re still curious!</p>
+</div>
+</div>
+<p>This warning pops up when you have a situation like this, where “main” is the version on github, and “local” is the version on your computer, or in your codespace.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">gitGraph
+  commit id: "assignment created"
+  branch local
+  commit id: "local copy"
+  commit id: "edits"
+  checkout main
+  commit id: "text fixes"
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>By setting <code>pull.rebase false</code>, this is what happens:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">gitGraph
+  commit id: "assignment created"
+  branch local
+  commit id: "local copy"
+  commit id: "edits"
+  checkout main
+  commit id: "text fixes"
+  checkout local
+  merge main
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>The other option, a “rebase”, basically re-writes the history of your local version to look like this:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">gitGraph
+  commit id: "assignment created"
+  branch local
+  commit id: "text fixes" type: HIGHLIGHT
+  commit id: "local copy"
+  commit id: "edits"
+</pre>
+</div>
+</div>
+</div>
+</div>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald,
