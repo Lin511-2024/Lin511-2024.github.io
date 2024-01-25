@@ -6,12 +6,474 @@
       version="2.0">
 <channel>
 <title>Lin511 Course Notes</title>
-<link>https://lin511-2024.github.io/notes/index.html</link>
+<link>https://lin511-2024.github.io/notes/</link>
 <atom:link href="https://lin511-2024.github.io/notes/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <language>en</language>
-<generator>quarto-1.3.450</generator>
-<lastBuildDate>Tue, 23 Jan 2024 00:00:00 GMT</lastBuildDate>
+<generator>quarto-1.4.549</generator>
+<lastBuildDate>Thu, 25 Jan 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Regular Expressions, Quickly</title>
+  <dc:creator>Josef Fruehwald</dc:creator>
+  <link>https://lin511-2024.github.io/notes/programming/02_regex.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Look at Github
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <em>real</em> content is in your <a href="https://github.com/orgs/Lin511-2024/repositories"><code>regex-in-class-&lt;username&gt;</code></a> repository on github. This is meant to be more of a reference sheet.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+This is just a support function
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div id="cell-3" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> urllib.parse</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> IPython.display <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> display, Markdown</span>
+<span id="cb1-3"></span>
+<span id="cb1-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> get_regex_url(regex: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>):</span>
+<span id="cb1-5">    base <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"https://regexper.com/#"</span></span>
+<span id="cb1-6">    url <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> base <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> urllib.parse.quote(regex)</span>
+<span id="cb1-7">    url_markdown <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"[</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>regex<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">](</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>url<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">)"</span></span>
+<span id="cb1-8">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#return url_markdown</span></span>
+<span id="cb1-9">    display(Markdown(url_markdown))</span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+<section id="setting-up-for-using-regular-expressions-in-python" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-for-using-regular-expressions-in-python">Setting up for using regular expressions in python</h2>
+<ul>
+<li>We’ll need to import the <code>re</code> module</li>
+<li>Unlike simple strings, we’ll need to write our regular expressions with a preceding <code>r</code></li>
+</ul>
+<div id="cell-6" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> re</span>
+<span id="cb2-2"></span>
+<span id="cb2-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">r"regex"</span></span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>'regex'</code></pre>
+</div>
+</div>
+</section>
+<section id="important-re-functions" class="level2">
+<h2 class="anchored" data-anchor-id="important-re-functions">Important <code>re</code> functions</h2>
+<p>Two ways to use <code>re</code> to search strings are</p>
+<dl>
+<dt><code>re.search()</code></dt>
+<dd>
+Return structured information about <em>where</em> the regex matches.
+</dd>
+<dt><code>re.findall()</code></dt>
+<dd>
+Return all actual matching substrings
+</dd>
+</dl>
+<div id="cell-8" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">sentence1 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"The speaker is speaking."</span></span></code></pre></div>
+</div>
+<section id="re.search" class="level3">
+<h3 class="anchored" data-anchor-id="re.search"><code>re.search()</code></h3>
+<div id="cell-10" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">re.search(<span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"speak"</span>, sentence1)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>&lt;re.Match object; span=(4, 9), match='speak'&gt;</code></pre>
+</div>
+</div>
+<div id="cell-11" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">sentence1[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>:<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>]</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>'speak'</code></pre>
+</div>
+</div>
+</section>
+<section id="re.findall" class="level3">
+<h3 class="anchored" data-anchor-id="re.findall"><code>re.findall()</code></h3>
+<div id="cell-13" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">re.findall(<span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"speak"</span>, sentence1)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>['speak', 'speak']</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="simple-character-searches" class="level2">
+<h2 class="anchored" data-anchor-id="simple-character-searches">Simple character searches</h2>
+<p>Like the examples above, literally the characters you want to use will match.</p>
+<div id="cell-15" class="cell" data-results="asis" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">speak_regex <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"speak"</span></span>
+<span id="cb11-2">get_regex_url(speak_regex)</span></code></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#speak">speak</a></p>
+</div>
+</div>
+</section>
+<section id="options" class="level2">
+<h2 class="anchored" data-anchor-id="options">Options</h2>
+<p>If you want some characters to be chosen from a set of options, place them in <code>[]</code>.</p>
+<div id="cell-17" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1">vowels_regex <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"[aeiou]"</span></span>
+<span id="cb12-2">get_regex_url(vowels_regex)</span></code></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#%5Baeiou%5D">[aeiou]</a></p>
+</div>
+</div>
+<div id="cell-18" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">re.findall(<span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"[aeiou]"</span>, sentence1)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>['e', 'e', 'a', 'e', 'i', 'e', 'a', 'i']</code></pre>
+</div>
+</div>
+<div id="cell-19" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1">the_regex <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"[Tt]he"</span></span>
+<span id="cb15-2">get_regex_url(the_regex)</span></code></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#%5BTt%5Dhe">[Tt]he</a></p>
+</div>
+</div>
+<div id="cell-20" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">re.findall(the_regex, sentence1)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>['The']</code></pre>
+</div>
+</div>
+<section id="ranges" class="level3">
+<h3 class="anchored" data-anchor-id="ranges">Ranges</h3>
+<p>Ranges of characters or numbers can be given inside <code>[]</code> like so</p>
+<div id="cell-22" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1">get_regex_url(<span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"[a-z]"</span>)</span>
+<span id="cb18-2">get_regex_url(<span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"[A-Z]"</span>)</span>
+<span id="cb18-3">get_regex_url(<span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"[0-9]"</span>)</span>
+<span id="cb18-4">get_regex_url(<span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"[A-Za-z]"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#%5Ba-z%5D">[a-z]</a></p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#%5BA-Z%5D">[A-Z]</a></p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#%5B0-9%5D">[0-9]</a></p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#%5BA-Za-z%5D">[A-Za-z]</a></p>
+</div>
+</div>
+</section>
+<section id="metacharacters" class="level3">
+<h3 class="anchored" data-anchor-id="metacharacters">“Metacharacters”</h3>
+<ul>
+<li><code>\w</code> == <code>[A-Za-z0-9_]</code>
+<ul>
+<li>word characters</li>
+</ul></li>
+<li><code>\W</code> == <code>[^A-Za-z0-9_]</code>
+<ul>
+<li>non-word characters</li>
+</ul></li>
+<li><code>\d</code> == <code>[0-9]</code>
+<ul>
+<li>digits</li>
+</ul></li>
+<li><code>\D</code> == <code>[^0-9]</code>
+<ul>
+<li>non-digits</li>
+</ul></li>
+<li><code>\s</code> == <code>[ \t\n]</code>
+<ul>
+<li>Any whitespace character</li>
+</ul></li>
+<li><code>\S</code> == <code>[^ \t\n]</code>
+<ul>
+<li>non-whitespace</li>
+</ul></li>
+</ul>
+</section>
+<section id="any-character" class="level3">
+<h3 class="anchored" data-anchor-id="any-character">Any Character</h3>
+<p>To match <em>any</em> character (letter, number, punctuation, space, etc.) use <code>.</code> or “dot”</p>
+<div id="cell-24" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">re.findall(</span>
+<span id="cb19-2">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># return every word character and </span></span>
+<span id="cb19-3">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># the following character</span></span>
+<span id="cb19-4">    <span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"\w."</span>,</span>
+<span id="cb19-5">    sentence1</span>
+<span id="cb19-6">)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>['Th', 'e ', 'sp', 'ea', 'ke', 'r ', 'is', 'sp', 'ea', 'ki', 'ng']</code></pre>
+</div>
+</div>
+</section>
+<section id="escaping-special-symbols" class="level3">
+<h3 class="anchored" data-anchor-id="escaping-special-symbols">Escaping special symbols</h3>
+<p>If you wanted to find the actual period in <code>sentence1</code>, you’d have to “escape” the <code>.</code> with a preceding <code></code>`.</p>
+<div id="cell-26" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># compare</span></span>
+<span id="cb21-2">get_regex_url(<span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"."</span>)</span>
+<span id="cb21-3">get_regex_url(<span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"\."</span>)</span></code></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#.">.</a></p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#%5C.">.</a></p>
+</div>
+</div>
+<div id="cell-27" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1">re.findall(</span>
+<span id="cb22-2">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"\."</span>,</span>
+<span id="cb22-3">    sentence1</span>
+<span id="cb22-4">)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>['.']</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="modifiers" class="level2">
+<h2 class="anchored" data-anchor-id="modifiers">Modifiers</h2>
+<p>Modifiers come after the definition of a single character, and define <em>how many times</em> that character can appear.</p>
+<ul>
+<li><code>a?</code> = zero or one <code>a</code></li>
+<li><code>a+</code> = one or more <code>a</code></li>
+<li><code>a*</code> = zero or more <code>a</code></li>
+</ul>
+<div id="cell-29" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1">get_regex_url(<span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"bana?na"</span>)</span>
+<span id="cb24-2">get_regex_url(<span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"bana+na"</span>)</span>
+<span id="cb24-3">get_regex_url(<span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"bana*na"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#bana%3Fna">bana?na</a></p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#bana%2Bna">bana+na</a></p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#bana%2Ana">bana*na</a></p>
+</div>
+</div>
+</section>
+<section id="grouping" class="level2">
+<h2 class="anchored" data-anchor-id="grouping">Grouping</h2>
+<p>You can define groupings within regular expressions. The <em>effect</em> of these groupings depends what kind of regex function you’re using. For <code>re.findall()</code>, it’ll find the whole string, but return just the text from the grouping.</p>
+<div id="cell-31" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb25" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1">sentence2 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"The big bear and the small bear ran away."</span></span></code></pre></div>
+</div>
+<div id="cell-32" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1">get_regex_url(<span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"[Tt]he (\w+) bear"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#%5BTt%5Dhe%20%28%5Cw%2B%29%20bear">[Tt]he (+) bear</a></p>
+</div>
+</div>
+<div id="cell-33" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1">re.findall(</span>
+<span id="cb27-2">    <span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"[Tt]he (\w+) bear"</span>,</span>
+<span id="cb27-3">    sentence2</span>
+<span id="cb27-4">)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>['big', 'small']</code></pre>
+</div>
+</div>
+</section>
+<section id="boundaries" class="level2">
+<h2 class="anchored" data-anchor-id="boundaries">Boundaries</h2>
+<ul>
+<li><p><code>^the</code> == Finds “the” at the <em>start</em> of a string.</p></li>
+<li><p><code>the$</code> == Finds ” the” at the <em>end</em> of a string.</p></li>
+<li><p><code>\bthe\b</code> == Finds “the” in between word boundaries.</p></li>
+</ul>
+<div id="cell-35" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb29" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1">get_regex_url(<span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"^the "</span>)</span>
+<span id="cb29-2">get_regex_url(<span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r" the$"</span>)</span>
+<span id="cb29-3">get_regex_url(<span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"\bthe\b"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#%5Ethe%20">^the</a></p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#%20the%24">the$</a></p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p>[(https://regexper.com/#%5Cbthe%5Cb)</p>
+</div>
+</div>
+<div id="cell-36" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb30" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1">sentence3 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"I saw the other bear."</span></span>
+<span id="cb30-2">re.findall(</span>
+<span id="cb30-3">    <span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"the"</span>,</span>
+<span id="cb30-4">    sentence3</span>
+<span id="cb30-5">)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<pre><code>['the', 'the']</code></pre>
+</div>
+</div>
+<p>The second “the” there comes from inside “o<strong>the</strong>r”</p>
+<div id="cell-38" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb32" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1">re.findall(</span>
+<span id="cb32-2">    <span class="vs" style="color: #20794D;
+background-color: null;
+font-style: inherit;">r"\bthe\b"</span>,</span>
+<span id="cb32-3">    sentence3</span>
+<span id="cb32-4">)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<pre><code>['the']</code></pre>
+</div>
+</div>
+<div id="cell-39" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb34" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1">sentence3</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<pre><code>'I saw the other bear.'</code></pre>
+</div>
+</div>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
+  author = {Fruehwald, Josef},
+  title = {Regular {Expressions,} {Quickly}},
+  date = {2024-01-25},
+  url = {https://lin511-2024.github.io/notes/programming/02_regex.html},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2024" class="csl-entry quarto-appendix-citeas">
+Fruehwald, Josef. 2024. <span>“Regular Expressions, Quickly.”</span>
+January 25, 2024. <a href="https://lin511-2024.github.io/notes/programming/02_regex.html">https://lin511-2024.github.io/notes/programming/02_regex.html</a>.
+</div></div></section></div> ]]></description>
+  <category>python</category>
+  <guid>https://lin511-2024.github.io/notes/programming/02_regex.html</guid>
+  <pubDate>Thu, 25 Jan 2024 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Pushdown Automata and Context Free Languages</title>
   <dc:creator>Josef Fruehwald</dc:creator>
@@ -20,12 +482,14 @@
 
 
 
+
 <section id="more-like-a-rip-off-machine" class="level2">
 <h2 class="anchored" data-anchor-id="more-like-a-rip-off-machine">More like a rip-off machine</h2>
 <p>In the notes on <a href="../../notes/meetings/01_fsm.html">Finite State Automata</a>, we looked at this turnstile finite state automaton.</p>
-<div class="cell">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">stateDiagram
   direction LR
@@ -39,6 +503,7 @@
   u --&gt; l: push
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -64,6 +529,10 @@ A scenario
 <p>Little does Robin know that the way this turnstile works is that after you put a coin into the slot, the coin rolls past and triggers the unlocking mechanism and goes straight into the collection bin. If the turnstile is already unlocked, the coin just rolls into the collection bin. It doesn’t have any “memory” of how many coins it’s been fed, so after one person walks through, the turnstile relocks.</p>
 <p>So here’s what happens to Robin and their friends</p>
 <table class="table">
+<colgroup>
+<col style="width: 63%">
+<col style="width: 36%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>Input</th>
@@ -107,9 +576,10 @@ A scenario
 <li><p>Any time someone pushes through the turnstile, the collection tray bounces one coin off of the stack.</p></li>
 </ul>
 <p>Even this simple system gets a little unwieldy to represent in the same kind of state diagram. So, here’s the last one of these we’ll see for a bit.</p>
-<div class="cell">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">stateDiagram
   direction LR
@@ -141,6 +611,7 @@ A scenario
   pop2 --&gt; l
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -149,6 +620,11 @@ A scenario
 <h3 class="anchored" data-anchor-id="using-the-pushdown-turnstile">Using the Pushdown Turnstile</h3>
 <p>With Robin’s new Pushdown Turnstile installed at metro stations everywhere, they bring their two friends back to the scene of the crime, and retry their three-coins, three-people strategy. Here’s what happens.</p>
 <table class="table">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 26%">
+<col style="width: 28%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>Input</th>
@@ -230,28 +706,45 @@ A scenario
 </div>
 </div>
 <p>Returning to this html snippit:</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb2-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb2-1"><span class="dt" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">&lt;p&gt;</span></span>
+font-style: inherit;">&lt;</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">p</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span></span>
 <span id="cb2-2">  This is a paragraph with </span>
-<span id="cb2-3">  <span class="kw" style="color: #003B4F;
+<span id="cb2-3">  <span class="dt" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">&lt;strong&gt;</span></span>
+font-style: inherit;">&lt;</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">strong</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span></span>
 <span id="cb2-4">    bold text.</span>
-<span id="cb2-5">  <span class="kw" style="color: #003B4F;
+<span id="cb2-5">  <span class="dt" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">&lt;/strong&gt;</span></span>
-<span id="cb2-6"><span class="kw" style="color: #003B4F;
+font-style: inherit;">&lt;/</span><span class="kw" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;/p&gt;</span></span></code></pre></div>
+font-style: inherit;">strong</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span></span>
+<span id="cb2-6"><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&lt;/</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">p</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span></span></code></pre></div>
 <p>Rules of a context free grammar that could give rise to this well-formed html are:</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AD%20%5Crightarrow%20%3Cp%3EC%3C/p%3E%0A"></p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AC%20%5Crightarrow%20words%0A"></p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AC%20%5Crightarrow%20words%20S%0A"></p>
 <p><img src="https://latex.codecogs.com/png.latex?%0AS%20%5Crightarrow%20%3Cstrong%3EC%3C/strong%3E%0A"></p>
-<div class="cell">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart TD
 
@@ -270,6 +763,7 @@ font-style: inherit;">&lt;/p&gt;</span></span></code></pre></div>
 
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -333,18 +827,34 @@ font-style: inherit;">&lt;/p&gt;</span></span></code></pre></div>
 </tbody>
 </table>
 <p>One consequence of the rule that tags need to match when you pop them is that the following is <em>not</em> valid html.</p>
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb3-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb3-1"><span class="dt" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">&lt;p&gt;</span></span>
-<span id="cb3-2">  This is <span class="kw" style="color: #003B4F;
+font-style: inherit;">&lt;</span><span class="kw" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">&lt;strong&gt;</span>invalid!</span>
-<span id="cb3-3"><span class="kw" style="color: #003B4F;
+font-style: inherit;">p</span><span class="dt" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">&lt;/p&gt;</span></span>
-<span id="cb3-4"><span class="kw" style="color: #003B4F;
+font-style: inherit;">&gt;</span></span>
+<span id="cb3-2">  This is <span class="dt" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">&lt;/strong&gt;</span></span></code></pre></div>
+font-style: inherit;">&lt;</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">strong</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span>invalid!</span>
+<span id="cb3-3"><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&lt;/</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">p</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span></span>
+<span id="cb3-4"><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&lt;/</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">strong</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span></span></code></pre></div>
 <p>If you were to reason through the state of the stack after the opening <code>&lt;strong&gt;</code> tag, it would look like</p>
 <blockquote class="blockquote">
 <p><span style="display: inline-block; border: 1px solid #CC6677;"><code>&lt;strong&gt;</code></span>, <code>&lt;p&gt;</code></p>
@@ -453,14 +963,14 @@ font-style: inherit;">&lt;/strong&gt;</span></span></code></pre></div>
 </section>
 </section>
 
-<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent">
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-jäger2012" class="csl-entry">
 Jäger, Gerhard, and James Rogers. 2012. <span>“Formal Language Theory: Refining the Chomsky Hierarchy.”</span> <em>Philosophical Transactions of the Royal Society B: Biological Sciences</em> 367 (1598): 1956–70. <a href="https://doi.org/10.1098/rstb.2012.0077">https://doi.org/10.1098/rstb.2012.0077</a>.
 </div>
 <div id="ref-shieber1985" class="csl-entry">
 Shieber, Stuart M. 1985. <span>“Evidence Against the Context-Freeness of Natural Language.”</span> <em>Linguistics and Philosophy</em> 8 (3): 333–43. <a href="https://doi.org/10.1007/BF00630917">https://doi.org/10.1007/BF00630917</a>.
 </div>
-</div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
   author = {Fruehwald, Josef},
   title = {Pushdown {Automata} and {Context} {Free} {Languages}},
   date = {2024-01-23},
@@ -480,6 +990,7 @@ Languages.”</span> January 23, 2024. <a href="https://lin511-2024.github.io/no
   <dc:creator>Josef Fruehwald</dc:creator>
   <link>https://lin511-2024.github.io/notes/meetings/01_fsm.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -523,12 +1034,12 @@ A small formal language
 </ul>
 <p>With the sets <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BN%7D">, <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7B%5CSigma%7D">, and <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BG%7D">, can we figure out which strings are, or are <em>not</em> in <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BL%7D">?</p>
 <ul class="task-list">
-<li><p><input type="checkbox"><img src="https://latex.codecogs.com/png.latex?ab">?</p></li>
-<li><p><input type="checkbox"><img src="https://latex.codecogs.com/png.latex?aab">?</p></li>
-<li><p><input type="checkbox"><img src="https://latex.codecogs.com/png.latex?b">?</p></li>
-<li><p><input type="checkbox"><img src="https://latex.codecogs.com/png.latex?aabb">?</p></li>
-<li><p><input type="checkbox"><img src="https://latex.codecogs.com/png.latex?abba">?</p></li>
-<li><p><input type="checkbox"><img src="https://latex.codecogs.com/png.latex?cab">?</p></li>
+<li><p><label><input type="checkbox"><img src="https://latex.codecogs.com/png.latex?ab">?</label></p></li>
+<li><p><label><input type="checkbox"><img src="https://latex.codecogs.com/png.latex?aab">?</label></p></li>
+<li><p><label><input type="checkbox"><img src="https://latex.codecogs.com/png.latex?b">?</label></p></li>
+<li><p><label><input type="checkbox"><img src="https://latex.codecogs.com/png.latex?aabb">?</label></p></li>
+<li><p><label><input type="checkbox"><img src="https://latex.codecogs.com/png.latex?abba">?</label></p></li>
+<li><p><label><input type="checkbox"><img src="https://latex.codecogs.com/png.latex?cab">?</label></p></li>
 </ul>
 </div>
 </div>
@@ -563,9 +1074,10 @@ A small formal language
 <h3 class="anchored" data-anchor-id="examples">Examples</h3>
 <section id="a-light-switch." class="level4">
 <h4 class="anchored" data-anchor-id="a-light-switch.">A light switch.</h4>
-<div class="cell">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">stateDiagram
   direction LR
@@ -577,6 +1089,7 @@ A small formal language
   off --&gt; on: switch flip
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -593,9 +1106,10 @@ A small formal language
 </section>
 <section id="a-metro-turnstile" class="level4">
 <h4 class="anchored" data-anchor-id="a-metro-turnstile">A metro turnstile</h4>
-<div class="cell">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">stateDiagram
   direction LR
@@ -609,6 +1123,7 @@ A small formal language
   u --&gt; l: push
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -625,9 +1140,10 @@ A small formal language
 </section>
 <section id="a-github-repo" class="level4">
 <h4 class="anchored" data-anchor-id="a-github-repo">A Github Repo!</h4>
-<div class="cell">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">stateDiagram
   state "Local Synced with Remote" as s
@@ -644,6 +1160,7 @@ A small formal language
   com --&gt; s: Push
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -687,9 +1204,10 @@ Batman!</p>
 </div>
 </div>
 </div>
-<div class="cell">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">stateDiagram
   direction LR
@@ -713,6 +1231,7 @@ Batman!</p>
   batman1 --&gt; [*]: ε
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -743,7 +1262,7 @@ Batman!</p>
 <p>This relationship between automata of various complexity and formal grammars/languages is called the “Chomsky Hierarchy.”</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://lin511-2024.github.io/notes/meetings/assets/chomsky.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<p><img src="https://lin511-2024.github.io/notes/meetings/assets/chomsky.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
 </figure>
 </div>
 </section>
@@ -769,11 +1288,13 @@ Batman!</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart TD
   S
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -789,12 +1310,14 @@ Batman!</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart TD
   S --&gt; a1["a"]
   S --&gt; A1["A"]
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -810,6 +1333,7 @@ Batman!</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart TD
   S --&gt; a1["a"]
@@ -818,6 +1342,7 @@ Batman!</p>
   A1 --&gt; A3["A"]
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -833,6 +1358,7 @@ Batman!</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart TD
   S --&gt; a1["a"]
@@ -843,6 +1369,7 @@ Batman!</p>
   A2 --&gt; B
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -858,6 +1385,7 @@ Batman!</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart TD
   S --&gt; a1["a"]
@@ -869,6 +1397,7 @@ Batman!</p>
   B --&gt; b
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -879,9 +1408,10 @@ Batman!</p>
 </section>
 <section id="defining-a-fsa-to-recognize-the-language" class="level3">
 <h3 class="anchored" data-anchor-id="defining-a-fsa-to-recognize-the-language">Defining a FSA to recognize the language</h3>
-<div class="cell">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">stateDiagram
   direction LR
@@ -893,6 +1423,7 @@ Batman!</p>
   
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -911,9 +1442,10 @@ Batman!</p>
 <div class="column" style="width:30%;">
 <p><code>colou?r</code></p>
 </div><div class="column" style="width:50%;">
-<div class="cell">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">stateDiagram
   direction LR
@@ -927,6 +1459,7 @@ Batman!</p>
   6 --&gt; [*]: r
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -939,21 +1472,37 @@ Batman!</p>
 <div class="langname">
 <pre class="langname">html</pre>
 </div>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb1-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb1-1"><span class="dt" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">&lt;p&gt;</span></span>
+font-style: inherit;">&lt;</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">p</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span></span>
 <span id="cb1-2">  This is a paragraph with </span>
-<span id="cb1-3">  <span class="kw" style="color: #003B4F;
+<span id="cb1-3">  <span class="dt" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">&lt;strong&gt;</span></span>
+font-style: inherit;">&lt;</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">strong</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span></span>
 <span id="cb1-4">    bold text</span>
-<span id="cb1-5">  <span class="kw" style="color: #003B4F;
+<span id="cb1-5">  <span class="dt" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">&lt;/strong&gt;</span></span>
+font-style: inherit;">&lt;/</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">strong</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span></span>
 <span id="cb1-6">  .</span>
-<span id="cb1-7"><span class="kw" style="color: #003B4F;
+<span id="cb1-7"><span class="dt" style="color: #AD0000;
 background-color: null;
-font-style: inherit;">&lt;/p&gt;</span></span></code></pre></div>
+font-style: inherit;">&lt;/</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">p</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span></span></code></pre></div>
 <ul>
 <li><p>For an html page to be valid, every opening tag, <code>&lt;tag&gt;</code> needs to have a matching closing tag <code>&lt;/tag&gt;</code>.</p></li>
 <li><p>You can’t have a closing tag <code>&lt;/tag&gt;</code> without a preceding opening <code>&lt;tag&gt;</code>.</p></li>
@@ -973,7 +1522,7 @@ font-style: inherit;">&lt;/p&gt;</span></span></code></pre></div>
 </section>
 
 
-<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent">
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-jäger2012" class="csl-entry">
 Jäger, Gerhard, and James Rogers. 2012. <span>“Formal Language Theory: Refining the Chomsky Hierarchy.”</span> <em>Philosophical Transactions of the Royal Society B: Biological Sciences</em> 367 (1598): 1956–70. <a href="https://doi.org/10.1098/rstb.2012.0077">https://doi.org/10.1098/rstb.2012.0077</a>.
 </div>
@@ -982,7 +1531,7 @@ Jäger, Gerhard, and James Rogers. 2012. <span>“Formal Language Theory: Refini
 <ol>
 <li id="fn1"><p>Complex in the sense of what they can <em>do</em>, not necessarily how easy it is to understand them.↩︎</p></li>
 </ol>
-</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
+</section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
   author = {Fruehwald, Josef},
   title = {Regular {Languages} and {Finite} {State} {Machines}},
   date = {2024-01-16},
@@ -1005,12 +1554,14 @@ Machines.”</span> January 16, 2024. <a href="https://lin511-2024.github.io/not
 
 
 
+
 <section id="finite-state-automata-and-regex" class="level2">
 <h2 class="anchored" data-anchor-id="finite-state-automata-and-regex">Finite State Automata and RegEx</h2>
 <p><code>ok(a+y)?</code></p>
-<div class="cell">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">stateDiagram
     direction LR
@@ -1030,6 +1581,7 @@ Machines.”</span> January 16, 2024. <a href="https://lin511-2024.github.io/not
     3 --&gt; [*]: ε
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -1044,7 +1596,7 @@ Machines.”</span> January 16, 2024. <a href="https://lin511-2024.github.io/not
 
 </section>
 
-<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
   author = {Fruehwald, Josef},
   title = {FSA in-Class Notes},
   date = {2024-01-16},
@@ -1067,6 +1619,7 @@ Fruehwald, Josef. 2024. <span>“FSA in-Class Notes.”</span> January 16,
 
 
 
+
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <p>We’ll need to get our systems setup to work properly with the tools we’ll be using this semester.</p>
@@ -1078,9 +1631,9 @@ Fruehwald, Josef. 2024. <span>“FSA in-Class Notes.”</span> January 16,
 <h4 class="anchored" data-anchor-id="windows-users">Windows Users</h4>
 <p>If you ware using a windows computer, I’ll ask you to install Windows Subsystem for Linux like so:</p>
 <ul class="task-list">
-<li><input type="checkbox"><a href="https://lingmethodshub.github.io/content/windows/wsl/00_installing_wsl.html">Follow the tutorial here for enabling and installing WSL</a></li>
-<li><input type="checkbox"><a href="https://code.visualstudio.com/">Install VS Code</a></li>
-<li><input type="checkbox"><a href="https://code.visualstudio.com/docs/remote/wsl-tutorial#_prerequisites">Work through the first section of this tutorial, stopping after you connect to WSL</a></li>
+<li><label><input type="checkbox"><a href="https://lingmethodshub.github.io/content/windows/wsl/00_installing_wsl.html">Follow the tutorial here for enabling and installing WSL</a></label></li>
+<li><label><input type="checkbox"><a href="https://code.visualstudio.com/">Install VS Code</a></label></li>
+<li><label><input type="checkbox"><a href="https://code.visualstudio.com/docs/remote/wsl-tutorial#_prerequisites">Work through the first section of this tutorial, stopping after you connect to WSL</a></label></li>
 </ul>
 </section>
 </div><div class="column" style="width:10%;">
@@ -1089,7 +1642,7 @@ Fruehwald, Josef. 2024. <span>“FSA in-Class Notes.”</span> January 16,
 <section id="macoslinux-users" class="level4">
 <h4 class="anchored" data-anchor-id="macoslinux-users">MacOS/Linux Users</h4>
 <ul class="task-list">
-<li><input type="checkbox"><a href="https://code.visualstudio.com/">Install VS Code</a></li>
+<li><label><input type="checkbox"><a href="https://code.visualstudio.com/">Install VS Code</a></label></li>
 </ul>
 </section>
 </div>
@@ -1099,9 +1652,9 @@ Fruehwald, Josef. 2024. <span>“FSA in-Class Notes.”</span> January 16,
 <h3 class="anchored" data-anchor-id="python">Python</h3>
 <section id="pyenv" class="level4">
 <h4 class="anchored" data-anchor-id="pyenv">pyenv</h4>
-<p>We’ll be using a program called <code>pyenv</code> to manage the versions of python we use. To install <code>pyenv</code>, open the VSCode Command Palette (with <kbd data-mac="Shift+Command+P" data-windows="Shift+Control+P" data-linux="Shift+Control+P"></kbd>) which will open the command line interface. Then,</p>
+<p>We’ll be using a program called <code>pyenv</code> to manage the versions of python we use. To install <code>pyenv</code>, open the VSCode Command Palette (with <span class="visually-hidden"></span>) which will open the command line interface. Then,</p>
 <ul class="task-list">
-<li><input type="checkbox">copy this line of code code from this page (<kbd data-mac="Command+C" data-windows="Control+C," data-linux="Control+C"></kbd>)</li>
+<li><label><input type="checkbox">copy this line of code code from this page (<span class="visually-hidden"></span>)</label></li>
 </ul>
 <div class="langname">
 <pre class="langname">bash</pre>
@@ -1114,8 +1667,8 @@ font-style: inherit;">|</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">bash</span></span></code></pre></div>
 <ul class="task-list">
-<li><input type="checkbox">Paste it into the terminal ((<kbd data-mac="Command+V" data-windows="Control+V," data-linux="Control+V"></kbd>)</li>
-<li><input type="checkbox">Hit enter.</li>
+<li><label><input type="checkbox">Paste it into the terminal ((<span class="visually-hidden"></span>)</label></li>
+<li><label><input type="checkbox">Hit enter.</label></li>
 </ul>
 <p>Once that has successfully finished:</p>
 <hr>
@@ -1125,7 +1678,7 @@ font-style: inherit;">bash</span></span></code></pre></div>
 <section id="macos-users" class="level4">
 <h4 class="anchored" data-anchor-id="macos-users">MacOS Users</h4>
 <ul class="task-list">
-<li><input type="checkbox">Run this</li>
+<li><label><input type="checkbox">Run this</label></li>
 </ul>
 <div class="langname">
 <pre class="langname">bash</pre>
@@ -1138,7 +1691,7 @@ font-style: inherit;">open</span> ~/.zshrc</span></code></pre></div>
 If you get an error.
 </summary>
 <ul class="task-list">
-<li><input type="checkbox">Run this</li>
+<li><label><input type="checkbox">Run this</label></li>
 </ul>
 <div class="langname">
 <pre class="langname">bash</pre>
@@ -1157,7 +1710,7 @@ font-style: inherit;">open</span> ~/.zshrc</span></code></pre></div>
 <section id="wsl-users" class="level4">
 <h4 class="anchored" data-anchor-id="wsl-users">WSL users</h4>
 <ul class="task-list">
-<li><input type="checkbox">Run this</li>
+<li><label><input type="checkbox">Run this</label></li>
 </ul>
 <div class="langname">
 <pre class="langname">bash</pre>
@@ -1170,7 +1723,7 @@ font-style: inherit;">open</span> ~/.bashrc</span></code></pre></div>
 If you get an error
 </summary>
 <ul class="task-list">
-<li><input type="checkbox">Run ths</li>
+<li><label><input type="checkbox">Run ths</label></li>
 </ul>
 <div class="langname">
 <pre class="langname">bash</pre>
@@ -1187,7 +1740,7 @@ font-style: inherit;">open</span> ~/.bashrc</span></code></pre></div>
 </div>
 <hr>
 <ul class="task-list">
-<li><input type="checkbox">Paste the following into the window that opens.</li>
+<li><label><input type="checkbox">Paste the following into the window that opens.</label></li>
 </ul>
 <div class="langname">
 <pre class="langname">sh</pre>
@@ -1248,13 +1801,13 @@ font-style: inherit;">)</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"</span></span></code></pre></div>
 <ul class="task-list">
-<li><input type="checkbox">Save it</li>
+<li><label><input type="checkbox">Save it</label></li>
 </ul>
 <section id="installing-python" class="level4">
 <h4 class="anchored" data-anchor-id="installing-python">Installing Python</h4>
 <ul class="task-list">
-<li><input type="checkbox">Close and reopen the terminal window</li>
-<li><input type="checkbox">Copy-Paste the following lines of code</li>
+<li><label><input type="checkbox">Close and reopen the terminal window</label></li>
+<li><label><input type="checkbox">Copy-Paste the following lines of code</label></li>
 </ul>
 <div class="langname">
 <pre class="langname">bash</pre>
@@ -1281,7 +1834,7 @@ font-style: inherit;">pyenv</span> activate Lin511</span></code></pre></div>
 <h3 class="anchored" data-anchor-id="git-github-configuration">Git &amp; Github Configuration</h3>
 <p><strong>Make sure you change the email and name to the email and username you use for Github!</strong></p>
 <ul class="task-list">
-<li><input type="checkbox">In the terminal, set your git email address:</li>
+<li><label><input type="checkbox">In the terminal, set your git email address:</label></li>
 </ul>
 <div class="langname">
 <pre class="langname">bash</pre>
@@ -1294,7 +1847,7 @@ font-style: inherit;">--global</span> user.email <span class="st" style="color: 
 background-color: null;
 font-style: inherit;">"you@example.com"</span></span></code></pre></div>
 <ul class="task-list">
-<li><input type="checkbox">Set your username.</li>
+<li><label><input type="checkbox">Set your username.</label></li>
 </ul>
 <div class="langname">
 <pre class="langname">bash</pre>
@@ -1308,15 +1861,15 @@ background-color: null;
 font-style: inherit;">"Your Name"</span></span></code></pre></div>
 <p>Then, follow these tutorials from github:</p>
 <ul class="task-list">
-<li><input type="checkbox"><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Generating a new SSH Key</a></li>
-<li><input type="checkbox"><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Adding your ssh key to github</a></li>
+<li><label><input type="checkbox"><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Generating a new SSH Key</a></label></li>
+<li><label><input type="checkbox"><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Adding your ssh key to github</a></label></li>
 </ul>
 
 
 </section>
 </section>
 
-<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
   author = {Fruehwald, Josef},
   title = {Setup {Notes}},
   date = {2024-01-08},
@@ -1338,7 +1891,8 @@ Fruehwald, Josef. 2024. <span>“Setup Notes.”</span> January 8, 2024. <a href
 
 
 
-<div class="cell" data-execution_count="1">
+
+<div id="cell-1" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="dv" style="color: #AD0000;
@@ -1348,7 +1902,7 @@ font-style: inherit;">1</span>)</span></code></pre></div>
 <pre><code>1</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="2">
+<div id="cell-2" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
@@ -1358,7 +1912,7 @@ font-style: inherit;">"hello"</span>)</span></code></pre></div>
 <pre><code>hello</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="3">
+<div id="cell-3" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="dv" style="color: #AD0000;
@@ -1372,7 +1926,7 @@ font-style: inherit;">2</span>)</span></code></pre></div>
 <pre><code>4</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="4">
+<div id="cell-4" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">x <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
@@ -1393,7 +1947,7 @@ font-style: inherit;">+</span> y)</span></code></pre></div>
 <pre><code>11</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="5">
+<div id="cell-5" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">word1 <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
@@ -1414,7 +1968,7 @@ font-style: inherit;">+</span> word2)</span></code></pre></div>
 <pre><code>Hello World!</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="6">
+<div id="cell-6" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="va" style="color: #111111;
@@ -1424,7 +1978,7 @@ font-style: inherit;">True</span>)</span></code></pre></div>
 <pre><code>True</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="7">
+<div id="cell-7" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="va" style="color: #111111;
@@ -1434,7 +1988,7 @@ font-style: inherit;">False</span>)</span></code></pre></div>
 <pre><code>False</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="8">
+<div id="cell-8" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="va" style="color: #111111;
@@ -1451,7 +2005,7 @@ font-style: inherit;">False</span>)</span></code></pre></div>
 
 
 
-<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald,
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald,
   author = {Fruehwald, Josef},
   title = {Python Basics},
   url = {https://lin511-2024.github.io/notes/programming/01_Python_basics.html},
@@ -1462,7 +2016,7 @@ Fruehwald, Josef. n.d. <span>“Python Basics.”</span> <a href="https://lin511
 </div></div></section></div> ]]></description>
   <category>python</category>
   <guid>https://lin511-2024.github.io/notes/programming/01_Python_basics.html</guid>
-  <pubDate>Wed, 24 Jan 2024 17:12:03 GMT</pubDate>
+  <pubDate>Thu, 25 Jan 2024 16:43:21 GMT</pubDate>
 </item>
 </channel>
 </rss>

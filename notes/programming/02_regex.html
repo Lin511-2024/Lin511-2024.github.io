@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Josef Fruehwald">
+<meta name="dcterms.date" content="2024-01-25">
 
-<title>Lin511-2024 - What is Python?</title>
+<title>Lin511-2024 - Regular Expressions, Quickly</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +66,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../notes/concepts/02_undersdanding-paths.html" rel="next">
-<link href="../../notes/concepts/01_keyboarding.html" rel="prev">
+<link href="../../notes/in_class/00_python.html" rel="next">
+<link href="../../notes/programming/01_Python_basics.html" rel="prev">
 <link href="../../assets/logo.svg" rel="icon" type="image/svg+xml">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -79,7 +80,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/quarto-contrib/codenamelabel/codeblocklabel.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -111,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="../../styles/styles.css">
-<meta property="og:title" content="Lin511-2024 - What is Python?">
+<meta property="og:title" content="Lin511-2024 - Regular Expressions, Quickly">
 <meta property="og:description" content="">
 <meta property="og:site_name" content="Lin511-2024">
 </head>
@@ -164,7 +164,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/concepts/00_glossary.html">Concepts</a></li><li class="breadcrumb-item"><a href="../../notes/concepts/01_what-is-python.html">What <em>is</em> Python?</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/programming/00_setup.html">Programming</a></li><li class="breadcrumb-item"><a href="../../notes/programming/02_regex.html">Regular Expressions, Quickly</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -210,7 +210,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notes/concepts/01_what-is-python.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../notes/concepts/01_what-is-python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">What <em>is</em> Python?</span></a>
   </div>
 </li>
@@ -286,7 +286,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notes/programming/02_regex.html" class="sidebar-item-text sidebar-link">
+  <a href="../../notes/programming/02_regex.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Regular Expressions, Quickly</span></a>
   </div>
 </li>
@@ -319,21 +319,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#python-is-set-of-rules-for-a-formal-language" id="toc-python-is-set-of-rules-for-a-formal-language" class="nav-link active" data-scroll-target="#python-is-set-of-rules-for-a-formal-language">📕 Python is set of rules for a formal language</a></li>
-  <li><a href="#python-is-a-program-that-interprets-formal-language-input" id="toc-python-is-a-program-that-interprets-formal-language-input" class="nav-link" data-scroll-target="#python-is-a-program-that-interprets-formal-language-input">🤖 Python is a program that interprets formal language input</a></li>
-  <li><a href="#python-is-an-ecosystem" id="toc-python-is-an-ecosystem" class="nav-link" data-scroll-target="#python-is-an-ecosystem">⛰️ Python is an Ecosystem</a></li>
-  <li><a href="#python-is-a-social-project" id="toc-python-is-a-social-project" class="nav-link" data-scroll-target="#python-is-a-social-project">🧑‍💻 Python is a social project</a></li>
-  <li><a href="#the-polysemy-is-ok" id="toc-the-polysemy-is-ok" class="nav-link" data-scroll-target="#the-polysemy-is-ok">📕, 🤖, ⛰️, 🧑‍💻 The Polysemy is Ok</a></li>
+  <li><a href="#setting-up-for-using-regular-expressions-in-python" id="toc-setting-up-for-using-regular-expressions-in-python" class="nav-link active" data-scroll-target="#setting-up-for-using-regular-expressions-in-python">Setting up for using regular expressions in python</a></li>
+  <li><a href="#important-re-functions" id="toc-important-re-functions" class="nav-link" data-scroll-target="#important-re-functions">Important <code>re</code> functions</a>
+  <ul>
+  <li><a href="#re.search" id="toc-re.search" class="nav-link" data-scroll-target="#re.search"><code>re.search()</code></a></li>
+  <li><a href="#re.findall" id="toc-re.findall" class="nav-link" data-scroll-target="#re.findall"><code>re.findall()</code></a></li>
+  </ul></li>
+  <li><a href="#simple-character-searches" id="toc-simple-character-searches" class="nav-link" data-scroll-target="#simple-character-searches">Simple character searches</a></li>
+  <li><a href="#options" id="toc-options" class="nav-link" data-scroll-target="#options">Options</a>
+  <ul>
+  <li><a href="#ranges" id="toc-ranges" class="nav-link" data-scroll-target="#ranges">Ranges</a></li>
+  <li><a href="#metacharacters" id="toc-metacharacters" class="nav-link" data-scroll-target="#metacharacters">“Metacharacters”</a></li>
+  <li><a href="#any-character" id="toc-any-character" class="nav-link" data-scroll-target="#any-character">Any Character</a></li>
+  <li><a href="#escaping-special-symbols" id="toc-escaping-special-symbols" class="nav-link" data-scroll-target="#escaping-special-symbols">Escaping special symbols</a></li>
+  </ul></li>
+  <li><a href="#modifiers" id="toc-modifiers" class="nav-link" data-scroll-target="#modifiers">Modifiers</a></li>
+  <li><a href="#grouping" id="toc-grouping" class="nav-link" data-scroll-target="#grouping">Grouping</a></li>
+  <li><a href="#boundaries" id="toc-boundaries" class="nav-link" data-scroll-target="#boundaries">Boundaries</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Lin511-2024/Lin511-2024.github.io/blob/main/notes/concepts/01_what-is-python.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Lin511-2024/Lin511-2024.github.io/blob/main/notes/programming/02_regex.ipynb" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/concepts/00_glossary.html">Concepts</a></li><li class="breadcrumb-item"><a href="../../notes/concepts/01_what-is-python.html">What <em>is</em> Python?</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/programming/00_setup.html">Programming</a></li><li class="breadcrumb-item"><a href="../../notes/programming/02_regex.html">Regular Expressions, Quickly</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">What <em>is</em> Python?</h1>
-</div>
+<h1 class="title">Regular Expressions, Quickly</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">python</div>
+  </div>
+  </div>
 
 
 
@@ -346,6 +361,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 25, 2024</p>
+    </div>
+  </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
@@ -361,212 +382,338 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>When talking about “Python” or other programming langauges, we often engage in a form of polysemy<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> that can be confusing at first. I’ll try to unpack the different meanings here.</p>
-<section id="python-is-set-of-rules-for-a-formal-language" class="level2">
-<h2 class="anchored" data-anchor-id="python-is-set-of-rules-for-a-formal-language">📕 Python is set of rules for a formal language</h2>
-<p>When we talk about “Python”, one thing we sometimes refer to is an abstract set of rules for a formal language.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-📕 The abstract language
+Look at Github
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>When you say:</p>
-<blockquote class="blockquote">
-<p>I’m learning Python this semester.</p>
-</blockquote>
-<p>You’re talking about the abstract set of rules.</p>
+<p>The <em>real</em> content is in your <a href="https://github.com/orgs/Lin511-2024/repositories"><code>regex-in-class-&lt;username&gt;</code></a> repository on github. This is meant to be more of a reference sheet.</p>
 </div>
 </div>
-<p>We can describe some of these rules in natural language (this isn’t how they’re <em>actually</em> written).</p>
-<ul>
-<li>If a list of values has been assigned to a variable, when the variable’s name is followed <code>[0]</code>, return the first value in the list.</li>
-<li>If <code>print(</code> is followed by a value or variable, which is then followed by <code>)</code>, print the value, or the value assigned to the variable.</li>
-<li>If a <code>#</code> symbol is encountered on a line, ignore everything following it.</li>
-</ul>
-<p>These rules define very precisely how code should be written, and also define what should be <em>done</em> when certain patterns of code are encountered, but these rules are abstract, and don’t actually <em>do</em> anything.</p>
-</section>
-<section id="python-is-a-program-that-interprets-formal-language-input" class="level2">
-<h2 class="anchored" data-anchor-id="python-is-a-program-that-interprets-formal-language-input">🤖 Python is a program that interprets formal language input</h2>
-<p>Simply having a set of abstract rules can be fun, but it’s not so useful if you have no way to actually <em>do</em> things. To make code we write actually do anything, we need to use a program called an <strong>Interpreter</strong>.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-🤖 The Python Interpreter
+This is just a support function
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>When you say</p>
-<blockquote class="blockquote">
-<p>I’m having a hard time installing Python.</p>
-</blockquote>
-<p>you’re talking about a Python Interpreter.</p>
+<div id="cell-3" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.parse</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, Markdown</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_regex_url(regex: <span class="bu">str</span>):</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    base <span class="op">=</span> <span class="st">"https://regexper.com/#"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> base <span class="op">+</span> urllib.parse.quote(regex)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    url_markdown <span class="op">=</span> <span class="ss">f"[</span><span class="sc">{</span>regex<span class="sc">}</span><span class="ss">](</span><span class="sc">{</span>url<span class="sc">}</span><span class="ss">)"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#return url_markdown</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    display(Markdown(url_markdown))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p>The Python interpreter processes code, determines whether or not it is valid, then does the things the code told it to do.</p>
-<p>Code can get passed to the interpreter many different ways, including</p>
+</div>
+</div>
+<section id="setting-up-for-using-regular-expressions-in-python" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-for-using-regular-expressions-in-python">Setting up for using regular expressions in python</h2>
 <ul>
-<li>In a single text file, called a python “script”, (usually named to end in <code>.py</code>)</li>
-<li>In an interactive python “shell”.</li>
-<li>Inside a Jupyter notebook.</li>
+<li>We’ll need to import the <code>re</code> module</li>
+<li>Unlike simple strings, we’ll need to write our regular expressions with a preceding <code>r</code></li>
 </ul>
-<p>For example, the text in the shaded block below was passed to a Python interpreter, and the interpreter decided that it was invalid (because there is an opening quote <code>"</code>, but not a closing quote).</p>
-<div class="cell" data-execution_count="1">
-<div class="code-with-filename">
-<div class="langname">
-<pre class="langname">python</pre>
-</div>
-<div class="code-with-filename-file">
-<pre><strong>Python Code</strong></pre>
-</div>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">"x</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell-output cell-output-error">
-<pre><code>SyntaxError: unterminated string literal (detected at line 1) (20073044.py, line 1)</code></pre>
-</div>
-</div>
-<p>The text in this next shaded block was passed to a Python interpreter. This time, it was deemed valid, and the interpreter did what the code instructed.</p>
-<div class="cell" data-execution_count="2">
-<div class="langname">
-<pre class="langname">python</pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"hello! "</span> <span class="op">*</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>hello! hello! hello! </code></pre>
+<div id="cell-6" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">r"regex"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>'regex'</code></pre>
 </div>
 </div>
 </section>
-<section id="python-is-an-ecosystem" class="level2">
-<h2 class="anchored" data-anchor-id="python-is-an-ecosystem">⛰️ Python is an Ecosystem</h2>
-<p>People often say that Python comes “with batteries included”, meaning it can do a lot of different things out without needing to install any extensions. But you <em>can</em> install extensions in the form of additional libraries that extend Python’s capabilities.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<section id="important-re-functions" class="level2">
+<h2 class="anchored" data-anchor-id="important-re-functions">Important <code>re</code> functions</h2>
+<p>Two ways to use <code>re</code> to search strings are</p>
+<dl>
+<dt><code>re.search()</code></dt>
+<dd>
+Return structured information about <em>where</em> the regex matches.
+</dd>
+<dt><code>re.findall()</code></dt>
+<dd>
+Return all actual matching substrings
+</dd>
+</dl>
+<div id="cell-8" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sentence1 <span class="op">=</span> <span class="st">"The speaker is speaking."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-title-container flex-fill">
-⛰️ The Ecosystem
+<section id="re.search" class="level3">
+<h3 class="anchored" data-anchor-id="re.search"><code>re.search()</code></h3>
+<div id="cell-10" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>re.search(<span class="vs">r"speak"</span>, sentence1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>&lt;re.Match object; span=(4, 9), match='speak'&gt;</code></pre>
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>When someone says</p>
-<blockquote class="blockquote">
-<p>Python is the most widely used language in natural language processing.</p>
-</blockquote>
-<p>They are talking about the <em>ecosystem</em> of libraries for Python hat have been built to do natural language processing.</p>
-</div>
-</div>
-<p>Some examples of additional libraries for Python are</p>
-<ul>
-<li><code>numpy</code>: Allows for effective computation with numbers</li>
-<li><code>matplotlib</code>: Makes graphs</li>
-</ul>
-<div class="cell" data-execution_count="3">
-<div class="langname">
-<pre class="langname">python</pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span> <span class="op">*</span> np.pi, <span class="dv">200</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.sin(x)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>ax.plot(x, y)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="01_what-is-python_files/figure-html/cell-4-output-1.png" class="figure-img" width="590" height="411"></p>
-</figure>
-</div>
+<div id="cell-11" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sentence1[<span class="dv">4</span>:<span class="dv">9</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>'speak'</code></pre>
 </div>
 </div>
 </section>
-<section id="python-is-a-social-project" class="level2">
-<h2 class="anchored" data-anchor-id="python-is-a-social-project">🧑‍💻 Python is a social project</h2>
-<p>The meanings of “Python” we’ve already talked about are</p>
-<ul>
-<li>📕 The abstract language</li>
-<li>🤖 The Python Interpreter</li>
-<li>⛰️ The Python Ecosystem</li>
-</ul>
-<p>Understanding how to put all of these pieces together effectively is a <em>social</em> project.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-🧑‍💻 The social project
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>When you say</p>
-<blockquote class="blockquote">
-<p>So-n-so is really good at Python.</p>
-</blockquote>
-<p>You are talking about their involvement in the Python social project.</p>
-</div>
-</div>
-<ul>
-<li>❌ There is no part of the 📕 <em>abstract language</em> that will inform you that there is a very good Python library for doing a certain task.</li>
-<li>❌ The 🤖 <em>Python Interpreter</em> won’t tell you that there’s a better way to do what you’re trying to do.</li>
-<li>❌ There are nearly <a href="https://pypi.org/">half a million libraries on ⛰️ <em>the Python Package Index</em></a>, so you can’t just peruse it to find what’s relevant.</li>
-</ul>
-<p>In order to know newest or most effective way to do things, you need to be involved in 🧑‍💻 <em>the social project</em>. That begins within a classroom, then extends to keeping up with blogs and other discourses about changes and developments.</p>
-<p>One way people demonstrate that they are involved in the Python social project is by writing their code <em>idiomatically</em>. For example, in the code block above, I included the line <code>import numpy as np</code>. But <em>there’s no rule</em> that we import <code>numpy</code> as <code>np</code>, it’s simply convention.</p>
-<p>This code below will run just as well, but would cause problems for people trying to read your code, because it’s not idiomatic.</p>
-<div class="cell" data-execution_count="4">
-<div class="langname">
-<pre class="langname">python</pre>
-</div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> jokes</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> farts</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> farts.linspace(<span class="dv">0</span>, <span class="dv">2</span> <span class="op">*</span> farts.pi, <span class="dv">200</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> farts.sin(x)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> jokes.subplots()</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>ax.plot(x, y)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>jokes.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="01_what-is-python_files/figure-html/cell-5-output-1.png" class="figure-img" width="590" height="411"></p>
-</figure>
-</div>
+<section id="re.findall" class="level3">
+<h3 class="anchored" data-anchor-id="re.findall"><code>re.findall()</code></h3>
+<div id="cell-13" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>re.findall(<span class="vs">r"speak"</span>, sentence1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>['speak', 'speak']</code></pre>
 </div>
 </div>
 </section>
-<section id="the-polysemy-is-ok" class="level2">
-<h2 class="anchored" data-anchor-id="the-polysemy-is-ok">📕, 🤖, ⛰️, 🧑‍💻 The Polysemy is Ok</h2>
-<p>It’s ok just say “Python” when you’re talking about one specific meaning.</p>
+</section>
+<section id="simple-character-searches" class="level2">
+<h2 class="anchored" data-anchor-id="simple-character-searches">Simple character searches</h2>
+<p>Like the examples above, literally the characters you want to use will match.</p>
+<div id="cell-15" class="cell" data-results="asis" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>speak_regex <span class="op">=</span> <span class="vs">r"speak"</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>get_regex_url(speak_regex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#speak">speak</a></p>
+</div>
+</div>
+</section>
+<section id="options" class="level2">
+<h2 class="anchored" data-anchor-id="options">Options</h2>
+<p>If you want some characters to be chosen from a set of options, place them in <code>[]</code>.</p>
+<div id="cell-17" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>vowels_regex <span class="op">=</span> <span class="vs">r"[aeiou]"</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>get_regex_url(vowels_regex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#%5Baeiou%5D">[aeiou]</a></p>
+</div>
+</div>
+<div id="cell-18" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>re.findall(<span class="vs">r"[aeiou]"</span>, sentence1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>['e', 'e', 'a', 'e', 'i', 'e', 'a', 'i']</code></pre>
+</div>
+</div>
+<div id="cell-19" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>the_regex <span class="op">=</span> <span class="vs">r"[Tt]he"</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>get_regex_url(the_regex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#%5BTt%5Dhe">[Tt]he</a></p>
+</div>
+</div>
+<div id="cell-20" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>re.findall(the_regex, sentence1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>['The']</code></pre>
+</div>
+</div>
+<section id="ranges" class="level3">
+<h3 class="anchored" data-anchor-id="ranges">Ranges</h3>
+<p>Ranges of characters or numbers can be given inside <code>[]</code> like so</p>
+<div id="cell-22" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>get_regex_url(<span class="vs">r"[a-z]"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>get_regex_url(<span class="vs">r"[A-Z]"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>get_regex_url(<span class="vs">r"[0-9]"</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>get_regex_url(<span class="vs">r"[A-Za-z]"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#%5Ba-z%5D">[a-z]</a></p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#%5BA-Z%5D">[A-Z]</a></p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#%5B0-9%5D">[0-9]</a></p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#%5BA-Za-z%5D">[A-Za-z]</a></p>
+</div>
+</div>
+</section>
+<section id="metacharacters" class="level3">
+<h3 class="anchored" data-anchor-id="metacharacters">“Metacharacters”</h3>
+<ul>
+<li><code>\w</code> == <code>[A-Za-z0-9_]</code>
+<ul>
+<li>word characters</li>
+</ul></li>
+<li><code>\W</code> == <code>[^A-Za-z0-9_]</code>
+<ul>
+<li>non-word characters</li>
+</ul></li>
+<li><code>\d</code> == <code>[0-9]</code>
+<ul>
+<li>digits</li>
+</ul></li>
+<li><code>\D</code> == <code>[^0-9]</code>
+<ul>
+<li>non-digits</li>
+</ul></li>
+<li><code>\s</code> == <code>[ \t\n]</code>
+<ul>
+<li>Any whitespace character</li>
+</ul></li>
+<li><code>\S</code> == <code>[^ \t\n]</code>
+<ul>
+<li>non-whitespace</li>
+</ul></li>
+</ul>
+</section>
+<section id="any-character" class="level3">
+<h3 class="anchored" data-anchor-id="any-character">Any Character</h3>
+<p>To match <em>any</em> character (letter, number, punctuation, space, etc.) use <code>.</code> or “dot”</p>
+<div id="cell-24" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>re.findall(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># return every word character and </span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the following character</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="vs">r"\w."</span>,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    sentence1</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>['Th', 'e ', 'sp', 'ea', 'ke', 'r ', 'is', 'sp', 'ea', 'ki', 'ng']</code></pre>
+</div>
+</div>
+</section>
+<section id="escaping-special-symbols" class="level3">
+<h3 class="anchored" data-anchor-id="escaping-special-symbols">Escaping special symbols</h3>
+<p>If you wanted to find the actual period in <code>sentence1</code>, you’d have to “escape” the <code>.</code> with a preceding <code></code>`.</p>
+<div id="cell-26" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compare</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>get_regex_url(<span class="vs">r"."</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>get_regex_url(<span class="vs">r"\."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#.">.</a></p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#%5C.">.</a></p>
+</div>
+</div>
+<div id="cell-27" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>re.findall(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"\."</span>,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    sentence1</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>['.']</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="modifiers" class="level2">
+<h2 class="anchored" data-anchor-id="modifiers">Modifiers</h2>
+<p>Modifiers come after the definition of a single character, and define <em>how many times</em> that character can appear.</p>
+<ul>
+<li><code>a?</code> = zero or one <code>a</code></li>
+<li><code>a+</code> = one or more <code>a</code></li>
+<li><code>a*</code> = zero or more <code>a</code></li>
+</ul>
+<div id="cell-29" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>get_regex_url(<span class="vs">r"bana?na"</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>get_regex_url(<span class="vs">r"bana+na"</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>get_regex_url(<span class="vs">r"bana*na"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#bana%3Fna">bana?na</a></p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#bana%2Bna">bana+na</a></p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#bana%2Ana">bana*na</a></p>
+</div>
+</div>
+</section>
+<section id="grouping" class="level2">
+<h2 class="anchored" data-anchor-id="grouping">Grouping</h2>
+<p>You can define groupings within regular expressions. The <em>effect</em> of these groupings depends what kind of regex function you’re using. For <code>re.findall()</code>, it’ll find the whole string, but return just the text from the grouping.</p>
+<div id="cell-31" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>sentence2 <span class="op">=</span> <span class="st">"The big bear and the small bear ran away."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-32" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>get_regex_url(<span class="vs">r"[Tt]he (\w+) bear"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#%5BTt%5Dhe%20%28%5Cw%2B%29%20bear">[Tt]he (+) bear</a></p>
+</div>
+</div>
+<div id="cell-33" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>re.findall(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="vs">r"[Tt]he (\w+) bear"</span>,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    sentence2</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>['big', 'small']</code></pre>
+</div>
+</div>
+</section>
+<section id="boundaries" class="level2">
+<h2 class="anchored" data-anchor-id="boundaries">Boundaries</h2>
+<ul>
+<li><p><code>^the</code> == Finds “the” at the <em>start</em> of a string.</p></li>
+<li><p><code>the$</code> == Finds ” the” at the <em>end</em> of a string.</p></li>
+<li><p><code>\bthe\b</code> == Finds “the” in between word boundaries.</p></li>
+</ul>
+<div id="cell-35" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>get_regex_url(<span class="vs">r"^the "</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>get_regex_url(<span class="vs">r" the$"</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>get_regex_url(<span class="vs">r"\bthe\b"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#%5Ethe%20">^the</a></p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><a href="https://regexper.com/#%20the%24">the$</a></p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p>[(https://regexper.com/#%5Cbthe%5Cb)</p>
+</div>
+</div>
+<div id="cell-36" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>sentence3 <span class="op">=</span> <span class="st">"I saw the other bear."</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>re.findall(</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="vs">r"the"</span>,</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    sentence3</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<pre><code>['the', 'the']</code></pre>
+</div>
+</div>
+<p>The second “the” there comes from inside “o<strong>the</strong>r”</p>
+<div id="cell-38" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>re.findall(</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="vs">r"\bthe\b"</span>,</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    sentence3</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<pre><code>['the']</code></pre>
+</div>
+</div>
+<div id="cell-39" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>sentence3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<pre><code>'I saw the other bear.'</code></pre>
+</div>
+</div>
 
 
 </section>
 
-
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>A word is polysemous when it has more than one meaning.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald,
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
   author = {Fruehwald, Josef},
-  title = {What *Is* {Python?}},
-  url = {https://lin511-2024.github.io/notes/concepts/01_what-is-python.html},
+  title = {Regular {Expressions,} {Quickly}},
+  date = {2024-01-25},
+  url = {https://lin511-2024.github.io/notes/programming/02_regex.html},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald" class="csl-entry quarto-appendix-citeas" role="listitem">
-Fruehwald, Josef. n.d. <span>“What *Is* Python?”</span> <a href="https://lin511-2024.github.io/notes/concepts/01_what-is-python.html">https://lin511-2024.github.io/notes/concepts/01_what-is-python.html</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Fruehwald, Josef. 2024. <span>“Regular Expressions, Quickly.”</span>
+January 25, 2024. <a href="https://lin511-2024.github.io/notes/programming/02_regex.html">https://lin511-2024.github.io/notes/programming/02_regex.html</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1101,13 +1248,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../notes/concepts/01_keyboarding.html" class="pagination-link  aria-label=" &quot;where="" is="" the="" ...="" key?&quot;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">“Where is the … key?”</span>
+      <a href="../../notes/programming/01_Python_basics.html" class="pagination-link  aria-label=" python="" basics"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Python basics</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../notes/concepts/02_undersdanding-paths.html" class="pagination-link" aria-label="Understanding Directories">
-        <span class="nav-page-text">Understanding Directories</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../notes/in_class/00_python.html" class="pagination-link" aria-label="Starting Python">
+        <span class="nav-page-text">Starting Python</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1138,7 +1285,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </a>
   </li>  
 </ul>
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Lin511-2024/Lin511-2024.github.io/blob/main/notes/concepts/01_what-is-python.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Lin511-2024/Lin511-2024.github.io/blob/main/notes/programming/02_regex.ipynb" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
