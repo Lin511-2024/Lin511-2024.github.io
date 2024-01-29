@@ -43,6 +43,8 @@ website:
         href: https://github.com/Lin511-2024
   sidebar: 
     - title: "Home"
+      style: "docked"
+      collapse-level: 1
       logo: assets/logo.svg
       contents:
         - text: Home
