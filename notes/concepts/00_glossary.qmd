@@ -48,7 +48,9 @@ To paste, you can either right-click and select 'Paste', or use your system's 'h
   
   "Clone", "Making a copy of a git repository on another computer, whether [locally](#local-adj) or [remotely](#remote-adj).",
   
-  "Formal", "In *computational* linguistics, 'formal' isn't the opposite of 'casual'. It's about any system or language which has a strict set of acceptable symbols, and how they can be combined."
+  "Formal", "In *computational* linguistics, 'formal' isn't the opposite of 'casual'. It's about any system or language which has a strict set of acceptable symbols, and how they can be combined.",
+  
+  "Terminal", "A text based interface to your computer. Instead of clicking on visual icons to, say, open a folder and look at its contents, you type in text based commands like `cd` and `ls`."
 
 ) |>
   arrange(
