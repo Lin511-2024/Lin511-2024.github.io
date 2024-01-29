@@ -11,7 +11,1106 @@
 <description></description>
 <language>en</language>
 <generator>quarto-1.4.549</generator>
-<lastBuildDate>Thu, 25 Jan 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 30 Jan 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>More Python: Poetry, Lists, Loops</title>
+  <dc:creator>Josef Fruehwald</dc:creator>
+  <link>https://lin511-2024.github.io/notes/programming/03_python_plus.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>This lesson has two goals:</p>
+<ol type="1">
+<li>Begin walking you through processing text in Python, with an eye towards our next computational linguistics topic: ngram models.</li>
+<li>To introduce you to additional datastructures that we didn’t get to cover in the original python workthrough.</li>
+</ol>
+<section id="finding-and-reading-in-files" class="level2">
+<h2 class="anchored" data-anchor-id="finding-and-reading-in-files">Finding and reading in files</h2>
+<p>In order to read in a file, first we need to tell python <em>where</em> a file is. We’ll do this with <code>pathlib.Path()</code>. For a recap of what paths <em>are</em>, see <a href="../../notes/concepts/02_undersdanding-paths.html">Understanding Directories</a>.</p>
+<div id="cell-2" class="cell" data-execution_count="1">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> pathlib <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> Path</span></code></pre></div>
+</div>
+<p>Let’s just call <code>Path()</code> and see what it gives us.</p>
+<div id="cell-4" class="cell" data-execution_count="2">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">here <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Path()</span>
+<span id="cb2-2">here</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>PosixPath('.')</code></pre>
+</div>
+</div>
+<p>Some detail of what gets printed out for <code>here</code> will depend on your operating system, but one thing that should be the same across the board is that <code>'.'</code> is a placeholder meaning “the dirtory you’re currently in.</p>
+<p>To see the full path to your current directory, we’ll use the <code>.resolve()</code> method.</p>
+<div id="cell-6" class="cell" data-execution_count="3">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">here.resolve()</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>PosixPath('/workspaces/Lin511-2024.github.io/notes/programming')</code></pre>
+</div>
+</div>
+<p>What this full path looks like <em>really</em> depends on where you are running your code.</p>
+<section id="getting-directory-contents" class="level3">
+<h3 class="anchored" data-anchor-id="getting-directory-contents">Getting directory contents</h3>
+<p>To get the full contents of a directory, we’ll use the the <code>.glob()</code> method. To get readable output, we need to wrap <code>list()</code> around everything.</p>
+<div id="cell-8" class="cell" data-execution_count="4">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">list</span>(</span>
+<span id="cb6-2">    here.glob(pattern <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"*"</span>)</span>
+<span id="cb6-3">)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>[PosixPath('03_python_plus.ipynb'),
+ PosixPath('assets'),
+ PosixPath('_02_Paths.ipynb'),
+ PosixPath('01_Python_basics.ipynb'),
+ PosixPath('00_setup.qmd'),
+ PosixPath('poems'),
+ PosixPath('02_regex.ipynb')]</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="lists-a-new-data-structure" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="lists-a-new-data-structure">*Lists (a new data structure)</h2>
+<p>The code above created a “list”, which is, like the name suggests, a list of values.</p>
+<div id="cell-10" class="cell" data-execution_count="5">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">here_list <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">list</span>(</span>
+<span id="cb8-2">    here.glob(pattern <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"*"</span>)</span>
+<span id="cb8-3">)</span></code></pre></div>
+</div>
+<p>We can create our own lists by hand, like so:</p>
+<div id="cell-12" class="cell" data-execution_count="6">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">my_list <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"a"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"b"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"c"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"d"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"e"</span>] </span></code></pre></div>
+</div>
+<section id="doing-things-with-lists" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="doing-things-with-lists">Doing things with lists</h3>
+<section id="getting-their-length" class="level4">
+<h4 class="anchored" data-anchor-id="getting-their-length">Getting their length</h4>
+<p>To get the length of anything, including lists, <code>len()</code>.</p>
+<div id="cell-14" class="cell" data-execution_count="7">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(here_list)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>7</code></pre>
+</div>
+</div>
+<div id="cell-15" class="cell" data-execution_count="8">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(my_list)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>5</code></pre>
+</div>
+</div>
+</section>
+<section id="getting-a-value-from-a-list" class="level4">
+<h4 class="anchored" data-anchor-id="getting-a-value-from-a-list">Getting a value from a list</h4>
+<p>To get a value out of a list in python, we need to <a href="../../notes/concepts/00_glossary.html#index-verb">“index”</a> it. To get just the first value from a list, we’ll use the index <code>0</code>.</p>
+<div id="cell-17" class="cell" data-execution_count="9">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">here_list[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>PosixPath('03_python_plus.ipynb')</code></pre>
+</div>
+</div>
+<div id="cell-18" class="cell" data-execution_count="10">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">my_list[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>'a'</code></pre>
+</div>
+</div>
+<p>To get a range of values, we’ll use a <a href="../../notes/concepts/00_glossary.html#slice-verb">“slice”</a> operator <code>:</code>.</p>
+<div id="cell-20" class="cell" data-execution_count="11">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1">my_list[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>]</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>['a', 'b', 'c']</code></pre>
+</div>
+</div>
+<div id="cell-21" class="cell" data-execution_count="12">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1">my_list[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>:<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>]</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>['b', 'c', 'd']</code></pre>
+</div>
+</div>
+</section>
+<section id="how-to-think-about-indices" class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="how-to-think-about-indices">How to think about indices</h4>
+<p>The index for <code>'a'</code> is 0, and the index for <code>'c'</code> is 2.</p>
+<div id="cell-23" class="cell" data-execution_count="13">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1">my_list.index(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"a"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>0</code></pre>
+</div>
+</div>
+<div id="cell-24" class="cell" data-execution_count="14">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1">my_list.index(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"c"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>2</code></pre>
+</div>
+</div>
+<p>But to get out every value between <code>'a'</code> and <code>'c'</code>, we need to use <code>0:3</code>.</p>
+<div id="cell-26" class="cell" data-execution_count="15">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1">my_list[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>]</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>['a', 'b', 'c']</code></pre>
+</div>
+</div>
+<p>The way to conceptualize these numeric indices is that they come <em>between</em> the values in a list.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://lin511-2024.github.io/notes/programming/assets/0_index.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption class="margin-caption">Index locations</figcaption>
+</figure>
+</div>
+<p>When we give just a single number as an index, we get back the value immediately to the right of the index.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://lin511-2024.github.io/notes/programming/assets/1_index.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption class="margin-caption">Single value index</figcaption>
+</figure>
+</div>
+<p>When we give an index slice, we get back every value between the start of the slice and the end.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://lin511-2024.github.io/notes/programming/assets/2_index.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption class="margin-caption">Slice indexing</figcaption>
+</figure>
+</div>
+<section id="negative-indexing" class="level5 page-columns page-full">
+<h5 class="anchored" data-anchor-id="negative-indexing">Negative indexing</h5>
+<p>Sometimes, you know you’ll want the last, or second to last value from a list, so there are also negative indicies defined.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://lin511-2024.github.io/notes/programming/assets/3_index.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption class="margin-caption">Negative indexing</figcaption>
+</figure>
+</div>
+<p>These work in the same way. A single index returns the value immediately to the left, a slice returns the values between the first and the second.</p>
+<div id="cell-28" class="cell" data-execution_count="16">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1">my_list[<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<pre><code>'e'</code></pre>
+</div>
+</div>
+<div id="cell-29" class="cell" data-execution_count="17">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb30" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1">my_list[<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>:<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<pre><code>['c', 'd']</code></pre>
+</div>
+</div>
+<div id="cell-30" class="cell" data-execution_count="18">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb32" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1">my_list[<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>:]</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>['d', 'e']</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section id="reading-in-a-text-file" class="level2">
+<h2 class="anchored" data-anchor-id="reading-in-a-text-file">Reading in a text file</h2>
+<p>I’ve put two poems in the <code>poems</code> directory right next to the current notebook. We can get a list of them by</p>
+<ul>
+<li>adding <code>poems/</code> to the <code>here</code> path</li>
+<li>Globbing the new path.</li>
+</ul>
+<div id="cell-32" class="cell" data-execution_count="19">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb34" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1">poems_dir <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> here.joinpath(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"poems"</span>)</span>
+<span id="cb34-2">poems_files <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">list</span>(poems_dir.glob(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"*"</span>))</span>
+<span id="cb34-3">poems_files</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>[PosixPath('poems/the_tiger.txt'), PosixPath('poems/this_is_just_to_say.txt')]</code></pre>
+</div>
+</div>
+<p>Let’s read in <code>poems/this_is_just_to_say.txt</code>.</p>
+<div id="cell-34" class="cell" data-execution_count="20">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb36" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1">plums_path <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> poems_files[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]</span>
+<span id="cb36-2">plums_path</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<pre><code>PosixPath('poems/this_is_just_to_say.txt')</code></pre>
+</div>
+</div>
+<p>Right now <code>plums_path</code> just contains information about <em>where</em> the file is. In order to read its contents into python, we need to</p>
+<ol type="1">
+<li>Open it.</li>
+<li>Read it.</li>
+<li>Close it.</li>
+</ol>
+<p>We’ll manage all three steps with the following code.</p>
+<div id="cell-36" class="cell" data-execution_count="21">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb38" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1">plums_poem <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> plums_path.read_text()</span>
+<span id="cb38-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(plums_poem)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>This Is Just To Say
+By William Carlos Williams
+
+I have eaten
+the plums
+that were in
+the icebox
+
+and which
+you were probably
+saving
+for breakfast
+
+Forgive me
+they were delicious
+so sweet
+and so cold</code></pre>
+</div>
+</div>
+</section>
+<section id="doing-things-to-strings" class="level2">
+<h2 class="anchored" data-anchor-id="doing-things-to-strings">Doing things to strings</h2>
+<p>Right now, <code>plums_poem</code> is just one long string. When we print it out, we get some nice formatting, but if we look at the unformatted output, you’ll see it’s one long string with newline characters: <code>\n</code>.</p>
+<div id="cell-38" class="cell" data-execution_count="22">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb40" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1">plums_poem</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<pre><code>'This Is Just To Say\nBy William Carlos Williams\n\nI have eaten\nthe plums\nthat were in\nthe icebox\n\nand which\nyou were probably\nsaving\nfor breakfast\n\nForgive me\nthey were delicious\nso sweet\nand so cold'</code></pre>
+</div>
+</div>
+<p>To start doing computational linguistics things to the poem, we’ll need to start splitting it up into pieces, like separate lines, or separate words.</p>
+<section id="upper-and-lower-case" class="level3">
+<h3 class="anchored" data-anchor-id="upper-and-lower-case">Upper and Lower case</h3>
+<p>One thing that can make life a little easier is to <a href="../../notes/concepts/00_glossary.html#case-folding">“case fold”</a> text data, which we can do with the <code>.lower()</code> and <code>.upper()</code> methods.</p>
+<div id="cell-40" class="cell" data-execution_count="23">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb42" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1">plums_lower <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> plums_poem.lower()</span>
+<span id="cb42-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(plums_lower[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">46</span>])</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>this is just to say
+by william carlos williams</code></pre>
+</div>
+</div>
+</section>
+<section id="splitting-into-lines" class="level3">
+<h3 class="anchored" data-anchor-id="splitting-into-lines">Splitting into lines</h3>
+<p>We can also split the poem into separate lines with the <code>.split()</code> method, which will return a list with the poem split by whatever value we give it.</p>
+<div id="cell-42" class="cell" data-execution_count="24">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb44" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># split according to newlines</span></span>
+<span id="cb44-2">plums_lines <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> plums_poem.split(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb44-3">plums_lines</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<pre><code>['This Is Just To Say',
+ 'By William Carlos Williams',
+ '',
+ 'I have eaten',
+ 'the plums',
+ 'that were in',
+ 'the icebox',
+ '',
+ 'and which',
+ 'you were probably',
+ 'saving',
+ 'for breakfast',
+ '',
+ 'Forgive me',
+ 'they were delicious',
+ 'so sweet',
+ 'and so cold']</code></pre>
+</div>
+</div>
+<p>Now, we can get each individual line by indexing.</p>
+<div id="cell-44" class="cell" data-execution_count="25">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb46" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1">plums_lines[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<pre><code>'This Is Just To Say'</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="looping-through-the-poem" class="level2">
+<h2 class="anchored" data-anchor-id="looping-through-the-poem">Looping through the poem</h2>
+<p>Above, I ran <code>.split()</code> on the non-case folded poem. What if I wanted to lowercase each line of the poem now, <em>after</em> the fact. We can use a <code>for</code> loop to do this. Let’s build up to it.</p>
+<section id="for-loop-skeleton" class="level3">
+<h3 class="anchored" data-anchor-id="for-loop-skeleton">for-loop skeleton</h3>
+<div id="cell-46" class="cell" data-execution_count="26">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb48" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> line <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> plums_lines:</span>
+<span id="cb48-2">    myspace_line <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"xXx "</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> line <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">" xXx"</span></span>
+<span id="cb48-3">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(myspace_line)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>xXx This Is Just To Say xXx
+xXx By William Carlos Williams xXx
+xXx  xXx
+xXx I have eaten xXx
+xXx the plums xXx
+xXx that were in xXx
+xXx the icebox xXx
+xXx  xXx
+xXx and which xXx
+xXx you were probably xXx
+xXx saving xXx
+xXx for breakfast xXx
+xXx  xXx
+xXx Forgive me xXx
+xXx they were delicious xXx
+xXx so sweet xXx
+xXx and so cold xXx</code></pre>
+</div>
+</div>
+<p>Let’s unpack the first line of the for loop:</p>
+<p><code>for line in plums_line:</code></p>
+<p>This tells python to take each value in <code>plums_line</code>, assign it to a new variable called <code>line</code>, then <em>do</em> something. After it has <em>done</em> something, it goes and grabs the next value from <code>plums_line</code>, assigns it to a variable called <code>line</code>, and starts over.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Some common misconceptions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>What we tell python to name the variable it creates does <em>not</em> affect the way the for loop works. We called it <code>line</code> to make the code readable. If we really wanted to pull out every noun from the poem, and said <code>for noun in plums_lines:</code>, it is <em>not</em> going to pull out every noun.</li>
+</ol>
+<div id="cell-48" class="cell" data-execution_count="27">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb50" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> noun <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> plums_lines[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>]:</span>
+<span id="cb50-2">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(noun)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>This Is Just To Say
+By William Carlos Williams</code></pre>
+</div>
+</div>
+<ol start="2" type="1">
+<li><em>What</em> we do inside of the loop doen’t have to involve the <code>line</code> variable at all.</li>
+</ol>
+<div id="cell-50" class="cell" data-execution_count="28">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb52" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> line <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> plums_lines:</span>
+<span id="cb52-2">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"plum"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>plum
+plum
+plum
+plum
+plum
+plum
+plum
+plum
+plum
+plum
+plum
+plum
+plum
+plum
+plum
+plum
+plum</code></pre>
+</div>
+</div>
+<ol start="3" type="1">
+<li>What the for-loop did does not get saved anywhere. The only “state” that gets preserved at all is the final one.</li>
+</ol>
+<div id="cell-52" class="cell" data-execution_count="29">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb54" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1">myspace_line</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<pre><code>'xXx and so cold xXx'</code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>This last point is super important. To save, or remember, what happened inside of a for-loop, you need to do two things.</p>
+<ol type="1">
+<li>Create a variable <em>outside</em> of the loop.</li>
+<li>Update the variable <em>inside</em> of the loop.</li>
+</ol>
+<p>For example, if we wanted to get the total number of characters in the peom, we’d need to</p>
+<ol type="1">
+<li>Create a collector variable <em>outside</em> of the loop.</li>
+<li>Add update its total value <em>inside</em> of the loop.</li>
+</ol>
+<div id="cell-55" class="cell" data-execution_count="30">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb56" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1">total_chars <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb56-2"></span>
+<span id="cb56-3"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"The total number of chars is now </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>total_chars<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb56-4"></span>
+<span id="cb56-5"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> line <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> plums_lines:</span>
+<span id="cb56-6">    line_len <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(line)</span>
+<span id="cb56-7">    total_chars <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> total_chars <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> line_len</span>
+<span id="cb56-8">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"The total number of chars is now </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>total_chars<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb56-9"></span>
+<span id="cb56-10"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"The final number of chars is </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>total_chars<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The total number of chars is now 0
+The total number of chars is now 19
+The total number of chars is now 45
+The total number of chars is now 45
+The total number of chars is now 57
+The total number of chars is now 66
+The total number of chars is now 78
+The total number of chars is now 88
+The total number of chars is now 88
+The total number of chars is now 97
+The total number of chars is now 114
+The total number of chars is now 120
+The total number of chars is now 133
+The total number of chars is now 133
+The total number of chars is now 143
+The total number of chars is now 162
+The total number of chars is now 170
+The total number of chars is now 181
+The final number of chars is 181</code></pre>
+</div>
+</div>
+<p>This use of a for-loop makes the “loop” part clearer.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram
+    state "for line in lines:" as for
+    state if_line &lt;&lt;choice&gt;&gt;
+    state fork &lt;&lt;fork&gt;&gt;
+    state fork1 &lt;&lt;fork&gt;&gt;
+    [*] --&gt; fork1
+    fork1 --&gt; total_chars: set to 0
+    fork1 --&gt; for
+    for --&gt; if_line
+    if_line --&gt; fork: If another line
+    if_line --&gt; [*]: If no more lines
+    fork --&gt; total_chars: +len(line)
+    fork --&gt; for
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>To actually lowercase the poem now, we need to</p>
+<ol type="1">
+<li>Create an empty list <em>outside</em> of the loop.</li>
+<li>Add the lowercased line to this list <em>inside</em> of the loop.</li>
+</ol>
+<div id="cell-58" class="cell" data-execution_count="31">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb58" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1">lower_lines <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb58-2"></span>
+<span id="cb58-3"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> line <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> plums_lines:</span>
+<span id="cb58-4">    lower_lines.append(</span>
+<span id="cb58-5">        line.lower()</span>
+<span id="cb58-6">    )</span>
+<span id="cb58-7"></span>
+<span id="cb58-8">lower_lines</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="31">
+<pre><code>['this is just to say',
+ 'by william carlos williams',
+ '',
+ 'i have eaten',
+ 'the plums',
+ 'that were in',
+ 'the icebox',
+ '',
+ 'and which',
+ 'you were probably',
+ 'saving',
+ 'for breakfast',
+ '',
+ 'forgive me',
+ 'they were delicious',
+ 'so sweet',
+ 'and so cold']</code></pre>
+</div>
+</div>
+</section>
+<section id="filtering-the-poem" class="level3">
+<h3 class="anchored" data-anchor-id="filtering-the-poem">Filtering the poem</h3>
+<p>There are a few lines of the poem that are blank and have a length of 0.</p>
+<div id="cell-60" class="cell" data-execution_count="32">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb60" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(lower_lines[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>])</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code></code></pre>
+</div>
+</div>
+<div id="cell-61" class="cell" data-execution_count="33">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb62" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(lower_lines[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>])</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="33">
+<pre><code>0</code></pre>
+</div>
+</div>
+<p>We can create a new list without these lines by</p>
+<ol type="1">
+<li>Creating an empty list <em>outside</em> of the loop.</li>
+<li>Adding lines to that list <em>inside</em> the loop, only if they have a length greater than 0.</li>
+</ol>
+<p>This introduces an <code>if</code> control block.</p>
+<div id="cell-63" class="cell" data-execution_count="34">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb64" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1">full_lines <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb64-2"></span>
+<span id="cb64-3"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> line <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> lower_lines:</span>
+<span id="cb64-4">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(line) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:</span>
+<span id="cb64-5">        full_lines.append(line)</span>
+<span id="cb64-6">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span>:</span>
+<span id="cb64-7">        <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"dumped an empty line"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>dumped an empty line
+dumped an empty line
+dumped an empty line</code></pre>
+</div>
+</div>
+<div id="cell-64" class="cell" data-execution_count="35">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb66" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1">full_lines</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="35">
+<pre><code>['this is just to say',
+ 'by william carlos williams',
+ 'i have eaten',
+ 'the plums',
+ 'that were in',
+ 'the icebox',
+ 'and which',
+ 'you were probably',
+ 'saving',
+ 'for breakfast',
+ 'forgive me',
+ 'they were delicious',
+ 'so sweet',
+ 'and so cold']</code></pre>
+</div>
+</div>
+<p>The <code>if</code> block:</p>
+<ol type="1">
+<li>Checks to see if the logical statement is <code>True</code> or <code>False.</code></li>
+<li>If <code>True</code>, it executes the code inside.</li>
+</ol>
+<p>In this case, I’ve also included an <code>else</code> block. This executes its code if the <code>if</code> block above was <code>False</code>.</p>
+</section>
+</section>
+<section id="nesting-loops" class="level2">
+<h2 class="anchored" data-anchor-id="nesting-loops">Nesting loops</h2>
+<p>We can nest for loops and if statements to an arbitrary level, but good programming practice tries to keep it to a minumum. For example, to get every word in the poem, based on where the spaces are, we can</p>
+<ol type="1">
+<li>Create an empty <code>words</code> list <em>outside</em> of a loop.</li>
+<li>Split each line using spaces.</li>
+<li>Start a loop over <em>that</em> list.</li>
+<li>Update the <code>words</code> list <em>inside</em> this loop.</li>
+</ol>
+<div id="cell-67" class="cell" data-execution_count="36">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb68" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1">all_words <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb68-2"></span>
+<span id="cb68-3"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> line <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> full_lines:</span>
+<span id="cb68-4">    words <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> line.split(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">" "</span>)</span>
+<span id="cb68-5">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> word <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> words:</span>
+<span id="cb68-6">        all_words.append(word)</span>
+<span id="cb68-7"></span>
+<span id="cb68-8"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(all_words[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">19</span>])</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['this', 'is', 'just', 'to', 'say', 'by', 'william', 'carlos', 'williams', 'i', 'have', 'eaten', 'the', 'plums', 'that', 'were', 'in', 'the', 'icebox']</code></pre>
+</div>
+</div>
+</section>
+<section id="a-slightly-nicer-way" class="level2">
+<h2 class="anchored" data-anchor-id="a-slightly-nicer-way">A slightly nicer way</h2>
+<p>A slightly nicer way to do some of the operations we worked on here is with “list comprehensions”. These are special instructions to build a list that wind up saving us a bit of typing.</p>
+<p>Here’s the code we used to make all of the lines lowercase again.</p>
+<div id="cell-69" class="cell" data-execution_count="37">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb70" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1">lower_lines <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> []</span>
+<span id="cb70-2"></span>
+<span id="cb70-3"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> line <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> plums_lines:</span>
+<span id="cb70-4">    lower_lines.append(line.lower())</span></code></pre></div>
+</div>
+<p>With a list comprehension, we could rewrite this for-loop like so:</p>
+<div id="cell-71" class="cell" data-execution_count="38">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb71" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1">lower_lines2 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb71-2">    line.lower() </span>
+<span id="cb71-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> line <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> plums_lines</span>
+<span id="cb71-4">]</span>
+<span id="cb71-5">lower_lines2</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="38">
+<pre><code>['this is just to say',
+ 'by william carlos williams',
+ '',
+ 'i have eaten',
+ 'the plums',
+ 'that were in',
+ 'the icebox',
+ '',
+ 'and which',
+ 'you were probably',
+ 'saving',
+ 'for breakfast',
+ '',
+ 'forgive me',
+ 'they were delicious',
+ 'so sweet',
+ 'and so cold']</code></pre>
+</div>
+</div>
+<p>We can even include the empty line filtering into the list comprehension.</p>
+<div id="cell-73" class="cell" data-execution_count="39">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb73" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1">full_lines2 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb73-2">    line.lower() </span>
+<span id="cb73-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> line <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> plums_lines </span>
+<span id="cb73-4">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(line)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb73-5">]</span>
+<span id="cb73-6"></span>
+<span id="cb73-7">full_lines2</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="39">
+<pre><code>['this is just to say',
+ 'by william carlos williams',
+ 'i have eaten',
+ 'the plums',
+ 'that were in',
+ 'the icebox',
+ 'and which',
+ 'you were probably',
+ 'saving',
+ 'for breakfast',
+ 'forgive me',
+ 'they were delicious',
+ 'so sweet',
+ 'and so cold']</code></pre>
+</div>
+</div>
+<p>Nested for statements also work inside of list comprehensions.</p>
+<div id="cell-75" class="cell" data-execution_count="40">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb75" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1">all_words2 <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb75-2">    word</span>
+<span id="cb75-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> line <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> full_lines2</span>
+<span id="cb75-4">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> word <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> line.split(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">" "</span>)</span>
+<span id="cb75-5">]</span>
+<span id="cb75-6"></span>
+<span id="cb75-7">all_words[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">19</span>]</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="40">
+<pre><code>['this',
+ 'is',
+ 'just',
+ 'to',
+ 'say',
+ 'by',
+ 'william',
+ 'carlos',
+ 'williams',
+ 'i',
+ 'have',
+ 'eaten',
+ 'the',
+ 'plums',
+ 'that',
+ 'were',
+ 'in',
+ 'the',
+ 'icebox']</code></pre>
+</div>
+</div>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
+  author = {Fruehwald, Josef},
+  title = {More {Python:} {Poetry,} {Lists,} {Loops}},
+  date = {2024-01-30},
+  url = {https://lin511-2024.github.io/notes/programming/03_python_plus.html},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2024" class="csl-entry quarto-appendix-citeas">
+Fruehwald, Josef. 2024. <span>“More Python: Poetry, Lists,
+Loops.”</span> January 30, 2024. <a href="https://lin511-2024.github.io/notes/programming/03_python_plus.html">https://lin511-2024.github.io/notes/programming/03_python_plus.html</a>.
+</div></div></section></div> ]]></description>
+  <category>python</category>
+  <guid>https://lin511-2024.github.io/notes/programming/03_python_plus.html</guid>
+  <pubDate>Tue, 30 Jan 2024 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Regular Expressions, Quickly</title>
   <dc:creator>Josef Fruehwald</dc:creator>
@@ -2016,7 +3115,7 @@ Fruehwald, Josef. n.d. <span>“Python Basics.”</span> <a href="https://lin511
 </div></div></section></div> ]]></description>
   <category>python</category>
   <guid>https://lin511-2024.github.io/notes/programming/01_Python_basics.html</guid>
-  <pubDate>Thu, 25 Jan 2024 16:43:21 GMT</pubDate>
+  <pubDate>Mon, 29 Jan 2024 20:27:53 GMT</pubDate>
 </item>
 </channel>
 </rss>

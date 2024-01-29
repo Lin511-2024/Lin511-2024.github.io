@@ -84,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
 <meta property="og:site_name" content="Lin511-2024">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -141,7 +141,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../../index.html" class="sidebar-logo-link">
       <img src="../../assets/logo.svg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -204,13 +204,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
  <span class="menu-text">Class Meetings</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../notes/meetings/01_fsm.html" class="sidebar-item-text sidebar-link">
@@ -233,13 +233,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
  <span class="menu-text">Programming</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../notes/programming/00_setup.html" class="sidebar-item-text sidebar-link">
@@ -258,17 +258,23 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Regular Expressions, Quickly</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../notes/programming/03_python_plus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">More Python: Poetry, Lists, Loops</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
  <span class="menu-text">In-class</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../notes/in_class/00_python.html" class="sidebar-item-text sidebar-link">
@@ -308,7 +314,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">January 25, 2024</p>
+      <p class="date-modified">January 29, 2024</p>
     </div>
   </div>
     
@@ -325,6 +331,10 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell">
 
 </div>
+<h3 class="anchored">
+Case Folding
+</h3>
+To convert text data either to all uppercase or lowercase characters.
 <h3 class="anchored">
 Clone
 </h3>
@@ -348,6 +358,14 @@ GitHub Codespaces
 </h3>
 GitHub Codespaces are a ‘development environment’, running on a <a href="#virtual-machine-vm">Virtual Machine</a>. They’re like mini computers you can access through your web browser that get created just for the repository you launch one in. The actual memory and computation are being run on GitHub’s physical computers.
 <h3 class="anchored">
+Index (noun)
+</h3>
+A value (usually an integer) that denotes the location of a valuable in an indexable object.
+<h3 class="anchored">
+Index (verb)
+</h3>
+To use a numeric <a href="#index-noun">index</a> on an object to return the value at that index.
+<h3 class="anchored">
 Local (adj)
 </h3>
 Describes anything that exists or happens on the <em>actual</em> device you’re interacting with. For example, if you have a Microsoft Word document on your computer that ends in .docx, it is probably ‘local’ (even if theres a <a href="#remote-adj">‘remote’</a> copy somewhere). These days, it’s not always obvious if things happen locally or remotely. If you have a phone that does facial recognition on pictures you take, if the facial recognition program runs <em>on</em> your phone, it’s ‘local’. But if the picture needs to get uploaded to Apple or Google first, then the facial recognition is ‘remote’.
@@ -355,6 +373,10 @@ Describes anything that exists or happens on the <em>actual</em> device you’re
 Remote (adj)
 </h3>
 Describes anything that exists or happens on a <em>different</em> device than the one you’re interacting with. For example, if you edit a Google Doc, the actual document is stored on a Google computer, not on the device you’re editing.
+<h3 class="anchored">
+Slice (verb)
+</h3>
+To pull out a range of values from an object, defined by a starting and stopping position.
 <h3 class="anchored">
 Tab Autocomplete
 </h3>
