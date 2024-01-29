@@ -50,7 +50,15 @@ To paste, you can either right-click and select 'Paste', or use your system's 'h
   
   "Formal", "In *computational* linguistics, 'formal' isn't the opposite of 'casual'. It's about any system or language which has a strict set of acceptable symbols, and how they can be combined.",
   
-  "Terminal", "A text based interface to your computer. Instead of clicking on visual icons to, say, open a folder and look at its contents, you type in text based commands like `cd` and `ls`."
+  "Terminal", "A text based interface to your computer. Instead of clicking on visual icons to, say, open a folder and look at its contents, you type in text based commands like `cd` and `ls`.",
+
+  "Index (noun)", "A value (usually an integer) that denotes the location of a valuable in an indexable object.",
+
+  "Index (verb)", "To use a numeric [index](#index-noun) on an object to return the value at that index.",
+
+  "Slice (verb)", "To pull out a range of values from an object, defined by a starting and stopping position.",
+
+  "Case Folding", "To convert text data either to all uppercase or lowercase characters."
 
 ) |>
   arrange(
