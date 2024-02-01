@@ -4,6 +4,12 @@ subtitle: "-or- What if we *could* parse natural language with a finite state au
 date: 2024-02-05
 filters: 
   - codeblocklabel
+knitr:
+  opts_chunk: 
+    warning: false
+    message: false
+    echo: false
+bibliography: references.bib
 ---
 
 So, in our notes on [finite state automata](01_fsm.qmd) and [push-down automata](02_pda.qmd) that since natural language has bracket matching patterns, and maybe even crossing dependencies, that it's more complex than a "regular" language, and can't really be parsed with a finite state automaton.
@@ -12,12 +18,246 @@ ngram language modelling asks the question: But what if we tried really hard?
 
 ```{r}
 library(reticulate)
+library(tidyverse)
+library(ngram)
+library(ggrepel)
+library(khroma)
+knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
 ```
 
 ```{python}
-a=1
+import re
+import gutenbergpy.textget
+from nltk.tokenize import word_tokenize
+from collections import Counter
+```
+
+## Language Prediction
+
+When we are perceiving language, we are constantly and in real-time making predictions about what we are about to hear next. While we're going to be talking about this in terms of predicting the next word, It's been shown that we do this even partway through a word [@allopenna1998].
+
+So, let's say I spoke this much of a sentence to you:
+
+> I could tell he was angry from the tone of his\_\_\_
+
+And then a sudden noise obscured the final word, and you only caught part of it. Which of the following three words was I *probably* trying to say?
+
+a.  boys
+b.  choice
+c.  voice
+
+Your ability to guess which word it was is based on your i) experience with English turns of phrase and ii) the information in the context.
+
+One goal of Language Models is to assign probabilities across the vocabulary for what the next word will be, and hopefully assign higher probabilities to the "correct" answer than the "incorrect" answer. Applications for this kind of prediction range from speech-to-text (which could suffer from a very similar circumstance as the fictional one above) to autocomplete or spellcheck.
+
+## Using context (ngrams)
+
+In the example sentence above, one way we could go about trying to predict which word is most likely is to count up how many times the phrase "I could tell he was angry from the tone of his\_\_\_" is finished by the candidate words. Here's a table of google hits for the three possible phrases, as well as all hits for just the context phrase.
+
+|   "I could tell he was angry from the tone of his" | count |
+|---------------------------------------------------:|------:|
+|                                               boys |     0 |
+|                                             choice |     0 |
+|                                              voice |     3 |
+| *"I could tell he was angry from the tone of his"* |     3 |
+
+We're going to start diving into mathematical formulas now (fortunately the numbers are easy right now).
+
+To represent the count of a word or string of words in a corpus. We'll use $C(\text{word})$. So given the table above we have
+
+$$
+\displaylines{C(\text{I could tell he was angry from the tone of his})=3\\
+C(\text{I could tell he was angry from the tone of his boys})=0\\
+C(\text{I could tell he was angry from the tone of his choice})=0\\
+C(\text{I could tell he was angry from the tone of his voice})=3}
+$$
+
+To describe the probability that the next word is "choice" given that we've already heard "I could tell he was angry from the tone of his", we'll use the notation $P(\text{choice} | \text{I could tell he was angry from the tone of his})$. To *calculate* that probability, we'll divide the total count of the whole phrase by the count of the preceding context.
+
+$$
+P(\text{choice} | \text{I could tell he was angry from the tone of his}) = \frac{C(\text{I could tell he was angry by the tone of his choice})}{C(\text{I could tell he was angry by the tone of his})} = \frac{0}{3} = 0
+$$
+
+In fact, we can estimate the probability of an entire sentence with the *Probability Chain Rule*. The probability of a sequence of events like $P(X_1X_2X_3)$ can be estimated by multiplying out their conditional probabilities like so:
+
+$$
+P(X_1X_2X_3) = P(X_1)P(X_2|X_1)P(X_3|X_1X_2)
+$$
+
+Or, to use a phrase as an example:[^1]
+
+[^1]: Credit here to Kyle Gorman for introducing me to this example.
+
+$$
+P(\text{du hast mich gefragt})=P(\text{du})P(\text{hast}|\text{du})P(\text{mich}|\text{du hast})P(\text{gefragt}|\text{du hast mich})
+$$
+
+## Data Sparsity
+
+The problem we face is that, even with the whole internet to search, very long phrases like *"I could tell he was angry by the tone of his"* are relatively rare!
+
+```{python}
+raw_book = gutenbergpy.textget.get_text_by_id(2701) # with headers
+moby_dick_byte = gutenbergpy.textget.strip_headers(raw_book) # without headers
+moby_dick = moby_dick_byte.decode("utf-8").lower() 
+```
+
+```{python}
+moby_dick_tokens = word_tokenize(moby_dick)
+moby_dick_words = [tok for tok in moby_dick_tokens if re.match(r"\w", tok)]
+```
+
+If we look at *Moby Dick*, using a standard tokenizer (more on that later) we wind up with `r scales::label_comma()(length(py$moby_dick_words))` words in total. But not every word is equally likely.
+
+```{r}
+tibble(
+  word = py$moby_dick_words
+) |> 
+  count(word, name = "freq") |> 
+  arrange(desc(freq)) |> 
+  mutate(rank = row_number()) ->
+  one_grams
 ```
 
 ```{r}
-py$a
+#| crop: true
+#| fig-width: 5
+#| fig-height: 5
+#| out-width: "80%"
+#| fig-align: center
+#| fig-cap: "Rank and Frequency of single words in Moby Dick"
+one_grams |> 
+  slice(1:10)->
+  top_10
+
+one_grams |> 
+  ggplot(
+    aes(
+      rank, 
+      freq
+    )
+  )+
+    geom_point(
+      color = "grey60"
+    ) +
+    geom_text_repel(
+      data = top_10,
+      aes(label = word)
+    )+
+    scale_x_log10(
+      labels = scales::comma
+    )+
+    scale_y_log10(
+      labels = scales::comma
+    )+
+    theme_minimal(base_size = 20)+
+    theme(
+      aspect.ratio = 1
+    )
+```
+
+```{r}
+long_string = str_c(py$moby_dick_words, collapse = " ")
+```
+
+```{r}
+moby_dick2gram = ngram(long_string)
+moby_dick3gram = ngram(long_string, n = 3)
+moby_dick4gram = ngram(long_string, n = 4)
+moby_dick5gram = ngram(long_string, n = 5)
+
+gram2 = get.phrasetable(moby_dick2gram) |> mutate(n = 2)
+gram3 = get.phrasetable(moby_dick3gram) |> mutate(n = 3)
+gram4 = get.phrasetable(moby_dick4gram) |> mutate(n = 4)
+gram5 = get.phrasetable(moby_dick5gram) |> mutate(n = 5)
+```
+
+```{r}
+bind_rows(
+  gram2,
+  gram3,
+  gram4,
+  gram5
+) |> 
+  mutate(
+    rank = rank(desc(freq), ties.method = "random"),
+    .by = n
+  ) ->
+  all_gram
+```
+
+```{r}
+#| crop: true
+#| fig-width: 6
+#| fig-height: 6
+#| out-width: "80%"
+#| fig-align: center
+#| fig-cap: "Rank and Frequency of 2-grams through 5-grams in Moby Dick"
+all_gram |> 
+  ggplot(
+    aes(
+      rank, freq
+    )
+  )+
+    geom_point()+
+    facet_wrap(~n)+
+    scale_x_log10(
+      labels = scales::comma
+    )+
+    scale_y_log10(
+       labels = scales::comma
+    )+
+    theme_minimal(base_size = 20)+
+    theme(
+      aspect.ratio = 1
+    )
+```
+
+```{r}
+#| fig-width: 7
+#| fig-height: 5
+#| out-width: "80%"
+#| fig-align: center
+#| fig-cap: "The proportion of all tokens which are hapax legomena "
+one_grams |> 
+  mutate(
+    ngrams = word,
+    n = 1
+  ) |> 
+  bind_rows(
+    gram2, gram3, gram4, gram5
+  ) |> 
+  mutate(
+    hapax = freq == 1
+  ) |> 
+  summarise(
+    total_count = sum(freq),
+    total_type = n(),
+    .by = c(hapax, n)
+  ) |> 
+  mutate(
+    total_prop = total_count/sum(total_count),
+    type_prop = total_type/sum(total_type),
+    .by = n
+  ) |> 
+  ggplot(
+    aes(
+      factor(n),
+      total_prop
+    )
+  )+
+    geom_col(
+      aes(fill = hapax),
+      position = "stack",
+      color = "black"
+    )+
+    scale_fill_bright()+
+    scale_y_continuous(
+      expand = expansion()
+    )+
+    labs(
+      x = "n gram size",
+      y = "proportion hapax legomena"
+    )+
+    theme_minimal(base_size = 20)
 ```
