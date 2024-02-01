@@ -11,7 +11,63 @@
 <description></description>
 <language>en</language>
 <generator>quarto-1.4.549</generator>
-<lastBuildDate>Tue, 30 Jan 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 05 Feb 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>ngrams</title>
+  <dc:creator>Josef Fruehwald</dc:creator>
+  <link>https://lin511-2024.github.io/notes/meetings/04_ngrams.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>So, in our notes on <a href="../../notes/meetings/01_fsm.html">finite state automata</a> and <a href="../../notes/meetings/02_pda.html">push-down automata</a> that since natural language has bracket matching patterns, and maybe even crossing dependencies, that it’s more complex than a “regular” language, and can’t really be parsed with a finite state automaton.</p>
+<p>ngram language modelling asks the question: But what if we tried really hard?</p>
+<div class="cell">
+<div class="langname">
+<pre class="langname">r</pre>
+</div>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(reticulate)</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">a<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span></code></pre></div>
+</div>
+<div class="cell">
+<div class="langname">
+<pre class="langname">r</pre>
+</div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">py<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>a</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+
+
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
+  author = {Fruehwald, Josef},
+  title = {Ngrams},
+  date = {2024-02-05},
+  url = {https://lin511-2024.github.io/notes/meetings/04_ngrams.html},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2024" class="csl-entry quarto-appendix-citeas">
+Fruehwald, Josef. 2024. <span>“Ngrams.”</span> February 5, 2024. <a href="https://lin511-2024.github.io/notes/meetings/04_ngrams.html">https://lin511-2024.github.io/notes/meetings/04_ngrams.html</a>.
+</div></div></section></div> ]]></description>
+  <guid>https://lin511-2024.github.io/notes/meetings/04_ngrams.html</guid>
+  <pubDate>Mon, 05 Feb 2024 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>More Python: Poetry, Lists, Loops</title>
   <dc:creator>Josef Fruehwald</dc:creator>
@@ -2085,6 +2141,71 @@ Languages.”</span> January 23, 2024. <a href="https://lin511-2024.github.io/no
   <pubDate>Tue, 23 Jan 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>FSA in-class notes</title>
+  <dc:creator>Josef Fruehwald</dc:creator>
+  <link>https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="finite-state-automata-and-regex" class="level2">
+<h2 class="anchored" data-anchor-id="finite-state-automata-and-regex">Finite State Automata and RegEx</h2>
+<p><code>ok(a+y)?</code></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram
+    direction LR
+    [*] --&gt; 1
+    1 --&gt; 2: o
+    2 --&gt; 3: k
+
+    3 --&gt; group1
+
+    state group1{
+        [*] --&gt; 4
+        4 --&gt; 4: a
+        4 --&gt; [*]: y
+    }
+    group1 --&gt; [*]: ε
+
+    3 --&gt; [*]: ε
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-regex-for-batman" class="level2">
+<h2 class="anchored" data-anchor-id="the-regex-for-batman">The RegEx for Batman</h2>
+<div class="langname">
+<pre class="langname">regex</pre>
+</div>
+<pre class="regex"><code>Na (na){15} Batman!( Batman! Batman!)?</code></pre>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
+  author = {Fruehwald, Josef},
+  title = {FSA in-Class Notes},
+  date = {2024-01-16},
+  url = {https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2024" class="csl-entry quarto-appendix-citeas">
+Fruehwald, Josef. 2024. <span>“FSA in-Class Notes.”</span> January 16,
+2024. <a href="https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html">https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html</a>.
+</div></div></section></div> ]]></description>
+  <category>compling</category>
+  <guid>https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html</guid>
+  <pubDate>Tue, 16 Jan 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Regular Languages and Finite State Machines</title>
   <dc:creator>Josef Fruehwald</dc:creator>
   <link>https://lin511-2024.github.io/notes/meetings/01_fsm.html</link>
@@ -2646,71 +2767,6 @@ Machines.”</span> January 16, 2024. <a href="https://lin511-2024.github.io/not
   <pubDate>Tue, 16 Jan 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>FSA in-class notes</title>
-  <dc:creator>Josef Fruehwald</dc:creator>
-  <link>https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="finite-state-automata-and-regex" class="level2">
-<h2 class="anchored" data-anchor-id="finite-state-automata-and-regex">Finite State Automata and RegEx</h2>
-<p><code>ok(a+y)?</code></p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">stateDiagram
-    direction LR
-    [*] --&gt; 1
-    1 --&gt; 2: o
-    2 --&gt; 3: k
-
-    3 --&gt; group1
-
-    state group1{
-        [*] --&gt; 4
-        4 --&gt; 4: a
-        4 --&gt; [*]: y
-    }
-    group1 --&gt; [*]: ε
-
-    3 --&gt; [*]: ε
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="the-regex-for-batman" class="level2">
-<h2 class="anchored" data-anchor-id="the-regex-for-batman">The RegEx for Batman</h2>
-<div class="langname">
-<pre class="langname">regex</pre>
-</div>
-<pre class="regex"><code>Na (na){15} Batman!( Batman! Batman!)?</code></pre>
-
-
-</section>
-
-<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
-  author = {Fruehwald, Josef},
-  title = {FSA in-Class Notes},
-  date = {2024-01-16},
-  url = {https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html},
-  langid = {en}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2024" class="csl-entry quarto-appendix-citeas">
-Fruehwald, Josef. 2024. <span>“FSA in-Class Notes.”</span> January 16,
-2024. <a href="https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html">https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html</a>.
-</div></div></section></div> ]]></description>
-  <category>compling</category>
-  <guid>https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html</guid>
-  <pubDate>Tue, 16 Jan 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
   <title>Setup Notes</title>
   <dc:creator>Josef Fruehwald</dc:creator>
   <link>https://lin511-2024.github.io/notes/programming/00_setup.html</link>
@@ -3115,7 +3171,7 @@ Fruehwald, Josef. n.d. <span>“Python Basics.”</span> <a href="https://lin511
 </div></div></section></div> ]]></description>
   <category>python</category>
   <guid>https://lin511-2024.github.io/notes/programming/01_Python_basics.html</guid>
-  <pubDate>Mon, 29 Jan 2024 20:27:53 GMT</pubDate>
+  <pubDate>Thu, 01 Feb 2024 22:05:01 GMT</pubDate>
 </item>
 </channel>
 </rss>

@@ -1,170 +1,369 @@
 [
   {
-    "objectID": "notes/programming/02_regex.html",
-    "href": "notes/programming/02_regex.html",
-    "title": "Regular Expressions, Quickly",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "Look at Github\n\n\n\nThe real content is in your regex-in-class-&lt;username&gt; repository on github. This is meant to be more of a reference sheet.",
-    "crumbs": [
-      "Notes",
-      "Programming",
-      "Regular Expressions, Quickly"
-    ]
+    "text": "This is the website for Lin511, Computational Linguistics, taught at the University of Kentucky Spring 2024\n\nAttribution\n\nThe robot emoji in the course logo is modified from Open Emoji (link), licenced CC-BY-SA 4.0. Edited version here(svg).\n\n\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {About},\n  url = {https://lin511-2024.github.io/about.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “About.” https://lin511-2024.github.io/about.html."
   },
   {
-    "objectID": "notes/programming/02_regex.html#setting-up-for-using-regular-expressions-in-python",
-    "href": "notes/programming/02_regex.html#setting-up-for-using-regular-expressions-in-python",
-    "title": "Regular Expressions, Quickly",
-    "section": "Setting up for using regular expressions in python",
-    "text": "Setting up for using regular expressions in python\n\nWe’ll need to import the re module\nUnlike simple strings, we’ll need to write our regular expressions with a preceding r\n\n\nimport re\n\nr\"regex\"\n\n'regex'",
-    "crumbs": [
-      "Notes",
-      "Programming",
-      "Regular Expressions, Quickly"
-    ]
-  },
-  {
-    "objectID": "notes/programming/02_regex.html#important-re-functions",
-    "href": "notes/programming/02_regex.html#important-re-functions",
-    "title": "Regular Expressions, Quickly",
-    "section": "Important re functions",
-    "text": "Important re functions\nTwo ways to use re to search strings are\n\nre.search()\n\nReturn structured information about where the regex matches.\n\nre.findall()\n\nReturn all actual matching substrings\n\n\n\nsentence1 = \"The speaker is speaking.\"\n\n\nre.search()\n\nre.search(r\"speak\", sentence1)\n\n&lt;re.Match object; span=(4, 9), match='speak'&gt;\n\n\n\nsentence1[4:9]\n\n'speak'\n\n\n\n\nre.findall()\n\nre.findall(r\"speak\", sentence1)\n\n['speak', 'speak']",
-    "crumbs": [
-      "Notes",
-      "Programming",
-      "Regular Expressions, Quickly"
-    ]
-  },
-  {
-    "objectID": "notes/programming/02_regex.html#simple-character-searches",
-    "href": "notes/programming/02_regex.html#simple-character-searches",
-    "title": "Regular Expressions, Quickly",
-    "section": "Simple character searches",
-    "text": "Simple character searches\nLike the examples above, literally the characters you want to use will match.\n\nspeak_regex = r\"speak\"\nget_regex_url(speak_regex)\n\nspeak",
-    "crumbs": [
-      "Notes",
-      "Programming",
-      "Regular Expressions, Quickly"
-    ]
-  },
-  {
-    "objectID": "notes/programming/02_regex.html#options",
-    "href": "notes/programming/02_regex.html#options",
-    "title": "Regular Expressions, Quickly",
-    "section": "Options",
-    "text": "Options\nIf you want some characters to be chosen from a set of options, place them in [].\n\nvowels_regex = r\"[aeiou]\"\nget_regex_url(vowels_regex)\n\n[aeiou]\n\n\n\nre.findall(r\"[aeiou]\", sentence1)\n\n['e', 'e', 'a', 'e', 'i', 'e', 'a', 'i']\n\n\n\nthe_regex = r\"[Tt]he\"\nget_regex_url(the_regex)\n\n[Tt]he\n\n\n\nre.findall(the_regex, sentence1)\n\n['The']\n\n\n\nRanges\nRanges of characters or numbers can be given inside [] like so\n\nget_regex_url(r\"[a-z]\")\nget_regex_url(r\"[A-Z]\")\nget_regex_url(r\"[0-9]\")\nget_regex_url(r\"[A-Za-z]\")\n\n[a-z]\n\n\n[A-Z]\n\n\n[0-9]\n\n\n[A-Za-z]\n\n\n\n\n“Metacharacters”\n\n\\w == [A-Za-z0-9_]\n\nword characters\n\n\\W == [^A-Za-z0-9_]\n\nnon-word characters\n\n\\d == [0-9]\n\ndigits\n\n\\D == [^0-9]\n\nnon-digits\n\n\\s == [ \\t\\n]\n\nAny whitespace character\n\n\\S == [^ \\t\\n]\n\nnon-whitespace\n\n\n\n\nAny Character\nTo match any character (letter, number, punctuation, space, etc.) use . or “dot”\n\nre.findall(\n    # return every word character and \n    # the following character\n    r\"\\w.\",\n    sentence1\n)\n\n['Th', 'e ', 'sp', 'ea', 'ke', 'r ', 'is', 'sp', 'ea', 'ki', 'ng']\n\n\n\n\nEscaping special symbols\nIf you wanted to find the actual period in sentence1, you’d have to “escape” the . with a preceding `.\n\n# compare\nget_regex_url(r\".\")\nget_regex_url(r\"\\.\")\n\n.\n\n\n.\n\n\n\nre.findall(\n    \"\\.\",\n    sentence1\n)\n\n['.']",
-    "crumbs": [
-      "Notes",
-      "Programming",
-      "Regular Expressions, Quickly"
-    ]
-  },
-  {
-    "objectID": "notes/programming/02_regex.html#modifiers",
-    "href": "notes/programming/02_regex.html#modifiers",
-    "title": "Regular Expressions, Quickly",
-    "section": "Modifiers",
-    "text": "Modifiers\nModifiers come after the definition of a single character, and define how many times that character can appear.\n\na? = zero or one a\na+ = one or more a\na* = zero or more a\n\n\nget_regex_url(r\"bana?na\")\nget_regex_url(r\"bana+na\")\nget_regex_url(r\"bana*na\")\n\nbana?na\n\n\nbana+na\n\n\nbana*na",
-    "crumbs": [
-      "Notes",
-      "Programming",
-      "Regular Expressions, Quickly"
-    ]
-  },
-  {
-    "objectID": "notes/programming/02_regex.html#grouping",
-    "href": "notes/programming/02_regex.html#grouping",
-    "title": "Regular Expressions, Quickly",
-    "section": "Grouping",
-    "text": "Grouping\nYou can define groupings within regular expressions. The effect of these groupings depends what kind of regex function you’re using. For re.findall(), it’ll find the whole string, but return just the text from the grouping.\n\nsentence2 = \"The big bear and the small bear ran away.\"\n\n\nget_regex_url(r\"[Tt]he (\\w+) bear\")\n\n[Tt]he (+) bear\n\n\n\nre.findall(\n    r\"[Tt]he (\\w+) bear\",\n    sentence2\n)\n\n['big', 'small']",
-    "crumbs": [
-      "Notes",
-      "Programming",
-      "Regular Expressions, Quickly"
-    ]
-  },
-  {
-    "objectID": "notes/programming/02_regex.html#boundaries",
-    "href": "notes/programming/02_regex.html#boundaries",
-    "title": "Regular Expressions, Quickly",
-    "section": "Boundaries",
-    "text": "Boundaries\n\n^the == Finds “the” at the start of a string.\nthe$ == Finds ” the” at the end of a string.\n\\bthe\\b == Finds “the” in between word boundaries.\n\n\nget_regex_url(r\"^the \")\nget_regex_url(r\" the$\")\nget_regex_url(r\"\\bthe\\b\")\n\n^the\n\n\nthe$\n\n\n[(https://regexper.com/#%5Cbthe%5Cb)\n\n\n\nsentence3 = \"I saw the other bear.\"\nre.findall(\n    r\"the\",\n    sentence3\n)\n\n['the', 'the']\n\n\nThe second “the” there comes from inside “other”\n\nre.findall(\n    r\"\\bthe\\b\",\n    sentence3\n)\n\n['the']\n\n\n\nsentence3\n\n'I saw the other bear.'",
-    "crumbs": [
-      "Notes",
-      "Programming",
-      "Regular Expressions, Quickly"
-    ]
-  },
-  {
-    "objectID": "notes/programming/01_Python_basics.html",
-    "href": "notes/programming/01_Python_basics.html",
-    "title": "Python basics",
+    "objectID": "notes/concepts/01_what-is-python.html",
+    "href": "notes/concepts/01_what-is-python.html",
+    "title": "What is Python?",
     "section": "",
-    "text": "print(1)\n\n1\n\n\n\nprint(\"hello\")\n\nhello\n\n\n\nprint(2 + 2)\n\n4\n\n\n\nx = 1\ny = 10\n\nprint(x + y)\n\n11\n\n\n\nword1 = \"Hello\"\nword2 = \" World!\"\n\nprint(word1 + word2)\n\nHello World!\n\n\n\nprint(True)\n\nTrue\n\n\n\nprint(False)\n\nFalse\n\n\n\nprint(True and False)\n\nFalse\n\n\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Python Basics},\n  url = {https://lin511-2024.github.io/notes/programming/01_Python_basics.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Python Basics.” https://lin511-2024.github.io/notes/programming/01_Python_basics.html.",
+    "text": "When talking about “Python” or other programming langauges, we often engage in a form of polysemy1 that can be confusing at first. I’ll try to unpack the different meanings here.",
+    "crumbs": [
+      "Notes",
+      "Concepts",
+      "What *is* Python?"
+    ]
+  },
+  {
+    "objectID": "notes/concepts/01_what-is-python.html#python-is-set-of-rules-for-a-formal-language",
+    "href": "notes/concepts/01_what-is-python.html#python-is-set-of-rules-for-a-formal-language",
+    "title": "What is Python?",
+    "section": "📕 Python is set of rules for a formal language",
+    "text": "📕 Python is set of rules for a formal language\nWhen we talk about “Python”, one thing we sometimes refer to is an abstract set of rules for a formal language.\n\n\n\n\n\n\n📕 The abstract language\n\n\n\nWhen you say:\n\nI’m learning Python this semester.\n\nYou’re talking about the abstract set of rules.\n\n\nWe can describe some of these rules in natural language (this isn’t how they’re actually written).\n\nIf a list of values has been assigned to a variable, when the variable’s name is followed [0], return the first value in the list.\nIf print( is followed by a value or variable, which is then followed by ), print the value, or the value assigned to the variable.\nIf a # symbol is encountered on a line, ignore everything following it.\n\nThese rules define very precisely how code should be written, and also define what should be done when certain patterns of code are encountered, but these rules are abstract, and don’t actually do anything.",
+    "crumbs": [
+      "Notes",
+      "Concepts",
+      "What *is* Python?"
+    ]
+  },
+  {
+    "objectID": "notes/concepts/01_what-is-python.html#python-is-a-program-that-interprets-formal-language-input",
+    "href": "notes/concepts/01_what-is-python.html#python-is-a-program-that-interprets-formal-language-input",
+    "title": "What is Python?",
+    "section": "🤖 Python is a program that interprets formal language input",
+    "text": "🤖 Python is a program that interprets formal language input\nSimply having a set of abstract rules can be fun, but it’s not so useful if you have no way to actually do things. To make code we write actually do anything, we need to use a program called an Interpreter.\n\n\n\n\n\n\n🤖 The Python Interpreter\n\n\n\nWhen you say\n\nI’m having a hard time installing Python.\n\nyou’re talking about a Python Interpreter.\n\n\nThe Python interpreter processes code, determines whether or not it is valid, then does the things the code told it to do.\nCode can get passed to the interpreter many different ways, including\n\nIn a single text file, called a python “script”, (usually named to end in .py)\nIn an interactive python “shell”.\nInside a Jupyter notebook.\n\nFor example, the text in the shaded block below was passed to a Python interpreter, and the interpreter decided that it was invalid (because there is an opening quote \", but not a closing quote).\n\n\n\npython\n\n\nPython Code\n\n\"x\n\n\nSyntaxError: unterminated string literal (detected at line 1) (20073044.py, line 1)\n\n\nThe text in this next shaded block was passed to a Python interpreter. This time, it was deemed valid, and the interpreter did what the code instructed.\n\n\npython\n\nprint(\"hello! \" * 3)\n\nhello! hello! hello!",
+    "crumbs": [
+      "Notes",
+      "Concepts",
+      "What *is* Python?"
+    ]
+  },
+  {
+    "objectID": "notes/concepts/01_what-is-python.html#python-is-an-ecosystem",
+    "href": "notes/concepts/01_what-is-python.html#python-is-an-ecosystem",
+    "title": "What is Python?",
+    "section": "⛰️ Python is an Ecosystem",
+    "text": "⛰️ Python is an Ecosystem\nPeople often say that Python comes “with batteries included”, meaning it can do a lot of different things out without needing to install any extensions. But you can install extensions in the form of additional libraries that extend Python’s capabilities.\n\n\n\n\n\n\n⛰️ The Ecosystem\n\n\n\nWhen someone says\n\nPython is the most widely used language in natural language processing.\n\nThey are talking about the ecosystem of libraries for Python hat have been built to do natural language processing.\n\n\nSome examples of additional libraries for Python are\n\nnumpy: Allows for effective computation with numbers\nmatplotlib: Makes graphs\n\n\n\npython\n\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nx = np.linspace(0, 2 * np.pi, 200)\ny = np.sin(x)\n\nfig, ax = plt.subplots()\nax.plot(x, y)\nplt.show()",
+    "crumbs": [
+      "Notes",
+      "Concepts",
+      "What *is* Python?"
+    ]
+  },
+  {
+    "objectID": "notes/concepts/01_what-is-python.html#python-is-a-social-project",
+    "href": "notes/concepts/01_what-is-python.html#python-is-a-social-project",
+    "title": "What is Python?",
+    "section": "🧑‍💻 Python is a social project",
+    "text": "🧑‍💻 Python is a social project\nThe meanings of “Python” we’ve already talked about are\n\n📕 The abstract language\n🤖 The Python Interpreter\n⛰️ The Python Ecosystem\n\nUnderstanding how to put all of these pieces together effectively is a social project.\n\n\n\n\n\n\n🧑‍💻 The social project\n\n\n\nWhen you say\n\nSo-n-so is really good at Python.\n\nYou are talking about their involvement in the Python social project.\n\n\n\n❌ There is no part of the 📕 abstract language that will inform you that there is a very good Python library for doing a certain task.\n❌ The 🤖 Python Interpreter won’t tell you that there’s a better way to do what you’re trying to do.\n❌ There are nearly half a million libraries on ⛰️ the Python Package Index, so you can’t just peruse it to find what’s relevant.\n\nIn order to know newest or most effective way to do things, you need to be involved in 🧑‍💻 the social project. That begins within a classroom, then extends to keeping up with blogs and other discourses about changes and developments.\nOne way people demonstrate that they are involved in the Python social project is by writing their code idiomatically. For example, in the code block above, I included the line import numpy as np. But there’s no rule that we import numpy as np, it’s simply convention.\nThis code below will run just as well, but would cause problems for people trying to read your code, because it’s not idiomatic.\n\n\npython\n\nimport matplotlib.pyplot as jokes\nimport numpy as farts\n\nx = farts.linspace(0, 2 * farts.pi, 200)\ny = farts.sin(x)\n\nfig, ax = jokes.subplots()\nax.plot(x, y)\njokes.show()",
+    "crumbs": [
+      "Notes",
+      "Concepts",
+      "What *is* Python?"
+    ]
+  },
+  {
+    "objectID": "notes/concepts/01_what-is-python.html#the-polysemy-is-ok",
+    "href": "notes/concepts/01_what-is-python.html#the-polysemy-is-ok",
+    "title": "What is Python?",
+    "section": "📕, 🤖, ⛰️, 🧑‍💻 The Polysemy is Ok",
+    "text": "📕, 🤖, ⛰️, 🧑‍💻 The Polysemy is Ok\nIt’s ok just say “Python” when you’re talking about one specific meaning.",
+    "crumbs": [
+      "Notes",
+      "Concepts",
+      "What *is* Python?"
+    ]
+  },
+  {
+    "objectID": "notes/concepts/01_what-is-python.html#footnotes",
+    "href": "notes/concepts/01_what-is-python.html#footnotes",
+    "title": "What is Python?",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nA word is polysemous when it has more than one meaning.↩︎",
+    "crumbs": [
+      "Notes",
+      "Concepts",
+      "What *is* Python?"
+    ]
+  },
+  {
+    "objectID": "notes/concepts/01_keyboarding.html#single-quotes-vs-backticks",
+    "href": "notes/concepts/01_keyboarding.html#single-quotes-vs-backticks",
+    "title": "“Where is the … key?”",
+    "section": "Single Quotes vs Backticks",
+    "text": "Single Quotes vs Backticks\nIt’s important to distinguish between single quotes: ' and backticks `. They look similar, but aren’t interchangeable.\nThe backtick key is highlighted in the images of the keyboards below, in the top left side.\n\nPCMac",
+    "crumbs": [
+      "Notes",
+      "Concepts",
+      "\"Where is the ... key?\""
+    ]
+  },
+  {
+    "objectID": "notes/concepts/01_keyboarding.html#slash-vs-backslash-.",
+    "href": "notes/concepts/01_keyboarding.html#slash-vs-backslash-.",
+    "title": "“Where is the … key?”",
+    "section": "Slash (/) vs backslash (\\).",
+    "text": "Slash (/) vs backslash (\\).\nThese different symbols will do different things, and aren’t interchangeable!\n\nSlash (/) location\n\nPCMac\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBackslash (\\) location\n\nPCMac",
+    "crumbs": [
+      "Notes",
+      "Concepts",
+      "\"Where is the ... key?\""
+    ]
+  },
+  {
+    "objectID": "notes/concepts/01_keyboarding.html#the-tilde-key.",
+    "href": "notes/concepts/01_keyboarding.html#the-tilde-key.",
+    "title": "“Where is the … key?”",
+    "section": "The tilde ~ key.",
+    "text": "The tilde ~ key.\nTo type the tilde1 key you have to hold Shift+`Shift+`.\n\nPCMac",
+    "crumbs": [
+      "Notes",
+      "Concepts",
+      "\"Where is the ... key?\""
+    ]
+  },
+  {
+    "objectID": "notes/concepts/01_keyboarding.html#the-caret",
+    "href": "notes/concepts/01_keyboarding.html#the-caret",
+    "title": "“Where is the … key?”",
+    "section": "The caret ^",
+    "text": "The caret ^\nYou can get the caret symbol with Shift+6Shift+6\n\nPCMac",
+    "crumbs": [
+      "Notes",
+      "Concepts",
+      "\"Where is the ... key?\""
+    ]
+  },
+  {
+    "objectID": "notes/concepts/01_keyboarding.html#the-pipe",
+    "href": "notes/concepts/01_keyboarding.html#the-pipe",
+    "title": "“Where is the … key?”",
+    "section": "The Pipe |",
+    "text": "The Pipe |\nYou can get the pipe, or vertical bar, with Shift+\\Shift+\\.\n\nPCMac",
+    "crumbs": [
+      "Notes",
+      "Concepts",
+      "\"Where is the ... key?\""
+    ]
+  },
+  {
+    "objectID": "notes/concepts/01_keyboarding.html#side-note-smart-quotes",
+    "href": "notes/concepts/01_keyboarding.html#side-note-smart-quotes",
+    "title": "“Where is the … key?”",
+    "section": "Side Note: “Smart Quotes”",
+    "text": "Side Note: “Smart Quotes”\nIf, at some point, you copy-paste text from the internet into your code or a text file, you might wind up with “smart quotes” that make things work weird!\n\n\n\nRegular Quotes\nSmart Quotes\n\n\n\n\n\"regular\"\n“smart”\n\n\n'regular'\n‘smart’\n\n\n\nBe careful not to have smart quotes cropping up in your code or data!",
+    "crumbs": [
+      "Notes",
+      "Concepts",
+      "\"Where is the ... key?\""
+    ]
+  },
+  {
+    "objectID": "notes/concepts/01_keyboarding.html#footnotes",
+    "href": "notes/concepts/01_keyboarding.html#footnotes",
+    "title": "“Where is the … key?”",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nPronunciations include [tɪl.də] and [tɪl.di]↩︎",
+    "crumbs": [
+      "Notes",
+      "Concepts",
+      "\"Where is the ... key?\""
+    ]
+  },
+  {
+    "objectID": "notes/concepts/03_navigating-directories.html",
+    "href": "notes/concepts/03_navigating-directories.html",
+    "title": "Navigating Directories",
+    "section": "",
+    "text": "Some of what we’ll be doing in class will involve interacting with your computer through a “Command Line Interface.” Command line interacts are purely text based way to interact with your computer. It’s your same exact computer, just a different way of using it without using icons, or clicking. \n\n\nIn macOS, we can access a command line interface using the program Terminal. You can find Terminal in your Applications inside the folder called Utilities, or just by typing in “Terminal” into Spotlight search.\n\n\n\nFor now, on Windows, I’d recommend using PowerShell. You can launch PowerShell by searching for it in the Start menu.",
+    "crumbs": [
+      "Notes",
+      "Concepts",
+      "Navigating Directories"
+    ]
+  },
+  {
+    "objectID": "notes/concepts/03_navigating-directories.html#command-line-interface",
+    "href": "notes/concepts/03_navigating-directories.html#command-line-interface",
+    "title": "Navigating Directories",
+    "section": "",
+    "text": "Some of what we’ll be doing in class will involve interacting with your computer through a “Command Line Interface.” Command line interacts are purely text based way to interact with your computer. It’s your same exact computer, just a different way of using it without using icons, or clicking. \n\n\nIn macOS, we can access a command line interface using the program Terminal. You can find Terminal in your Applications inside the folder called Utilities, or just by typing in “Terminal” into Spotlight search.\n\n\n\nFor now, on Windows, I’d recommend using PowerShell. You can launch PowerShell by searching for it in the Start menu.",
+    "crumbs": [
+      "Notes",
+      "Concepts",
+      "Navigating Directories"
+    ]
+  },
+  {
+    "objectID": "notes/concepts/03_navigating-directories.html#getting-your-bearings",
+    "href": "notes/concepts/03_navigating-directories.html#getting-your-bearings",
+    "title": "Navigating Directories",
+    "section": "Getting your Bearings",
+    "text": "Getting your Bearings\nWhen you first launch your command line interface, it will look something like this:\n\n\n\nCommand Line Interface\n\n\nThis is obviously scary looking, and it doesn’t give you much hint as to what to do next. The important to thing to keep in mind is that while you are using the command line interface you are inside of a folder. There are two commands I recommend using over and over again to figure out where you are, and where you can go.\n\n“The Prompt”\nWe call the the space waiting for us to type in something the “prompt”. It usually has a symbol before it. Depending on your system, it might be any of the following: $, %, or &gt;. If you type something in here, your computer will interpret it as a command, and try to run it. \n\n\npwd\nIf you type in pwd into the terminal and hit enter, it will print out the absolute path to where you currently are. When you first launch a terminal, it usually starts you off in your home directory, which is usually going to be named after your username.\n\nbash\n\npwd\n/Users/Display\nUse pwd early, and use it often. It stands for present working directory. \n\n\nls\nIf you type in ls into the terminal and hit enter, it will print out a list of all of the directories and files inside the folder you are currently in. Here’s how it prints out on my own computer when I first launch Terminal:\n\nbash\n\nls\nDesktop      Library    Pictures\nDocuments    Movies     Public\nDownloads    Music      Sites  \nEach of the items listed here is another directory inside of my current directory. I can look inside and get a list of all the files inside of these directories by typing in ls and the name of the directory I want to see inside of. For example, if I wanted to get a list of all of the files on my desktop, this is what I would type:\n\nbash\n\nls Desktop\nSampletext.txt\nI only have one file on my desktop right now, and it’s a document called Sampletext.txt. \n\n\nKnow your surroundings\nReally skilled and accomplished programmers use the commands pwd and ls constantly, and so should you! It’s the only way to keep track of your surroundings on the command line. \nIf you ever are looking at a terminal, and don’t know what to do next, just type in pwd and ls. \nEvery time you do a new thing in the terminal, type in type in pwd and ls afterwards.\nJust type in pwd and ls all the time. :::",
+    "crumbs": [
+      "Notes",
+      "Concepts",
+      "Navigating Directories"
+    ]
+  },
+  {
+    "objectID": "notes/concepts/03_navigating-directories.html#getting-around",
+    "href": "notes/concepts/03_navigating-directories.html#getting-around",
+    "title": "Navigating Directories",
+    "section": "Getting around",
+    "text": "Getting around\nYou’re not always going to want to hang around in your home directory the whole time. You may want to get to a specific directory where some code or a script is to run it. To do this, we use the cd command, which stands for change directory.\n\ncd : Moving down 1 level\nTo change the folder you’re in, you just need to type in cd and then the name of the folder. For example to move from my home directory into my Documents folder, it would look like this:\n\nbash\n\nls\nDesktop     Library   Pictures\nDocuments   Movies    Public\nDownloads   Music     Sites\n\nbash\n\ncd Documents\nls\nFranklinInstituteSamples.pptx   Zoom\nFranklinInstituteSounds         html_practice\n\nbash\n\npwd\n/Users/Display/Documents\n\nFirst, I double checked which directories were in the folder I was currently in with ls.\nSecond, I moved into the Documents directory with cd Documents.\nThird, I checked what files and directories were in my new location with ls.\nFourth, I double checked my current location with pwd, which gave my the absolute path to where I was.\n\n\n\ncd : Moving up 1 level\nIf after moving into my documents folder, I wanted to move back to my home directory, that would involve moving up one level, because my Documents folder is inside of my home directory. We can do this using cd again, but instead of the name of a directory, we follow it with ... The two dots, .., is a short hand for “one level up from where I am.” Here’s how that works out on my system.\n\nbash\n\npwd\n/Users/Display/Documents\n\nbash\n\ncd ..\npwd\n/Users/Display\n\nFirst, I double checked where I was with pwd.\nSecond, I moved up one level with cd ..\nThird, I double checked where I would up with pwd again, confirming that I was now in my home directory again.\n\n\n\ncd : Moving down multiple levels\nYou don’t have to move down just one level at a time. For example, right now we’re in my home directory, but inside of my documents there’s a directory called html_practice. That’s two levels down. To get into html_practice, I just need to enter cd followed by the relative path to it. Remember, the relative path is the sequence of directory names that lie between where we are and where we want to go. Here’s how that looks on my system.\n\nbash\n\npwd\n/Users/Display\n\nbash\n\ncd Documents/html_practice\npwd\n/Users/Display/Documents/html_practice\n\nbash\n\nls\nsite.html  style.css\n\nFirst, I double checked my location with pwd\nSecond, I moved down two levels through Documents into html_practice with cd.\nThird, I double checked where I had moved to with pwd.\nLastly, I checked what files were in my new directory with ls.\n\n\n\nMoving up and over\nNow, we’re inside html_practice which is inside Documents. But what if we wanted to move into another directory that is also inside of Documents. For example, the directory Zoom is also inside of Documents, which is where Zoom saves all of the chat logs from our class meetings.\n\n\n\nWhere we want to move\n\n\nWe could do this in a two step process, using cd .. to move up one level, then cd Zoom to move into the zoom directory. But we can also combine the two into one step.\n\nbash\n\npwd\n/Users/Display/Documents/html_practice\n\nbash\n\ncd ../Zoom\npwd\n/Users/Display/Documents/Zoom\n\nFirst, I double checked where I was with pwd.\nThen, I moved up into Documents and down into Zoom in one go with cd ../Zoom\nFinally, I double checked where I wound up with pwd.",
+    "crumbs": [
+      "Notes",
+      "Concepts",
+      "Navigating Directories"
+    ]
+  },
+  {
+    "objectID": "notes/concepts/03_navigating-directories.html#very-useful-tips",
+    "href": "notes/concepts/03_navigating-directories.html#very-useful-tips",
+    "title": "Navigating Directories",
+    "section": "Very useful tips!",
+    "text": "Very useful tips!\nThere are a few tips, tricks, and shortcuts that can make using the command line a little bit easier.\n\nTab autocomplete\nWhen using a command line interface, “tab autocomplete” is a crucial tool to help you get around. For example, if you are in your home directory and you want to move into your documents directory, all you really need to type is cd Doc and the terminal should autocomplete the rest of the file name! \nIf you have multiple directories that start with Doc, it will list all of them, and then you’ll only need to type in a few more characters before it will be able to autocomplete. \nTab autocomplete works for ls as well, which can let you explore through directories without needing to move around.\n\n\nGet back home!\nTechnically, your home directory is a directory with a long absolute path. But because it’s a directory you’ll probably want to keep getting back to often, there’s a shortcut built in. If you run cd ~, it will zip you back to your home directory from wherever you are.\n\n\nAbsolute paths\nIf, for some reason, you don’t know what the relative path is to a directory you want to get to from where you are (or maybe it’s very complicated), you can always run cd followed by the absolute path to where you want to go.",
+    "crumbs": [
+      "Notes",
+      "Concepts",
+      "Navigating Directories"
+    ]
+  },
+  {
+    "objectID": "notes/concepts/03_navigating-directories.html#this-is-all-going-to-matter-a-lot",
+    "href": "notes/concepts/03_navigating-directories.html#this-is-all-going-to-matter-a-lot",
+    "title": "Navigating Directories",
+    "section": "This is all going to matter a lot",
+    "text": "This is all going to matter a lot\nUsing the command line and navigating your computer is going to come up a lot more in this course. You should try as much as you can to get a handle on how this all works now.",
+    "crumbs": [
+      "Notes",
+      "Concepts",
+      "Navigating Directories"
+    ]
+  },
+  {
+    "objectID": "notes/programming/00_setup.html",
+    "href": "notes/programming/00_setup.html",
+    "title": "Setup Notes",
+    "section": "",
+    "text": "We’ll need to get our systems setup to work properly with the tools we’ll be using this semester.\n\n\n\n\n\n\nIf you ware using a windows computer, I’ll ask you to install Windows Subsystem for Linux like so:\n\nFollow the tutorial here for enabling and installing WSL\nInstall VS Code\nWork through the first section of this tutorial, stopping after you connect to WSL\n\n\n\n\n\n\n\n\nInstall VS Code\n\n\n\n\n\n\n\n\n\nWe’ll be using a program called pyenv to manage the versions of python we use. To install pyenv, open the VSCode Command Palette (with ) which will open the command line interface. Then,\n\ncopy this line of code code from this page ()\n\n\nbash\n\ncurl https://pyenv.run | bash\n\nPaste it into the terminal (()\nHit enter.\n\nOnce that has successfully finished:\n\n\n\n\n\n\n\nRun this\n\n\nbash\n\nopen ~/.zshrc\n\n\nIf you get an error.\n\n\nRun this\n\n\nbash\n\ntouch ~/.zshrc\nopen ~/.zshrc\n\n\n\n\n\n\n\n\nRun this\n\n\nbash\n\nopen ~/.bashrc\n\n\nIf you get an error\n\n\nRun ths\n\n\nbash\n\ntouch ~/.bashrc\nopen ~/.bashrc\n\n\n\n\n\n\nPaste the following into the window that opens.\n\n\nsh\n\nexport PYENV_ROOT=\"$HOME/.pyenv\"\n[[ -d $PYENV_ROOT/bin ]] && export PATH=\"$PYENV_ROOT/bin:$PATH\"\neval \"$(pyenv init -)\"\n\nSave it\n\n\n\n\nClose and reopen the terminal window\nCopy-Paste the following lines of code\n\n\nbash\n\npyenv install 3.11\npyenv global 3.11\npyenv virtualenv 3.11 Lin511\npyenv activate Lin511\nThis will have installed a recent version of python onto your computer, and created a “virtual environment” for the class.\n\n\n\n\n\n\n\nMake sure you change the email and name to the email and username you use for Github!\n\nIn the terminal, set your git email address:\n\n\nbash\n\ngit config --global user.email \"you@example.com\"\n\nSet your username.\n\n\nbash\n\ngit config --global user.name \"Your Name\"\nThen, follow these tutorials from github:\n\nGenerating a new SSH Key\nAdding your ssh key to github",
     "crumbs": [
       "Notes",
       "Programming",
-      "Python basics"
+      "Setup Notes"
     ]
   },
   {
-    "objectID": "notes/meetings/02_pda.html",
-    "href": "notes/meetings/02_pda.html",
-    "title": "Pushdown Automata and Context Free Languages",
+    "objectID": "notes/programming/00_setup.html#setup",
+    "href": "notes/programming/00_setup.html#setup",
+    "title": "Setup Notes",
     "section": "",
-    "text": "In the notes on Finite State Automata, we looked at this turnstile finite state automaton.\n\n\n\n\n\nstateDiagram\n  direction LR\n  state \"Locked\" as l\n  state \"Unlocked\" as u\n  \n  [*] --&gt; l\n  l --&gt; l: push\n  l --&gt; u: coin\n  u --&gt; u: coin\n  u --&gt; l: push\n\n\n\n\n\n\nAn annoying thing about this turnstile is that if you don’t know how it works, it will rip you off!\n\n\n\n\n\n\nA scenario\n\n\n\nRobin approaches the finite-state turnstile with two of their friends. They think\n\nThere’s three of us, and I have three tokens. I’ll speed things up and be a good friend by popping three tokens into the machine, and then all three of us can pop through.\n\n\n\nRobin is expecting a pattern like this to happen\n, , , , , \nLittle does Robin know that the way this turnstile works is that after you put a coin into the slot, the coin rolls past and triggers the unlocking mechanism and goes straight into the collection bin. If the turnstile is already unlocked, the coin just rolls into the collection bin. It doesn’t have any “memory” of how many coins it’s been fed, so after one person walks through, the turnstile relocks.\nSo here’s what happens to Robin and their friends\n\n\n\n\n\n\n\nInput\nNew State\n\n\n\n\n\nLocked\n\n\n\nUnlocked\n\n\n\nUnlocked\n\n\n\nUnlocked\n\n\n\nLocked\n\n\n\nWith the turnstile locked again, Robin’s two friends can’t get through unless they insert yet another token!",
+    "text": "We’ll need to get our systems setup to work properly with the tools we’ll be using this semester.\n\n\n\n\n\n\nIf you ware using a windows computer, I’ll ask you to install Windows Subsystem for Linux like so:\n\nFollow the tutorial here for enabling and installing WSL\nInstall VS Code\nWork through the first section of this tutorial, stopping after you connect to WSL\n\n\n\n\n\n\n\n\nInstall VS Code\n\n\n\n\n\n\n\n\n\nWe’ll be using a program called pyenv to manage the versions of python we use. To install pyenv, open the VSCode Command Palette (with ) which will open the command line interface. Then,\n\ncopy this line of code code from this page ()\n\n\nbash\n\ncurl https://pyenv.run | bash\n\nPaste it into the terminal (()\nHit enter.\n\nOnce that has successfully finished:\n\n\n\n\n\n\n\nRun this\n\n\nbash\n\nopen ~/.zshrc\n\n\nIf you get an error.\n\n\nRun this\n\n\nbash\n\ntouch ~/.zshrc\nopen ~/.zshrc\n\n\n\n\n\n\n\n\nRun this\n\n\nbash\n\nopen ~/.bashrc\n\n\nIf you get an error\n\n\nRun ths\n\n\nbash\n\ntouch ~/.bashrc\nopen ~/.bashrc\n\n\n\n\n\n\nPaste the following into the window that opens.\n\n\nsh\n\nexport PYENV_ROOT=\"$HOME/.pyenv\"\n[[ -d $PYENV_ROOT/bin ]] && export PATH=\"$PYENV_ROOT/bin:$PATH\"\neval \"$(pyenv init -)\"\n\nSave it\n\n\n\n\nClose and reopen the terminal window\nCopy-Paste the following lines of code\n\n\nbash\n\npyenv install 3.11\npyenv global 3.11\npyenv virtualenv 3.11 Lin511\npyenv activate Lin511\nThis will have installed a recent version of python onto your computer, and created a “virtual environment” for the class.\n\n\n\n\n\n\n\nMake sure you change the email and name to the email and username you use for Github!\n\nIn the terminal, set your git email address:\n\n\nbash\n\ngit config --global user.email \"you@example.com\"\n\nSet your username.\n\n\nbash\n\ngit config --global user.name \"Your Name\"\nThen, follow these tutorials from github:\n\nGenerating a new SSH Key\nAdding your ssh key to github",
     "crumbs": [
       "Notes",
-      "Class Meetings",
-      "Pushdown Automata and Context Free Languages"
+      "Programming",
+      "Setup Notes"
     ]
   },
   {
-    "objectID": "notes/meetings/02_pda.html#more-like-a-rip-off-machine",
-    "href": "notes/meetings/02_pda.html#more-like-a-rip-off-machine",
-    "title": "Pushdown Automata and Context Free Languages",
+    "objectID": "notes/programming/03_python_plus.html",
+    "href": "notes/programming/03_python_plus.html",
+    "title": "More Python: Poetry, Lists, Loops",
     "section": "",
-    "text": "In the notes on Finite State Automata, we looked at this turnstile finite state automaton.\n\n\n\n\n\nstateDiagram\n  direction LR\n  state \"Locked\" as l\n  state \"Unlocked\" as u\n  \n  [*] --&gt; l\n  l --&gt; l: push\n  l --&gt; u: coin\n  u --&gt; u: coin\n  u --&gt; l: push\n\n\n\n\n\n\nAn annoying thing about this turnstile is that if you don’t know how it works, it will rip you off!\n\n\n\n\n\n\nA scenario\n\n\n\nRobin approaches the finite-state turnstile with two of their friends. They think\n\nThere’s three of us, and I have three tokens. I’ll speed things up and be a good friend by popping three tokens into the machine, and then all three of us can pop through.\n\n\n\nRobin is expecting a pattern like this to happen\n, , , , , \nLittle does Robin know that the way this turnstile works is that after you put a coin into the slot, the coin rolls past and triggers the unlocking mechanism and goes straight into the collection bin. If the turnstile is already unlocked, the coin just rolls into the collection bin. It doesn’t have any “memory” of how many coins it’s been fed, so after one person walks through, the turnstile relocks.\nSo here’s what happens to Robin and their friends\n\n\n\n\n\n\n\nInput\nNew State\n\n\n\n\n\nLocked\n\n\n\nUnlocked\n\n\n\nUnlocked\n\n\n\nUnlocked\n\n\n\nLocked\n\n\n\nWith the turnstile locked again, Robin’s two friends can’t get through unless they insert yet another token!",
+    "text": "This lesson has two goals:",
     "crumbs": [
       "Notes",
-      "Class Meetings",
-      "Pushdown Automata and Context Free Languages"
+      "Programming",
+      "More Python: Poetry, Lists, Loops"
     ]
   },
   {
-    "objectID": "notes/meetings/02_pda.html#a-pushdown-automaton",
-    "href": "notes/meetings/02_pda.html#a-pushdown-automaton",
-    "title": "Pushdown Automata and Context Free Languages",
-    "section": "A Pushdown Automaton",
-    "text": "A Pushdown Automaton\nRobin was really upset and embarrassed at losing two whole tokens to the rip-off (finite state) machine in front of their friends. They vowed to invent a better turnstile so no one would ever have to face that kind of embarrassment again.\n\nIncorporating a memory\nThe problem with the finite-state turnstile is that it has no “memory” of how many coins it’s been fed. Robin’s new prototype works like so:\n\nEvery time someone inserts a coin into Robin’s turnstile, it lands in a little collection tray. If someone inserts multiple coins, they form a stack of coins.\nIf there is even one coin in the stack, the turnstile is unlocked.\nAny time someone pushes through the turnstile, the collection tray bounces one coin off of the stack.\n\nEven this simple system gets a little unwieldy to represent in the same kind of state diagram. So, here’s the last one of these we’ll see for a bit.\n\n\n\n\n\nstateDiagram\n  direction LR\n  state \"Locked\" as l\n  state \"Unlocked\" as u\n  state coin_fork1 &lt;&lt;fork&gt;&gt;\n  state coin_fork2 &lt;&lt;fork&gt;&gt;\n  state pop1 &lt;&lt;fork&gt;&gt;\n  state pop2 &lt;&lt;fork&gt;&gt;\n  state choice_state &lt;&lt;choice&gt;&gt;\n  state \"Stack\" as s\n  \n  [*] --&gt; l\n  l --&gt; l : push\n  l --&gt; coin_fork1: coin\n  coin_fork1 --&gt; u\n  coin_fork1 --&gt; s: +1\n  u --&gt; coin_fork2: coin\n  coin_fork2 --&gt; u\n  coin_fork2 --&gt; s: +1\n  \n  u --&gt; choice_state: push\n  choice_state --&gt; pop1: if Stack &gt; 1\n  pop1 --&gt; s: -1\n  pop1 --&gt; u\n  \n  choice_state --&gt; pop2: if Stack == 1\n  pop2 --&gt; s: -1\n  pop2 --&gt; l\n\n\n\n\n\n\n\n\nUsing the Pushdown Turnstile\nWith Robin’s new Pushdown Turnstile installed at metro stations everywhere, they bring their two friends back to the scene of the crime, and retry their three-coins, three-people strategy. Here’s what happens.\n\n\n\n\n\n\n\n\nInput\nNew State\nCoin Stack\n\n\n\n\n\nLocked\n0\n\n\n\nUnlocked\n1\n\n\n\nUnlocked\n2\n\n\n\nUnlocked\n3\n\n\n\nUnlocked\n2\n\n\n\nUnlocked\n1\n\n\n\nLocked\n0\n\n\n\n\n\nGeneralizing the pattern\nThe way this turnstile works, generally, is that if you put in \\(n\\) coins, \\(n\\) people will be able to push through. Another way of notating that sequence of events is \\(^n\\)\\(^n\\). In the more formal-language-theory world, these kinds of patterns are usually labeled \\(a^nb^n\\).\nAnother way to think about these \\(a^nb^n\\) systems is in terms of bracket matching. If we replace each  symbol with [ and each  symbol with ], then we get a pattern that looks like this:\n[\n[\n[\n]\n]\n]\nThe requirement for the language is that every opening bracket [ needs to get matched with a closing bracket ].",
+    "objectID": "notes/programming/03_python_plus.html#finding-and-reading-in-files",
+    "href": "notes/programming/03_python_plus.html#finding-and-reading-in-files",
+    "title": "More Python: Poetry, Lists, Loops",
+    "section": "Finding and reading in files",
+    "text": "Finding and reading in files\nIn order to read in a file, first we need to tell python where a file is. We’ll do this with pathlib.Path(). For a recap of what paths are, see Understanding Directories.\n\n\npython\n\nfrom pathlib import Path\n\nLet’s just call Path() and see what it gives us.\n\n\npython\n\nhere = Path()\nhere\n\nPosixPath('.')\n\n\nSome detail of what gets printed out for here will depend on your operating system, but one thing that should be the same across the board is that '.' is a placeholder meaning “the dirtory you’re currently in.\nTo see the full path to your current directory, we’ll use the .resolve() method.\n\n\npython\n\nhere.resolve()\n\nPosixPath('/workspaces/Lin511-2024.github.io/notes/programming')\n\n\nWhat this full path looks like really depends on where you are running your code.\n\nGetting directory contents\nTo get the full contents of a directory, we’ll use the the .glob() method. To get readable output, we need to wrap list() around everything.\n\n\npython\n\nlist(\n    here.glob(pattern = \"*\")\n)\n\n[PosixPath('03_python_plus.ipynb'),\n PosixPath('assets'),\n PosixPath('_02_Paths.ipynb'),\n PosixPath('01_Python_basics.ipynb'),\n PosixPath('00_setup.qmd'),\n PosixPath('poems'),\n PosixPath('02_regex.ipynb')]",
     "crumbs": [
       "Notes",
-      "Class Meetings",
-      "Pushdown Automata and Context Free Languages"
+      "Programming",
+      "More Python: Poetry, Lists, Loops"
     ]
   },
   {
-    "objectID": "notes/meetings/02_pda.html#context-free-grammars",
-    "href": "notes/meetings/02_pda.html#context-free-grammars",
-    "title": "Pushdown Automata and Context Free Languages",
-    "section": "Context Free Grammars",
-    "text": "Context Free Grammars\nWe get nested, bracket matching patterns in natural language all the time. For example the person-number agreement in this sentence.\n\nThe person who I, the guy you are looking at, am talking to is not listening.\n\nIf the form of be in this sentence were generated by a Regular Grammar, to be parsed with a Finite State Automaton, once the “you” subject appears in the sentence, every following form of be would have to be “are” the rest of the way.\n\n*The person who I, the guy you are looking at, are talking to are not listening.\n\nSince the first sentence is how English and other languages work, we’d conclude that natural language is, at least, Context Free.\n\nContext Free Rules\n\n\nRegular rules can look like this:\n\\[\nA \\rightarrow aA\n\\]\n\nContext free rules can look like this: \\[\nA \\rightarrow aAb\n\\]\n\n\nReturning to this html snippit:\n&lt;p&gt;\n  This is a paragraph with \n  &lt;strong&gt;\n    bold text.\n  &lt;/strong&gt;\n&lt;/p&gt;\nRules of a context free grammar that could give rise to this well-formed html are:\n\\[\nD \\rightarrow &lt;p&gt;C&lt;/p&gt;\n\\]\n\\[\nC \\rightarrow words\n\\]\n\\[\nC \\rightarrow words S\n\\]\n\\[\nS \\rightarrow &lt;strong&gt;C&lt;/strong&gt;\n\\]\n\n\n\n\n\nflowchart TD\n\n  D --&gt; p1[\"p\"]\n  D --&gt; C1[\"C\"]\n  D --&gt; p2[\"/p\"]\n\n  C1 --&gt; w1[\"This is a paragraph with\"]\n  C1 --&gt; S\n\n  S --&gt; s1[\"strong\"]\n  S --&gt; C2[\"C\"]\n  S --&gt; s2[\"/strong\"]\n\n  C2 --&gt; w2[\"bold text.\"]\n\n\n\n\n\n\n\n\n\nA PDA for this grammar\nHere’s a way we’d describe a Pushdown Automaton that decides whether or not a document is generated by this grammar:\n\nEach time it encounters an opening &lt;tag&gt;, it adds it to the stack, and when it encounters a closing &lt;/tag&gt;, it pops it from the stack.\n\n\n\nWhen it encounters a closing &lt;/tag&gt;, it has to match the opening &lt;tag&gt; that’s at the top of the stack.\nWhen it gets to the end of the document, the stack needs to be empty.\n\nHere’s a table showing how that’d play out\n\n\n\n\n\n\n\n\nInput\nevent\nStack\n\n\n\n\n&lt;p&gt;\npush &lt;p&gt;\n&lt;p&gt;\n\n\nThis, is, a, paragraph, with\n\n&lt;p&gt;\n\n\n&lt;strong&gt;\npush &lt;strong&gt;\n&lt;strong&gt;, &lt;p&gt;\n\n\nbold, text.\n\n&lt;strong&gt;, &lt;p&gt;\n\n\n&lt;/strong&gt;\npop &lt;strong&gt;\n&lt;p&gt;\n\n\n&lt;/p&gt;\npop &lt;p&gt;\n\n\n\n\nOne consequence of the rule that tags need to match when you pop them is that the following is not valid html.\n&lt;p&gt;\n  This is &lt;strong&gt;invalid!\n&lt;/p&gt;\n&lt;/strong&gt;\nIf you were to reason through the state of the stack after the opening &lt;strong&gt; tag, it would look like\n\n&lt;strong&gt;, &lt;p&gt;\n\nThen, when you feed it &lt;/p&gt;, it doen’t match the tag at the top of the stack, so we’d get an error of some sort.",
+    "objectID": "notes/programming/03_python_plus.html#lists-a-new-data-structure",
+    "href": "notes/programming/03_python_plus.html#lists-a-new-data-structure",
+    "title": "More Python: Poetry, Lists, Loops",
+    "section": "*Lists (a new data structure)",
+    "text": "*Lists (a new data structure)\nThe code above created a “list”, which is, like the name suggests, a list of values.\n\n\npython\n\nhere_list = list(\n    here.glob(pattern = \"*\")\n)\n\nWe can create our own lists by hand, like so:\n\n\npython\n\nmy_list = [\"a\", \"b\", \"c\", \"d\", \"e\"] \n\n\nDoing things with lists\n\nGetting their length\nTo get the length of anything, including lists, len().\n\n\npython\n\nlen(here_list)\n\n7\n\n\n\n\npython\n\nlen(my_list)\n\n5\n\n\n\n\nGetting a value from a list\nTo get a value out of a list in python, we need to “index” it. To get just the first value from a list, we’ll use the index 0.\n\n\npython\n\nhere_list[0]\n\nPosixPath('03_python_plus.ipynb')\n\n\n\n\npython\n\nmy_list[0]\n\n'a'\n\n\nTo get a range of values, we’ll use a “slice” operator :.\n\n\npython\n\nmy_list[0:3]\n\n['a', 'b', 'c']\n\n\n\n\npython\n\nmy_list[1:4]\n\n['b', 'c', 'd']\n\n\n\n\nHow to think about indices\nThe index for 'a' is 0, and the index for 'c' is 2.\n\n\npython\n\nmy_list.index(\"a\")\n\n0\n\n\n\n\npython\n\nmy_list.index(\"c\")\n\n2\n\n\nBut to get out every value between 'a' and 'c', we need to use 0:3.\n\n\npython\n\nmy_list[0:3]\n\n['a', 'b', 'c']\n\n\nThe way to conceptualize these numeric indices is that they come between the values in a list.\n\n\n\nIndex locations\n\n\nWhen we give just a single number as an index, we get back the value immediately to the right of the index.\n\n\n\nSingle value index\n\n\nWhen we give an index slice, we get back every value between the start of the slice and the end.\n\n\n\nSlice indexing\n\n\n\nNegative indexing\nSometimes, you know you’ll want the last, or second to last value from a list, so there are also negative indicies defined.\n\n\n\nNegative indexing\n\n\nThese work in the same way. A single index returns the value immediately to the left, a slice returns the values between the first and the second.\n\n\npython\n\nmy_list[-1]\n\n'e'\n\n\n\n\npython\n\nmy_list[-3:-1]\n\n['c', 'd']\n\n\n\n\npython\n\nmy_list[-2:]\n\n['d', 'e']",
     "crumbs": [
       "Notes",
-      "Class Meetings",
-      "Pushdown Automata and Context Free Languages"
+      "Programming",
+      "More Python: Poetry, Lists, Loops"
     ]
   },
   {
-    "objectID": "notes/meetings/02_pda.html#limits-of-pushdown-automata",
-    "href": "notes/meetings/02_pda.html#limits-of-pushdown-automata",
-    "title": "Pushdown Automata and Context Free Languages",
-    "section": "Limits of Pushdown Automata",
-    "text": "Limits of Pushdown Automata\nAn office building has installed a version of Robin’s turnstile. Each person who enters the building has to insert their id card, and the machine scans it and spits it out the other side when a person pushes through.\nRobin approaches the turnstile with their friends Skylar and Alex. Both Skylar and Alex have their hands full carrying packages into the building, so Robin tries to be helpful and insert all of their id cards first, so they can then pass through. They’re walking through in the order\n\nRobin\nSkylar\nAlex\n\nSo Robin puts their ID cards into the turnstile in that order. Here’s how it works out\n\n\n\n\n\n\n\n\nInput\nAction\nStack\n\n\n\n\n\npush \n\n\n\n\npush \n, \n\n\n\npush \n, , \n\n\n\npop \n, \n\n\n\n🚨\n\n\n\n\nOh no! The turnstile has handed Robin Alex’s id card! What a mess!\n\nBeyond Context Free\nRobin was expecting a sequence like this\n\n, , , , , \n\nThis involves so-called “crossing dependencies”, which can’t be recognized by a Pushdown Automaton, which means they involve a more complex grammar than context free rules.\nThere are some examples of crossing dependencies in human language as well, like this example in Swiss German from Shieber (1985) (cited in Jäger and Rogers (2012))\n\n“that we let the children help Hans paint the house”\n\n\n\n\n\n\n\n\n\n\n\n\ndass\nmer\nd’ chind\nem Hans\nes Huus\nlönd\nhälfe\naanstriiche\n\n\nthat\nwe\nthe children-ACC\nHans-DAT\nthe house-ACC\nlet\nhelp\npaint",
+    "objectID": "notes/programming/03_python_plus.html#reading-in-a-text-file",
+    "href": "notes/programming/03_python_plus.html#reading-in-a-text-file",
+    "title": "More Python: Poetry, Lists, Loops",
+    "section": "Reading in a text file",
+    "text": "Reading in a text file\nI’ve put two poems in the poems directory right next to the current notebook. We can get a list of them by\n\nadding poems/ to the here path\nGlobbing the new path.\n\n\n\npython\n\npoems_dir = here.joinpath(\"poems\")\npoems_files = list(poems_dir.glob(\"*\"))\npoems_files\n\n[PosixPath('poems/the_tiger.txt'), PosixPath('poems/this_is_just_to_say.txt')]\n\n\nLet’s read in poems/this_is_just_to_say.txt.\n\n\npython\n\nplums_path = poems_files[1]\nplums_path\n\nPosixPath('poems/this_is_just_to_say.txt')\n\n\nRight now plums_path just contains information about where the file is. In order to read its contents into python, we need to\n\nOpen it.\nRead it.\nClose it.\n\nWe’ll manage all three steps with the following code.\n\n\npython\n\nplums_poem = plums_path.read_text()\nprint(plums_poem)\n\nThis Is Just To Say\nBy William Carlos Williams\n\nI have eaten\nthe plums\nthat were in\nthe icebox\n\nand which\nyou were probably\nsaving\nfor breakfast\n\nForgive me\nthey were delicious\nso sweet\nand so cold",
     "crumbs": [
       "Notes",
-      "Class Meetings",
-      "Pushdown Automata and Context Free Languages"
+      "Programming",
+      "More Python: Poetry, Lists, Loops"
+    ]
+  },
+  {
+    "objectID": "notes/programming/03_python_plus.html#doing-things-to-strings",
+    "href": "notes/programming/03_python_plus.html#doing-things-to-strings",
+    "title": "More Python: Poetry, Lists, Loops",
+    "section": "Doing things to strings",
+    "text": "Doing things to strings\nRight now, plums_poem is just one long string. When we print it out, we get some nice formatting, but if we look at the unformatted output, you’ll see it’s one long string with newline characters: \\n.\n\n\npython\n\nplums_poem\n\n'This Is Just To Say\\nBy William Carlos Williams\\n\\nI have eaten\\nthe plums\\nthat were in\\nthe icebox\\n\\nand which\\nyou were probably\\nsaving\\nfor breakfast\\n\\nForgive me\\nthey were delicious\\nso sweet\\nand so cold'\n\n\nTo start doing computational linguistics things to the poem, we’ll need to start splitting it up into pieces, like separate lines, or separate words.\n\nUpper and Lower case\nOne thing that can make life a little easier is to “case fold” text data, which we can do with the .lower() and .upper() methods.\n\n\npython\n\nplums_lower = plums_poem.lower()\nprint(plums_lower[0:46])\n\nthis is just to say\nby william carlos williams\n\n\n\n\nSplitting into lines\nWe can also split the poem into separate lines with the .split() method, which will return a list with the poem split by whatever value we give it.\n\n\npython\n\n# split according to newlines\nplums_lines = plums_poem.split(\"\\n\")\nplums_lines\n\n['This Is Just To Say',\n 'By William Carlos Williams',\n '',\n 'I have eaten',\n 'the plums',\n 'that were in',\n 'the icebox',\n '',\n 'and which',\n 'you were probably',\n 'saving',\n 'for breakfast',\n '',\n 'Forgive me',\n 'they were delicious',\n 'so sweet',\n 'and so cold']\n\n\nNow, we can get each individual line by indexing.\n\n\npython\n\nplums_lines[0]\n\n'This Is Just To Say'",
+    "crumbs": [
+      "Notes",
+      "Programming",
+      "More Python: Poetry, Lists, Loops"
+    ]
+  },
+  {
+    "objectID": "notes/programming/03_python_plus.html#looping-through-the-poem",
+    "href": "notes/programming/03_python_plus.html#looping-through-the-poem",
+    "title": "More Python: Poetry, Lists, Loops",
+    "section": "Looping through the poem",
+    "text": "Looping through the poem\nAbove, I ran .split() on the non-case folded poem. What if I wanted to lowercase each line of the poem now, after the fact. We can use a for loop to do this. Let’s build up to it.\n\nfor-loop skeleton\n\n\npython\n\nfor line in plums_lines:\n    myspace_line = \"xXx \" + line + \" xXx\"\n    print(myspace_line)\n\nxXx This Is Just To Say xXx\nxXx By William Carlos Williams xXx\nxXx  xXx\nxXx I have eaten xXx\nxXx the plums xXx\nxXx that were in xXx\nxXx the icebox xXx\nxXx  xXx\nxXx and which xXx\nxXx you were probably xXx\nxXx saving xXx\nxXx for breakfast xXx\nxXx  xXx\nxXx Forgive me xXx\nxXx they were delicious xXx\nxXx so sweet xXx\nxXx and so cold xXx\n\n\nLet’s unpack the first line of the for loop:\nfor line in plums_line:\nThis tells python to take each value in plums_line, assign it to a new variable called line, then do something. After it has done something, it goes and grabs the next value from plums_line, assigns it to a variable called line, and starts over.\n\n\n\n\n\n\nSome common misconceptions\n\n\n\n\nWhat we tell python to name the variable it creates does not affect the way the for loop works. We called it line to make the code readable. If we really wanted to pull out every noun from the poem, and said for noun in plums_lines:, it is not going to pull out every noun.\n\n\n\npython\n\nfor noun in plums_lines[0:2]:\n    print(noun)\n\nThis Is Just To Say\nBy William Carlos Williams\n\n\n\nWhat we do inside of the loop doen’t have to involve the line variable at all.\n\n\n\npython\n\nfor line in plums_lines:\n    print(\"plum\")\n\nplum\nplum\nplum\nplum\nplum\nplum\nplum\nplum\nplum\nplum\nplum\nplum\nplum\nplum\nplum\nplum\nplum\n\n\n\nWhat the for-loop did does not get saved anywhere. The only “state” that gets preserved at all is the final one.\n\n\n\npython\n\nmyspace_line\n\n'xXx and so cold xXx'\n\n\n\n\nThis last point is super important. To save, or remember, what happened inside of a for-loop, you need to do two things.\n\nCreate a variable outside of the loop.\nUpdate the variable inside of the loop.\n\nFor example, if we wanted to get the total number of characters in the peom, we’d need to\n\nCreate a collector variable outside of the loop.\nAdd update its total value inside of the loop.\n\n\n\npython\n\ntotal_chars = 0\n\nprint(f\"The total number of chars is now {total_chars}\")\n\nfor line in plums_lines:\n    line_len = len(line)\n    total_chars = total_chars + line_len\n    print(f\"The total number of chars is now {total_chars}\")\n\nprint(f\"The final number of chars is {total_chars}\")\n\nThe total number of chars is now 0\nThe total number of chars is now 19\nThe total number of chars is now 45\nThe total number of chars is now 45\nThe total number of chars is now 57\nThe total number of chars is now 66\nThe total number of chars is now 78\nThe total number of chars is now 88\nThe total number of chars is now 88\nThe total number of chars is now 97\nThe total number of chars is now 114\nThe total number of chars is now 120\nThe total number of chars is now 133\nThe total number of chars is now 133\nThe total number of chars is now 143\nThe total number of chars is now 162\nThe total number of chars is now 170\nThe total number of chars is now 181\nThe final number of chars is 181\n\n\nThis use of a for-loop makes the “loop” part clearer.\n\n\n\n\n\nstateDiagram\n    state \"for line in lines:\" as for\n    state if_line &lt;&lt;choice&gt;&gt;\n    state fork &lt;&lt;fork&gt;&gt;\n    state fork1 &lt;&lt;fork&gt;&gt;\n    [*] --&gt; fork1\n    fork1 --&gt; total_chars: set to 0\n    fork1 --&gt; for\n    for --&gt; if_line\n    if_line --&gt; fork: If another line\n    if_line --&gt; [*]: If no more lines\n    fork --&gt; total_chars: +len(line)\n    fork --&gt; for\n\n\n\n\n\n\nTo actually lowercase the poem now, we need to\n\nCreate an empty list outside of the loop.\nAdd the lowercased line to this list inside of the loop.\n\n\n\npython\n\nlower_lines = []\n\nfor line in plums_lines:\n    lower_lines.append(\n        line.lower()\n    )\n\nlower_lines\n\n['this is just to say',\n 'by william carlos williams',\n '',\n 'i have eaten',\n 'the plums',\n 'that were in',\n 'the icebox',\n '',\n 'and which',\n 'you were probably',\n 'saving',\n 'for breakfast',\n '',\n 'forgive me',\n 'they were delicious',\n 'so sweet',\n 'and so cold']\n\n\n\n\nFiltering the poem\nThere are a few lines of the poem that are blank and have a length of 0.\n\n\npython\n\nprint(lower_lines[2])\n\n\n\n\n\n\npython\n\nlen(lower_lines[2])\n\n0\n\n\nWe can create a new list without these lines by\n\nCreating an empty list outside of the loop.\nAdding lines to that list inside the loop, only if they have a length greater than 0.\n\nThis introduces an if control block.\n\n\npython\n\nfull_lines = []\n\nfor line in lower_lines:\n    if len(line) &gt; 0:\n        full_lines.append(line)\n    else:\n        print(\"dumped an empty line\")\n\ndumped an empty line\ndumped an empty line\ndumped an empty line\n\n\n\n\npython\n\nfull_lines\n\n['this is just to say',\n 'by william carlos williams',\n 'i have eaten',\n 'the plums',\n 'that were in',\n 'the icebox',\n 'and which',\n 'you were probably',\n 'saving',\n 'for breakfast',\n 'forgive me',\n 'they were delicious',\n 'so sweet',\n 'and so cold']\n\n\nThe if block:\n\nChecks to see if the logical statement is True or False.\nIf True, it executes the code inside.\n\nIn this case, I’ve also included an else block. This executes its code if the if block above was False.",
+    "crumbs": [
+      "Notes",
+      "Programming",
+      "More Python: Poetry, Lists, Loops"
+    ]
+  },
+  {
+    "objectID": "notes/programming/03_python_plus.html#nesting-loops",
+    "href": "notes/programming/03_python_plus.html#nesting-loops",
+    "title": "More Python: Poetry, Lists, Loops",
+    "section": "Nesting loops",
+    "text": "Nesting loops\nWe can nest for loops and if statements to an arbitrary level, but good programming practice tries to keep it to a minumum. For example, to get every word in the poem, based on where the spaces are, we can\n\nCreate an empty words list outside of a loop.\nSplit each line using spaces.\nStart a loop over that list.\nUpdate the words list inside this loop.\n\n\n\npython\n\nall_words = []\n\nfor line in full_lines:\n    words = line.split(\" \")\n    for word in words:\n        all_words.append(word)\n\nprint(all_words[0:19])\n\n['this', 'is', 'just', 'to', 'say', 'by', 'william', 'carlos', 'williams', 'i', 'have', 'eaten', 'the', 'plums', 'that', 'were', 'in', 'the', 'icebox']",
+    "crumbs": [
+      "Notes",
+      "Programming",
+      "More Python: Poetry, Lists, Loops"
+    ]
+  },
+  {
+    "objectID": "notes/programming/03_python_plus.html#a-slightly-nicer-way",
+    "href": "notes/programming/03_python_plus.html#a-slightly-nicer-way",
+    "title": "More Python: Poetry, Lists, Loops",
+    "section": "A slightly nicer way",
+    "text": "A slightly nicer way\nA slightly nicer way to do some of the operations we worked on here is with “list comprehensions”. These are special instructions to build a list that wind up saving us a bit of typing.\nHere’s the code we used to make all of the lines lowercase again.\n\n\npython\n\nlower_lines = []\n\nfor line in plums_lines:\n    lower_lines.append(line.lower())\n\nWith a list comprehension, we could rewrite this for-loop like so:\n\n\npython\n\nlower_lines2 = [\n    line.lower() \n    for line in plums_lines\n]\nlower_lines2\n\n['this is just to say',\n 'by william carlos williams',\n '',\n 'i have eaten',\n 'the plums',\n 'that were in',\n 'the icebox',\n '',\n 'and which',\n 'you were probably',\n 'saving',\n 'for breakfast',\n '',\n 'forgive me',\n 'they were delicious',\n 'so sweet',\n 'and so cold']\n\n\nWe can even include the empty line filtering into the list comprehension.\n\n\npython\n\nfull_lines2 = [\n    line.lower() \n    for line in plums_lines \n    if len(line)&gt;0\n]\n\nfull_lines2\n\n['this is just to say',\n 'by william carlos williams',\n 'i have eaten',\n 'the plums',\n 'that were in',\n 'the icebox',\n 'and which',\n 'you were probably',\n 'saving',\n 'for breakfast',\n 'forgive me',\n 'they were delicious',\n 'so sweet',\n 'and so cold']\n\n\nNested for statements also work inside of list comprehensions.\n\n\npython\n\nall_words2 = [\n    word\n    for line in full_lines2\n    for word in line.split(\" \")\n]\n\nall_words[0:19]\n\n['this',\n 'is',\n 'just',\n 'to',\n 'say',\n 'by',\n 'william',\n 'carlos',\n 'williams',\n 'i',\n 'have',\n 'eaten',\n 'the',\n 'plums',\n 'that',\n 'were',\n 'in',\n 'the',\n 'icebox']",
+    "crumbs": [
+      "Notes",
+      "Programming",
+      "More Python: Poetry, Lists, Loops"
     ]
   },
   {
@@ -276,171 +475,63 @@
     ]
   },
   {
-    "objectID": "notes/concepts/01_what-is-python.html",
-    "href": "notes/concepts/01_what-is-python.html",
-    "title": "What is Python?",
+    "objectID": "notes/meetings/02_pda.html",
+    "href": "notes/meetings/02_pda.html",
+    "title": "Pushdown Automata and Context Free Languages",
     "section": "",
-    "text": "When talking about “Python” or other programming langauges, we often engage in a form of polysemy1 that can be confusing at first. I’ll try to unpack the different meanings here.",
+    "text": "In the notes on Finite State Automata, we looked at this turnstile finite state automaton.\n\n\n\n\n\nstateDiagram\n  direction LR\n  state \"Locked\" as l\n  state \"Unlocked\" as u\n  \n  [*] --&gt; l\n  l --&gt; l: push\n  l --&gt; u: coin\n  u --&gt; u: coin\n  u --&gt; l: push\n\n\n\n\n\n\nAn annoying thing about this turnstile is that if you don’t know how it works, it will rip you off!\n\n\n\n\n\n\nA scenario\n\n\n\nRobin approaches the finite-state turnstile with two of their friends. They think\n\nThere’s three of us, and I have three tokens. I’ll speed things up and be a good friend by popping three tokens into the machine, and then all three of us can pop through.\n\n\n\nRobin is expecting a pattern like this to happen\n, , , , , \nLittle does Robin know that the way this turnstile works is that after you put a coin into the slot, the coin rolls past and triggers the unlocking mechanism and goes straight into the collection bin. If the turnstile is already unlocked, the coin just rolls into the collection bin. It doesn’t have any “memory” of how many coins it’s been fed, so after one person walks through, the turnstile relocks.\nSo here’s what happens to Robin and their friends\n\n\n\n\n\n\n\nInput\nNew State\n\n\n\n\n\nLocked\n\n\n\nUnlocked\n\n\n\nUnlocked\n\n\n\nUnlocked\n\n\n\nLocked\n\n\n\nWith the turnstile locked again, Robin’s two friends can’t get through unless they insert yet another token!",
     "crumbs": [
       "Notes",
-      "Concepts",
-      "What *is* Python?"
+      "Class Meetings",
+      "Pushdown Automata and Context Free Languages"
     ]
   },
   {
-    "objectID": "notes/concepts/01_what-is-python.html#python-is-set-of-rules-for-a-formal-language",
-    "href": "notes/concepts/01_what-is-python.html#python-is-set-of-rules-for-a-formal-language",
-    "title": "What is Python?",
-    "section": "📕 Python is set of rules for a formal language",
-    "text": "📕 Python is set of rules for a formal language\nWhen we talk about “Python”, one thing we sometimes refer to is an abstract set of rules for a formal language.\n\n\n\n\n\n\n📕 The abstract language\n\n\n\nWhen you say:\n\nI’m learning Python this semester.\n\nYou’re talking about the abstract set of rules.\n\n\nWe can describe some of these rules in natural language (this isn’t how they’re actually written).\n\nIf a list of values has been assigned to a variable, when the variable’s name is followed [0], return the first value in the list.\nIf print( is followed by a value or variable, which is then followed by ), print the value, or the value assigned to the variable.\nIf a # symbol is encountered on a line, ignore everything following it.\n\nThese rules define very precisely how code should be written, and also define what should be done when certain patterns of code are encountered, but these rules are abstract, and don’t actually do anything.",
-    "crumbs": [
-      "Notes",
-      "Concepts",
-      "What *is* Python?"
-    ]
-  },
-  {
-    "objectID": "notes/concepts/01_what-is-python.html#python-is-a-program-that-interprets-formal-language-input",
-    "href": "notes/concepts/01_what-is-python.html#python-is-a-program-that-interprets-formal-language-input",
-    "title": "What is Python?",
-    "section": "🤖 Python is a program that interprets formal language input",
-    "text": "🤖 Python is a program that interprets formal language input\nSimply having a set of abstract rules can be fun, but it’s not so useful if you have no way to actually do things. To make code we write actually do anything, we need to use a program called an Interpreter.\n\n\n\n\n\n\n🤖 The Python Interpreter\n\n\n\nWhen you say\n\nI’m having a hard time installing Python.\n\nyou’re talking about a Python Interpreter.\n\n\nThe Python interpreter processes code, determines whether or not it is valid, then does the things the code told it to do.\nCode can get passed to the interpreter many different ways, including\n\nIn a single text file, called a python “script”, (usually named to end in .py)\nIn an interactive python “shell”.\nInside a Jupyter notebook.\n\nFor example, the text in the shaded block below was passed to a Python interpreter, and the interpreter decided that it was invalid (because there is an opening quote \", but not a closing quote).\n\n\n\npython\n\n\nPython Code\n\n\"x\n\n\nSyntaxError: unterminated string literal (detected at line 1) (20073044.py, line 1)\n\n\nThe text in this next shaded block was passed to a Python interpreter. This time, it was deemed valid, and the interpreter did what the code instructed.\n\n\npython\n\nprint(\"hello! \" * 3)\n\nhello! hello! hello!",
-    "crumbs": [
-      "Notes",
-      "Concepts",
-      "What *is* Python?"
-    ]
-  },
-  {
-    "objectID": "notes/concepts/01_what-is-python.html#python-is-an-ecosystem",
-    "href": "notes/concepts/01_what-is-python.html#python-is-an-ecosystem",
-    "title": "What is Python?",
-    "section": "⛰️ Python is an Ecosystem",
-    "text": "⛰️ Python is an Ecosystem\nPeople often say that Python comes “with batteries included”, meaning it can do a lot of different things out without needing to install any extensions. But you can install extensions in the form of additional libraries that extend Python’s capabilities.\n\n\n\n\n\n\n⛰️ The Ecosystem\n\n\n\nWhen someone says\n\nPython is the most widely used language in natural language processing.\n\nThey are talking about the ecosystem of libraries for Python hat have been built to do natural language processing.\n\n\nSome examples of additional libraries for Python are\n\nnumpy: Allows for effective computation with numbers\nmatplotlib: Makes graphs\n\n\n\npython\n\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nx = np.linspace(0, 2 * np.pi, 200)\ny = np.sin(x)\n\nfig, ax = plt.subplots()\nax.plot(x, y)\nplt.show()",
-    "crumbs": [
-      "Notes",
-      "Concepts",
-      "What *is* Python?"
-    ]
-  },
-  {
-    "objectID": "notes/concepts/01_what-is-python.html#python-is-a-social-project",
-    "href": "notes/concepts/01_what-is-python.html#python-is-a-social-project",
-    "title": "What is Python?",
-    "section": "🧑‍💻 Python is a social project",
-    "text": "🧑‍💻 Python is a social project\nThe meanings of “Python” we’ve already talked about are\n\n📕 The abstract language\n🤖 The Python Interpreter\n⛰️ The Python Ecosystem\n\nUnderstanding how to put all of these pieces together effectively is a social project.\n\n\n\n\n\n\n🧑‍💻 The social project\n\n\n\nWhen you say\n\nSo-n-so is really good at Python.\n\nYou are talking about their involvement in the Python social project.\n\n\n\n❌ There is no part of the 📕 abstract language that will inform you that there is a very good Python library for doing a certain task.\n❌ The 🤖 Python Interpreter won’t tell you that there’s a better way to do what you’re trying to do.\n❌ There are nearly half a million libraries on ⛰️ the Python Package Index, so you can’t just peruse it to find what’s relevant.\n\nIn order to know newest or most effective way to do things, you need to be involved in 🧑‍💻 the social project. That begins within a classroom, then extends to keeping up with blogs and other discourses about changes and developments.\nOne way people demonstrate that they are involved in the Python social project is by writing their code idiomatically. For example, in the code block above, I included the line import numpy as np. But there’s no rule that we import numpy as np, it’s simply convention.\nThis code below will run just as well, but would cause problems for people trying to read your code, because it’s not idiomatic.\n\n\npython\n\nimport matplotlib.pyplot as jokes\nimport numpy as farts\n\nx = farts.linspace(0, 2 * farts.pi, 200)\ny = farts.sin(x)\n\nfig, ax = jokes.subplots()\nax.plot(x, y)\njokes.show()",
-    "crumbs": [
-      "Notes",
-      "Concepts",
-      "What *is* Python?"
-    ]
-  },
-  {
-    "objectID": "notes/concepts/01_what-is-python.html#the-polysemy-is-ok",
-    "href": "notes/concepts/01_what-is-python.html#the-polysemy-is-ok",
-    "title": "What is Python?",
-    "section": "📕, 🤖, ⛰️, 🧑‍💻 The Polysemy is Ok",
-    "text": "📕, 🤖, ⛰️, 🧑‍💻 The Polysemy is Ok\nIt’s ok just say “Python” when you’re talking about one specific meaning.",
-    "crumbs": [
-      "Notes",
-      "Concepts",
-      "What *is* Python?"
-    ]
-  },
-  {
-    "objectID": "notes/concepts/01_what-is-python.html#footnotes",
-    "href": "notes/concepts/01_what-is-python.html#footnotes",
-    "title": "What is Python?",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nA word is polysemous when it has more than one meaning.↩︎",
-    "crumbs": [
-      "Notes",
-      "Concepts",
-      "What *is* Python?"
-    ]
-  },
-  {
-    "objectID": "notes/concepts/03_navigating-directories.html",
-    "href": "notes/concepts/03_navigating-directories.html",
-    "title": "Navigating Directories",
+    "objectID": "notes/meetings/02_pda.html#more-like-a-rip-off-machine",
+    "href": "notes/meetings/02_pda.html#more-like-a-rip-off-machine",
+    "title": "Pushdown Automata and Context Free Languages",
     "section": "",
-    "text": "Some of what we’ll be doing in class will involve interacting with your computer through a “Command Line Interface.” Command line interacts are purely text based way to interact with your computer. It’s your same exact computer, just a different way of using it without using icons, or clicking. \n\n\nIn macOS, we can access a command line interface using the program Terminal. You can find Terminal in your Applications inside the folder called Utilities, or just by typing in “Terminal” into Spotlight search.\n\n\n\nFor now, on Windows, I’d recommend using PowerShell. You can launch PowerShell by searching for it in the Start menu.",
+    "text": "In the notes on Finite State Automata, we looked at this turnstile finite state automaton.\n\n\n\n\n\nstateDiagram\n  direction LR\n  state \"Locked\" as l\n  state \"Unlocked\" as u\n  \n  [*] --&gt; l\n  l --&gt; l: push\n  l --&gt; u: coin\n  u --&gt; u: coin\n  u --&gt; l: push\n\n\n\n\n\n\nAn annoying thing about this turnstile is that if you don’t know how it works, it will rip you off!\n\n\n\n\n\n\nA scenario\n\n\n\nRobin approaches the finite-state turnstile with two of their friends. They think\n\nThere’s three of us, and I have three tokens. I’ll speed things up and be a good friend by popping three tokens into the machine, and then all three of us can pop through.\n\n\n\nRobin is expecting a pattern like this to happen\n, , , , , \nLittle does Robin know that the way this turnstile works is that after you put a coin into the slot, the coin rolls past and triggers the unlocking mechanism and goes straight into the collection bin. If the turnstile is already unlocked, the coin just rolls into the collection bin. It doesn’t have any “memory” of how many coins it’s been fed, so after one person walks through, the turnstile relocks.\nSo here’s what happens to Robin and their friends\n\n\n\n\n\n\n\nInput\nNew State\n\n\n\n\n\nLocked\n\n\n\nUnlocked\n\n\n\nUnlocked\n\n\n\nUnlocked\n\n\n\nLocked\n\n\n\nWith the turnstile locked again, Robin’s two friends can’t get through unless they insert yet another token!",
     "crumbs": [
       "Notes",
-      "Concepts",
-      "Navigating Directories"
+      "Class Meetings",
+      "Pushdown Automata and Context Free Languages"
     ]
   },
   {
-    "objectID": "notes/concepts/03_navigating-directories.html#command-line-interface",
-    "href": "notes/concepts/03_navigating-directories.html#command-line-interface",
-    "title": "Navigating Directories",
-    "section": "",
-    "text": "Some of what we’ll be doing in class will involve interacting with your computer through a “Command Line Interface.” Command line interacts are purely text based way to interact with your computer. It’s your same exact computer, just a different way of using it without using icons, or clicking. \n\n\nIn macOS, we can access a command line interface using the program Terminal. You can find Terminal in your Applications inside the folder called Utilities, or just by typing in “Terminal” into Spotlight search.\n\n\n\nFor now, on Windows, I’d recommend using PowerShell. You can launch PowerShell by searching for it in the Start menu.",
+    "objectID": "notes/meetings/02_pda.html#a-pushdown-automaton",
+    "href": "notes/meetings/02_pda.html#a-pushdown-automaton",
+    "title": "Pushdown Automata and Context Free Languages",
+    "section": "A Pushdown Automaton",
+    "text": "A Pushdown Automaton\nRobin was really upset and embarrassed at losing two whole tokens to the rip-off (finite state) machine in front of their friends. They vowed to invent a better turnstile so no one would ever have to face that kind of embarrassment again.\n\nIncorporating a memory\nThe problem with the finite-state turnstile is that it has no “memory” of how many coins it’s been fed. Robin’s new prototype works like so:\n\nEvery time someone inserts a coin into Robin’s turnstile, it lands in a little collection tray. If someone inserts multiple coins, they form a stack of coins.\nIf there is even one coin in the stack, the turnstile is unlocked.\nAny time someone pushes through the turnstile, the collection tray bounces one coin off of the stack.\n\nEven this simple system gets a little unwieldy to represent in the same kind of state diagram. So, here’s the last one of these we’ll see for a bit.\n\n\n\n\n\nstateDiagram\n  direction LR\n  state \"Locked\" as l\n  state \"Unlocked\" as u\n  state coin_fork1 &lt;&lt;fork&gt;&gt;\n  state coin_fork2 &lt;&lt;fork&gt;&gt;\n  state pop1 &lt;&lt;fork&gt;&gt;\n  state pop2 &lt;&lt;fork&gt;&gt;\n  state choice_state &lt;&lt;choice&gt;&gt;\n  state \"Stack\" as s\n  \n  [*] --&gt; l\n  l --&gt; l : push\n  l --&gt; coin_fork1: coin\n  coin_fork1 --&gt; u\n  coin_fork1 --&gt; s: +1\n  u --&gt; coin_fork2: coin\n  coin_fork2 --&gt; u\n  coin_fork2 --&gt; s: +1\n  \n  u --&gt; choice_state: push\n  choice_state --&gt; pop1: if Stack &gt; 1\n  pop1 --&gt; s: -1\n  pop1 --&gt; u\n  \n  choice_state --&gt; pop2: if Stack == 1\n  pop2 --&gt; s: -1\n  pop2 --&gt; l\n\n\n\n\n\n\n\n\nUsing the Pushdown Turnstile\nWith Robin’s new Pushdown Turnstile installed at metro stations everywhere, they bring their two friends back to the scene of the crime, and retry their three-coins, three-people strategy. Here’s what happens.\n\n\n\n\n\n\n\n\nInput\nNew State\nCoin Stack\n\n\n\n\n\nLocked\n0\n\n\n\nUnlocked\n1\n\n\n\nUnlocked\n2\n\n\n\nUnlocked\n3\n\n\n\nUnlocked\n2\n\n\n\nUnlocked\n1\n\n\n\nLocked\n0\n\n\n\n\n\nGeneralizing the pattern\nThe way this turnstile works, generally, is that if you put in \\(n\\) coins, \\(n\\) people will be able to push through. Another way of notating that sequence of events is \\(^n\\)\\(^n\\). In the more formal-language-theory world, these kinds of patterns are usually labeled \\(a^nb^n\\).\nAnother way to think about these \\(a^nb^n\\) systems is in terms of bracket matching. If we replace each  symbol with [ and each  symbol with ], then we get a pattern that looks like this:\n[\n[\n[\n]\n]\n]\nThe requirement for the language is that every opening bracket [ needs to get matched with a closing bracket ].",
     "crumbs": [
       "Notes",
-      "Concepts",
-      "Navigating Directories"
+      "Class Meetings",
+      "Pushdown Automata and Context Free Languages"
     ]
   },
   {
-    "objectID": "notes/concepts/03_navigating-directories.html#getting-your-bearings",
-    "href": "notes/concepts/03_navigating-directories.html#getting-your-bearings",
-    "title": "Navigating Directories",
-    "section": "Getting your Bearings",
-    "text": "Getting your Bearings\nWhen you first launch your command line interface, it will look something like this:\n\n\n\nCommand Line Interface\n\n\nThis is obviously scary looking, and it doesn’t give you much hint as to what to do next. The important to thing to keep in mind is that while you are using the command line interface you are inside of a folder. There are two commands I recommend using over and over again to figure out where you are, and where you can go.\n\n“The Prompt”\nWe call the the space waiting for us to type in something the “prompt”. It usually has a symbol before it. Depending on your system, it might be any of the following: $, %, or &gt;. If you type something in here, your computer will interpret it as a command, and try to run it. \n\n\npwd\nIf you type in pwd into the terminal and hit enter, it will print out the absolute path to where you currently are. When you first launch a terminal, it usually starts you off in your home directory, which is usually going to be named after your username.\n\nbash\n\npwd\n/Users/Display\nUse pwd early, and use it often. It stands for present working directory. \n\n\nls\nIf you type in ls into the terminal and hit enter, it will print out a list of all of the directories and files inside the folder you are currently in. Here’s how it prints out on my own computer when I first launch Terminal:\n\nbash\n\nls\nDesktop      Library    Pictures\nDocuments    Movies     Public\nDownloads    Music      Sites  \nEach of the items listed here is another directory inside of my current directory. I can look inside and get a list of all the files inside of these directories by typing in ls and the name of the directory I want to see inside of. For example, if I wanted to get a list of all of the files on my desktop, this is what I would type:\n\nbash\n\nls Desktop\nSampletext.txt\nI only have one file on my desktop right now, and it’s a document called Sampletext.txt. \n\n\nKnow your surroundings\nReally skilled and accomplished programmers use the commands pwd and ls constantly, and so should you! It’s the only way to keep track of your surroundings on the command line. \nIf you ever are looking at a terminal, and don’t know what to do next, just type in pwd and ls. \nEvery time you do a new thing in the terminal, type in type in pwd and ls afterwards.\nJust type in pwd and ls all the time. :::",
+    "objectID": "notes/meetings/02_pda.html#context-free-grammars",
+    "href": "notes/meetings/02_pda.html#context-free-grammars",
+    "title": "Pushdown Automata and Context Free Languages",
+    "section": "Context Free Grammars",
+    "text": "Context Free Grammars\nWe get nested, bracket matching patterns in natural language all the time. For example the person-number agreement in this sentence.\n\nThe person who I, the guy you are looking at, am talking to is not listening.\n\nIf the form of be in this sentence were generated by a Regular Grammar, to be parsed with a Finite State Automaton, once the “you” subject appears in the sentence, every following form of be would have to be “are” the rest of the way.\n\n*The person who I, the guy you are looking at, are talking to are not listening.\n\nSince the first sentence is how English and other languages work, we’d conclude that natural language is, at least, Context Free.\n\nContext Free Rules\n\n\nRegular rules can look like this:\n\\[\nA \\rightarrow aA\n\\]\n\nContext free rules can look like this: \\[\nA \\rightarrow aAb\n\\]\n\n\nReturning to this html snippit:\n&lt;p&gt;\n  This is a paragraph with \n  &lt;strong&gt;\n    bold text.\n  &lt;/strong&gt;\n&lt;/p&gt;\nRules of a context free grammar that could give rise to this well-formed html are:\n\\[\nD \\rightarrow &lt;p&gt;C&lt;/p&gt;\n\\]\n\\[\nC \\rightarrow words\n\\]\n\\[\nC \\rightarrow words S\n\\]\n\\[\nS \\rightarrow &lt;strong&gt;C&lt;/strong&gt;\n\\]\n\n\n\n\n\nflowchart TD\n\n  D --&gt; p1[\"p\"]\n  D --&gt; C1[\"C\"]\n  D --&gt; p2[\"/p\"]\n\n  C1 --&gt; w1[\"This is a paragraph with\"]\n  C1 --&gt; S\n\n  S --&gt; s1[\"strong\"]\n  S --&gt; C2[\"C\"]\n  S --&gt; s2[\"/strong\"]\n\n  C2 --&gt; w2[\"bold text.\"]\n\n\n\n\n\n\n\n\n\nA PDA for this grammar\nHere’s a way we’d describe a Pushdown Automaton that decides whether or not a document is generated by this grammar:\n\nEach time it encounters an opening &lt;tag&gt;, it adds it to the stack, and when it encounters a closing &lt;/tag&gt;, it pops it from the stack.\n\n\n\nWhen it encounters a closing &lt;/tag&gt;, it has to match the opening &lt;tag&gt; that’s at the top of the stack.\nWhen it gets to the end of the document, the stack needs to be empty.\n\nHere’s a table showing how that’d play out\n\n\n\n\n\n\n\n\nInput\nevent\nStack\n\n\n\n\n&lt;p&gt;\npush &lt;p&gt;\n&lt;p&gt;\n\n\nThis, is, a, paragraph, with\n\n&lt;p&gt;\n\n\n&lt;strong&gt;\npush &lt;strong&gt;\n&lt;strong&gt;, &lt;p&gt;\n\n\nbold, text.\n\n&lt;strong&gt;, &lt;p&gt;\n\n\n&lt;/strong&gt;\npop &lt;strong&gt;\n&lt;p&gt;\n\n\n&lt;/p&gt;\npop &lt;p&gt;\n\n\n\n\nOne consequence of the rule that tags need to match when you pop them is that the following is not valid html.\n&lt;p&gt;\n  This is &lt;strong&gt;invalid!\n&lt;/p&gt;\n&lt;/strong&gt;\nIf you were to reason through the state of the stack after the opening &lt;strong&gt; tag, it would look like\n\n&lt;strong&gt;, &lt;p&gt;\n\nThen, when you feed it &lt;/p&gt;, it doen’t match the tag at the top of the stack, so we’d get an error of some sort.",
     "crumbs": [
       "Notes",
-      "Concepts",
-      "Navigating Directories"
+      "Class Meetings",
+      "Pushdown Automata and Context Free Languages"
     ]
   },
   {
-    "objectID": "notes/concepts/03_navigating-directories.html#getting-around",
-    "href": "notes/concepts/03_navigating-directories.html#getting-around",
-    "title": "Navigating Directories",
-    "section": "Getting around",
-    "text": "Getting around\nYou’re not always going to want to hang around in your home directory the whole time. You may want to get to a specific directory where some code or a script is to run it. To do this, we use the cd command, which stands for change directory.\n\ncd : Moving down 1 level\nTo change the folder you’re in, you just need to type in cd and then the name of the folder. For example to move from my home directory into my Documents folder, it would look like this:\n\nbash\n\nls\nDesktop     Library   Pictures\nDocuments   Movies    Public\nDownloads   Music     Sites\n\nbash\n\ncd Documents\nls\nFranklinInstituteSamples.pptx   Zoom\nFranklinInstituteSounds         html_practice\n\nbash\n\npwd\n/Users/Display/Documents\n\nFirst, I double checked which directories were in the folder I was currently in with ls.\nSecond, I moved into the Documents directory with cd Documents.\nThird, I checked what files and directories were in my new location with ls.\nFourth, I double checked my current location with pwd, which gave my the absolute path to where I was.\n\n\n\ncd : Moving up 1 level\nIf after moving into my documents folder, I wanted to move back to my home directory, that would involve moving up one level, because my Documents folder is inside of my home directory. We can do this using cd again, but instead of the name of a directory, we follow it with ... The two dots, .., is a short hand for “one level up from where I am.” Here’s how that works out on my system.\n\nbash\n\npwd\n/Users/Display/Documents\n\nbash\n\ncd ..\npwd\n/Users/Display\n\nFirst, I double checked where I was with pwd.\nSecond, I moved up one level with cd ..\nThird, I double checked where I would up with pwd again, confirming that I was now in my home directory again.\n\n\n\ncd : Moving down multiple levels\nYou don’t have to move down just one level at a time. For example, right now we’re in my home directory, but inside of my documents there’s a directory called html_practice. That’s two levels down. To get into html_practice, I just need to enter cd followed by the relative path to it. Remember, the relative path is the sequence of directory names that lie between where we are and where we want to go. Here’s how that looks on my system.\n\nbash\n\npwd\n/Users/Display\n\nbash\n\ncd Documents/html_practice\npwd\n/Users/Display/Documents/html_practice\n\nbash\n\nls\nsite.html  style.css\n\nFirst, I double checked my location with pwd\nSecond, I moved down two levels through Documents into html_practice with cd.\nThird, I double checked where I had moved to with pwd.\nLastly, I checked what files were in my new directory with ls.\n\n\n\nMoving up and over\nNow, we’re inside html_practice which is inside Documents. But what if we wanted to move into another directory that is also inside of Documents. For example, the directory Zoom is also inside of Documents, which is where Zoom saves all of the chat logs from our class meetings.\n\n\n\nWhere we want to move\n\n\nWe could do this in a two step process, using cd .. to move up one level, then cd Zoom to move into the zoom directory. But we can also combine the two into one step.\n\nbash\n\npwd\n/Users/Display/Documents/html_practice\n\nbash\n\ncd ../Zoom\npwd\n/Users/Display/Documents/Zoom\n\nFirst, I double checked where I was with pwd.\nThen, I moved up into Documents and down into Zoom in one go with cd ../Zoom\nFinally, I double checked where I wound up with pwd.",
+    "objectID": "notes/meetings/02_pda.html#limits-of-pushdown-automata",
+    "href": "notes/meetings/02_pda.html#limits-of-pushdown-automata",
+    "title": "Pushdown Automata and Context Free Languages",
+    "section": "Limits of Pushdown Automata",
+    "text": "Limits of Pushdown Automata\nAn office building has installed a version of Robin’s turnstile. Each person who enters the building has to insert their id card, and the machine scans it and spits it out the other side when a person pushes through.\nRobin approaches the turnstile with their friends Skylar and Alex. Both Skylar and Alex have their hands full carrying packages into the building, so Robin tries to be helpful and insert all of their id cards first, so they can then pass through. They’re walking through in the order\n\nRobin\nSkylar\nAlex\n\nSo Robin puts their ID cards into the turnstile in that order. Here’s how it works out\n\n\n\n\n\n\n\n\nInput\nAction\nStack\n\n\n\n\n\npush \n\n\n\n\npush \n, \n\n\n\npush \n, , \n\n\n\npop \n, \n\n\n\n🚨\n\n\n\n\nOh no! The turnstile has handed Robin Alex’s id card! What a mess!\n\nBeyond Context Free\nRobin was expecting a sequence like this\n\n, , , , , \n\nThis involves so-called “crossing dependencies”, which can’t be recognized by a Pushdown Automaton, which means they involve a more complex grammar than context free rules.\nThere are some examples of crossing dependencies in human language as well, like this example in Swiss German from Shieber (1985) (cited in Jäger and Rogers (2012))\n\n“that we let the children help Hans paint the house”\n\n\n\n\n\n\n\n\n\n\n\n\ndass\nmer\nd’ chind\nem Hans\nes Huus\nlönd\nhälfe\naanstriiche\n\n\nthat\nwe\nthe children-ACC\nHans-DAT\nthe house-ACC\nlet\nhelp\npaint",
     "crumbs": [
       "Notes",
-      "Concepts",
-      "Navigating Directories"
-    ]
-  },
-  {
-    "objectID": "notes/concepts/03_navigating-directories.html#very-useful-tips",
-    "href": "notes/concepts/03_navigating-directories.html#very-useful-tips",
-    "title": "Navigating Directories",
-    "section": "Very useful tips!",
-    "text": "Very useful tips!\nThere are a few tips, tricks, and shortcuts that can make using the command line a little bit easier.\n\nTab autocomplete\nWhen using a command line interface, “tab autocomplete” is a crucial tool to help you get around. For example, if you are in your home directory and you want to move into your documents directory, all you really need to type is cd Doc and the terminal should autocomplete the rest of the file name! \nIf you have multiple directories that start with Doc, it will list all of them, and then you’ll only need to type in a few more characters before it will be able to autocomplete. \nTab autocomplete works for ls as well, which can let you explore through directories without needing to move around.\n\n\nGet back home!\nTechnically, your home directory is a directory with a long absolute path. But because it’s a directory you’ll probably want to keep getting back to often, there’s a shortcut built in. If you run cd ~, it will zip you back to your home directory from wherever you are.\n\n\nAbsolute paths\nIf, for some reason, you don’t know what the relative path is to a directory you want to get to from where you are (or maybe it’s very complicated), you can always run cd followed by the absolute path to where you want to go.",
-    "crumbs": [
-      "Notes",
-      "Concepts",
-      "Navigating Directories"
-    ]
-  },
-  {
-    "objectID": "notes/concepts/03_navigating-directories.html#this-is-all-going-to-matter-a-lot",
-    "href": "notes/concepts/03_navigating-directories.html#this-is-all-going-to-matter-a-lot",
-    "title": "Navigating Directories",
-    "section": "This is all going to matter a lot",
-    "text": "This is all going to matter a lot\nUsing the command line and navigating your computer is going to come up a lot more in this course. You should try as much as you can to get a handle on how this all works now.",
-    "crumbs": [
-      "Notes",
-      "Concepts",
-      "Navigating Directories"
-    ]
-  },
-  {
-    "objectID": "notes/concepts/00_glossary.html",
-    "href": "notes/concepts/00_glossary.html",
-    "title": "Glossary",
-    "section": "",
-    "text": "Case Folding\n\nTo convert text data either to all uppercase or lowercase characters.\n\nClone\n\nMaking a copy of a git repository on another computer, whether locally or remotely.\n\nCopy-Paste\n\nCopying text to your computer’s ‘clipboard’ and pasting it into another location.\nCopying can be done many ways, including selecting text with your mouse, right-clicking then selecting ‘copy’, by selecting text and using your computer’s ‘hotkey’ for copying (), or, in the course documents, by clicking on the ‘copy’ icon in most code chunks.\nTo paste, you can either right-click and select ‘Paste’, or use your system’s ‘hotkey’ ().\n\nFind, or \n\nYou can find text in most pages or documents by either typing , then typing in the text you want to find in the dialogue box that pops up.\n\nFormal\n\nIn computational linguistics, ‘formal’ isn’t the opposite of ‘casual’. It’s about any system or language which has a strict set of acceptable symbols, and how they can be combined.\n\nGitHub Codespaces\n\nGitHub Codespaces are a ‘development environment’, running on a Virtual Machine. They’re like mini computers you can access through your web browser that get created just for the repository you launch one in. The actual memory and computation are being run on GitHub’s physical computers.\n\nIndex (noun)\n\nA value (usually an integer) that denotes the location of a valuable in an indexable object.\n\nIndex (verb)\n\nTo use a numeric index on an object to return the value at that index.\n\nLocal (adj)\n\nDescribes anything that exists or happens on the actual device you’re interacting with. For example, if you have a Microsoft Word document on your computer that ends in .docx, it is probably ‘local’ (even if theres a ‘remote’ copy somewhere). These days, it’s not always obvious if things happen locally or remotely. If you have a phone that does facial recognition on pictures you take, if the facial recognition program runs on your phone, it’s ‘local’. But if the picture needs to get uploaded to Apple or Google first, then the facial recognition is ‘remote’.\n\nRemote (adj)\n\nDescribes anything that exists or happens on a different device than the one you’re interacting with. For example, if you edit a Google Doc, the actual document is stored on a Google computer, not on the device you’re editing.\n\nSlice (verb)\n\nTo pull out a range of values from an object, defined by a starting and stopping position.\n\nTab Autocomplete\n\nMany programming applications have “Tab Autocomplete” suggestions that allow you to type in just a few letters of the command, function, or variable you want to use, and then hit TabTab.\n\nTerminal\n\nA text based interface to your computer. Instead of clicking on visual icons to, say, open a folder and look at its contents, you type in text based commands like cd and ls.\n\nVirtual Machine/VM\n\nVirtual Machines are simulations of computers. It’s like having an encapsulated computer, running its own operating system and programs, that borrows memory and computing resources from computers it’s running on.\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Glossary},\n  url = {https://lin511-2024.github.io/notes/concepts/00_glossary.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Glossary.” https://lin511-2024.github.io/notes/concepts/00_glossary.html.",
-    "crumbs": [
-      "Notes",
-      "Concepts",
-      "Glossary"
+      "Class Meetings",
+      "Pushdown Automata and Context Free Languages"
     ]
   },
   {
@@ -448,38 +539,10 @@
     "href": "notes/index.html",
     "title": "Meeting Notes",
     "section": "",
-    "text": "These are the notes for our regular meetings. \n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSetup Notes\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJan 8, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nRegular Languages and Finite State Machines\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nFSA in-class notes\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nPushdown Automata and Context Free Languages\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nJan 23, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nRegular Expressions, Quickly\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJan 25, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nMore Python: Poetry, Lists, Loops\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJan 30, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nPython basics\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJosef Fruehwald\n\n\n\n\n\n\nNo matching items\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Meeting {Notes}},\n  url = {https://lin511-2024.github.io/notes},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Meeting Notes.” https://lin511-2024.github.io/notes.",
+    "text": "These are the notes for our regular meetings. \n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSetup Notes\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJan 8, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nFSA in-class notes\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nRegular Languages and Finite State Machines\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nPushdown Automata and Context Free Languages\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nJan 23, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nRegular Expressions, Quickly\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJan 25, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nMore Python: Poetry, Lists, Loops\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJan 30, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nngrams\n\n\n-or- What if we could parse natural language with a finite state automaton?\n\n\n\n\n\n\n\n\nFeb 5, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nPython basics\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJosef Fruehwald\n\n\n\n\n\n\nNo matching items\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Meeting {Notes}},\n  url = {https://lin511-2024.github.io/notes},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Meeting Notes.” https://lin511-2024.github.io/notes.",
     "crumbs": [
       "Notes",
       "Notes Home"
-    ]
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "This is the website for Lin511, Computational Linguistics, taught at the University of Kentucky Spring 2024\n\nAttribution\n\nThe robot emoji in the course logo is modified from Open Emoji (link), licenced CC-BY-SA 4.0. Edited version here(svg).\n\n\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {About},\n  url = {https://lin511-2024.github.io/about.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “About.” https://lin511-2024.github.io/about.html."
-  },
-  {
-    "objectID": "syllabus/schedule.html",
-    "href": "syllabus/schedule.html",
-    "title": "Course Schedule",
-    "section": "",
-    "text": "Week 1\n\n\n\nDates:\n\nJan 8-12\n\n\n\n\nTopics:\n\nSetup, What is Computational Linguistics?\n\n\n\n\n\nReadings\n\nFollow posted tutorials for setting up our course technology.\nTP Chapter 1\n\n\n\n\n\nWeek 2-3\n\n\n\nDates:\n\nJan 15-26\n\n\n\n\nTopics:\n\nFiles, Text, Strings, Regular Expressions, Finite State Automata\n\n\n\n\nNo Office Hours for MLK Jr Day.\n\nReadings:\n\nCourse Notes: What is Python\nSLP Chapter 2, section 2.1 (pdf)\nTP, Chapter 2, Variables, expressions and statements\nTP Chapter 3, Functionss\n\n\n\n\n\nWeek 4-5\n\n\n\nDates:\n\nJan 29-Feb 09\n\n\n\n\nTopics:\n\nText Normalization, Tokenization, Python Variables, Python Functions\n\n\n\n\n\nReadings:\n\nSLP Chapter 2, sections 2.2, 2.3, 2.4\nTP, Chapter 10, Lists\nTP, Chapter 7, Iteration\nTP, Chapter 5, Conditionals\nNLTK Book, Chapter 3\n\n\n\n\n\nWeek 6-7\n\n\n\nDates:\n\nFeb 12 - 23\n\n\n\n\nTopics:\n\nn-grams, Corpora, Document Classification, Python Loops and Conditionals\n\n\n\n\n\nReadings\n\nSLP Chapters 3, 4, 5\n\n\n\n\n\nWeek 8-9\n\n\n\nDates:\n\nFeb 26 - Mar 08\n\n\n\n\nTopics:\n\nHidden Markov Models\n\n\n\n\n\nReadings\n\nSLP Appendix A: Hidden Markov Models\nTP Chapter 11, Dictionaries\nTP Chapter 15, Classes and Objects\n\n\n\nSpring Break\n\n\n\n\n\nWeek 10-11\n\n\n\nDates:\n\nMar 18-29\n\n\n\n\nTopics:\n\nParsing, Dependency trees\n\n\n\n\n\n\n\nWeek 12-13\n\n\n\nDates:\n\nApr 01-12\n\n\n\n\nTopics:\n\nDistributional semantics, word “embeddings”\n\n\n\n\n\n\n\nWeek 14-15\n\n\n\nDates:\n\nApr 15-19\n\n\n\n\nTopics:\n\nNeural Network Basics, Review\n\n\n\n\n\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Course {Schedule}},\n  url = {https://lin511-2024.github.io/syllabus/schedule.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Course Schedule.” https://lin511-2024.github.io/syllabus/schedule.html.",
-    "crumbs": [
-      "Home",
-      "Schedule"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Computational Linguistics (Spring 2024)",
-    "section": "",
-    "text": "Welcome to the Lin511 Computational Linguistics website. This course is being taught in the University of Kentucky’s Linguistics Department in Spring 2024\nIf you are visiting on a mobile device, site navigation can be found under the “hamburger” at the top.\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Computational {Linguistics} {(Spring} 2024)},\n  url = {https://lin511-2024.github.io/},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Computational Linguistics (Spring\n2024).” https://lin511-2024.github.io/.",
-    "crumbs": [
-      "Home"
     ]
   },
   {
@@ -659,6 +722,183 @@
     ]
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Computational Linguistics (Spring 2024)",
+    "section": "",
+    "text": "Welcome to the Lin511 Computational Linguistics website. This course is being taught in the University of Kentucky’s Linguistics Department in Spring 2024\nIf you are visiting on a mobile device, site navigation can be found under the “hamburger” at the top.\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Computational {Linguistics} {(Spring} 2024)},\n  url = {https://lin511-2024.github.io/},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Computational Linguistics (Spring\n2024).” https://lin511-2024.github.io/.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "syllabus/schedule.html",
+    "href": "syllabus/schedule.html",
+    "title": "Course Schedule",
+    "section": "",
+    "text": "Week 1\n\n\n\nDates:\n\nJan 8-12\n\n\n\n\nTopics:\n\nSetup, What is Computational Linguistics?\n\n\n\n\n\nReadings\n\nFollow posted tutorials for setting up our course technology.\nTP Chapter 1\n\n\n\n\n\nWeek 2-3\n\n\n\nDates:\n\nJan 15-26\n\n\n\n\nTopics:\n\nFiles, Text, Strings, Regular Expressions, Finite State Automata\n\n\n\n\nNo Office Hours for MLK Jr Day.\n\nReadings:\n\nCourse Notes: What is Python\nSLP Chapter 2, section 2.1 (pdf)\nTP, Chapter 2, Variables, expressions and statements\nTP Chapter 3, Functionss\n\n\n\n\n\nWeek 4-5\n\n\n\nDates:\n\nJan 29-Feb 09\n\n\n\n\nTopics:\n\nText Normalization, Tokenization, Python Variables, Python Functions\n\n\n\n\n\nReadings:\n\nSLP Chapter 2, sections 2.2, 2.3, 2.4\nTP, Chapter 10, Lists\nTP, Chapter 7, Iteration\nTP, Chapter 5, Conditionals\nNLTK Book, Chapter 3\n\n\n\n\n\nWeek 6-7\n\n\n\nDates:\n\nFeb 12 - 23\n\n\n\n\nTopics:\n\nn-grams, Corpora, Document Classification, Python Loops and Conditionals\n\n\n\n\n\nReadings\n\nSLP Chapters 3, 4, 5\n\n\n\n\n\nWeek 8-9\n\n\n\nDates:\n\nFeb 26 - Mar 08\n\n\n\n\nTopics:\n\nHidden Markov Models\n\n\n\n\n\nReadings\n\nSLP Appendix A: Hidden Markov Models\nTP Chapter 11, Dictionaries\nTP Chapter 15, Classes and Objects\n\n\n\nSpring Break\n\n\n\n\n\nWeek 10-11\n\n\n\nDates:\n\nMar 18-29\n\n\n\n\nTopics:\n\nParsing, Dependency trees\n\n\n\n\n\n\n\nWeek 12-13\n\n\n\nDates:\n\nApr 01-12\n\n\n\n\nTopics:\n\nDistributional semantics, word “embeddings”\n\n\n\n\n\n\n\nWeek 14-15\n\n\n\nDates:\n\nApr 15-19\n\n\n\n\nTopics:\n\nNeural Network Basics, Review\n\n\n\n\n\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Course {Schedule}},\n  url = {https://lin511-2024.github.io/syllabus/schedule.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Course Schedule.” https://lin511-2024.github.io/syllabus/schedule.html.",
+    "crumbs": [
+      "Home",
+      "Schedule"
+    ]
+  },
+  {
+    "objectID": "notes/meetings/01-1_fsm_addenda.html",
+    "href": "notes/meetings/01-1_fsm_addenda.html",
+    "title": "FSA in-class notes",
+    "section": "",
+    "text": "ok(a+y)?\n\n\n\n\n\nstateDiagram\n    direction LR\n    [*] --&gt; 1\n    1 --&gt; 2: o\n    2 --&gt; 3: k\n\n    3 --&gt; group1\n\n    state group1{\n        [*] --&gt; 4\n        4 --&gt; 4: a\n        4 --&gt; [*]: y\n    }\n    group1 --&gt; [*]: ε\n\n    3 --&gt; [*]: ε",
+    "crumbs": [
+      "Notes",
+      "Class Meetings",
+      "FSA in-class notes"
+    ]
+  },
+  {
+    "objectID": "notes/meetings/01-1_fsm_addenda.html#finite-state-automata-and-regex",
+    "href": "notes/meetings/01-1_fsm_addenda.html#finite-state-automata-and-regex",
+    "title": "FSA in-class notes",
+    "section": "",
+    "text": "ok(a+y)?\n\n\n\n\n\nstateDiagram\n    direction LR\n    [*] --&gt; 1\n    1 --&gt; 2: o\n    2 --&gt; 3: k\n\n    3 --&gt; group1\n\n    state group1{\n        [*] --&gt; 4\n        4 --&gt; 4: a\n        4 --&gt; [*]: y\n    }\n    group1 --&gt; [*]: ε\n\n    3 --&gt; [*]: ε",
+    "crumbs": [
+      "Notes",
+      "Class Meetings",
+      "FSA in-class notes"
+    ]
+  },
+  {
+    "objectID": "notes/meetings/01-1_fsm_addenda.html#the-regex-for-batman",
+    "href": "notes/meetings/01-1_fsm_addenda.html#the-regex-for-batman",
+    "title": "FSA in-class notes",
+    "section": "The RegEx for Batman",
+    "text": "The RegEx for Batman\n\nregex\n\nNa (na){15} Batman!( Batman! Batman!)?",
+    "crumbs": [
+      "Notes",
+      "Class Meetings",
+      "FSA in-class notes"
+    ]
+  },
+  {
+    "objectID": "notes/meetings/04_ngrams.html",
+    "href": "notes/meetings/04_ngrams.html",
+    "title": "ngrams",
+    "section": "",
+    "text": "So, in our notes on finite state automata and push-down automata that since natural language has bracket matching patterns, and maybe even crossing dependencies, that it’s more complex than a “regular” language, and can’t really be parsed with a finite state automaton.\nngram language modelling asks the question: But what if we tried really hard?\n\n\nr\n\nlibrary(reticulate)\n\n\n\npython\n\na=1\n\n\n\nr\n\npy$a\n\n[1] 1\n\n\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald2024,\n  author = {Fruehwald, Josef},\n  title = {Ngrams},\n  date = {2024-02-05},\n  url = {https://lin511-2024.github.io/notes/meetings/04_ngrams.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. 2024. “Ngrams.” February 5, 2024. https://lin511-2024.github.io/notes/meetings/04_ngrams.html.",
+    "crumbs": [
+      "Notes",
+      "Class Meetings",
+      "ngrams"
+    ]
+  },
+  {
+    "objectID": "notes/programming/02_regex.html",
+    "href": "notes/programming/02_regex.html",
+    "title": "Regular Expressions, Quickly",
+    "section": "",
+    "text": "Look at Github\n\n\n\nThe real content is in your regex-in-class-&lt;username&gt; repository on github. This is meant to be more of a reference sheet.",
+    "crumbs": [
+      "Notes",
+      "Programming",
+      "Regular Expressions, Quickly"
+    ]
+  },
+  {
+    "objectID": "notes/programming/02_regex.html#setting-up-for-using-regular-expressions-in-python",
+    "href": "notes/programming/02_regex.html#setting-up-for-using-regular-expressions-in-python",
+    "title": "Regular Expressions, Quickly",
+    "section": "Setting up for using regular expressions in python",
+    "text": "Setting up for using regular expressions in python\n\nWe’ll need to import the re module\nUnlike simple strings, we’ll need to write our regular expressions with a preceding r\n\n\nimport re\n\nr\"regex\"\n\n'regex'",
+    "crumbs": [
+      "Notes",
+      "Programming",
+      "Regular Expressions, Quickly"
+    ]
+  },
+  {
+    "objectID": "notes/programming/02_regex.html#important-re-functions",
+    "href": "notes/programming/02_regex.html#important-re-functions",
+    "title": "Regular Expressions, Quickly",
+    "section": "Important re functions",
+    "text": "Important re functions\nTwo ways to use re to search strings are\n\nre.search()\n\nReturn structured information about where the regex matches.\n\nre.findall()\n\nReturn all actual matching substrings\n\n\n\nsentence1 = \"The speaker is speaking.\"\n\n\nre.search()\n\nre.search(r\"speak\", sentence1)\n\n&lt;re.Match object; span=(4, 9), match='speak'&gt;\n\n\n\nsentence1[4:9]\n\n'speak'\n\n\n\n\nre.findall()\n\nre.findall(r\"speak\", sentence1)\n\n['speak', 'speak']",
+    "crumbs": [
+      "Notes",
+      "Programming",
+      "Regular Expressions, Quickly"
+    ]
+  },
+  {
+    "objectID": "notes/programming/02_regex.html#simple-character-searches",
+    "href": "notes/programming/02_regex.html#simple-character-searches",
+    "title": "Regular Expressions, Quickly",
+    "section": "Simple character searches",
+    "text": "Simple character searches\nLike the examples above, literally the characters you want to use will match.\n\nspeak_regex = r\"speak\"\nget_regex_url(speak_regex)\n\nspeak",
+    "crumbs": [
+      "Notes",
+      "Programming",
+      "Regular Expressions, Quickly"
+    ]
+  },
+  {
+    "objectID": "notes/programming/02_regex.html#options",
+    "href": "notes/programming/02_regex.html#options",
+    "title": "Regular Expressions, Quickly",
+    "section": "Options",
+    "text": "Options\nIf you want some characters to be chosen from a set of options, place them in [].\n\nvowels_regex = r\"[aeiou]\"\nget_regex_url(vowels_regex)\n\n[aeiou]\n\n\n\nre.findall(r\"[aeiou]\", sentence1)\n\n['e', 'e', 'a', 'e', 'i', 'e', 'a', 'i']\n\n\n\nthe_regex = r\"[Tt]he\"\nget_regex_url(the_regex)\n\n[Tt]he\n\n\n\nre.findall(the_regex, sentence1)\n\n['The']\n\n\n\nRanges\nRanges of characters or numbers can be given inside [] like so\n\nget_regex_url(r\"[a-z]\")\nget_regex_url(r\"[A-Z]\")\nget_regex_url(r\"[0-9]\")\nget_regex_url(r\"[A-Za-z]\")\n\n[a-z]\n\n\n[A-Z]\n\n\n[0-9]\n\n\n[A-Za-z]\n\n\n\n\n“Metacharacters”\n\n\\w == [A-Za-z0-9_]\n\nword characters\n\n\\W == [^A-Za-z0-9_]\n\nnon-word characters\n\n\\d == [0-9]\n\ndigits\n\n\\D == [^0-9]\n\nnon-digits\n\n\\s == [ \\t\\n]\n\nAny whitespace character\n\n\\S == [^ \\t\\n]\n\nnon-whitespace\n\n\n\n\nAny Character\nTo match any character (letter, number, punctuation, space, etc.) use . or “dot”\n\nre.findall(\n    # return every word character and \n    # the following character\n    r\"\\w.\",\n    sentence1\n)\n\n['Th', 'e ', 'sp', 'ea', 'ke', 'r ', 'is', 'sp', 'ea', 'ki', 'ng']\n\n\n\n\nEscaping special symbols\nIf you wanted to find the actual period in sentence1, you’d have to “escape” the . with a preceding `.\n\n# compare\nget_regex_url(r\".\")\nget_regex_url(r\"\\.\")\n\n.\n\n\n.\n\n\n\nre.findall(\n    \"\\.\",\n    sentence1\n)\n\n['.']",
+    "crumbs": [
+      "Notes",
+      "Programming",
+      "Regular Expressions, Quickly"
+    ]
+  },
+  {
+    "objectID": "notes/programming/02_regex.html#modifiers",
+    "href": "notes/programming/02_regex.html#modifiers",
+    "title": "Regular Expressions, Quickly",
+    "section": "Modifiers",
+    "text": "Modifiers\nModifiers come after the definition of a single character, and define how many times that character can appear.\n\na? = zero or one a\na+ = one or more a\na* = zero or more a\n\n\nget_regex_url(r\"bana?na\")\nget_regex_url(r\"bana+na\")\nget_regex_url(r\"bana*na\")\n\nbana?na\n\n\nbana+na\n\n\nbana*na",
+    "crumbs": [
+      "Notes",
+      "Programming",
+      "Regular Expressions, Quickly"
+    ]
+  },
+  {
+    "objectID": "notes/programming/02_regex.html#grouping",
+    "href": "notes/programming/02_regex.html#grouping",
+    "title": "Regular Expressions, Quickly",
+    "section": "Grouping",
+    "text": "Grouping\nYou can define groupings within regular expressions. The effect of these groupings depends what kind of regex function you’re using. For re.findall(), it’ll find the whole string, but return just the text from the grouping.\n\nsentence2 = \"The big bear and the small bear ran away.\"\n\n\nget_regex_url(r\"[Tt]he (\\w+) bear\")\n\n[Tt]he (+) bear\n\n\n\nre.findall(\n    r\"[Tt]he (\\w+) bear\",\n    sentence2\n)\n\n['big', 'small']",
+    "crumbs": [
+      "Notes",
+      "Programming",
+      "Regular Expressions, Quickly"
+    ]
+  },
+  {
+    "objectID": "notes/programming/02_regex.html#boundaries",
+    "href": "notes/programming/02_regex.html#boundaries",
+    "title": "Regular Expressions, Quickly",
+    "section": "Boundaries",
+    "text": "Boundaries\n\n^the == Finds “the” at the start of a string.\nthe$ == Finds ” the” at the end of a string.\n\\bthe\\b == Finds “the” in between word boundaries.\n\n\nget_regex_url(r\"^the \")\nget_regex_url(r\" the$\")\nget_regex_url(r\"\\bthe\\b\")\n\n^the\n\n\nthe$\n\n\n[(https://regexper.com/#%5Cbthe%5Cb)\n\n\n\nsentence3 = \"I saw the other bear.\"\nre.findall(\n    r\"the\",\n    sentence3\n)\n\n['the', 'the']\n\n\nThe second “the” there comes from inside “other”\n\nre.findall(\n    r\"\\bthe\\b\",\n    sentence3\n)\n\n['the']\n\n\n\nsentence3\n\n'I saw the other bear.'",
+    "crumbs": [
+      "Notes",
+      "Programming",
+      "Regular Expressions, Quickly"
+    ]
+  },
+  {
+    "objectID": "notes/programming/01_Python_basics.html",
+    "href": "notes/programming/01_Python_basics.html",
+    "title": "Python basics",
+    "section": "",
+    "text": "print(1)\n\n1\n\n\n\nprint(\"hello\")\n\nhello\n\n\n\nprint(2 + 2)\n\n4\n\n\n\nx = 1\ny = 10\n\nprint(x + y)\n\n11\n\n\n\nword1 = \"Hello\"\nword2 = \" World!\"\n\nprint(word1 + word2)\n\nHello World!\n\n\n\nprint(True)\n\nTrue\n\n\n\nprint(False)\n\nFalse\n\n\n\nprint(True and False)\n\nFalse\n\n\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Python Basics},\n  url = {https://lin511-2024.github.io/notes/programming/01_Python_basics.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Python Basics.” https://lin511-2024.github.io/notes/programming/01_Python_basics.html.",
+    "crumbs": [
+      "Notes",
+      "Programming",
+      "Python basics"
+    ]
+  },
+  {
     "objectID": "notes/in_class/00_python.html",
     "href": "notes/in_class/00_python.html",
     "title": "Starting Python",
@@ -707,123 +947,15 @@
     ]
   },
   {
-    "objectID": "notes/concepts/04_git_errors.html",
-    "href": "notes/concepts/04_git_errors.html",
-    "title": "Git Errors",
+    "objectID": "notes/concepts/00_glossary.html",
+    "href": "notes/concepts/00_glossary.html",
+    "title": "Glossary",
     "section": "",
-    "text": "When you clicked on “Sync”, did you get an error window that looked like this?\nIf you clock on “Show Command Output”, a file will pop open that looks like this.\nImportant things to note:",
+    "text": "Case Folding\n\nTo convert text data either to all uppercase or lowercase characters.\n\nClone\n\nMaking a copy of a git repository on another computer, whether locally or remotely.\n\nCopy-Paste\n\nCopying text to your computer’s ‘clipboard’ and pasting it into another location.\nCopying can be done many ways, including selecting text with your mouse, right-clicking then selecting ‘copy’, by selecting text and using your computer’s ‘hotkey’ for copying (), or, in the course documents, by clicking on the ‘copy’ icon in most code chunks.\nTo paste, you can either right-click and select ‘Paste’, or use your system’s ‘hotkey’ ().\n\nFind, or \n\nYou can find text in most pages or documents by either typing , then typing in the text you want to find in the dialogue box that pops up.\n\nFormal\n\nIn computational linguistics, ‘formal’ isn’t the opposite of ‘casual’. It’s about any system or language which has a strict set of acceptable symbols, and how they can be combined.\n\nGitHub Codespaces\n\nGitHub Codespaces are a ‘development environment’, running on a Virtual Machine. They’re like mini computers you can access through your web browser that get created just for the repository you launch one in. The actual memory and computation are being run on GitHub’s physical computers.\n\nIndex (noun)\n\nA value (usually an integer) that denotes the location of a valuable in an indexable object.\n\nIndex (verb)\n\nTo use a numeric index on an object to return the value at that index.\n\nLocal (adj)\n\nDescribes anything that exists or happens on the actual device you’re interacting with. For example, if you have a Microsoft Word document on your computer that ends in .docx, it is probably ‘local’ (even if theres a ‘remote’ copy somewhere). These days, it’s not always obvious if things happen locally or remotely. If you have a phone that does facial recognition on pictures you take, if the facial recognition program runs on your phone, it’s ‘local’. But if the picture needs to get uploaded to Apple or Google first, then the facial recognition is ‘remote’.\n\nRemote (adj)\n\nDescribes anything that exists or happens on a different device than the one you’re interacting with. For example, if you edit a Google Doc, the actual document is stored on a Google computer, not on the device you’re editing.\n\nSlice (verb)\n\nTo pull out a range of values from an object, defined by a starting and stopping position.\n\nTab Autocomplete\n\nMany programming applications have “Tab Autocomplete” suggestions that allow you to type in just a few letters of the command, function, or variable you want to use, and then hit TabTab.\n\nTerminal\n\nA text based interface to your computer. Instead of clicking on visual icons to, say, open a folder and look at its contents, you type in text based commands like cd and ls.\n\nVirtual Machine/VM\n\nVirtual Machines are simulations of computers. It’s like having an encapsulated computer, running its own operating system and programs, that borrows memory and computing resources from computers it’s running on.\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Glossary},\n  url = {https://lin511-2024.github.io/notes/concepts/00_glossary.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Glossary.” https://lin511-2024.github.io/notes/concepts/00_glossary.html.",
     "crumbs": [
       "Notes",
       "Concepts",
-      "Git Errors"
-    ]
-  },
-  {
-    "objectID": "notes/concepts/04_git_errors.html#how-to-fix-it.",
-    "href": "notes/concepts/04_git_errors.html#how-to-fix-it.",
-    "title": "Git Errors",
-    "section": "How to fix it.",
-    "text": "How to fix it.\n\nHit the key combination  to pop open the VSCode Command Palette. It should look like this:\n\n\n\n\n\n\n\nType in terminal editor to find the command “Terminal: Create New Terminal in Editor Area”. It should probably be the top result. If it’s highlighted, just hit enter to open a new terminal.\n\n\n\n\n\n\n\nCopy-paste the following code into the terminal window that opened, then hit enter.\n\n\nbash\n\ngit config pull.rebase false\n\nThat’s it. You should be able to Sync successfully.",
-    "crumbs": [
-      "Notes",
-      "Concepts",
-      "Git Errors"
-    ]
-  },
-  {
-    "objectID": "notes/concepts/04_git_errors.html#whats-going-on.",
-    "href": "notes/concepts/04_git_errors.html#whats-going-on.",
-    "title": "Git Errors",
-    "section": "What’s going on.",
-    "text": "What’s going on.\nThe “problem” is that the repository history in your codespace and the version on github don’t completely match up. The most likely scenario is\n\nYou accepted the assignment link, created your code space, made some changes and committed your changes.\nAfter you created your code space, I made some changes to the assignment (e.g fixed a misspelling in the README, or fixed an error in one of the tests), which then got merged into your GitHub repository.\n\nAll git is asking for is clarity in how to resolve the different histories between the version in your codespace and the version up on GitHub.\nI’m going to try to make sure that the command git config pull.rebase false gets run automatically when you create the Codespace for any future assignments.\n\nDetails\n\n\n\n\n\n\nWarning\n\n\n\nThis is only if you’re still curious!\n\n\nThis warning pops up when you have a situation like this, where “main” is the version on github, and “local” is the version on your computer, or in your codespace.\n\n\n\n\n\ngitGraph\n  commit id: \"assignment created\"\n  branch local\n  commit id: \"local copy\"\n  commit id: \"edits\"\n  checkout main\n  commit id: \"text fixes\"\n\n\n\n\n\n\nBy setting pull.rebase false, this is what happens:\n\n\n\n\n\ngitGraph\n  commit id: \"assignment created\"\n  branch local\n  commit id: \"local copy\"\n  commit id: \"edits\"\n  checkout main\n  commit id: \"text fixes\"\n  checkout local\n  merge main\n\n\n\n\n\n\nThe other option, a “rebase”, basically re-writes the history of your local version to look like this:\n\n\n\n\n\ngitGraph\n  commit id: \"assignment created\"\n  branch local\n  commit id: \"text fixes\" type: HIGHLIGHT\n  commit id: \"local copy\"\n  commit id: \"edits\"",
-    "crumbs": [
-      "Notes",
-      "Concepts",
-      "Git Errors"
-    ]
-  },
-  {
-    "objectID": "notes/concepts/01_keyboarding.html#single-quotes-vs-backticks",
-    "href": "notes/concepts/01_keyboarding.html#single-quotes-vs-backticks",
-    "title": "“Where is the … key?”",
-    "section": "Single Quotes vs Backticks",
-    "text": "Single Quotes vs Backticks\nIt’s important to distinguish between single quotes: ' and backticks `. They look similar, but aren’t interchangeable.\nThe backtick key is highlighted in the images of the keyboards below, in the top left side.\n\nPCMac",
-    "crumbs": [
-      "Notes",
-      "Concepts",
-      "\"Where is the ... key?\""
-    ]
-  },
-  {
-    "objectID": "notes/concepts/01_keyboarding.html#slash-vs-backslash-.",
-    "href": "notes/concepts/01_keyboarding.html#slash-vs-backslash-.",
-    "title": "“Where is the … key?”",
-    "section": "Slash (/) vs backslash (\\).",
-    "text": "Slash (/) vs backslash (\\).\nThese different symbols will do different things, and aren’t interchangeable!\n\nSlash (/) location\n\nPCMac\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBackslash (\\) location\n\nPCMac",
-    "crumbs": [
-      "Notes",
-      "Concepts",
-      "\"Where is the ... key?\""
-    ]
-  },
-  {
-    "objectID": "notes/concepts/01_keyboarding.html#the-tilde-key.",
-    "href": "notes/concepts/01_keyboarding.html#the-tilde-key.",
-    "title": "“Where is the … key?”",
-    "section": "The tilde ~ key.",
-    "text": "The tilde ~ key.\nTo type the tilde1 key you have to hold Shift+`Shift+`.\n\nPCMac",
-    "crumbs": [
-      "Notes",
-      "Concepts",
-      "\"Where is the ... key?\""
-    ]
-  },
-  {
-    "objectID": "notes/concepts/01_keyboarding.html#the-caret",
-    "href": "notes/concepts/01_keyboarding.html#the-caret",
-    "title": "“Where is the … key?”",
-    "section": "The caret ^",
-    "text": "The caret ^\nYou can get the caret symbol with Shift+6Shift+6\n\nPCMac",
-    "crumbs": [
-      "Notes",
-      "Concepts",
-      "\"Where is the ... key?\""
-    ]
-  },
-  {
-    "objectID": "notes/concepts/01_keyboarding.html#the-pipe",
-    "href": "notes/concepts/01_keyboarding.html#the-pipe",
-    "title": "“Where is the … key?”",
-    "section": "The Pipe |",
-    "text": "The Pipe |\nYou can get the pipe, or vertical bar, with Shift+\\Shift+\\.\n\nPCMac",
-    "crumbs": [
-      "Notes",
-      "Concepts",
-      "\"Where is the ... key?\""
-    ]
-  },
-  {
-    "objectID": "notes/concepts/01_keyboarding.html#side-note-smart-quotes",
-    "href": "notes/concepts/01_keyboarding.html#side-note-smart-quotes",
-    "title": "“Where is the … key?”",
-    "section": "Side Note: “Smart Quotes”",
-    "text": "Side Note: “Smart Quotes”\nIf, at some point, you copy-paste text from the internet into your code or a text file, you might wind up with “smart quotes” that make things work weird!\n\n\n\nRegular Quotes\nSmart Quotes\n\n\n\n\n\"regular\"\n“smart”\n\n\n'regular'\n‘smart’\n\n\n\nBe careful not to have smart quotes cropping up in your code or data!",
-    "crumbs": [
-      "Notes",
-      "Concepts",
-      "\"Where is the ... key?\""
-    ]
-  },
-  {
-    "objectID": "notes/concepts/01_keyboarding.html#footnotes",
-    "href": "notes/concepts/01_keyboarding.html#footnotes",
-    "title": "“Where is the … key?”",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nPronunciations include [tɪl.də] and [tɪl.di]↩︎",
-    "crumbs": [
-      "Notes",
-      "Concepts",
-      "\"Where is the ... key?\""
+      "Glossary"
     ]
   },
   {
@@ -923,159 +1055,39 @@
     ]
   },
   {
-    "objectID": "notes/meetings/01-1_fsm_addenda.html",
-    "href": "notes/meetings/01-1_fsm_addenda.html",
-    "title": "FSA in-class notes",
+    "objectID": "notes/concepts/04_git_errors.html",
+    "href": "notes/concepts/04_git_errors.html",
+    "title": "Git Errors",
     "section": "",
-    "text": "ok(a+y)?\n\n\n\n\n\nstateDiagram\n    direction LR\n    [*] --&gt; 1\n    1 --&gt; 2: o\n    2 --&gt; 3: k\n\n    3 --&gt; group1\n\n    state group1{\n        [*] --&gt; 4\n        4 --&gt; 4: a\n        4 --&gt; [*]: y\n    }\n    group1 --&gt; [*]: ε\n\n    3 --&gt; [*]: ε",
+    "text": "When you clicked on “Sync”, did you get an error window that looked like this?\nIf you clock on “Show Command Output”, a file will pop open that looks like this.\nImportant things to note:",
     "crumbs": [
       "Notes",
-      "Class Meetings",
-      "FSA in-class notes"
+      "Concepts",
+      "Git Errors"
     ]
   },
   {
-    "objectID": "notes/meetings/01-1_fsm_addenda.html#finite-state-automata-and-regex",
-    "href": "notes/meetings/01-1_fsm_addenda.html#finite-state-automata-and-regex",
-    "title": "FSA in-class notes",
-    "section": "",
-    "text": "ok(a+y)?\n\n\n\n\n\nstateDiagram\n    direction LR\n    [*] --&gt; 1\n    1 --&gt; 2: o\n    2 --&gt; 3: k\n\n    3 --&gt; group1\n\n    state group1{\n        [*] --&gt; 4\n        4 --&gt; 4: a\n        4 --&gt; [*]: y\n    }\n    group1 --&gt; [*]: ε\n\n    3 --&gt; [*]: ε",
+    "objectID": "notes/concepts/04_git_errors.html#how-to-fix-it.",
+    "href": "notes/concepts/04_git_errors.html#how-to-fix-it.",
+    "title": "Git Errors",
+    "section": "How to fix it.",
+    "text": "How to fix it.\n\nHit the key combination  to pop open the VSCode Command Palette. It should look like this:\n\n\n\n\n\n\n\nType in terminal editor to find the command “Terminal: Create New Terminal in Editor Area”. It should probably be the top result. If it’s highlighted, just hit enter to open a new terminal.\n\n\n\n\n\n\n\nCopy-paste the following code into the terminal window that opened, then hit enter.\n\n\nbash\n\ngit config pull.rebase false\n\nThat’s it. You should be able to Sync successfully.",
     "crumbs": [
       "Notes",
-      "Class Meetings",
-      "FSA in-class notes"
+      "Concepts",
+      "Git Errors"
     ]
   },
   {
-    "objectID": "notes/meetings/01-1_fsm_addenda.html#the-regex-for-batman",
-    "href": "notes/meetings/01-1_fsm_addenda.html#the-regex-for-batman",
-    "title": "FSA in-class notes",
-    "section": "The RegEx for Batman",
-    "text": "The RegEx for Batman\n\nregex\n\nNa (na){15} Batman!( Batman! Batman!)?",
+    "objectID": "notes/concepts/04_git_errors.html#whats-going-on.",
+    "href": "notes/concepts/04_git_errors.html#whats-going-on.",
+    "title": "Git Errors",
+    "section": "What’s going on.",
+    "text": "What’s going on.\nThe “problem” is that the repository history in your codespace and the version on github don’t completely match up. The most likely scenario is\n\nYou accepted the assignment link, created your code space, made some changes and committed your changes.\nAfter you created your code space, I made some changes to the assignment (e.g fixed a misspelling in the README, or fixed an error in one of the tests), which then got merged into your GitHub repository.\n\nAll git is asking for is clarity in how to resolve the different histories between the version in your codespace and the version up on GitHub.\nI’m going to try to make sure that the command git config pull.rebase false gets run automatically when you create the Codespace for any future assignments.\n\nDetails\n\n\n\n\n\n\nWarning\n\n\n\nThis is only if you’re still curious!\n\n\nThis warning pops up when you have a situation like this, where “main” is the version on github, and “local” is the version on your computer, or in your codespace.\n\n\n\n\n\ngitGraph\n  commit id: \"assignment created\"\n  branch local\n  commit id: \"local copy\"\n  commit id: \"edits\"\n  checkout main\n  commit id: \"text fixes\"\n\n\n\n\n\n\nBy setting pull.rebase false, this is what happens:\n\n\n\n\n\ngitGraph\n  commit id: \"assignment created\"\n  branch local\n  commit id: \"local copy\"\n  commit id: \"edits\"\n  checkout main\n  commit id: \"text fixes\"\n  checkout local\n  merge main\n\n\n\n\n\n\nThe other option, a “rebase”, basically re-writes the history of your local version to look like this:\n\n\n\n\n\ngitGraph\n  commit id: \"assignment created\"\n  branch local\n  commit id: \"text fixes\" type: HIGHLIGHT\n  commit id: \"local copy\"\n  commit id: \"edits\"",
     "crumbs": [
       "Notes",
-      "Class Meetings",
-      "FSA in-class notes"
-    ]
-  },
-  {
-    "objectID": "notes/programming/03_python_plus.html",
-    "href": "notes/programming/03_python_plus.html",
-    "title": "More Python: Poetry, Lists, Loops",
-    "section": "",
-    "text": "This lesson has two goals:",
-    "crumbs": [
-      "Notes",
-      "Programming",
-      "More Python: Poetry, Lists, Loops"
-    ]
-  },
-  {
-    "objectID": "notes/programming/03_python_plus.html#finding-and-reading-in-files",
-    "href": "notes/programming/03_python_plus.html#finding-and-reading-in-files",
-    "title": "More Python: Poetry, Lists, Loops",
-    "section": "Finding and reading in files",
-    "text": "Finding and reading in files\nIn order to read in a file, first we need to tell python where a file is. We’ll do this with pathlib.Path(). For a recap of what paths are, see Understanding Directories.\n\n\npython\n\nfrom pathlib import Path\n\nLet’s just call Path() and see what it gives us.\n\n\npython\n\nhere = Path()\nhere\n\nPosixPath('.')\n\n\nSome detail of what gets printed out for here will depend on your operating system, but one thing that should be the same across the board is that '.' is a placeholder meaning “the dirtory you’re currently in.\nTo see the full path to your current directory, we’ll use the .resolve() method.\n\n\npython\n\nhere.resolve()\n\nPosixPath('/workspaces/Lin511-2024.github.io/notes/programming')\n\n\nWhat this full path looks like really depends on where you are running your code.\n\nGetting directory contents\nTo get the full contents of a directory, we’ll use the the .glob() method. To get readable output, we need to wrap list() around everything.\n\n\npython\n\nlist(\n    here.glob(pattern = \"*\")\n)\n\n[PosixPath('03_python_plus.ipynb'),\n PosixPath('assets'),\n PosixPath('_02_Paths.ipynb'),\n PosixPath('01_Python_basics.ipynb'),\n PosixPath('00_setup.qmd'),\n PosixPath('poems'),\n PosixPath('02_regex.ipynb')]",
-    "crumbs": [
-      "Notes",
-      "Programming",
-      "More Python: Poetry, Lists, Loops"
-    ]
-  },
-  {
-    "objectID": "notes/programming/03_python_plus.html#lists-a-new-data-structure",
-    "href": "notes/programming/03_python_plus.html#lists-a-new-data-structure",
-    "title": "More Python: Poetry, Lists, Loops",
-    "section": "*Lists (a new data structure)",
-    "text": "*Lists (a new data structure)\nThe code above created a “list”, which is, like the name suggests, a list of values.\n\n\npython\n\nhere_list = list(\n    here.glob(pattern = \"*\")\n)\n\nWe can create our own lists by hand, like so:\n\n\npython\n\nmy_list = [\"a\", \"b\", \"c\", \"d\", \"e\"] \n\n\nDoing things with lists\n\nGetting their length\nTo get the length of anything, including lists, len().\n\n\npython\n\nlen(here_list)\n\n7\n\n\n\n\npython\n\nlen(my_list)\n\n5\n\n\n\n\nGetting a value from a list\nTo get a value out of a list in python, we need to “index” it. To get just the first value from a list, we’ll use the index 0.\n\n\npython\n\nhere_list[0]\n\nPosixPath('03_python_plus.ipynb')\n\n\n\n\npython\n\nmy_list[0]\n\n'a'\n\n\nTo get a range of values, we’ll use a “slice” operator :.\n\n\npython\n\nmy_list[0:3]\n\n['a', 'b', 'c']\n\n\n\n\npython\n\nmy_list[1:4]\n\n['b', 'c', 'd']\n\n\n\n\nHow to think about indices\nThe index for 'a' is 0, and the index for 'c' is 2.\n\n\npython\n\nmy_list.index(\"a\")\n\n0\n\n\n\n\npython\n\nmy_list.index(\"c\")\n\n2\n\n\nBut to get out every value between 'a' and 'c', we need to use 0:3.\n\n\npython\n\nmy_list[0:3]\n\n['a', 'b', 'c']\n\n\nThe way to conceptualize these numeric indices is that they come between the values in a list.\n\n\n\nIndex locations\n\n\nWhen we give just a single number as an index, we get back the value immediately to the right of the index.\n\n\n\nSingle value index\n\n\nWhen we give an index slice, we get back every value between the start of the slice and the end.\n\n\n\nSlice indexing\n\n\n\nNegative indexing\nSometimes, you know you’ll want the last, or second to last value from a list, so there are also negative indicies defined.\n\n\n\nNegative indexing\n\n\nThese work in the same way. A single index returns the value immediately to the left, a slice returns the values between the first and the second.\n\n\npython\n\nmy_list[-1]\n\n'e'\n\n\n\n\npython\n\nmy_list[-3:-1]\n\n['c', 'd']\n\n\n\n\npython\n\nmy_list[-2:]\n\n['d', 'e']",
-    "crumbs": [
-      "Notes",
-      "Programming",
-      "More Python: Poetry, Lists, Loops"
-    ]
-  },
-  {
-    "objectID": "notes/programming/03_python_plus.html#reading-in-a-text-file",
-    "href": "notes/programming/03_python_plus.html#reading-in-a-text-file",
-    "title": "More Python: Poetry, Lists, Loops",
-    "section": "Reading in a text file",
-    "text": "Reading in a text file\nI’ve put two poems in the poems directory right next to the current notebook. We can get a list of them by\n\nadding poems/ to the here path\nGlobbing the new path.\n\n\n\npython\n\npoems_dir = here.joinpath(\"poems\")\npoems_files = list(poems_dir.glob(\"*\"))\npoems_files\n\n[PosixPath('poems/the_tiger.txt'), PosixPath('poems/this_is_just_to_say.txt')]\n\n\nLet’s read in poems/this_is_just_to_say.txt.\n\n\npython\n\nplums_path = poems_files[1]\nplums_path\n\nPosixPath('poems/this_is_just_to_say.txt')\n\n\nRight now plums_path just contains information about where the file is. In order to read its contents into python, we need to\n\nOpen it.\nRead it.\nClose it.\n\nWe’ll manage all three steps with the following code.\n\n\npython\n\nplums_poem = plums_path.read_text()\nprint(plums_poem)\n\nThis Is Just To Say\nBy William Carlos Williams\n\nI have eaten\nthe plums\nthat were in\nthe icebox\n\nand which\nyou were probably\nsaving\nfor breakfast\n\nForgive me\nthey were delicious\nso sweet\nand so cold",
-    "crumbs": [
-      "Notes",
-      "Programming",
-      "More Python: Poetry, Lists, Loops"
-    ]
-  },
-  {
-    "objectID": "notes/programming/03_python_plus.html#doing-things-to-strings",
-    "href": "notes/programming/03_python_plus.html#doing-things-to-strings",
-    "title": "More Python: Poetry, Lists, Loops",
-    "section": "Doing things to strings",
-    "text": "Doing things to strings\nRight now, plums_poem is just one long string. When we print it out, we get some nice formatting, but if we look at the unformatted output, you’ll see it’s one long string with newline characters: \\n.\n\n\npython\n\nplums_poem\n\n'This Is Just To Say\\nBy William Carlos Williams\\n\\nI have eaten\\nthe plums\\nthat were in\\nthe icebox\\n\\nand which\\nyou were probably\\nsaving\\nfor breakfast\\n\\nForgive me\\nthey were delicious\\nso sweet\\nand so cold'\n\n\nTo start doing computational linguistics things to the poem, we’ll need to start splitting it up into pieces, like separate lines, or separate words.\n\nUpper and Lower case\nOne thing that can make life a little easier is to “case fold” text data, which we can do with the .lower() and .upper() methods.\n\n\npython\n\nplums_lower = plums_poem.lower()\nprint(plums_lower[0:46])\n\nthis is just to say\nby william carlos williams\n\n\n\n\nSplitting into lines\nWe can also split the poem into separate lines with the .split() method, which will return a list with the poem split by whatever value we give it.\n\n\npython\n\n# split according to newlines\nplums_lines = plums_poem.split(\"\\n\")\nplums_lines\n\n['This Is Just To Say',\n 'By William Carlos Williams',\n '',\n 'I have eaten',\n 'the plums',\n 'that were in',\n 'the icebox',\n '',\n 'and which',\n 'you were probably',\n 'saving',\n 'for breakfast',\n '',\n 'Forgive me',\n 'they were delicious',\n 'so sweet',\n 'and so cold']\n\n\nNow, we can get each individual line by indexing.\n\n\npython\n\nplums_lines[0]\n\n'This Is Just To Say'",
-    "crumbs": [
-      "Notes",
-      "Programming",
-      "More Python: Poetry, Lists, Loops"
-    ]
-  },
-  {
-    "objectID": "notes/programming/03_python_plus.html#looping-through-the-poem",
-    "href": "notes/programming/03_python_plus.html#looping-through-the-poem",
-    "title": "More Python: Poetry, Lists, Loops",
-    "section": "Looping through the poem",
-    "text": "Looping through the poem\nAbove, I ran .split() on the non-case folded poem. What if I wanted to lowercase each line of the poem now, after the fact. We can use a for loop to do this. Let’s build up to it.\n\nfor-loop skeleton\n\n\npython\n\nfor line in plums_lines:\n    myspace_line = \"xXx \" + line + \" xXx\"\n    print(myspace_line)\n\nxXx This Is Just To Say xXx\nxXx By William Carlos Williams xXx\nxXx  xXx\nxXx I have eaten xXx\nxXx the plums xXx\nxXx that were in xXx\nxXx the icebox xXx\nxXx  xXx\nxXx and which xXx\nxXx you were probably xXx\nxXx saving xXx\nxXx for breakfast xXx\nxXx  xXx\nxXx Forgive me xXx\nxXx they were delicious xXx\nxXx so sweet xXx\nxXx and so cold xXx\n\n\nLet’s unpack the first line of the for loop:\nfor line in plums_line:\nThis tells python to take each value in plums_line, assign it to a new variable called line, then do something. After it has done something, it goes and grabs the next value from plums_line, assigns it to a variable called line, and starts over.\n\n\n\n\n\n\nSome common misconceptions\n\n\n\n\nWhat we tell python to name the variable it creates does not affect the way the for loop works. We called it line to make the code readable. If we really wanted to pull out every noun from the poem, and said for noun in plums_lines:, it is not going to pull out every noun.\n\n\n\npython\n\nfor noun in plums_lines[0:2]:\n    print(noun)\n\nThis Is Just To Say\nBy William Carlos Williams\n\n\n\nWhat we do inside of the loop doen’t have to involve the line variable at all.\n\n\n\npython\n\nfor line in plums_lines:\n    print(\"plum\")\n\nplum\nplum\nplum\nplum\nplum\nplum\nplum\nplum\nplum\nplum\nplum\nplum\nplum\nplum\nplum\nplum\nplum\n\n\n\nWhat the for-loop did does not get saved anywhere. The only “state” that gets preserved at all is the final one.\n\n\n\npython\n\nmyspace_line\n\n'xXx and so cold xXx'\n\n\n\n\nThis last point is super important. To save, or remember, what happened inside of a for-loop, you need to do two things.\n\nCreate a variable outside of the loop.\nUpdate the variable inside of the loop.\n\nFor example, if we wanted to get the total number of characters in the peom, we’d need to\n\nCreate a collector variable outside of the loop.\nAdd update its total value inside of the loop.\n\n\n\npython\n\ntotal_chars = 0\n\nprint(f\"The total number of chars is now {total_chars}\")\n\nfor line in plums_lines:\n    line_len = len(line)\n    total_chars = total_chars + line_len\n    print(f\"The total number of chars is now {total_chars}\")\n\nprint(f\"The final number of chars is {total_chars}\")\n\nThe total number of chars is now 0\nThe total number of chars is now 19\nThe total number of chars is now 45\nThe total number of chars is now 45\nThe total number of chars is now 57\nThe total number of chars is now 66\nThe total number of chars is now 78\nThe total number of chars is now 88\nThe total number of chars is now 88\nThe total number of chars is now 97\nThe total number of chars is now 114\nThe total number of chars is now 120\nThe total number of chars is now 133\nThe total number of chars is now 133\nThe total number of chars is now 143\nThe total number of chars is now 162\nThe total number of chars is now 170\nThe total number of chars is now 181\nThe final number of chars is 181\n\n\nThis use of a for-loop makes the “loop” part clearer.\n\n\n\n\n\nstateDiagram\n    state \"for line in lines:\" as for\n    state if_line &lt;&lt;choice&gt;&gt;\n    state fork &lt;&lt;fork&gt;&gt;\n    state fork1 &lt;&lt;fork&gt;&gt;\n    [*] --&gt; fork1\n    fork1 --&gt; total_chars: set to 0\n    fork1 --&gt; for\n    for --&gt; if_line\n    if_line --&gt; fork: If another line\n    if_line --&gt; [*]: If no more lines\n    fork --&gt; total_chars: +len(line)\n    fork --&gt; for\n\n\n\n\n\n\nTo actually lowercase the poem now, we need to\n\nCreate an empty list outside of the loop.\nAdd the lowercased line to this list inside of the loop.\n\n\n\npython\n\nlower_lines = []\n\nfor line in plums_lines:\n    lower_lines.append(\n        line.lower()\n    )\n\nlower_lines\n\n['this is just to say',\n 'by william carlos williams',\n '',\n 'i have eaten',\n 'the plums',\n 'that were in',\n 'the icebox',\n '',\n 'and which',\n 'you were probably',\n 'saving',\n 'for breakfast',\n '',\n 'forgive me',\n 'they were delicious',\n 'so sweet',\n 'and so cold']\n\n\n\n\nFiltering the poem\nThere are a few lines of the poem that are blank and have a length of 0.\n\n\npython\n\nprint(lower_lines[2])\n\n\n\n\n\n\npython\n\nlen(lower_lines[2])\n\n0\n\n\nWe can create a new list without these lines by\n\nCreating an empty list outside of the loop.\nAdding lines to that list inside the loop, only if they have a length greater than 0.\n\nThis introduces an if control block.\n\n\npython\n\nfull_lines = []\n\nfor line in lower_lines:\n    if len(line) &gt; 0:\n        full_lines.append(line)\n    else:\n        print(\"dumped an empty line\")\n\ndumped an empty line\ndumped an empty line\ndumped an empty line\n\n\n\n\npython\n\nfull_lines\n\n['this is just to say',\n 'by william carlos williams',\n 'i have eaten',\n 'the plums',\n 'that were in',\n 'the icebox',\n 'and which',\n 'you were probably',\n 'saving',\n 'for breakfast',\n 'forgive me',\n 'they were delicious',\n 'so sweet',\n 'and so cold']\n\n\nThe if block:\n\nChecks to see if the logical statement is True or False.\nIf True, it executes the code inside.\n\nIn this case, I’ve also included an else block. This executes its code if the if block above was False.",
-    "crumbs": [
-      "Notes",
-      "Programming",
-      "More Python: Poetry, Lists, Loops"
-    ]
-  },
-  {
-    "objectID": "notes/programming/03_python_plus.html#nesting-loops",
-    "href": "notes/programming/03_python_plus.html#nesting-loops",
-    "title": "More Python: Poetry, Lists, Loops",
-    "section": "Nesting loops",
-    "text": "Nesting loops\nWe can nest for loops and if statements to an arbitrary level, but good programming practice tries to keep it to a minumum. For example, to get every word in the poem, based on where the spaces are, we can\n\nCreate an empty words list outside of a loop.\nSplit each line using spaces.\nStart a loop over that list.\nUpdate the words list inside this loop.\n\n\n\npython\n\nall_words = []\n\nfor line in full_lines:\n    words = line.split(\" \")\n    for word in words:\n        all_words.append(word)\n\nprint(all_words[0:19])\n\n['this', 'is', 'just', 'to', 'say', 'by', 'william', 'carlos', 'williams', 'i', 'have', 'eaten', 'the', 'plums', 'that', 'were', 'in', 'the', 'icebox']",
-    "crumbs": [
-      "Notes",
-      "Programming",
-      "More Python: Poetry, Lists, Loops"
-    ]
-  },
-  {
-    "objectID": "notes/programming/03_python_plus.html#a-slightly-nicer-way",
-    "href": "notes/programming/03_python_plus.html#a-slightly-nicer-way",
-    "title": "More Python: Poetry, Lists, Loops",
-    "section": "A slightly nicer way",
-    "text": "A slightly nicer way\nA slightly nicer way to do some of the operations we worked on here is with “list comprehensions”. These are special instructions to build a list that wind up saving us a bit of typing.\nHere’s the code we used to make all of the lines lowercase again.\n\n\npython\n\nlower_lines = []\n\nfor line in plums_lines:\n    lower_lines.append(line.lower())\n\nWith a list comprehension, we could rewrite this for-loop like so:\n\n\npython\n\nlower_lines2 = [\n    line.lower() \n    for line in plums_lines\n]\nlower_lines2\n\n['this is just to say',\n 'by william carlos williams',\n '',\n 'i have eaten',\n 'the plums',\n 'that were in',\n 'the icebox',\n '',\n 'and which',\n 'you were probably',\n 'saving',\n 'for breakfast',\n '',\n 'forgive me',\n 'they were delicious',\n 'so sweet',\n 'and so cold']\n\n\nWe can even include the empty line filtering into the list comprehension.\n\n\npython\n\nfull_lines2 = [\n    line.lower() \n    for line in plums_lines \n    if len(line)&gt;0\n]\n\nfull_lines2\n\n['this is just to say',\n 'by william carlos williams',\n 'i have eaten',\n 'the plums',\n 'that were in',\n 'the icebox',\n 'and which',\n 'you were probably',\n 'saving',\n 'for breakfast',\n 'forgive me',\n 'they were delicious',\n 'so sweet',\n 'and so cold']\n\n\nNested for statements also work inside of list comprehensions.\n\n\npython\n\nall_words2 = [\n    word\n    for line in full_lines2\n    for word in line.split(\" \")\n]\n\nall_words[0:19]\n\n['this',\n 'is',\n 'just',\n 'to',\n 'say',\n 'by',\n 'william',\n 'carlos',\n 'williams',\n 'i',\n 'have',\n 'eaten',\n 'the',\n 'plums',\n 'that',\n 'were',\n 'in',\n 'the',\n 'icebox']",
-    "crumbs": [
-      "Notes",
-      "Programming",
-      "More Python: Poetry, Lists, Loops"
-    ]
-  },
-  {
-    "objectID": "notes/programming/00_setup.html",
-    "href": "notes/programming/00_setup.html",
-    "title": "Setup Notes",
-    "section": "",
-    "text": "We’ll need to get our systems setup to work properly with the tools we’ll be using this semester.\n\n\n\n\n\n\nIf you ware using a windows computer, I’ll ask you to install Windows Subsystem for Linux like so:\n\nFollow the tutorial here for enabling and installing WSL\nInstall VS Code\nWork through the first section of this tutorial, stopping after you connect to WSL\n\n\n\n\n\n\n\n\nInstall VS Code\n\n\n\n\n\n\n\n\n\nWe’ll be using a program called pyenv to manage the versions of python we use. To install pyenv, open the VSCode Command Palette (with ) which will open the command line interface. Then,\n\ncopy this line of code code from this page ()\n\n\nbash\n\ncurl https://pyenv.run | bash\n\nPaste it into the terminal (()\nHit enter.\n\nOnce that has successfully finished:\n\n\n\n\n\n\n\nRun this\n\n\nbash\n\nopen ~/.zshrc\n\n\nIf you get an error.\n\n\nRun this\n\n\nbash\n\ntouch ~/.zshrc\nopen ~/.zshrc\n\n\n\n\n\n\n\n\nRun this\n\n\nbash\n\nopen ~/.bashrc\n\n\nIf you get an error\n\n\nRun ths\n\n\nbash\n\ntouch ~/.bashrc\nopen ~/.bashrc\n\n\n\n\n\n\nPaste the following into the window that opens.\n\n\nsh\n\nexport PYENV_ROOT=\"$HOME/.pyenv\"\n[[ -d $PYENV_ROOT/bin ]] && export PATH=\"$PYENV_ROOT/bin:$PATH\"\neval \"$(pyenv init -)\"\n\nSave it\n\n\n\n\nClose and reopen the terminal window\nCopy-Paste the following lines of code\n\n\nbash\n\npyenv install 3.11\npyenv global 3.11\npyenv virtualenv 3.11 Lin511\npyenv activate Lin511\nThis will have installed a recent version of python onto your computer, and created a “virtual environment” for the class.\n\n\n\n\n\n\n\nMake sure you change the email and name to the email and username you use for Github!\n\nIn the terminal, set your git email address:\n\n\nbash\n\ngit config --global user.email \"you@example.com\"\n\nSet your username.\n\n\nbash\n\ngit config --global user.name \"Your Name\"\nThen, follow these tutorials from github:\n\nGenerating a new SSH Key\nAdding your ssh key to github",
-    "crumbs": [
-      "Notes",
-      "Programming",
-      "Setup Notes"
-    ]
-  },
-  {
-    "objectID": "notes/programming/00_setup.html#setup",
-    "href": "notes/programming/00_setup.html#setup",
-    "title": "Setup Notes",
-    "section": "",
-    "text": "We’ll need to get our systems setup to work properly with the tools we’ll be using this semester.\n\n\n\n\n\n\nIf you ware using a windows computer, I’ll ask you to install Windows Subsystem for Linux like so:\n\nFollow the tutorial here for enabling and installing WSL\nInstall VS Code\nWork through the first section of this tutorial, stopping after you connect to WSL\n\n\n\n\n\n\n\n\nInstall VS Code\n\n\n\n\n\n\n\n\n\nWe’ll be using a program called pyenv to manage the versions of python we use. To install pyenv, open the VSCode Command Palette (with ) which will open the command line interface. Then,\n\ncopy this line of code code from this page ()\n\n\nbash\n\ncurl https://pyenv.run | bash\n\nPaste it into the terminal (()\nHit enter.\n\nOnce that has successfully finished:\n\n\n\n\n\n\n\nRun this\n\n\nbash\n\nopen ~/.zshrc\n\n\nIf you get an error.\n\n\nRun this\n\n\nbash\n\ntouch ~/.zshrc\nopen ~/.zshrc\n\n\n\n\n\n\n\n\nRun this\n\n\nbash\n\nopen ~/.bashrc\n\n\nIf you get an error\n\n\nRun ths\n\n\nbash\n\ntouch ~/.bashrc\nopen ~/.bashrc\n\n\n\n\n\n\nPaste the following into the window that opens.\n\n\nsh\n\nexport PYENV_ROOT=\"$HOME/.pyenv\"\n[[ -d $PYENV_ROOT/bin ]] && export PATH=\"$PYENV_ROOT/bin:$PATH\"\neval \"$(pyenv init -)\"\n\nSave it\n\n\n\n\nClose and reopen the terminal window\nCopy-Paste the following lines of code\n\n\nbash\n\npyenv install 3.11\npyenv global 3.11\npyenv virtualenv 3.11 Lin511\npyenv activate Lin511\nThis will have installed a recent version of python onto your computer, and created a “virtual environment” for the class.\n\n\n\n\n\n\n\nMake sure you change the email and name to the email and username you use for Github!\n\nIn the terminal, set your git email address:\n\n\nbash\n\ngit config --global user.email \"you@example.com\"\n\nSet your username.\n\n\nbash\n\ngit config --global user.name \"Your Name\"\nThen, follow these tutorials from github:\n\nGenerating a new SSH Key\nAdding your ssh key to github",
-    "crumbs": [
-      "Notes",
-      "Programming",
-      "Setup Notes"
+      "Concepts",
+      "Git Errors"
     ]
   }
 ]
