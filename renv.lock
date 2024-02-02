@@ -87,6 +87,20 @@
       ],
       "Hash": "ae6cbbe1492f4de79c45fce06f967ce8"
     },
+    "RcppArmadillo": {
+      "Package": "RcppArmadillo",
+      "Version": "0.12.6.6.1",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R",
+        "Rcpp",
+        "methods",
+        "stats",
+        "utils"
+      ],
+      "Hash": "d2b60e0a15d73182a3a766ff0a7d0d7f"
+    },
     "RcppEigen": {
       "Package": "RcppEigen",
       "Version": "0.3.3.9.4",
@@ -306,6 +320,17 @@
       ],
       "Hash": "3f038e5ac7f41d4ac41ce658c85e3042"
     },
+    "coda": {
+      "Package": "coda",
+      "Version": "0.19-4.1",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R",
+        "lattice"
+      ],
+      "Hash": "af436915c590afc6fffc3ce3a5be1569"
+    },
     "colorspace": {
       "Package": "colorspace",
       "Version": "2.1-0",
@@ -342,13 +367,31 @@
     },
     "cpp11": {
       "Package": "cpp11",
-      "Version": "0.4.6",
+      "Version": "0.4.7",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R"
       ],
-      "Hash": "707fae4bbf73697ec8d85f9d7076c061"
+      "Hash": "5a295d7d963cc5035284dcdbaf334f4e"
+    },
+    "crandep": {
+      "Package": "crandep",
+      "Version": "0.3.5",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R",
+        "Rcpp",
+        "RcppArmadillo",
+        "dplyr",
+        "igraph",
+        "rvest",
+        "stats",
+        "stringr",
+        "xml2"
+      ],
+      "Hash": "df636db6d2845cf0139716a829dfdb26"
     },
     "crayon": {
       "Package": "crayon",
@@ -636,6 +679,22 @@
       ],
       "Hash": "49b9b1acf1390eee4a5f0c707ede536a"
     },
+    "ggnetwork": {
+      "Package": "ggnetwork",
+      "Version": "0.5.12",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "ggplot2",
+        "ggrepel",
+        "igraph",
+        "network",
+        "sna",
+        "utils"
+      ],
+      "Hash": "3affb08a7edf1a72dfc6b78acb6f17d7"
+    },
     "ggplot2": {
       "Package": "ggplot2",
       "Version": "3.4.4",
@@ -660,6 +719,22 @@
         "withr"
       ],
       "Hash": "313d31eff2274ecf4c1d3581db7241f9"
+    },
+    "ggrepel": {
+      "Package": "ggrepel",
+      "Version": "0.9.5",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R",
+        "Rcpp",
+        "ggplot2",
+        "grid",
+        "rlang",
+        "scales",
+        "withr"
+      ],
+      "Hash": "cc3361e234c4a5050e29697d675764aa"
     },
     "glue": {
       "Package": "glue",
@@ -884,6 +959,28 @@
       ],
       "Hash": "99df65cfef20e525ed38c3d2577f7190"
     },
+    "igraph": {
+      "Package": "igraph",
+      "Version": "2.0.1.1",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "Matrix",
+        "R",
+        "cli",
+        "cpp11",
+        "grDevices",
+        "graphics",
+        "lifecycle",
+        "magrittr",
+        "methods",
+        "pkgconfig",
+        "rlang",
+        "stats",
+        "utils"
+      ],
+      "Hash": "fb2999614d40fe7fd61cf569b66a2dbc"
+    },
     "isoband": {
       "Package": "isoband",
       "Version": "0.2.7",
@@ -1097,6 +1194,32 @@
         "methods"
       ],
       "Hash": "6dfe8bf774944bd5595785e3229d8771"
+    },
+    "network": {
+      "Package": "network",
+      "Version": "1.18.2",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R",
+        "magrittr",
+        "statnet.common",
+        "stats",
+        "tibble",
+        "utils"
+      ],
+      "Hash": "5e4fda9d3ed359d1b155d46a36681191"
+    },
+    "ngram": {
+      "Package": "ngram",
+      "Version": "3.2.3",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R",
+        "methods"
+      ],
+      "Hash": "287851d4dbc46a419aea93921afed7da"
     },
     "nlme": {
       "Package": "nlme",
@@ -1518,6 +1641,34 @@
         "stringr"
       ],
       "Hash": "3838071b66e0c566d55cc26bd6e27bf4"
+    },
+    "sna": {
+      "Package": "sna",
+      "Version": "2.7-2",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R",
+        "network",
+        "statnet.common",
+        "utils"
+      ],
+      "Hash": "050b4098cef7fa1827c5c199559fde1f"
+    },
+    "statnet.common": {
+      "Package": "statnet.common",
+      "Version": "4.9.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "coda",
+        "methods",
+        "parallel",
+        "tools",
+        "utils"
+      ],
+      "Hash": "be35aebf512f7b31de12200d5c3d1d67"
     },
     "stringi": {
       "Package": "stringi",
