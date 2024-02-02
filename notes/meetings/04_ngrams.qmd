@@ -10,6 +10,8 @@ knitr:
     message: false
     echo: false
 bibliography: references.bib
+categories:
+  - compling
 ---
 
 So, in our notes on [finite state automata](01_fsm.qmd) and [push-down automata](02_pda.qmd) that since natural language has bracket matching patterns, and maybe even crossing dependencies, that it's more complex than a "regular" language, and can't really be parsed with a finite state automaton.
@@ -22,6 +24,11 @@ library(tidyverse)
 library(ngram)
 library(ggrepel)
 library(khroma)
+library(network)
+library(sna)
+library(crandep)
+library(ggnetwork)
+library(igraph)
 knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
 ```
 
@@ -30,6 +37,133 @@ import re
 import gutenbergpy.textget
 from nltk.tokenize import word_tokenize
 from collections import Counter
+```
+
+## Words in
+
+```{python}
+raw_book = gutenbergpy.textget.get_text_by_id(2701) # with headers
+moby_dick_byte = gutenbergpy.textget.strip_headers(raw_book) # without headers
+moby_dick = moby_dick_byte.decode("utf-8").lower() 
+```
+
+```{python}
+moby_dick_tokens = word_tokenize(moby_dick)
+moby_dick_words = [tok for tok in moby_dick_tokens if re.match(r"\w", tok)]
+```
+
+```{r}
+tibble(word = py$moby_dick_words,
+       next_word = lead(word)) |> 
+  count(word, next_word) |> 
+  arrange(desc(n)) ->
+  bigrams
+```
+
+```{r}
+bigrams |> 
+  filter(n >= 5) |> 
+  rename(
+    from = word,
+    to = next_word
+  ) |> 
+  df_to_graph() |> 
+  ggnetwork(layout = with_drl(), arrow.gap = 0)->
+  bigram_network
+```
+
+The first sentence of Moby Dick is
+
+> Call me Ishmael.
+
+We could try representing this as a finite state automaton like so:
+
+```{mermaid}
+stateDiagram
+	direction LR
+
+	[*] --> call: call
+	call --> me: me
+	me --> ishmael: ishmael
+	ishmael --> [*]
+```
+
+But, this is *far* from a complete model of the whole book *Moby Dick*. It would only work if the entire book was just "Call me Ishmael" over and over again.
+
+To enrich the FSA, we could add all of the other words that could follow *"call".*
+
+```{mermaid}
+stateDiagram
+	direction LR
+
+	[*] --> call: call
+	call --> call: call
+	call --> it: it
+	call --> a: a
+	call --> me: me
+	call --> him: him
+	call --> ...
+	call --> [*]
+
+	me --> ishmael: ishmael
+	me --> call: call
+
+	ishmael --> [*]
+```
+
+But, lots of other words could *also* follow *"me"*. And more words could also follow *"Ishmael"*
+
+```{mermaid}
+stateDiagram
+	direction LR
+
+	[*] --> call: call
+	call --> call: call
+	call --> it: it
+	call --> a: a
+	call --> me: me
+	call --> him: him
+	call --> ...
+	call --> [*]
+
+	me --> me: me
+	me --> call: call
+	me --> that: that
+	me --> and: and
+	me --> ishmael: ishmael
+	me --> to: to
+	me --> ...
+	me --> [*]
+
+	ishmael --> ishmael: ishmael
+	ishmael --> me: me
+	ishmael --> can: can
+	ishmael --> said: said
+	ishmael --> ...
+	ishmael --> [*]
+```
+
+If we fully fleshed out this diagram with *all*[^1] of words in *Moby Dick*, it would look like this
+
+[^1]: well, *almost* all.
+
+```{r}
+#| label: "fig-moby_dick_network"
+#| fig-width: 5
+#| fig-height: 5
+#| fig-cap: "Bigram network for Moby Dick, where $C(w_1, w_2)\\ge 5$"
+#| out-width: "80%"
+#| fig-align: center
+ggplot(bigram_network, 
+       aes(x = x, y = y, xend = xend, yend = yend))+
+  geom_edges(
+    arrow = arrow(type = "closed", length = unit(0.1, "cm")),
+    linewidth = 0.1,
+    alpha = 0.5
+    )+
+  geom_nodes(size = 0.1)+
+  theme_void()+
+  theme(aspect.ratio = 1)
 ```
 
 ## Language Prediction
@@ -84,9 +218,9 @@ $$
 P(X_1X_2X_3) = P(X_1)P(X_2|X_1)P(X_3|X_1X_2)
 $$
 
-Or, to use a phrase as an example:[^1]
+Or, to use a phrase as an example:[^2]
 
-[^1]: Credit here to Kyle Gorman for introducing me to this example.
+[^2]: Credit here to Kyle Gorman for introducing me to this example.
 
 $$
 P(\text{du hast mich gefragt})=P(\text{du})P(\text{hast}|\text{du})P(\text{mich}|\text{du hast})P(\text{gefragt}|\text{du hast mich})
@@ -95,17 +229,6 @@ $$
 ## Data Sparsity
 
 The problem we face is that, even with the whole internet to search, very long phrases like *"I could tell he was angry by the tone of his"* are relatively rare!
-
-```{python}
-raw_book = gutenbergpy.textget.get_text_by_id(2701) # with headers
-moby_dick_byte = gutenbergpy.textget.strip_headers(raw_book) # without headers
-moby_dick = moby_dick_byte.decode("utf-8").lower() 
-```
-
-```{python}
-moby_dick_tokens = word_tokenize(moby_dick)
-moby_dick_words = [tok for tok in moby_dick_tokens if re.match(r"\w", tok)]
-```
 
 If we look at *Moby Dick*, using a standard tokenizer (more on that later) we wind up with `r scales::label_comma()(length(py$moby_dick_words))` words in total. But not every word is equally likely.
 
