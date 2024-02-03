@@ -14,7 +14,7 @@ categories:
   - compling
 ---
 
-So, in our notes on [finite state automata](01_fsm.qmd) and [push-down automata](02_pda.qmd) that since natural language has bracket matching patterns, and maybe even crossing dependencies, that it's more complex than a "regular" language, and can't really be parsed with a finite state automaton.
+So, in our notes on [finite state automata](01_fsm.qmd) and [push-down automata](02_pda.qmd) we concluded that since natural language has bracket matching patterns, and maybe even crossing dependencies, that it's more complex than a "regular" language, and can't really be parsed with a finite state automaton.
 
 ngram language modelling asks the question: But what if we tried really hard?
 
@@ -29,6 +29,8 @@ library(sna)
 library(crandep)
 library(ggnetwork)
 library(igraph)
+library(gt)
+library(gtExtras)
 knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
 ```
 
@@ -39,7 +41,7 @@ from nltk.tokenize import word_tokenize
 from collections import Counter
 ```
 
-## Words in
+## States and Words
 
 ```{python}
 raw_book = gutenbergpy.textget.get_text_by_id(2701) # with headers
@@ -58,6 +60,13 @@ tibble(word = py$moby_dick_words,
   count(word, next_word) |> 
   arrange(desc(n)) ->
   bigrams
+
+tibble(word = py$moby_dick_words,
+       next_word = lead(word), 
+       next_next_word = lead(next_word)) |> 
+  count(word, next_word, next_next_word) |> 
+  arrange(desc(n)) ->
+  trigrams
 ```
 
 ```{r}
@@ -72,7 +81,7 @@ bigrams |>
   bigram_network
 ```
 
-The first sentence of Moby Dick is
+The first sentence of Moby Dick is, famously,
 
 > Call me Ishmael.
 
@@ -164,6 +173,188 @@ ggplot(bigram_network,
   geom_nodes(size = 0.1)+
   theme_void()+
   theme(aspect.ratio = 1)
+```
+
+### \*grams
+
+The "model" of word sequences is called an "ngram" model or more specifically a "bigram" model.
+
+| Words in the current state | Words in input | Total Words | Name    |
+|----------------------------|----------------|-------------|---------|
+| 1                          | 1              | 2           | bigram  |
+| 2                          | 1              | 3           | trigram |
+| 3                          | 1              | 4           | 4-gram  |
+| 4                          | 1              | 5           | 5-gram  |
+|                            |                |             | etc     |
+
+: How we name \*gram models
+
+We can expand the context of the bigram model to a trigram model, which would look something like this
+
+```{mermaid}
+stateDiagram
+  direction LR
+  
+  state "_ call" as _c
+  state "call me" as cm
+  state "me Ishmael" as mi
+  
+  [*] --> _
+  _ --> _c: call
+  _c --> cm: me
+  cm --> mi: Ishmael
+  mi --> [*]
+  
+```
+
+But, again, even for this small vocabulary, this *total* number of states is incomplete. If we wired up *all* of the logical transitions they'd look like this [ilithid](https://en.wikipedia.org/wiki/Illithid) monstrosity.
+
+```{mermaid}
+stateDiagram
+	direction LR
+
+	state "_ call" as _c
+	state "_ me" as _m
+	state "_ Ishmael" as _i
+	
+	state "call me" as cm
+	state "call call" as cc
+	state "call Ishmael" as ci
+
+	state "me Ishmael" as mi
+	state "me call" as mc
+	state "me me" as mm
+
+	state "Ishmael call" as ic
+	state "Ishmael Ishmael" as ii
+	state "Ishmael me" as im
+
+	[*] --> _: _
+	_ --> _m: me
+	_ --> _c: call
+	_ --> _i: Ishmael
+	
+
+	_c --> cm: me
+	_c --> cc: call
+	_c --> ci: Ishmael
+
+	cc --> cc: call
+	cc --> ci: Ishmael
+	cc --> cm: me
+
+	ci --> ii: Ishmael
+	ci --> im: me
+	ci --> ic: call
+
+	cm --> mi: Ishmael
+	cm --> mm: me
+	cm --> mc: call
+
+	_m --> mc: call
+	_m --> mm: me
+	_m --> mi: Ishmael
+	
+	mm --> mm: me
+	mm --> mc: call
+	mm --> mi: Ishmael
+
+	mi --> ii: Ishmael
+	mi --> ic: call
+	mi --> im: me
+
+	mc --> cm: me
+	mc --> ci: Ishmael
+	mc --> cc: call
+
+
+
+	_i --> ic: call
+	_i --> im: me
+	_i --> ii: Ishmael
+
+	ic --> cc: call
+	ic --> cm: me
+	ic --> ci: Ishmael
+
+	im --> mi: Ishmael
+	im --> mc: call
+	im --> mm: me
+
+	ii --> im: me
+	ii --> ic: call
+	ii --> ii: Ishmael
+	
+```
+
+### Probabilistic ngrams
+
+```{r}
+bigrams |> 
+  filter(word %in% c("call", "me", "ishmael"),
+         next_word %in% c("call", "me", "ishmael")) |> 
+  mutate(word = factor(word, levels = c("call", "me", "ishmael"))) |> 
+  complete(word, next_word, fill = list(n = 0)) |> 
+  pivot_wider(
+    names_from = word, 
+    values_from = n
+  ) |> 
+  relocate(
+    me, .after = call 
+  ) |> 
+  gt(
+    rowname_col = "next_word", 
+  ) |> 
+  tab_spanner(
+    label = "word", columns = 2:4
+  ) |> 
+  tab_stubhead("next word") |> 
+  gt_color_rows(call:ishmael, domain = 1:3)
+```
+
+```{mermaid}
+%% fig-align: center
+flowchart LR
+	c["call"] ==> m["me"]
+	m --> c
+	c --> i["Ishmael"]
+```
+
+```{r}
+bigrams |> 
+  filter(word %in% c("call", "me", "ishmael")) |> 
+  arrange(desc(n)) |> 
+  mutate(
+    next_word = factor(next_word) |> 
+      fct_reorder(.x = -n, .fun= median)
+    )->
+  cmi_bigrams
+
+lower_word = levels(cmi_bigrams$next_word)[-(1:10)]
+
+cmi_bigrams |> 
+  mutate(next_word_lump = fct_collapse(next_word, `<other>` = lower_word)) |> 
+  summarise(
+    n = sum(n),
+    .by = c(word, next_word_lump)
+  ) |> 
+  pivot_wider(
+    names_from = word,
+    values_from = n,
+    values_fill = 0
+  ) |> 
+  gt(rowname_col = "next_word_lump")  |> 
+    gt_color_rows(
+      -next_word_lump,
+      domain = 1:421
+    ) |> 
+    tab_spanner(
+      "word",
+      columns = 2:4
+    ) |> 
+    tab_stubhead(
+      "next word"
+    )
 ```
 
 ## Language Prediction
