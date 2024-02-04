@@ -11,62 +11,1612 @@
 <description></description>
 <language>en</language>
 <generator>quarto-1.4.549</generator>
-<lastBuildDate>Mon, 05 Feb 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 06 Feb 2024 00:00:00 GMT</lastBuildDate>
 <item>
-  <title>ngrams</title>
+  <title>Tokenization</title>
   <dc:creator>Josef Fruehwald</dc:creator>
-  <link>https://lin511-2024.github.io/notes/meetings/04_ngrams.html</link>
+  <link>https://lin511-2024.github.io/notes/meetings/03_tokenization.html</link>
   <description><![CDATA[ 
 
 
 
 
-<p>So, in our notes on <a href="../../notes/meetings/01_fsm.html">finite state automata</a> and <a href="../../notes/meetings/02_pda.html">push-down automata</a> that since natural language has bracket matching patterns, and maybe even crossing dependencies, that it’s more complex than a “regular” language, and can’t really be parsed with a finite state automaton.</p>
-<p>ngram language modelling asks the question: But what if we tried really hard?</p>
+<div class="cell">
+
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+A nice token printer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div class="cell">
 <div class="langname">
-<pre class="langname">r</pre>
+<pre class="langname">python</pre>
 </div>
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">library</span>(reticulate)</span></code></pre></div>
+font-style: inherit;">def</span> wrap_print(tokens, width <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>):</span>
+<span id="cb1-2">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> idx, token <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">enumerate</span>(tokens):</span>
+<span id="cb1-3">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"'</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>token<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'"</span>, end <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\t</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb1-4">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> (idx<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%</span> width <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:</span>
+<span id="cb1-5">      <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>)</span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+<section id="lesson-1-data-is-messy" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="lesson-1-data-is-messy">Lesson 1: Data is Messy</h2>
+<section id="headers-etc." class="level3">
+<h3 class="anchored" data-anchor-id="headers-etc.">Headers, etc.</h3>
+<p>If you go take a look at the plain-text version of <a href="https://www.gutenberg.org/cache/epub/2701/pg2701.txt">Moby Dick on Project Gutenberg</a>, you’ll see that it starts out with the following block of text:</p>
+<div class="codebox">
+<div class="langname">
+<pre class="langname">txt</pre>
+</div>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb2-1">The Project Gutenberg eBook of Moby Dick; Or, The Whale</span>
+<span id="cb2-2">    </span>
+<span id="cb2-3">This ebook is for the use of anyone anywhere in the United States and</span>
+<span id="cb2-4">most other parts of the world at no cost and with almost no restrictions</span>
+<span id="cb2-5">whatsoever. You may copy it, give it away or re-use it under the terms</span>
+<span id="cb2-6">of the Project Gutenberg License included with this ebook or online</span>
+<span id="cb2-7">at www.gutenberg.org. If you are not located in the United States,</span>
+<span id="cb2-8">you will have to check the laws of the country where you are located</span>
+<span id="cb2-9">before using this eBook.</span>
+<span id="cb2-10"></span>
+<span id="cb2-11">Title: Moby Dick; Or, The Whale</span>
+<span id="cb2-12"></span>
+<span id="cb2-13"></span>
+<span id="cb2-14">Author: Herman Melville</span>
+<span id="cb2-15"></span>
+<span id="cb2-16">Release date: July 1, 2001 [eBook #2701]</span>
+<span id="cb2-17">                Most recently updated: August 18, 2021</span>
+<span id="cb2-18"></span>
+<span id="cb2-19">Language: English</span>
+<span id="cb2-20"></span>
+<span id="cb2-21"></span>
+<span id="cb2-22"></span>
+<span id="cb2-23">*** START OF THE PROJECT GUTENBERG EBOOK MOBY DICK; OR, THE WHALE ***</span></code></pre></div>
+</div>
+<p>And if you scroll to the very bottom of the file, you’ll also find a <em>very</em> long block of text describing the Project Gutenberg License. If we wanted to analyze the text of <em>Moby Dick</em>, we’d have to make sure to remove these headers and footers appropriately.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Header removal
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>I’ve been using <code>gutenbergpy</code> to get text from project Gutenberg, which has a special function <code>gutenbergpy.textget.strip_headers()</code> to handily remove these headers.</p>
+</div>
+</div>
+</div>
+<p>Similarly, if you wanted to analyze the text of the course notes, and you downloaded the html page, on each page you’d be faced with a <em>long</em> header looking like this:</p>
+<div class="codebox">
+<div class="langname">
+<pre class="langname">html</pre>
+</div>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb3-1">!DOCTYPE html&gt;</span>
+<span id="cb3-2"><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&lt;</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">html</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;"> xmlns</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"http://www.w3.org/1999/xhtml"</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;"> lang</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"en"</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;"> xml:lang</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"en"</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;&lt;</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">head</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span></span>
+<span id="cb3-3"></span>
+<span id="cb3-4"><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&lt;</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">meta</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;"> charset</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"utf-8"</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span></span>
+<span id="cb3-5"><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&lt;</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">meta</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;"> name</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"generator"</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;"> content</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"quarto-1.4.549"</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span></span>
+<span id="cb3-6"></span>
+<span id="cb3-7"><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&lt;</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">meta</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;"> name</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"viewport"</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;"> content</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"width=device-width, initial-scale=1.0, user-scalable=yes"</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span></span>
+<span id="cb3-8"></span>
+<span id="cb3-9"><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&lt;</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">meta</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;"> name</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"author"</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;"> content</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Josef Fruehwald"</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span></span>
+<span id="cb3-10"><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&lt;</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">meta</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;"> name</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"dcterms.date"</span><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;"> content</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2024-01-16"</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span></span>
+<span id="cb3-11"></span>
+<span id="cb3-12"><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&lt;</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">title</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span>Lin511-2024 - Regular Languages and Finite State Machines<span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&lt;/</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">title</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span></span>
+<span id="cb3-13"><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&lt;</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">style</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span></span>
+<span id="cb3-14">code{<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">white-space</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">pre-wrap</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span>}</span>
+<span id="cb3-15">span<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.smallcaps</span>{<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">font-variant</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">small-caps</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span>}</span>
+<span id="cb3-16">div<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.columns</span>{<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">display</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">flex</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">gap</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">min(</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">vw</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.5</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">em</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">)</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span>}</span>
+<span id="cb3-17">div<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.column</span>{<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">flex</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">auto</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">overflow-x</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">auto</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span>}</span>
+<span id="cb3-18">div<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.hanging-indent</span>{<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">margin-left</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.5</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">em</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">text-indent</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">-1.5</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">em</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span>}</span>
+<span id="cb3-19">ul<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.task-list</span>{<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">list-style</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">none</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span>}</span>
+<span id="cb3-20">ul<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.task-list</span> li input<span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">[</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">type</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"checkbox"</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">]</span> {</span>
+<span id="cb3-21">  <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">width</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">em</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb3-22">  <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">margin</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">em</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.2</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">em</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">-1</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">em</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */</span> </span>
+<span id="cb3-23">  <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">vertical-align</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">middle</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb3-24">}</span>
+<span id="cb3-25"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/* CSS for syntax highlighting */</span></span>
+<span id="cb3-26">pre <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> code<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.sourceCode</span> { <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">white-space</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">pre</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">position</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">relative</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> }</span>
+<span id="cb3-27">pre <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> code<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.sourceCode</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> span { <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">line-height</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.25</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> }</span>
+<span id="cb3-28">pre <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> code<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.sourceCode</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> span<span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:empty</span> { <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">height</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.2</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">em</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> }</span>
+<span id="cb3-29"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.sourceCode</span> { <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">overflow</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">visible</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> }</span>
+<span id="cb3-30">code<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.sourceCode</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> span { <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">color</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">inherit</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">text-decoration</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">inherit</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> }</span>
+<span id="cb3-31">div<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.sourceCode</span> { <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">margin</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">em</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> }</span>
+<span id="cb3-32">pre<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.sourceCode</span> { <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">margin</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> }</span>
+<span id="cb3-33"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">@media</span> <span class="an" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">screen</span> {</span>
+<span id="cb3-34">div<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.sourceCode</span> { <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">overflow</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">auto</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> }</span>
+<span id="cb3-35">}</span>
+<span id="cb3-36"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">@media</span> <span class="an" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">print</span> {</span>
+<span id="cb3-37">pre <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> code<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.sourceCode</span> { <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">white-space</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">pre-wrap</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> }</span>
+<span id="cb3-38">pre <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> code<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.sourceCode</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> span { <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">text-indent</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">-5</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">em</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">padding-left</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">em</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> }</span>
+<span id="cb3-39">}</span>
+<span id="cb3-40">pre<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.numberSource</span> code</span>
+<span id="cb3-41">  { <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">counter-reset</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">source-line 0</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> }</span>
+<span id="cb3-42">pre<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.numberSource</span> code <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> span</span>
+<span id="cb3-43">  { <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">position</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">relative</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">left</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">-4</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">em</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">counter-increment</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">source-line</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> }</span>
+<span id="cb3-44">pre<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.numberSource</span> code <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> span <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> a<span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:first-child::before</span></span>
+<span id="cb3-45">  { <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">content</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">counter(</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">source-line</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">)</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb3-46">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">position</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">relative</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">left</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">-1</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">em</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">text-align</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">right</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">vertical-align</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">baseline</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb3-47">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">border</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">none</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">display</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">inline-block</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb3-48">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-webkit-touch-callout</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">none</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-webkit-user-select</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">none</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb3-49">    -khtml-user-select<span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">none</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-moz-user-select</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">none</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb3-50">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">-ms-user-select</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">none</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">user-select</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">none</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb3-51">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">padding</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">px</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">width</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">em</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb3-52">  }</span>
+<span id="cb3-53">pre<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.numberSource</span> { <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">margin-left</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">em</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span>  <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">padding-left</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">px</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> }</span>
+<span id="cb3-54">div<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.sourceCode</span></span>
+<span id="cb3-55">  {   }</span>
+<span id="cb3-56"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">@media</span> <span class="an" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">screen</span> {</span>
+<span id="cb3-57">pre <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> code<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.sourceCode</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> span <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> a<span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:first-child::before</span> { <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">text-decoration</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">underline</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> }</span>
+<span id="cb3-58">}</span>
+<span id="cb3-59"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/* CSS for citations */</span></span>
+<span id="cb3-60">div<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.csl-bib-body</span> { }</span>
+<span id="cb3-61">div<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.csl-entry</span> {</span>
+<span id="cb3-62">  <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">clear</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">both</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb3-63">  <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">margin-bottom</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">em</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb3-64">}</span>
+<span id="cb3-65"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.hanging-indent</span> div<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.csl-entry</span> {</span>
+<span id="cb3-66">  <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">margin-left</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">em</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb3-67">  <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">text-indent</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">-2</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">em</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb3-68">}</span>
+<span id="cb3-69">div<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.csl-left-margin</span> {</span>
+<span id="cb3-70">  <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">min-width</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">em</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb3-71">  <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">float</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">left</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb3-72">}</span>
+<span id="cb3-73">div<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.csl-right-inline</span> {</span>
+<span id="cb3-74">  <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">margin-left</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">em</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb3-75">  <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">padding-left</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">em</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb3-76">}</span>
+<span id="cb3-77">div<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">.csl-indent</span> {</span>
+<span id="cb3-78">  <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">margin-left</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">:</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">em</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb3-79">}<span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&lt;/</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">style</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span></span>
+<span id="cb3-80">...</span></code></pre></div>
+</div>
+<p>That’s not even the end of it.</p>
+</section>
+<section id="markup" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="markup">Markup</h3>
+<p>Once we get to the <em>content</em> of the text, there’s still “markup” to deal with. Here’s a sentence from <em>Moby Dick</em>.</p>
+<div class="codebox">
+<div class="langname">
+<pre class="langname">txt</pre>
+</div>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb4-1">But _being paid_,—what will compare with it?</span></code></pre></div>
+</div>
+<p>The underscores <code>_</code> are there to indicate italics in the original text. Here’s how it looks when rendered:</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://lin511-2024.github.io/notes/meetings/assets/being_paid.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%"></p>
+<figcaption class="margin-caption">Rendered text</figcaption>
+</figure>
+</div>
+<p>If we just split this text up into words based on spaces, those underscores (and other punctiuation) are going to stuck around.</p>
+<div class="codebox">
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">sentence <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"But _being paid_,—what will compare with it?"</span></span>
+<span id="cb5-2">wrap_print(sentence.split(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">" "</span>))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'But'   '_being'    'paid_,—what'   'will'  'compare'   
+'with'  'it?'   </code></pre>
+</div>
+</div>
+</div>
+<p>I don’t think “paid_,-what” is a word.</p>
+<p>The same issue goes for trying to analyze text from the course notes. Here a paragraph from the <a href="../../notes/meetings/01_fsm.html">finite state automata notes</a>.</p>
+<div class="codebox">
+<div class="langname">
+<pre class="langname">html</pre>
+</div>
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb7-1"><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&lt;</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">p</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span></span>
+<span id="cb7-2">  But since this is <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&lt;</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">em</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span>Computational<span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&lt;/</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">em</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span> Linguistics, </span>
+<span id="cb7-3">  we should probably learn about what is </span>
+<span id="cb7-4">  “regular” about “regular” expressions, </span>
+<span id="cb7-5">  because it’s related to formal language </span>
+<span id="cb7-6">  theory!</span>
+<span id="cb7-7"><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&lt;/</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">p</span><span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">&gt;</span></span></code></pre></div>
+</div>
+<p>Again, if we want to analyze the text, we’d need to extract it from this markup.</p>
+</section>
+</section>
+<section id="lesson-2-language-is-complex." class="level2">
+<h2 class="anchored" data-anchor-id="lesson-2-language-is-complex.">Lesson 2: Language is complex.</h2>
+<p>We already started touching on how we may need to “case-fold” text before we analyze it.</p>
+<div class="codebox">
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> re</span>
+<span id="cb8-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> collections <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> Counter</span>
+<span id="cb8-3"></span>
+<span id="cb8-4">phrase <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"""The 2019 film Cats is a movie about cats. </span></span>
+<span id="cb8-5"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Cats appear in every scene. </span></span>
+<span id="cb8-6"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">A cat can always be seen"""</span></span>
+<span id="cb8-7"></span>
+<span id="cb8-8">words <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> re.split(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"\s"</span>, phrase)</span>
+<span id="cb8-9">cat_count <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Counter(words)</span>
+<span id="cb8-10"></span>
+<span id="cb8-11"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> key <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> cat_count:</span>
+<span id="cb8-12">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> re.match(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"[Cc]at"</span>, key):</span>
+<span id="cb8-13">    <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>key<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\t</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>cat_count[key]<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cats    2
+cats.   1
+cat 1</code></pre>
+</div>
+</div>
+</div>
+<p>Converting the whole phrase to lowercase will help, but there’s still the issue of punctuation.</p>
+<p><strong>Tokenization</strong> is the non-trivial task of splitting text up into meaningful units.</p>
+<section id="tokenization" class="level3">
+<h3 class="anchored" data-anchor-id="tokenization">Tokenization</h3>
+<p>Setting aside <em>semantic</em> issues, there are a lot of things that happen inside of text, especially if it is transcribed speech, that makes normalizing text and <strong>tokenizing</strong> it way more challenging than just splitting up on white space and stripping out punctuation, even just for English.</p>
+<section id="places-to-leave-in-punctuation" class="level4">
+<h4 class="anchored" data-anchor-id="places-to-leave-in-punctuation">Places to leave in punctuation</h4>
+<p>Some examples given by Jurafsky &amp; Martin for where you might want to leave in punctuation are:</p>
+<ul>
+<li><p>You don’t want to eliminate punctuation from inside <code>Ph.D</code>, or <code>m.p.h.</code>. You also don’t want to eliminate it from some proper names, like ampersands in <code>Procter &amp; Gamble</code>, <code>Texas A&amp;M</code>, <code>A&amp;W</code>, <code>m&amp;m's</code>.</p></li>
+<li><p>You’ll want to keep formatting in numerals, and not split them into separate words. These are all possible numeric formats cross culturally for the same quantity</p>
+<ul>
+<li><p><code>1,000.55</code></p></li>
+<li><p><code>1.000,55</code></p></li>
+<li><p><code>1 000,55</code></p></li>
+</ul></li>
+<li><p>Currency symbols should probably be kept together with their numerals, and depending on the culture &amp; denomination.</p>
+<ul>
+<li><p><code>$0.99</code></p></li>
+<li><p><code>99¢</code></p></li>
+<li><p><code>€0,99</code></p></li>
+</ul></li>
+<li><p>Dates: There are so many different permutations on how dates can be formatted that I shouldn’t list them all here, but here are some.<sup>1</sup></p>
+<ul>
+<li><p>4 digit year, 2 digit month, 2 digit day</p>
+<ul>
+<li><code>2022-09-12</code></li>
+<li><code>2022/09/12</code></li>
+</ul></li>
+<li><p>4 digit year, 1 or 2 digit month, 2 digit day</p>
+<ul>
+<li><code>2022-9-12</code></li>
+<li><code>2022/9/12</code></li>
+</ul></li>
+<li><p>2 digit day, 2 digit month, 4 digit year</p>
+<ul>
+<li><code>12-09-2022</code></li>
+<li><code>12/09/2022</code></li>
+</ul></li>
+<li><p>2 digit day, 1 or 2 digit month, 4 digit year</p>
+<ul>
+<li><code>12-9-2022</code></li>
+<li><code>12/9/2022</code></li>
+</ul></li>
+<li><p>2 digit day, 2 digit month, 2 digit year</p>
+<ul>
+<li><code>12-09-22</code></li>
+<li><code>12/09/22</code></li>
+</ul></li>
+<li><p>2 digit month, 2 digit day, 4 digit year</p>
+<ul>
+<li><code>09-12-2022</code></li>
+<li><code>09/12/2022</code></li>
+</ul></li>
+<li><p>1 digit month, 2 digit day, 2 digit year</p>
+<ul>
+<li><code>9-12-22</code></li>
+<li><code>9/12/22</code></li>
+</ul></li>
+</ul></li>
+<li><p>Emoticons,<sup>2</sup> where the token is entirely punctuation <code>:)</code>, <code>&gt;.&lt;</code>.</p></li>
+</ul>
+</section>
+<section id="places-to-split-up-words" class="level4">
+<h4 class="anchored" data-anchor-id="places-to-split-up-words">Places to split up words</h4>
+<p>Sometimes the tokens you get back from whitespace tokenization ought to be split up even further. One example might be hyphenated words, like <code>hard-won</code>.</p>
+<ul>
+<li><code>hard-won</code> ➔ <code>hard</code>, <code>won</code> or <code>hard</code>, <code>-</code>, <code>won</code>.</li>
+</ul>
+<p>Another example involves clitics, like <code>n't</code> or <code>'re</code> in English.</p>
+<ul>
+<li><p><code>isn't</code> ➔ <code>is</code>, <code>n't</code></p></li>
+<li><p><code>can't</code> ➔ <code>ca</code>, <code>n't</code></p></li>
+<li><p><code>what're</code> ➔ <code>what</code>, <code>'re</code></p></li>
+</ul>
+</section>
+<section id="places-to-glue-words-together" class="level4">
+<h4 class="anchored" data-anchor-id="places-to-glue-words-together">Places to glue words together</h4>
+<p>You might want to also glue together tokens from whitespace tokenization.</p>
+<ul>
+<li><p><code>New</code>, <code>York</code>, <code>City</code> ➔ <code>New York City</code></p></li>
+<li><p><code>Super</code>, <code>Smash</code>, <code>Brothers</code> ➔ <code>Super Smash Brothers</code></p></li>
+</ul>
+</section>
+<section id="challenges-with-speech-and-text" class="level4">
+<h4 class="anchored" data-anchor-id="challenges-with-speech-and-text">Challenges with speech and text</h4>
+<ul>
+<li><i class="fa-solid fa-keyboard" aria-label="keyboard"></i>: $1,500
+<ul>
+<li><p><i class="fa-solid fa-bullhorn" aria-label="bullhorn"></i>: “one thousand five hundred dollars”</p></li>
+<li><p><i class="fa-solid fa-bullhorn" aria-label="bullhorn"></i>: “fifteen hundred dollars”</p></li>
+<li><p><i class="fa-solid fa-bullhorn" aria-label="bullhorn"></i>: “one and a half thousand dollars”</p></li>
+<li><p><i class="fa-solid fa-bullhorn" aria-label="bullhorn"></i>: “one point five thousand dollars”</p></li>
+</ul></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="tokenizers--part-1-" class="level2">
+<h2 class="anchored" data-anchor-id="tokenizers--part-1-">Tokenizers -part 1-</h2>
+<p>The Natural Language Toolkit library <span class="citation" data-cites="bird2009">(Bird, Klein, and Loper 2009)</span> has a few tokenizers available.</p>
+<div class="codebox">
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> nltk</span>
+<span id="cb10-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> nltk.tokenize <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> word_tokenize</span>
+<span id="cb10-3"></span>
+<span id="cb10-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">## The first time you run it, </span></span>
+<span id="cb10-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">## you need to download some data</span></span>
+<span id="cb10-6">nltk.download(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'punkt'</span>)</span></code></pre></div>
 </div>
 <div class="cell">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">a<span class="op" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">tokens_01 <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+font-style: inherit;">=</span> word_tokenize(sentence)</span>
+<span id="cb11-2">wrap_print(tokens_01)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'But'   '_being'    'paid_' ',' '—what' 
+'will'  'compare'   'with'  'it'    '?' </code></pre>
+</div>
+</div>
+</div>
+<p>The spacy package also has tokenizers available,</p>
+<div class="codebox">
+<div class="langname">
+<pre class="langname">bash</pre>
+</div>
+<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><span class="ex" style="color: null;
 background-color: null;
-font-style: inherit;">1</span></span></code></pre></div>
+font-style: inherit;">pip</span> install spacy</span>
+<span id="cb13-2"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pip</span> install <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">$(</span><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">spacy</span> info en_core_web_sm <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--url</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">)</span></span></code></pre></div>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> spacy</span>
+<span id="cb14-2">nlp <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> spacy.load(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"en_core_web_sm"</span>)</span>
+<span id="cb14-3">doc <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> nlp(sentence)</span>
+<span id="cb14-4">wrap_print(doc)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'But'   '_' 'being' 'paid_,—what'   'will'  
+'compare'   'with'  'it'    '?' </code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="data-sparsity" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="data-sparsity">Data Sparsity</h2>
+<p>With <em>any</em> tokenization of text, you’re going to wind up with a lot of tokens that appear just once or twice.</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<p>Here’s a plot of the top 10 most frequent tokens in <em>Moby Dick</em>.</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="cell-output-display page-columns page-full">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://lin511-2024.github.io/notes/meetings/03_tokenization_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+<figcaption class="margin-caption">Top 10 tokens in Moby Dick</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The trend of tokens getting less and less frequent continues</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="cell-output-display page-columns page-full">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://lin511-2024.github.io/notes/meetings/03_tokenization_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+<figcaption class="margin-caption">All tokens in Moby Dick</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>There is also a general phenomenon that the larger your corpus of tokens gets, the larger the vocabulary will get.</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="cell-output-display page-columns page-full">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://lin511-2024.github.io/notes/meetings/03_tokenization_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+<figcaption class="margin-caption">As the number of tokens increases, the size of the vocabulary increases</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This means that if you have an “open vocabulary” tokenization method, where you can always create a new token based on some rules, you’ll <em>never</em> be able to analyze enough text such that you’ll never encounter a new token you’ve never seen before.</p>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://lin511-2024.github.io/notes/meetings/03_tokenization_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<figcaption class="margin-caption">The probability of a new type as token size increases</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="closed-vocabulary-tokenization-byte-pair-encoding" class="level2">
+<h2 class="anchored" data-anchor-id="closed-vocabulary-tokenization-byte-pair-encoding">Closed Vocabulary Tokenization (Byte Pair Encoding)</h2>
+<p>A different approach to tokenization is to have a pre-specified closed vocabulary that you use to pull tokens out of text.</p>
+<p>Let’s start out with a fake training of a byte pair encoder with the simple vocabulary “cats can’t canter”. We kick things off treating every character as a token, plus a specialized start-of-word symbol, which I’m representing with <code>_</code>.</p>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="2" style="border-style: solid;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p>Tokens</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<pre><code>_ c a t s
+_ c a n ' t
+_ c a n t e r</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p>Types</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<pre><code>{'a', 'e', 't', 'r', 
+'s', 'n', 'c', "'", '_'}</code></pre>
+</div>
+</div>
+</div>
+<p>This is, in principle, the smallest and <em>simplest</em> tokenization we could do for any input text. While the total number of <em>words</em> is infinite, the total number of characters or symbols we use to create those words is finite.</p>
+<p>The next step is to count up all of the pairs (or bigrams) of tokens in the training data. In this case, both (<code>_</code>, <code>c</code>) and (<code>c</code>, <code>a</code>) appear equally commonly, so I make a decision and say (<code>_</code>, <code>c</code>) is the one we’ll process first. We’ll paste them together, call them a new type, and replace all (<code>_</code>, <code>c</code>) sequences with <code>_c</code>.</p>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="2" style="border-style: solid;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p>tokens</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<pre><code>_c a t s
+_c a n ' t
+_c a n t e r</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p>types</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<pre><code>{'a', 'e', 't', 'r', 
+'s', 'n', 'c', "'", ' ',
+`_c`}</code></pre>
+</div>
+</div>
+</div>
+<p>Repeating the process, the most frequently occurring bigram is now (<code>_c</code>, <code>a</code>), so we’ll add <code>_ca</code> as a new type, and replace all (<code>_c</code>, <code>a</code>) sequences with <code>_ca</code>.</p>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="2" style="border-style: solid;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p>tokens</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<pre><code>_ca t s 
+_ca n ' t _
+_ca n t e r _</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p>types</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<pre><code>{'a', 'e', 't', 'r', 
+'s', 'n', 'c', "'", ' ', 
+'_c', '_ca'}</code></pre>
+</div>
+</div>
+</div>
+<p>Finally, the last most frequent sequence is (<code>_ca</code>, <code>n</code>), so we’ll add <code>_can</code> to the vocabulary, and collapse (<code>_ca</code>, <code>n</code>) sequences.</p>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="2" style="border-style: solid;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p>tokens</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<pre><code>_ca t s
+_can ' t
+_can t e r</code></pre>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p>types</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<pre><code>{'a', 'e', 't', 'r', 
+'s', 'n', 'c', "'", ' ', 
+'_c', '_ca', '_can'}</code></pre>
+</div>
+</div>
+</div>
+<p>We’ll stop at that point, but we could either continue for a fixed number of iterations, or until our type, or vocabulary size reaches a fixed number.</p>
+<section id="the-use-of-byte-pair-encoding" class="level3">
+<h3 class="anchored" data-anchor-id="the-use-of-byte-pair-encoding">The use of Byte Pair Encoding</h3>
+<p>This kind of tokenization approach is necessary when you want to be able to tokenizer <em>anything</em>, and also have a pre-specified vocabulary size. We can see how OpenAI’s byte pair encoder handles the first few sentences of <em>Moby Dick</em></p>
+<div class="codebox">
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> tiktoken</span>
+<span id="cb24-2">enc <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> tiktoken.encoding_for_model(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"gpt-4"</span>)</span></code></pre></div>
 </div>
 <div class="cell">
 <div class="langname">
-<pre class="langname">r</pre>
+<pre class="langname">python</pre>
 </div>
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">py<span class="sc" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb25" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1">mb_string <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">$</span>a</span></code></pre></div>
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"""</span></span>
+<span id="cb25-2"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Call me Ishmael. Some years ago—never mind how long precisely—having</span></span>
+<span id="cb25-3"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">little or no money in my purse, and nothing particular to interest me</span></span>
+<span id="cb25-4"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">on shore, I thought I would sail about a little and see the watery part</span></span>
+<span id="cb25-5"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">of the world. It is a way I have of driving off the spleen and</span></span>
+<span id="cb25-6"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">regulating the circulation.</span></span>
+<span id="cb25-7"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"""</span></span>
+<span id="cb25-8"></span>
+<span id="cb25-9">tokens <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb25-10">  enc.decode([token]) </span>
+<span id="cb25-11">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> token <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> enc.encode(mb_string.replace(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="ch" style="color: #20794D;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">" "</span>))</span>
+<span id="cb25-12">]</span>
+<span id="cb25-13"></span>
+<span id="cb25-14">wrap_print(tokens)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1</code></pre>
+<pre><code>' Call' ' me'   ' Ish'  'ma'    'el'    
+'.' ' Some' ' years'    ' ago'  '—' 
+'never' ' mind' ' how'  ' long' ' precisely'    
+'—' 'having'    ' little'   ' or'   ' no'   
+' money'    ' in'   ' my'   ' purse'    ',' 
+' and'  ' nothing'  ' particular'   ' to'   ' interest' 
+' me'   ' on'   ' shore'    ',' ' I'    
+' thought'  ' I'    ' would'    ' sail' ' about'    
+' a'    ' little'   ' and'  ' see'  ' the'  
+' wat'  'ery'   ' part' ' of'   ' the'  
+' world'    '.' ' It'   ' is'   ' a'    
+' way'  ' I'    ' have' ' of'   ' driving'  
+' off'  ' the'  ' sple' 'en'    ' and'  
+' regulating'   ' the'  ' circulation'  '.' ' ' </code></pre>
 </div>
 </div>
+</div>
 
 
 
-<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
+</section>
+</section>
+
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-bird2009" class="csl-entry">
+Bird, Steven, Ewan Klein, and Edward Loper. 2009. <em>Natural language processing with Python</em>. Beijing: O’Reilly.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>I’m being tedious here on purpose, because you have to keep in mind that if you wrote a function to handle just one of these possible date formats, it would not immediately translate over to the others! There are also <em>entire libraries</em> in multiple programming languages for parsing and reformatting date times. Python: <a href="https://docs.python.org/3/library/datetime.html">datetime</a>, R: <a href="https://lubridate.tidyverse.org/">lubridate</a>.↩︎</p></li>
+<li id="fn2"><p>This example <em>isn’t</em> from Jurafsky &amp; Martin.↩︎</p></li>
+</ol>
+</section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
   author = {Fruehwald, Josef},
-  title = {Ngrams},
-  date = {2024-02-05},
-  url = {https://lin511-2024.github.io/notes/meetings/04_ngrams.html},
+  title = {Tokenization},
+  date = {2024-02-06},
+  url = {https://lin511-2024.github.io/notes/meetings/03_tokenization.html},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2024" class="csl-entry quarto-appendix-citeas">
-Fruehwald, Josef. 2024. <span>“Ngrams.”</span> February 5, 2024. <a href="https://lin511-2024.github.io/notes/meetings/04_ngrams.html">https://lin511-2024.github.io/notes/meetings/04_ngrams.html</a>.
+Fruehwald, Josef. 2024. <span>“Tokenization.”</span> February 6, 2024.
+<a href="https://lin511-2024.github.io/notes/meetings/03_tokenization.html">https://lin511-2024.github.io/notes/meetings/03_tokenization.html</a>.
 </div></div></section></div> ]]></description>
-  <guid>https://lin511-2024.github.io/notes/meetings/04_ngrams.html</guid>
-  <pubDate>Mon, 05 Feb 2024 00:00:00 GMT</pubDate>
+  <guid>https://lin511-2024.github.io/notes/meetings/03_tokenization.html</guid>
+  <pubDate>Tue, 06 Feb 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>More Python: Poetry, Lists, Loops</title>
@@ -2141,71 +3691,6 @@ Languages.”</span> January 23, 2024. <a href="https://lin511-2024.github.io/no
   <pubDate>Tue, 23 Jan 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>FSA in-class notes</title>
-  <dc:creator>Josef Fruehwald</dc:creator>
-  <link>https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="finite-state-automata-and-regex" class="level2">
-<h2 class="anchored" data-anchor-id="finite-state-automata-and-regex">Finite State Automata and RegEx</h2>
-<p><code>ok(a+y)?</code></p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">stateDiagram
-    direction LR
-    [*] --&gt; 1
-    1 --&gt; 2: o
-    2 --&gt; 3: k
-
-    3 --&gt; group1
-
-    state group1{
-        [*] --&gt; 4
-        4 --&gt; 4: a
-        4 --&gt; [*]: y
-    }
-    group1 --&gt; [*]: ε
-
-    3 --&gt; [*]: ε
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="the-regex-for-batman" class="level2">
-<h2 class="anchored" data-anchor-id="the-regex-for-batman">The RegEx for Batman</h2>
-<div class="langname">
-<pre class="langname">regex</pre>
-</div>
-<pre class="regex"><code>Na (na){15} Batman!( Batman! Batman!)?</code></pre>
-
-
-</section>
-
-<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
-  author = {Fruehwald, Josef},
-  title = {FSA in-Class Notes},
-  date = {2024-01-16},
-  url = {https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html},
-  langid = {en}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2024" class="csl-entry quarto-appendix-citeas">
-Fruehwald, Josef. 2024. <span>“FSA in-Class Notes.”</span> January 16,
-2024. <a href="https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html">https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html</a>.
-</div></div></section></div> ]]></description>
-  <category>compling</category>
-  <guid>https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html</guid>
-  <pubDate>Tue, 16 Jan 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
   <title>Regular Languages and Finite State Machines</title>
   <dc:creator>Josef Fruehwald</dc:creator>
   <link>https://lin511-2024.github.io/notes/meetings/01_fsm.html</link>
@@ -2767,6 +4252,71 @@ Machines.”</span> January 16, 2024. <a href="https://lin511-2024.github.io/not
   <pubDate>Tue, 16 Jan 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
+  <title>FSA in-class notes</title>
+  <dc:creator>Josef Fruehwald</dc:creator>
+  <link>https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="finite-state-automata-and-regex" class="level2">
+<h2 class="anchored" data-anchor-id="finite-state-automata-and-regex">Finite State Automata and RegEx</h2>
+<p><code>ok(a+y)?</code></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram
+    direction LR
+    [*] --&gt; 1
+    1 --&gt; 2: o
+    2 --&gt; 3: k
+
+    3 --&gt; group1
+
+    state group1{
+        [*] --&gt; 4
+        4 --&gt; 4: a
+        4 --&gt; [*]: y
+    }
+    group1 --&gt; [*]: ε
+
+    3 --&gt; [*]: ε
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-regex-for-batman" class="level2">
+<h2 class="anchored" data-anchor-id="the-regex-for-batman">The RegEx for Batman</h2>
+<div class="langname">
+<pre class="langname">regex</pre>
+</div>
+<pre class="regex"><code>Na (na){15} Batman!( Batman! Batman!)?</code></pre>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
+  author = {Fruehwald, Josef},
+  title = {FSA in-Class Notes},
+  date = {2024-01-16},
+  url = {https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2024" class="csl-entry quarto-appendix-citeas">
+Fruehwald, Josef. 2024. <span>“FSA in-Class Notes.”</span> January 16,
+2024. <a href="https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html">https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html</a>.
+</div></div></section></div> ]]></description>
+  <category>compling</category>
+  <guid>https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html</guid>
+  <pubDate>Tue, 16 Jan 2024 00:00:00 GMT</pubDate>
+</item>
+<item>
   <title>Setup Notes</title>
   <dc:creator>Josef Fruehwald</dc:creator>
   <link>https://lin511-2024.github.io/notes/programming/00_setup.html</link>
@@ -3171,7 +4721,7 @@ Fruehwald, Josef. n.d. <span>“Python Basics.”</span> <a href="https://lin511
 </div></div></section></div> ]]></description>
   <category>python</category>
   <guid>https://lin511-2024.github.io/notes/programming/01_Python_basics.html</guid>
-  <pubDate>Thu, 01 Feb 2024 22:05:01 GMT</pubDate>
+  <pubDate>Sun, 04 Feb 2024 22:17:42 GMT</pubDate>
 </item>
 </channel>
 </rss>

@@ -1,1 +1,7 @@
 /* css styles */
+
+.codebox{
+   padding: 2%;
+   border-radius: 10px;
+   margin-bottom: 1em;
+}

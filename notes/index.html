@@ -85,9 +85,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-subtitle','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -289,8 +289,8 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../notes/meetings/04_ngrams.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ngrams</span></a>
+  <a href="../notes/meetings/03_tokenization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tokenization</span></a>
   </div>
 </li>
       </ul>
@@ -378,7 +378,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">February 1, 2024</p>
+      <p class="date-modified">February 4, 2024</p>
     </div>
   </div>
     
@@ -396,7 +396,7 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="python" data-listing-date-sort="1704672000000" data-listing-file-modified-sort="1706824954363" data-listing-date-modified-sort="1706824954000" data-listing-reading-time-sort="2" data-listing-word-count-sort="392">
+<div class="quarto-post image-right" data-index="0" data-categories="python" data-listing-date-sort="1704672000000" data-listing-file-modified-sort="1707082969306" data-listing-date-modified-sort="1707082969000" data-listing-reading-time-sort="2" data-listing-word-count-sort="392">
 <div class="thumbnail">
 <p><a href="../notes/programming/00_setup.html" class="no-external"></a></p><a href="../notes/programming/00_setup.html" class="no-external">
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
@@ -429,40 +429,7 @@ Josef Fruehwald
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="compling" data-listing-date-sort="1705363200000" data-listing-file-modified-sort="1706824954363" data-listing-date-modified-sort="1706824954000" data-listing-reading-time-sort="1" data-listing-word-count-sort="36">
-<div class="thumbnail">
-<p><a href="../notes/meetings/01-1_fsm_addenda.html" class="no-external"></a></p><a href="../notes/meetings/01-1_fsm_addenda.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="../notes/meetings/01-1_fsm_addenda.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../notes/meetings/01-1_fsm_addenda.html" class="no-external">FSA in-class notes</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../notes/meetings/01-1_fsm_addenda.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('compling'); return false;">
-compling
-</div>
-</div>
-<div class="listing-description">
-<a href="../notes/meetings/01-1_fsm_addenda.html" class="no-external"><code>ok(a+y)?</code></a>
-</div>
-</div>
-<div class="metadata">
-<a href="../notes/meetings/01-1_fsm_addenda.html" class="no-external">
-<div class="listing-date">
-Jan 16, 2024
-</div>
-<div class="listing-author">
-Josef Fruehwald
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="compling" data-listing-date-sort="1705363200000" data-listing-file-modified-sort="1706824954363" data-listing-date-modified-sort="1706824954000" data-listing-reading-time-sort="8" data-listing-word-count-sort="1455">
+<div class="quarto-post image-right" data-index="1" data-categories="compling" data-listing-date-sort="1705363200000" data-listing-file-modified-sort="1707082969301" data-listing-date-modified-sort="1707082969000" data-listing-reading-time-sort="8" data-listing-word-count-sort="1455">
 <div class="thumbnail">
 <p><a href="../notes/meetings/01_fsm.html" class="no-external"></a></p><a href="../notes/meetings/01_fsm.html" class="no-external">
 <p class="card-img-top"><img src="meetings/assets/chomsky.png"  class="thumbnail-image card-img"/></p>
@@ -495,7 +462,40 @@ Josef Fruehwald
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="compling" data-listing-date-sort="1705968000000" data-listing-file-modified-sort="1706824954363" data-listing-date-modified-sort="1706824954000" data-listing-reading-time-sort="23" data-listing-word-count-sort="4466">
+<div class="quarto-post image-right" data-index="2" data-categories="compling" data-listing-date-sort="1705363200000" data-listing-file-modified-sort="1707082969301" data-listing-date-modified-sort="1707082969000" data-listing-reading-time-sort="1" data-listing-word-count-sort="36">
+<div class="thumbnail">
+<p><a href="../notes/meetings/01-1_fsm_addenda.html" class="no-external"></a></p><a href="../notes/meetings/01-1_fsm_addenda.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="../notes/meetings/01-1_fsm_addenda.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../notes/meetings/01-1_fsm_addenda.html" class="no-external">FSA in-class notes</a>
+</h3>
+<div class="listing-subtitle">
+<a href="../notes/meetings/01-1_fsm_addenda.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('compling'); return false;">
+compling
+</div>
+</div>
+<div class="listing-description">
+<a href="../notes/meetings/01-1_fsm_addenda.html" class="no-external"><code>ok(a+y)?</code></a>
+</div>
+</div>
+<div class="metadata">
+<a href="../notes/meetings/01-1_fsm_addenda.html" class="no-external">
+<div class="listing-date">
+Jan 16, 2024
+</div>
+<div class="listing-author">
+Josef Fruehwald
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="compling" data-listing-date-sort="1705968000000" data-listing-file-modified-sort="1707082969302" data-listing-date-modified-sort="1707082969000" data-listing-reading-time-sort="23" data-listing-word-count-sort="4466">
 <div class="thumbnail">
 <p><a href="../notes/meetings/02_pda.html" class="no-external"></a></p><a href="../notes/meetings/02_pda.html" class="no-external">
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
@@ -528,7 +528,7 @@ Josef Fruehwald
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="python" data-listing-date-sort="1706140800000" data-listing-file-modified-sort="1706824954363" data-listing-date-modified-sort="1706824954000" data-listing-reading-time-sort="2" data-listing-word-count-sort="318">
+<div class="quarto-post image-right" data-index="4" data-categories="python" data-listing-date-sort="1706140800000" data-listing-file-modified-sort="1707082969307" data-listing-date-modified-sort="1707082969000" data-listing-reading-time-sort="2" data-listing-word-count-sort="318">
 <div class="thumbnail">
 <p><a href="../notes/programming/02_regex.html" class="no-external"></a></p><a href="../notes/programming/02_regex.html" class="no-external">
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
@@ -561,7 +561,7 @@ Josef Fruehwald
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="python" data-listing-date-sort="1706572800000" data-listing-file-modified-sort="1706824954363" data-listing-date-modified-sort="1706824954000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1186">
+<div class="quarto-post image-right" data-index="5" data-categories="python" data-listing-date-sort="1706572800000" data-listing-file-modified-sort="1707082969307" data-listing-date-modified-sort="1707082969000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1186">
 <div class="thumbnail">
 <p><a href="../notes/programming/03_python_plus.html" class="no-external"></a></p><a href="../notes/programming/03_python_plus.html" class="no-external">
 <p class="card-img-top"><img src="programming/assets/0_index.png"  class="thumbnail-image card-img"/></p>
@@ -594,27 +594,27 @@ Josef Fruehwald
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1707091200000" data-listing-file-modified-sort="1706824954363" data-listing-date-modified-sort="1706824954000" data-listing-reading-time-sort="1" data-listing-word-count-sort="54">
+<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1707177600000" data-listing-file-modified-sort="1707082969302" data-listing-date-modified-sort="1707082969000" data-listing-reading-time-sort="15" data-listing-word-count-sort="2915">
 <div class="thumbnail">
-<p><a href="../notes/meetings/04_ngrams.html" class="no-external"></a></p><a href="../notes/meetings/04_ngrams.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="../notes/meetings/04_ngrams.html" class="no-external"></a></p>
+<p><a href="../notes/meetings/03_tokenization.html" class="no-external"></a></p><a href="../notes/meetings/03_tokenization.html" class="no-external">
+<p class="card-img-top"><img src="meetings/assets/being_paid.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="../notes/meetings/03_tokenization.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="../notes/meetings/04_ngrams.html" class="no-external">ngrams</a>
+<a href="../notes/meetings/03_tokenization.html" class="no-external">Tokenization</a>
 </h3>
 <div class="listing-subtitle">
-<a href="../notes/meetings/04_ngrams.html" class="no-external">-or- What if we <em>could</em> parse natural language with a finite state automaton?</a>
+<a href="../notes/meetings/03_tokenization.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<a href="../notes/meetings/04_ngrams.html" class="no-external">So, in our notes on finite state automata and push-down automata that since natural language has bracket matching patterns, and maybe even crossing dependencies, that it’s…</a>
+<a href="../notes/meetings/03_tokenization.html" class="no-external">If you go take a look at the plain-text version of Moby Dick on Project Gutenberg, you’ll see that it starts out with the following block of text:</a>
 </div>
 </div>
 <div class="metadata">
-<a href="../notes/meetings/04_ngrams.html" class="no-external">
+<a href="../notes/meetings/03_tokenization.html" class="no-external">
 <div class="listing-date">
-Feb 5, 2024
+Feb 6, 2024
 </div>
 <div class="listing-author">
 Josef Fruehwald
@@ -622,7 +622,7 @@ Josef Fruehwald
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="python" data-listing-file-modified-sort="1706824954363" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="quarto-post image-right" data-index="7" data-categories="python" data-listing-file-modified-sort="1707082969307" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
 <div class="thumbnail">
 <p><a href="../notes/programming/01_Python_basics.html" class="no-external"></a></p><a href="../notes/programming/01_Python_basics.html" class="no-external">
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
