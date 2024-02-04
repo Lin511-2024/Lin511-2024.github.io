@@ -289,6 +289,8 @@ stateDiagram
 
 ### Probabilistic ngrams
 
+But, if we look at the actual entire book *Moby Dick,* not all of these connections are equally likely.
+
 ```{r}
 bigrams |> 
   filter(word %in% c("call", "me", "ishmael"),
@@ -317,45 +319,108 @@ bigrams |>
 flowchart LR
 	c["call"] ==> m["me"]
 	m --> c
-	c --> i["Ishmael"]
+	m --> i["Ishmael"]
 ```
 
-```{r}
-bigrams |> 
-  filter(word %in% c("call", "me", "ishmael")) |> 
-  arrange(desc(n)) |> 
-  mutate(
-    next_word = factor(next_word) |> 
-      fct_reorder(.x = -n, .fun= median)
-    )->
-  cmi_bigrams
+## Terminology and Notation Moment
 
-lower_word = levels(cmi_bigrams$next_word)[-(1:10)]
+### Types vs Tokens
 
-cmi_bigrams |> 
-  mutate(next_word_lump = fct_collapse(next_word, `<other>` = lower_word)) |> 
-  summarise(
-    n = sum(n),
-    .by = c(word, next_word_lump)
-  ) |> 
-  pivot_wider(
-    names_from = word,
-    values_from = n,
-    values_fill = 0
-  ) |> 
-  gt(rowname_col = "next_word_lump")  |> 
-    gt_color_rows(
-      -next_word_lump,
-      domain = 1:421
-    ) |> 
-    tab_spanner(
-      "word",
-      columns = 2:4
-    ) |> 
-    tab_stubhead(
-      "next word"
-    )
+<details>
+
+<summary>A function to get all of the words in Moby Dick</summary>
+
+```{python}
+#| collapse: true
+#| code-summary: A function to get all Moby Dick words
+#| echo: true
+import re
+import gutenbergpy.textget
+from nltk.tokenize import word_tokenize
+
+def get_moby_dick_words():
+  raw_book = gutenbergpy.textget.get_text_by_id(2701) # with headers
+  moby_dick_byte = gutenbergpy.textget.strip_headers(raw_book) # without headers
+  moby_dick = moby_dick_byte.decode("utf-8").lower() 
+  moby_dick_tokens = word_tokenize(moby_dick)
+  moby_dick_words = [tok for tok in moby_dick_tokens if re.match(r"\w", tok)]
+  
+  return moby_dick_words
 ```
+
+</details>
+
+```{python}
+#| echo: true
+moby_dick_words = get_moby_dick_words()
+for idx, word in enumerate(moby_dick_words[0:20]):
+  print(word, end = ", ")
+  if (idx+1) % 5 == 0:
+     print("")
+```
+
+We can get counts of how often each word appeared in the book with `collections.Counter()` .
+
+```{python}
+#| echo: true
+from collections import Counter
+
+word_count = Counter(moby_dick_words)
+```
+
+Let's compare the length of the full list of words to the length of the word count dictionary.
+
+```{python}
+#| echo: true
+print(f"There are {len(moby_dick_words):,} total  words.")
+print(f"There are  {len(word_count):,} unique words.")
+```
+
+::: callout-important
+## Terminology
+
+In more common corpus/compling terminology, we would say
+
+-   There are 215,300 **tokens** in *Moby Dick*.
+
+-   There are 19,989 **types** in *Moby Dick*.
+:::
+
+We can get the frequency of the words "whale" and "ogre" in *Moby Dick* like so:
+
+::: {.callout-note collapse="true"}
+## Indexing with a string?
+
+We can index `word_count` with the string `"whale"` because it is a ["dictionary"](../concepts/glossary.qmd#dictionary) We could create our own dictionary like this:
+
+```{python}
+#| echo: true
+food_type = {
+  "banana": "fruit",
+  "strawberry": "fruit",
+  "carrot": "vegetable",
+  "onion": "vegetable"
+}
+
+food_type["banana"]
+```
+:::
+
+```{python}
+#| echo: true
+print(f"The word 'whale' appeared {word_count['whale']:,} times.")
+print(f"The word  'ogre' appeared    {word_count['ogre']} times.")
+```
+
+::: callout-important
+## Terminology
+
+The way we'd describe this in a more corpus/comp-ling way is
+
+> The word **type** "whale" appears in *Moby Dick*. There are 1,070 **tokens** of "whale" in the book.
+>
+> The word **type** "ogre" does not appear in *Moby Dick*.
+:::
 
 ## Language Prediction
 
