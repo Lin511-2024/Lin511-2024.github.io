@@ -363,27 +363,23 @@ for idx, word in enumerate(moby_dick_words[0:20]):
 
 We can get counts of how often each word appeared in the book with `collections.Counter()` .
 
-:::{.codebox}
-
+::: codebox
 ```{python}
 #| echo: true
 from collections import Counter
 
 word_count = Counter(moby_dick_words)
 ```
-
 :::
 
 Let's compare the length of the full list of words to the length of the word count dictionary.
 
-:::{.codebox}
-
+::: codebox
 ```{python}
 #| echo: true
 print(f"There are {len(moby_dick_words):,} total  words.")
 print(f"There are  {len(word_count):,} unique words.")
 ```
-
 :::
 
 ::: callout-important
@@ -416,14 +412,12 @@ food_type["banana"]
 ```
 :::
 
-:::{.codebox}
-
+::: codebox
 ```{python}
 #| echo: true
 print(f"The word 'whale' appeared {word_count['whale']:,} times.")
 print(f"The word  'ogre' appeared    {word_count['ogre']} times.")
 ```
-
 :::
 
 ::: callout-important
