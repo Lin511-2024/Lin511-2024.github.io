@@ -350,6 +350,7 @@ def get_moby_dick_words():
 
 </details>
 
+::: codebox
 ```{python}
 #| echo: true
 moby_dick_words = get_moby_dick_words()
@@ -358,8 +359,11 @@ for idx, word in enumerate(moby_dick_words[0:20]):
   if (idx+1) % 5 == 0:
      print("")
 ```
+:::
 
 We can get counts of how often each word appeared in the book with `collections.Counter()` .
+
+:::{.codebox}
 
 ```{python}
 #| echo: true
@@ -368,13 +372,19 @@ from collections import Counter
 word_count = Counter(moby_dick_words)
 ```
 
+:::
+
 Let's compare the length of the full list of words to the length of the word count dictionary.
+
+:::{.codebox}
 
 ```{python}
 #| echo: true
 print(f"There are {len(moby_dick_words):,} total  words.")
 print(f"There are  {len(word_count):,} unique words.")
 ```
+
+:::
 
 ::: callout-important
 ## Terminology
@@ -391,7 +401,7 @@ We can get the frequency of the words "whale" and "ogre" in *Moby Dick* like so:
 ::: {.callout-note collapse="true"}
 ## Indexing with a string?
 
-We can index `word_count` with the string `"whale"` because it is a ["dictionary"](../concepts/glossary.qmd#dictionary) We could create our own dictionary like this:
+We can index `word_count` with the string `"whale"` because it is a ["dictionary"](../concepts/00_glossary.qmd#dictionary) We could create our own dictionary like this:
 
 ```{python}
 #| echo: true
@@ -406,11 +416,15 @@ food_type["banana"]
 ```
 :::
 
+:::{.codebox}
+
 ```{python}
 #| echo: true
 print(f"The word 'whale' appeared {word_count['whale']:,} times.")
 print(f"The word  'ogre' appeared    {word_count['ogre']} times.")
 ```
+
+:::
 
 ::: callout-important
 ## Terminology
@@ -421,6 +435,8 @@ The way we'd describe this in a more corpus/comp-ling way is
 >
 > The word **type** "ogre" does not appear in *Moby Dick*.
 :::
+
+### Notation
 
 ## Language Prediction
 
