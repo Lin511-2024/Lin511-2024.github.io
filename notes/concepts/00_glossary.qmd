@@ -58,7 +58,9 @@ To paste, you can either right-click and select 'Paste', or use your system's 'h
 
   "Slice (verb)", "To pull out a range of values from an object, defined by a starting and stopping position.",
 
-  "Case Folding", "To convert text data either to all uppercase or lowercase characters."
+  "Case Folding", "To convert text data either to all uppercase or lowercase characters.",
+  
+  "dictionary", "In programming languages, a dictionary is a data structure that stores key, value pairs, and lets you retrieve a value with a given key.",
 
 ) |>
   arrange(

@@ -1,0 +1,652 @@
+---
+title: "ngrams"
+subtitle: "-or- What if we *could* parse natural language with a finite state automaton?"
+date: 2024-02-05
+filters: 
+  - codeblocklabel
+knitr:
+  opts_chunk: 
+    warning: false
+    message: false
+    echo: false
+bibliography: references.bib
+categories:
+  - compling
+---
+
+So, in our notes on [finite state automata](01_fsm.qmd) and [push-down automata](02_pda.qmd) we concluded that since natural language has bracket matching patterns, and maybe even crossing dependencies, that it's more complex than a "regular" language, and can't really be parsed with a finite state automaton.
+
+ngram language modelling asks the question: But what if we tried really hard?
+
+```{r}
+library(reticulate)
+library(tidyverse)
+library(ngram)
+library(ggrepel)
+library(khroma)
+library(network)
+library(sna)
+library(crandep)
+library(ggnetwork)
+library(igraph)
+library(gt)
+library(gtExtras)
+knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
+```
+
+```{python}
+import re
+import gutenbergpy.textget
+from nltk.tokenize import word_tokenize
+from collections import Counter
+```
+
+## States and Words
+
+```{python}
+raw_book = gutenbergpy.textget.get_text_by_id(2701) # with headers
+moby_dick_byte = gutenbergpy.textget.strip_headers(raw_book) # without headers
+moby_dick = moby_dick_byte.decode("utf-8").lower() 
+```
+
+```{python}
+moby_dick_tokens = word_tokenize(moby_dick)
+moby_dick_words = [tok for tok in moby_dick_tokens if re.match(r"\w", tok)]
+```
+
+```{r}
+tibble(word = py$moby_dick_words,
+       next_word = lead(word)) |> 
+  count(word, next_word) |> 
+  arrange(desc(n)) ->
+  bigrams
+
+tibble(word = py$moby_dick_words,
+       next_word = lead(word), 
+       next_next_word = lead(next_word)) |> 
+  count(word, next_word, next_next_word) |> 
+  arrange(desc(n)) ->
+  trigrams
+```
+
+```{r}
+bigrams |> 
+  filter(n >= 5) |> 
+  rename(
+    from = word,
+    to = next_word
+  ) |> 
+  df_to_graph() |> 
+  ggnetwork(layout = with_drl(), arrow.gap = 0)->
+  bigram_network
+```
+
+The first sentence of Moby Dick is, famously,
+
+> Call me Ishmael.
+
+We could try representing this as a finite state automaton like so:
+
+```{mermaid}
+stateDiagram
+	direction LR
+
+	[*] --> call: call
+	call --> me: me
+	me --> ishmael: ishmael
+	ishmael --> [*]
+```
+
+But, this is *far* from a complete model of the whole book *Moby Dick*. It would only work if the entire book was just "Call me Ishmael" over and over again.
+
+To enrich the FSA, we could add all of the other words that could follow *"call".*
+
+```{mermaid}
+stateDiagram
+	direction LR
+
+	[*] --> call: call
+	call --> call: call
+	call --> it: it
+	call --> a: a
+	call --> me: me
+	call --> him: him
+	call --> ...
+	call --> [*]
+
+	me --> ishmael: ishmael
+	me --> call: call
+
+	ishmael --> [*]
+```
+
+But, lots of other words could *also* follow *"me"*. And more words could also follow *"Ishmael"*
+
+```{mermaid}
+stateDiagram
+	direction LR
+
+	[*] --> call: call
+	call --> call: call
+	call --> it: it
+	call --> a: a
+	call --> me: me
+	call --> him: him
+	call --> ...
+	call --> [*]
+
+	me --> me: me
+	me --> call: call
+	me --> that: that
+	me --> and: and
+	me --> ishmael: ishmael
+	me --> to: to
+	me --> ...
+	me --> [*]
+
+	ishmael --> ishmael: ishmael
+	ishmael --> me: me
+	ishmael --> can: can
+	ishmael --> said: said
+	ishmael --> ...
+	ishmael --> [*]
+```
+
+If we fully fleshed out this diagram with *all*[^1] of words in *Moby Dick*, it would look like this
+
+[^1]: well, *almost* all.
+
+```{r}
+#| label: "fig-moby_dick_network"
+#| fig-width: 5
+#| fig-height: 5
+#| fig-cap: "Bigram network for Moby Dick, where $C(w_1, w_2)\\ge 5$"
+#| out-width: "80%"
+#| fig-align: center
+ggplot(bigram_network, 
+       aes(x = x, y = y, xend = xend, yend = yend))+
+  geom_edges(
+    arrow = arrow(type = "closed", length = unit(0.1, "cm")),
+    linewidth = 0.1,
+    alpha = 0.5
+    )+
+  geom_nodes(size = 0.1)+
+  theme_void()+
+  theme(aspect.ratio = 1)
+```
+
+### \*grams
+
+The "model" of word sequences is called an "ngram" model or more specifically a "bigram" model.
+
+| Words in the current state | Words in input | Total Words | Name    |
+|----------------------------|----------------|-------------|---------|
+| 1                          | 1              | 2           | bigram  |
+| 2                          | 1              | 3           | trigram |
+| 3                          | 1              | 4           | 4-gram  |
+| 4                          | 1              | 5           | 5-gram  |
+|                            |                |             | etc     |
+
+: How we name \*gram models
+
+We can expand the context of the bigram model to a trigram model, which would look something like this
+
+```{mermaid}
+stateDiagram
+  direction LR
+  
+  state "_ call" as _c
+  state "call me" as cm
+  state "me Ishmael" as mi
+  
+  [*] --> _
+  _ --> _c: call
+  _c --> cm: me
+  cm --> mi: Ishmael
+  mi --> [*]
+  
+```
+
+But, again, even for this small vocabulary, this *total* number of states is incomplete. If we wired up *all* of the logical transitions they'd look like this [ilithid](https://en.wikipedia.org/wiki/Illithid) monstrosity.
+
+```{mermaid}
+stateDiagram
+	direction LR
+
+	state "_ call" as _c
+	state "_ me" as _m
+	state "_ Ishmael" as _i
+	
+	state "call me" as cm
+	state "call call" as cc
+	state "call Ishmael" as ci
+
+	state "me Ishmael" as mi
+	state "me call" as mc
+	state "me me" as mm
+
+	state "Ishmael call" as ic
+	state "Ishmael Ishmael" as ii
+	state "Ishmael me" as im
+
+	[*] --> _: _
+	_ --> _m: me
+	_ --> _c: call
+	_ --> _i: Ishmael
+	
+
+	_c --> cm: me
+	_c --> cc: call
+	_c --> ci: Ishmael
+
+	cc --> cc: call
+	cc --> ci: Ishmael
+	cc --> cm: me
+
+	ci --> ii: Ishmael
+	ci --> im: me
+	ci --> ic: call
+
+	cm --> mi: Ishmael
+	cm --> mm: me
+	cm --> mc: call
+
+	_m --> mc: call
+	_m --> mm: me
+	_m --> mi: Ishmael
+	
+	mm --> mm: me
+	mm --> mc: call
+	mm --> mi: Ishmael
+
+	mi --> ii: Ishmael
+	mi --> ic: call
+	mi --> im: me
+
+	mc --> cm: me
+	mc --> ci: Ishmael
+	mc --> cc: call
+
+
+
+	_i --> ic: call
+	_i --> im: me
+	_i --> ii: Ishmael
+
+	ic --> cc: call
+	ic --> cm: me
+	ic --> ci: Ishmael
+
+	im --> mi: Ishmael
+	im --> mc: call
+	im --> mm: me
+
+	ii --> im: me
+	ii --> ic: call
+	ii --> ii: Ishmael
+	
+```
+
+### Probabilistic ngrams
+
+But, if we look at the actual entire book *Moby Dick,* not all of these connections are equally likely.
+
+```{r}
+bigrams |> 
+  filter(word %in% c("call", "me", "ishmael"),
+         next_word %in% c("call", "me", "ishmael")) |> 
+  mutate(word = factor(word, levels = c("call", "me", "ishmael"))) |> 
+  complete(word, next_word, fill = list(n = 0)) |> 
+  pivot_wider(
+    names_from = word, 
+    values_from = n
+  ) |> 
+  relocate(
+    me, .after = call 
+  ) |> 
+  gt(
+    rowname_col = "next_word", 
+  ) |> 
+  tab_spanner(
+    label = "word", columns = 2:4
+  ) |> 
+  tab_stubhead("next word") |> 
+  gt_color_rows(call:ishmael, domain = 1:3)
+```
+
+```{mermaid}
+%% fig-align: center
+flowchart LR
+	c["call"] ==> m["me"]
+	m --> c
+	m --> i["Ishmael"]
+```
+
+## Terminology and Notation Moment
+
+### Types vs Tokens
+
+<details>
+
+<summary>A function to get all of the words in Moby Dick</summary>
+
+```{python}
+#| collapse: true
+#| code-summary: A function to get all Moby Dick words
+#| echo: true
+import re
+import gutenbergpy.textget
+from nltk.tokenize import word_tokenize
+
+def get_moby_dick_words():
+  raw_book = gutenbergpy.textget.get_text_by_id(2701) # with headers
+  moby_dick_byte = gutenbergpy.textget.strip_headers(raw_book) # without headers
+  moby_dick = moby_dick_byte.decode("utf-8").lower() 
+  moby_dick_tokens = word_tokenize(moby_dick)
+  moby_dick_words = [tok for tok in moby_dick_tokens if re.match(r"\w", tok)]
+  
+  return moby_dick_words
+```
+
+</details>
+
+::: codebox
+```{python}
+#| echo: true
+moby_dick_words = get_moby_dick_words()
+for idx, word in enumerate(moby_dick_words[0:20]):
+  print(word, end = ", ")
+  if (idx+1) % 5 == 0:
+     print("")
+```
+:::
+
+We can get counts of how often each word appeared in the book with `collections.Counter()` .
+
+::: codebox
+```{python}
+#| echo: true
+from collections import Counter
+
+word_count = Counter(moby_dick_words)
+```
+:::
+
+Let's compare the length of the full list of words to the length of the word count dictionary.
+
+::: codebox
+```{python}
+#| echo: true
+print(f"There are {len(moby_dick_words):,} total  words.")
+print(f"There are  {len(word_count):,} unique words.")
+```
+:::
+
+::: callout-important
+## Terminology
+
+In more common corpus/compling terminology, we would say
+
+-   There are 215,300 **tokens** in *Moby Dick*.
+
+-   There are 19,989 **types** in *Moby Dick*.
+:::
+
+We can get the frequency of the words "whale" and "ogre" in *Moby Dick* like so:
+
+::: {.callout-note collapse="true"}
+## Indexing with a string?
+
+We can index `word_count` with the string `"whale"` because it is a ["dictionary"](../concepts/00_glossary.qmd#dictionary) We could create our own dictionary like this:
+
+```{python}
+#| echo: true
+food_type = {
+  "banana": "fruit",
+  "strawberry": "fruit",
+  "carrot": "vegetable",
+  "onion": "vegetable"
+}
+
+food_type["banana"]
+```
+:::
+
+::: codebox
+```{python}
+#| echo: true
+print(f"The word 'whale' appeared {word_count['whale']:,} times.")
+print(f"The word  'ogre' appeared    {word_count['ogre']} times.")
+```
+:::
+
+::: callout-important
+## Terminology
+
+The way we'd describe this in a more corpus/comp-ling way is
+
+> The word **type** "whale" appears in *Moby Dick*. There are 1,070 **tokens** of "whale" in the book.
+>
+> The word **type** "ogre" does not appear in *Moby Dick*.
+:::
+
+### Notation
+
+## Language Prediction
+
+When we are perceiving language, we are constantly and in real-time making predictions about what we are about to hear next. While we're going to be talking about this in terms of predicting the next word, It's been shown that we do this even partway through a word [@allopenna1998].
+
+So, let's say I spoke this much of a sentence to you:
+
+> I could tell he was angry from the tone of his\_\_\_
+
+And then a sudden noise obscured the final word, and you only caught part of it. Which of the following three words was I *probably* trying to say?
+
+a.  boys
+b.  choice
+c.  voice
+
+Your ability to guess which word it was is based on your i) experience with English turns of phrase and ii) the information in the context.
+
+One goal of Language Models is to assign probabilities across the vocabulary for what the next word will be, and hopefully assign higher probabilities to the "correct" answer than the "incorrect" answer. Applications for this kind of prediction range from speech-to-text (which could suffer from a very similar circumstance as the fictional one above) to autocomplete or spellcheck.
+
+## Using context (ngrams)
+
+In the example sentence above, one way we could go about trying to predict which word is most likely is to count up how many times the phrase "I could tell he was angry from the tone of his\_\_\_" is finished by the candidate words. Here's a table of google hits for the three possible phrases, as well as all hits for just the context phrase.
+
+|   "I could tell he was angry from the tone of his" | count |
+|---------------------------------------------------:|------:|
+|                                               boys |     0 |
+|                                             choice |     0 |
+|                                              voice |     3 |
+| *"I could tell he was angry from the tone of his"* |     3 |
+
+We're going to start diving into mathematical formulas now (fortunately the numbers are easy right now).
+
+To represent the count of a word or string of words in a corpus. We'll use $C(\text{word})$. So given the table above we have
+
+$$
+\displaylines{C(\text{I could tell he was angry from the tone of his})=3\\
+C(\text{I could tell he was angry from the tone of his boys})=0\\
+C(\text{I could tell he was angry from the tone of his choice})=0\\
+C(\text{I could tell he was angry from the tone of his voice})=3}
+$$
+
+To describe the probability that the next word is "choice" given that we've already heard "I could tell he was angry from the tone of his", we'll use the notation $P(\text{choice} | \text{I could tell he was angry from the tone of his})$. To *calculate* that probability, we'll divide the total count of the whole phrase by the count of the preceding context.
+
+$$
+P(\text{choice} | \text{I could tell he was angry from the tone of his}) = \frac{C(\text{I could tell he was angry by the tone of his choice})}{C(\text{I could tell he was angry by the tone of his})} = \frac{0}{3} = 0
+$$
+
+In fact, we can estimate the probability of an entire sentence with the *Probability Chain Rule*. The probability of a sequence of events like $P(X_1X_2X_3)$ can be estimated by multiplying out their conditional probabilities like so:
+
+$$
+P(X_1X_2X_3) = P(X_1)P(X_2|X_1)P(X_3|X_1X_2)
+$$
+
+Or, to use a phrase as an example:[^2]
+
+[^2]: Credit here to Kyle Gorman for introducing me to this example.
+
+$$
+P(\text{du hast mich gefragt})=P(\text{du})P(\text{hast}|\text{du})P(\text{mich}|\text{du hast})P(\text{gefragt}|\text{du hast mich})
+$$
+
+## Data Sparsity
+
+The problem we face is that, even with the whole internet to search, very long phrases like *"I could tell he was angry by the tone of his"* are relatively rare!
+
+If we look at *Moby Dick*, using a standard tokenizer (more on that later) we wind up with `r scales::label_comma()(length(py$moby_dick_words))` words in total. But not every word is equally likely.
+
+```{r}
+tibble(
+  word = py$moby_dick_words
+) |> 
+  count(word, name = "freq") |> 
+  arrange(desc(freq)) |> 
+  mutate(rank = row_number()) ->
+  one_grams
+```
+
+```{r}
+#| crop: true
+#| fig-width: 5
+#| fig-height: 5
+#| out-width: "80%"
+#| fig-align: center
+#| fig-cap: "Rank and Frequency of single words in Moby Dick"
+one_grams |> 
+  slice(1:10)->
+  top_10
+
+one_grams |> 
+  ggplot(
+    aes(
+      rank, 
+      freq
+    )
+  )+
+    geom_point(
+      color = "grey60"
+    ) +
+    geom_text_repel(
+      data = top_10,
+      aes(label = word)
+    )+
+    scale_x_log10(
+      labels = scales::comma
+    )+
+    scale_y_log10(
+      labels = scales::comma
+    )+
+    theme_minimal(base_size = 20)+
+    theme(
+      aspect.ratio = 1
+    )
+```
+
+```{r}
+long_string = str_c(py$moby_dick_words, collapse = " ")
+```
+
+```{r}
+moby_dick2gram = ngram(long_string)
+moby_dick3gram = ngram(long_string, n = 3)
+moby_dick4gram = ngram(long_string, n = 4)
+moby_dick5gram = ngram(long_string, n = 5)
+
+gram2 = get.phrasetable(moby_dick2gram) |> mutate(n = 2)
+gram3 = get.phrasetable(moby_dick3gram) |> mutate(n = 3)
+gram4 = get.phrasetable(moby_dick4gram) |> mutate(n = 4)
+gram5 = get.phrasetable(moby_dick5gram) |> mutate(n = 5)
+```
+
+```{r}
+bind_rows(
+  gram2,
+  gram3,
+  gram4,
+  gram5
+) |> 
+  mutate(
+    rank = rank(desc(freq), ties.method = "random"),
+    .by = n
+  ) ->
+  all_gram
+```
+
+```{r}
+#| crop: true
+#| fig-width: 6
+#| fig-height: 6
+#| out-width: "80%"
+#| fig-align: center
+#| fig-cap: "Rank and Frequency of 2-grams through 5-grams in Moby Dick"
+all_gram |> 
+  ggplot(
+    aes(
+      rank, freq
+    )
+  )+
+    geom_point()+
+    facet_wrap(~n)+
+    scale_x_log10(
+      labels = scales::comma
+    )+
+    scale_y_log10(
+       labels = scales::comma
+    )+
+    theme_minimal(base_size = 20)+
+    theme(
+      aspect.ratio = 1
+    )
+```
+
+```{r}
+#| fig-width: 7
+#| fig-height: 5
+#| out-width: "80%"
+#| fig-align: center
+#| fig-cap: "The proportion of all tokens which are hapax legomena "
+one_grams |> 
+  mutate(
+    ngrams = word,
+    n = 1
+  ) |> 
+  bind_rows(
+    gram2, gram3, gram4, gram5
+  ) |> 
+  mutate(
+    hapax = freq == 1
+  ) |> 
+  summarise(
+    total_count = sum(freq),
+    total_type = n(),
+    .by = c(hapax, n)
+  ) |> 
+  mutate(
+    total_prop = total_count/sum(total_count),
+    type_prop = total_type/sum(total_type),
+    .by = n
+  ) |> 
+  ggplot(
+    aes(
+      factor(n),
+      total_prop
+    )
+  )+
+    geom_col(
+      aes(fill = hapax),
+      position = "stack",
+      color = "black"
+    )+
+    scale_fill_bright()+
+    scale_y_continuous(
+      expand = expansion()
+    )+
+    labs(
+      x = "n gram size",
+      y = "proportion hapax legomena"
+    )+
+    theme_minimal(base_size = 20)
+```
