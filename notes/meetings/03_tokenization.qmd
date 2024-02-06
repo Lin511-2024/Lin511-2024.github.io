@@ -8,6 +8,8 @@ knitr:
     warning: false
 filters: 
   - codeblocklabel
+categories:
+  - compling
 bibliography: references.bib
 ---
 
