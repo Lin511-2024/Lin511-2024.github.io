@@ -1,7 +1,7 @@
 ---
 title: "ngrams"
 subtitle: "-or- What if we *could* parse natural language with a finite state automaton?"
-date: 2024-02-05
+date: 2024-02-13
 filters: 
   - codeblocklabel
 knitr:
@@ -341,9 +341,9 @@ from nltk.tokenize import word_tokenize
 def get_moby_dick_words():
   raw_book = gutenbergpy.textget.get_text_by_id(2701) # with headers
   moby_dick_byte = gutenbergpy.textget.strip_headers(raw_book) # without headers
-  moby_dick = moby_dick_byte.decode("utf-8").lower() 
+  moby_dick = moby_dick_byte.decode("utf-8")
   moby_dick_tokens = word_tokenize(moby_dick)
-  moby_dick_words = [tok for tok in moby_dick_tokens if re.match(r"\w", tok)]
+  moby_dick_words = [tok for tok in moby_dick_tokens]
   
   return moby_dick_words
 ```
@@ -432,6 +432,117 @@ The way we'd describe this in a more corpus/comp-ling way is
 
 ### Notation
 
+In mathematical notation,
+
+|                  |       |       |         |       |       |       |     |       |
+|------------------|:-----:|:-----:|:-------:|:-----:|:-----:|:-----:|:---:|:-----:|
+| **text**         | Call  |  me   | Ishmael |   .   | Some  | years | ... |       |
+| **math standin** | $w_1$ | $w_2$ |  $w_3$  | $w_4$ | $w_5$ | $w_5$ |     | $w_i$ |
+
+$w_2$
+
+:   Literally the second word in a sequence.
+
+$w_i$
+
+:   The $i$^th^ word in the sequence (that is, any arbitrary word.
+
+```{r}
+#| tbl-cap: "Counts of each type in Moby Dick"
+first_words =  c("Call", "me", "Ishmael", ".", "Some", "years") 
+tibble(
+  token = py$moby_dick_words
+) |> 
+  count(token) |> 
+  filter(
+    token %in% first_words 
+  ) |> 
+  mutate(
+    token = factor(token, levels = first_words)
+  ) |> 
+  arrange(token) |> 
+  mutate(
+    math = str_glue("$C(w_{row_number()}) = {n}$")
+  ) |> 
+  gt() |> 
+   fmt_markdown(
+     columns = math
+   )
+```
+
+$C()$
+
+:   A function for the "C"ount of a value.
+
+$C(w_1)$
+
+:   The frequency of the *type* of the first *token*
+
+$C(w_i)$
+
+:   The frequency of an arbitrary type.
+
+```{r}
+first_bigram <- tibble(
+  token = first_words,
+  `next token` = lead(first_words)
+)
+
+tibble(
+  token = py$moby_dick_words
+) |> 
+  mutate(`next token` = lead(token)) |> 
+  count(
+    token, `next token`
+  ) |> 
+  inner_join(
+    first_bigram
+  ) |> 
+  mutate(
+    token = factor(token, levels = first_words)
+  ) |> 
+  arrange(token) |> 
+  mutate(
+    math = str_glue("$C(w_{row_number()}w_{row_number()+1}) = {n}$")
+  ) |> 
+  gt() |> 
+    cols_align(align = "left") |> 
+    cols_align(align = "center", columns = n) |> 
+    fmt_markdown(
+     columns = math
+   )
+```
+
+$C(w_1w_2)$
+
+:   The count of times the sequence $w_1w_2$ occured.
+
+$C(w_iw_{i+1})$
+
+:   The count of times an arbitrary 2 word sequence appeared
+
+$C(w_{i-1}w_i)$
+
+:   Same as before, but with emphasis on the second word.
+
+#### Probabilities
+
+$P(w_1)$
+
+:   The *probability* of the first word
+
+$P(w_i)$
+
+:   The probability if an arbitrary word
+
+$P(w_2|w_1)$
+
+:   The probability that we'll get word 2 coming after word 1
+
+$P(w_i|w_{i-1})$
+
+:   The probability we'll get any arbitrary word coming after the word before.
+
 ## Language Prediction
 
 When we are perceiving language, we are constantly and in real-time making predictions about what we are about to hear next. While we're going to be talking about this in terms of predicting the next word, It's been shown that we do this even partway through a word [@allopenna1998].
@@ -465,17 +576,23 @@ We're going to start diving into mathematical formulas now (fortunately the numb
 
 To represent the count of a word or string of words in a corpus. We'll use $C(\text{word})$. So given the table above we have
 
-$$
-\displaylines{C(\text{I could tell he was angry from the tone of his})=3\\
-C(\text{I could tell he was angry from the tone of his boys})=0\\
-C(\text{I could tell he was angry from the tone of his choice})=0\\
-C(\text{I could tell he was angry from the tone of his voice})=3}
-$$
+|                                                                   |     |     |
+|:------------------------------------------------------------------|:---:|:----|
+| $C(\text{I could tell he was angry from the tone of his})$        |  =  | 3   |
+| $C(\text{I could tell he was angry from the tone of his boys})$   |  =  | 0   |
+| $C(\text{I could tell he was angry from the tone of his choice})$ |  =  | 0   |
+| $C(\text{I could tell he was angry from the tone of his voice})$  |  =  | 3   |
 
 To describe the probability that the next word is "choice" given that we've already heard "I could tell he was angry from the tone of his", we'll use the notation $P(\text{choice} | \text{I could tell he was angry from the tone of his})$. To *calculate* that probability, we'll divide the total count of the whole phrase by the count of the preceding context.
 
 $$
 P(\text{choice} | \text{I could tell he was angry from the tone of his}) = \frac{C(\text{I could tell he was angry by the tone of his choice})}{C(\text{I could tell he was angry by the tone of his})} = \frac{0}{3} = 0
+$$
+
+Or, more generally:
+
+$$
+P(w_i|w_{i-n}\dots w_{i-1}) = \frac{w_{i-n}\dots w_i}{w_{i-n}\dots w_{i-1}}
 $$
 
 In fact, we can estimate the probability of an entire sentence with the *Probability Chain Rule*. The probability of a sequence of events like $P(X_1X_2X_3)$ can be estimated by multiplying out their conditional probabilities like so:
