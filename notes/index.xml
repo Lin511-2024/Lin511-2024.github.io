@@ -1403,7 +1403,7 @@ font-style: inherit;">=</span> nlp(sentence)</span>
 <div>
 
 </div>
-<div class="quarto-layout-panel" data-layout-ncol="2" style="border-style: solid;">
+<div class="quarto-layout-panel" style="border-style: solid;" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <p>Tokens</p>
@@ -1429,7 +1429,7 @@ _ c a n t e r</code></pre>
 <div>
 
 </div>
-<div class="quarto-layout-panel" data-layout-ncol="2" style="border-style: solid;">
+<div class="quarto-layout-panel" style="border-style: solid;" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <p>tokens</p>
@@ -1455,7 +1455,7 @@ _c a n t e r</code></pre>
 <div>
 
 </div>
-<div class="quarto-layout-panel" data-layout-ncol="2" style="border-style: solid;">
+<div class="quarto-layout-panel" style="border-style: solid;" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <p>tokens</p>
@@ -1481,7 +1481,7 @@ _ca n t e r _</code></pre>
 <div>
 
 </div>
-<div class="quarto-layout-panel" data-layout-ncol="2" style="border-style: solid;">
+<div class="quarto-layout-panel" style="border-style: solid;" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <p>tokens</p>
@@ -1615,6 +1615,7 @@ Bird, Steven, Ewan Klein, and Edward Loper. 2009. <em>Natural language processin
 Fruehwald, Josef. 2024. <span>“Tokenization.”</span> February 6, 2024.
 <a href="https://lin511-2024.github.io/notes/meetings/03_tokenization.html">https://lin511-2024.github.io/notes/meetings/03_tokenization.html</a>.
 </div></div></section></div> ]]></description>
+  <category>compling</category>
   <guid>https://lin511-2024.github.io/notes/meetings/03_tokenization.html</guid>
   <pubDate>Tue, 06 Feb 2024 00:00:00 GMT</pubDate>
 </item>
@@ -4721,7 +4722,7 @@ Fruehwald, Josef. n.d. <span>“Python Basics.”</span> <a href="https://lin511
 </div></div></section></div> ]]></description>
   <category>python</category>
   <guid>https://lin511-2024.github.io/notes/programming/01_Python_basics.html</guid>
-  <pubDate>Sun, 04 Feb 2024 22:17:42 GMT</pubDate>
+  <pubDate>Tue, 06 Feb 2024 13:58:12 GMT</pubDate>
 </item>
 </channel>
 </rss>
