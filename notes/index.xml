@@ -1348,15 +1348,12 @@ font-style: inherit;">=</span> nlp(sentence)</span>
 <div class="cell">
 
 </div>
-<div class="cell">
-
-</div>
 <p>Here’s a plot of the top 10 most frequent tokens in <em>Moby Dick</em>.</p>
 <div class="cell page-columns page-full" data-layout-align="center">
 <div class="cell-output-display page-columns page-full">
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://lin511-2024.github.io/notes/meetings/03_tokenization_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+<p><img src="https://lin511-2024.github.io/notes/meetings/03_tokenization_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
 <figcaption class="margin-caption">Top 10 tokens in Moby Dick</figcaption>
 </figure>
 </div>
@@ -1367,7 +1364,7 @@ font-style: inherit;">=</span> nlp(sentence)</span>
 <div class="cell-output-display page-columns page-full">
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://lin511-2024.github.io/notes/meetings/03_tokenization_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+<p><img src="https://lin511-2024.github.io/notes/meetings/03_tokenization_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
 <figcaption class="margin-caption">All tokens in Moby Dick</figcaption>
 </figure>
 </div>
@@ -1378,7 +1375,7 @@ font-style: inherit;">=</span> nlp(sentence)</span>
 <div class="cell-output-display page-columns page-full">
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://lin511-2024.github.io/notes/meetings/03_tokenization_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+<p><img src="https://lin511-2024.github.io/notes/meetings/03_tokenization_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
 <figcaption class="margin-caption">As the number of tokens increases, the size of the vocabulary increases</figcaption>
 </figure>
 </div>
@@ -1389,14 +1386,14 @@ font-style: inherit;">=</span> nlp(sentence)</span>
 <div class="cell-output-display page-columns page-full">
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
-<p><img src="https://lin511-2024.github.io/notes/meetings/03_tokenization_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<p><img src="https://lin511-2024.github.io/notes/meetings/03_tokenization_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" style="width:90.0%"></p>
 <figcaption class="margin-caption">The probability of a new type as token size increases</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="closed-vocabulary-tokenization-byte-pair-encoding" class="level2">
+<section id="closed-vocabulary-tokenization-byte-pair-encoding" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="closed-vocabulary-tokenization-byte-pair-encoding">Closed Vocabulary Tokenization (Byte Pair Encoding)</h2>
 <p>A different approach to tokenization is to have a pre-specified closed vocabulary that you use to pull tokens out of text.</p>
 <p>Let’s start out with a fake training of a byte pair encoder with the simple vocabulary “cats can’t canter”. We kick things off treating every character as a token, plus a specialized start-of-word symbol, which I’m representing with <code>_</code>.</p>
@@ -1504,7 +1501,7 @@ _can t e r</code></pre>
 </div>
 </div>
 <p>We’ll stop at that point, but we could either continue for a fixed number of iterations, or until our type, or vocabulary size reaches a fixed number.</p>
-<section id="the-use-of-byte-pair-encoding" class="level3">
+<section id="the-use-of-byte-pair-encoding" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="the-use-of-byte-pair-encoding">The use of Byte Pair Encoding</h3>
 <p>This kind of tokenization approach is necessary when you want to be able to tokenizer <em>anything</em>, and also have a pre-specified vocabulary size. We can see how OpenAI’s byte pair encoder handles the first few sentences of <em>Moby Dick</em></p>
 <div class="codebox">
@@ -1584,6 +1581,35 @@ font-style: inherit;">" "</span>))</span>
 ' way'  ' I'    ' have' ' of'   ' driving'  
 ' off'  ' the'  ' sple' 'en'    ' and'  
 ' regulating'   ' the'  ' circulation'  '.' ' ' </code></pre>
+</div>
+</div>
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="cell-output-display page-columns page-full">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://lin511-2024.github.io/notes/meetings/03_tokenization_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="576"></p>
+<figcaption class="margin-caption">Rank vs Frequency per tokenizer</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="https://lin511-2024.github.io/notes/meetings/03_tokenization_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="margin-caption">Corpus size vs Vocabulary size per tokenizer</figcaption>
+</figure>
 </div>
 </div>
 </div>
@@ -4722,7 +4748,7 @@ Fruehwald, Josef. n.d. <span>“Python Basics.”</span> <a href="https://lin511
 </div></div></section></div> ]]></description>
   <category>python</category>
   <guid>https://lin511-2024.github.io/notes/programming/01_Python_basics.html</guid>
-  <pubDate>Tue, 06 Feb 2024 13:58:12 GMT</pubDate>
+  <pubDate>Tue, 06 Feb 2024 20:02:53 GMT</pubDate>
 </item>
 </channel>
 </rss>
