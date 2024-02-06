@@ -387,17 +387,12 @@ import gutenbergpy.textget
 from nltk.tokenize import word_tokenize
 from collections import Counter
 
-def get_moby_dick_tokens():
-  raw_book = gutenbergpy.textget.get_text_by_id(2701) # with headers
-  moby_dick_byte = gutenbergpy.textget.strip_headers(raw_book) # without headers
-  moby_dick = moby_dick_byte.decode("utf-8").lower() 
-  moby_dick_tokens = word_tokenize(moby_dick)
-  
-  return moby_dick_tokens
-```
 
-```{python}
-all_tokens = get_moby_dick_tokens()
+raw_book = gutenbergpy.textget.get_text_by_id(2701) # with headers
+moby_dick_byte = gutenbergpy.textget.strip_headers(raw_book) # without headers
+moby_dick = moby_dick_byte.decode("utf-8").lower() 
+all_tokens = word_tokenize(moby_dick)
+  
 ```
 
 ```{r}
@@ -648,8 +643,7 @@ We'll stop at that point, but we could either continue for a fixed number of ite
 
 This kind of tokenization approach is necessary when you want to be able to tokenizer *anything*, and also have a pre-specified vocabulary size. We can see how OpenAI's byte pair encoder handles the first few sentences of *Moby Dick*
 
-:::{.codebox}
-
+::: codebox
 ```{python}
 #| echo: true
 import tiktoken
@@ -673,5 +667,109 @@ tokens = [
 
 wrap_print(tokens)
 ```
-
 :::
+
+```{python}
+all_gpt_tokens = [enc.decode([token]) for token in enc.encode(re.sub("\s+", " ", moby_dick))]
+```
+
+```{r}
+moby_gpt = tibble(
+  token = py$all_gpt_tokens
+)
+```
+
+```{r}
+moby_gpt |> 
+  count(token) |> 
+  arrange(
+    desc(n)
+  ) |> 
+  mutate(
+    rank = row_number()
+  )->moby_gpt_zipf
+```
+
+```{r}
+#| fig-width: 6
+#| fig-height: 5
+#| fig-align: center
+#| fig-cap: "Rank vs Frequency per tokenizer"
+moby_zipf |> 
+  mutate(
+    tokenizer = "open vocab"
+  ) |> 
+  bind_rows(
+    moby_gpt_zipf |> mutate(tokenizer = "byte-pair")
+  ) |> 
+  ggplot(
+    aes(
+      x = rank,
+      y = n
+    )
+  )+
+    geom_line(
+      aes(color = tokenizer),
+      linewidth = 1
+    )+
+    scale_y_log10(labels = scales::comma)+
+    scale_x_log10(labels = scales::comma)+
+    scale_color_bright()+
+    coord_fixed()+
+    labs(
+      title = "Corpus: Moby Dick"
+    )+
+    theme_minimal()
+```
+
+```{r}
+#| fig-width: 7
+#| fig-height: 5
+#| fig-cap: "Corpus size vs Vocabulary size per tokenizer"
+moby_tokens |> 
+  mutate(
+    tokens = row_number(),
+    vocab = cummax(
+      factor(token, levels = unique(token)) |> 
+        as.numeric()
+    ),
+    tokenizer = "open vocab"
+  ) ->
+  moby_vocab
+
+moby_gpt |> 
+  mutate(
+    tokens = row_number(),
+    vocab = cummax(
+      factor(token, levels = unique(token)) |> 
+        as.numeric()
+    ),
+    tokenizer = "byte-pair"
+  )->
+  moby_gpt_vocab
+
+
+moby_vocab |> 
+  bind_rows(moby_gpt_vocab) |> 
+  ggplot(
+    aes(
+      tokens,
+      vocab
+    )
+  )+
+    geom_line(
+      aes(
+        color = tokenizer
+      ),
+      linewidth = 1
+    )+
+    scale_x_continuous(
+      labels = scales::comma
+    )+
+    scale_y_continuous(
+      labels = scales::comma
+    )+
+    expand_limits(x = 0, y = 0)+
+    scale_color_bright() +
+    theme_minimal()
+```
