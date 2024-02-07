@@ -432,7 +432,7 @@ The way we'd describe this in a more corpus/comp-ling way is
 
 ### Notation
 
-In mathematical notation,
+#### Words and variables
 
 |                  |       |       |         |       |       |       |     |       |
 |------------------|:-----:|:-----:|:-------:|:-----:|:-----:|:-----:|:---:|:-----:|
@@ -445,7 +445,9 @@ $w_2$
 
 $w_i$
 
-:   The $i$^th^ word in the sequence (that is, any arbitrary word.
+:   The $i$^th^ word in the sequence (that is, any arbitrary word).
+
+#### Counting Words
 
 ```{r}
 #| tbl-cap: "Counts of each type in Moby Dick"
@@ -533,7 +535,7 @@ $P(w_1)$
 
 $P(w_i)$
 
-:   The probability if an arbitrary word
+:   The probability of an arbitrary word
 
 $P(w_2|w_1)$
 
@@ -577,7 +579,7 @@ We're going to start diving into mathematical formulas now (fortunately the numb
 To represent the count of a word or string of words in a corpus. We'll use $C(\text{word})$. So given the table above we have
 
 |                                                                   |     |     |
-|:------------------------------------------------------------------|:---:|:----|
+|:---------------------------------------------------|:--------:|:---------|
 | $C(\text{I could tell he was angry from the tone of his})$        |  =  | 3   |
 | $C(\text{I could tell he was angry from the tone of his boys})$   |  =  | 0   |
 | $C(\text{I could tell he was angry from the tone of his choice})$ |  =  | 0   |
@@ -766,4 +768,39 @@ one_grams |>
       y = "proportion hapax legomena"
     )+
     theme_minimal(base_size = 20)
+```
+
+### The *problem* with data sparsity
+
+Let's say we got the following sequence of 4 words, and I wanted to predict the 5th
+
+|       |       |       |          |       |
+|-------|-------|-------|----------|-------|
+| a     | man   | is    | elevated | ?     |
+| $w_1$ | $w_2$ | $w_3$ | $w_4$    | $w_5$ |
+
+So, for each word type, I want to know
+
+$$
+P(w_i | \text{a man is elevated})
+$$
+
+We know this is going to be calculated with this formula:
+
+$$
+\frac{C(\text{a man is elevated }w_i)}{C(\text{a man is elevated)}}
+$$
+
+From the 4gram counts, I'll grab a table of the frequency of "a man is elevated".
+
+```{r}
+gram4 |> 
+  filter(
+    str_detect(ngrams, "a man is elevated")
+  ) |> 
+  select(ngrams, freq) |> 
+  rename(
+    `4gram` = ngrams
+  ) |> 
+  gt()
 ```

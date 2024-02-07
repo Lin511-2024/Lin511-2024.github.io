@@ -1,3 +1,4 @@
+aligned-textgrid==0.5.0
 annotated-types==0.6.0
 anyio==4.1.0
 appnope==0.1.3
