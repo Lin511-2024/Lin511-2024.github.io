@@ -1,0 +1,67 @@
+---
+title: Generating sequences
+date: 2024-02-15
+---
+
+```{r}
+library(tidyverse)
+library(reticulate)
+```
+
+```{python}
+import re
+import gutenbergpy.textget
+from nltk.tokenize import word_tokenize
+from collections import Counter
+```
+
+```{python}
+raw_book = gutenbergpy.textget.get_text_by_id(2701) # with headers
+moby_dick_byte = gutenbergpy.textget.strip_headers(raw_book) # without headers
+moby_dick = moby_dick_byte.decode("utf-8")
+moby_dick_tokens = word_tokenize(moby_dick)
+moby_dick_words = [tok for tok in moby_dick_tokens if re.match(r"\w", tok)]
+```
+
+```{r}
+moby_tokens <- tibble(
+  token = py$moby_dick_tokens
+)
+```
+
+## "Sampling" from a probability distribution
+
+```{r}
+moby_tokens |> 
+  mutate(
+    fol = lead(token)
+  ) |> 
+  count(token, fol) |> 
+  filter(
+    token == "the"
+  ) |> 
+  arrange(desc(n)) |> 
+  slice(1:5) |> 
+  mutate(
+    fol = factor(fol) |> fct_reorder(.x = -n, .fun = median)
+  )->
+  top_five
+```
+
+```{r}
+#| fig-width: 5
+#| fig-height: 3
+#| fig-cap: "Frequency of words that come after 'the'"
+top_five |> 
+  ggplot(
+    aes(fol,  n)
+  )+
+    geom_col()+
+    theme_minimal()+
+    scale_y_continuous(expand = expansion())+
+    labs(
+      y = "count",
+      x = "following word",
+      title = "words that came after 'the'"
+    )
+```
