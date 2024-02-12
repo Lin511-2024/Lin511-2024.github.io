@@ -993,7 +993,9 @@ sent_df |>
   )
 ```
 
-I artificially clamped the number of decimal points that would show in the final column to 10, but because of the way computers represent decimal points, they *also* have a lower limit they can get to. So these probabilities will often be represented as *log* probabilities.
+I artificially clamped the number of decimal points that would show in the final column to 10, but because of the way computers represent decimal points, they *also* have a lower limit they can get to.
+
+To avoid things getting weird with decimals that are too small, these probabilities will often be represented as *log* probabilities.
 
 If you don't remember how logarithms work, that's ok. There's just a few useful properties to remember.
 
@@ -1015,6 +1017,22 @@ $$
 
 ```{r}
 sent_df |> 
-  mutate(log_prob = log(prob),
-         total_lp = cumsum(log_prob)) 
+  mutate(
+    log_prob = log(prob),
+    total_lp = cumsum(log_prob)
+  ) |> 
+  select(
+    ngrams, 
+    prob,
+    log_prob,
+    total_lp
+  ) |> 
+  gt() |> 
+    cols_label(
+      ngrams = "bigram",
+      prob = "probability",
+      log_prob = "log(prob)",
+      total_lp = "total log(prob)"
+    ) |> 
+    fmt_number(decimals = 2) 
 ```
