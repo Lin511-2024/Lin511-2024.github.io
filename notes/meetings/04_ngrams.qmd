@@ -439,6 +439,9 @@ The way we'd describe this in a more corpus/comp-ling way is
 | **text**         | Call  |  me   | Ishmael |   .   | Some  | years | ... |       |
 | **math standin** | $w_1$ | $w_2$ |  $w_3$  | $w_4$ | $w_5$ | $w_5$ |     | $w_i$ |
 
+::: callout-note
+## Math Notation
+
 $w_2$
 
 :   Literally the second word in a sequence.
@@ -446,6 +449,7 @@ $w_2$
 $w_i$
 
 :   The $i$^th^ word in the sequence (that is, any arbitrary word).
+:::
 
 #### Counting Words
 
@@ -472,6 +476,9 @@ tibble(
    )
 ```
 
+::: callout-note
+## Math Notation
+
 $C()$
 
 :   A function for the "C"ount of a value.
@@ -483,6 +490,7 @@ $C(w_1)$
 $C(w_i)$
 
 :   The frequency of an arbitrary type.
+:::
 
 ```{r}
 first_bigram <- tibble(
@@ -515,6 +523,9 @@ tibble(
    )
 ```
 
+::: callout-note
+## Math Notation
+
 $C(w_1w_2)$
 
 :   The count of times the sequence $w_1w_2$ occured.
@@ -526,8 +537,12 @@ $C(w_iw_{i+1})$
 $C(w_{i-1}w_i)$
 
 :   Same as before, but with emphasis on the second word.
+:::
 
 #### Probabilities
+
+::: callout-note
+## Math Notation
 
 $P(w_1)$
 
@@ -544,6 +559,7 @@ $P(w_2|w_1)$
 $P(w_i|w_{i-1})$
 
 :   The probability we'll get any arbitrary word coming after the word before.
+:::
 
 ## Language Prediction
 
@@ -579,7 +595,7 @@ We're going to start diving into mathematical formulas now (fortunately the numb
 To represent the count of a word or string of words in a corpus. We'll use $C(\text{word})$. So given the table above we have
 
 |                                                                   |     |     |
-|:---------------------------------------------------|:--------:|:---------|
+|:-----------------------------------------|:-------------:|:--------------|
 | $C(\text{I could tell he was angry from the tone of his})$        |  =  | 3   |
 | $C(\text{I could tell he was angry from the tone of his boys})$   |  =  | 0   |
 | $C(\text{I could tell he was angry from the tone of his choice})$ |  =  | 0   |
@@ -694,6 +710,8 @@ bind_rows(
   all_gram
 ```
 
+And as the size of the ngrams increases, the sparsity gets worse.
+
 ```{r}
 #| crop: true
 #| fig-width: 6
@@ -720,6 +738,8 @@ all_gram |>
       aspect.ratio = 1
     )
 ```
+
+A "Hapax Legomenon" is a word or phrase that occurs just once in a corpus. If we look at the 2-grams through 5-grams in Moby Dick and make a plot of what proportion of tokens are hapax legomena, we can see that almost *all* 5grams appear just once.
 
 ```{r}
 #| fig-width: 7
@@ -803,4 +823,198 @@ gram4 |>
     `4gram` = ngrams
   ) |> 
   gt()
+```
+
+It looks like *"a man is elevated"* appeared just once, so it follows that the 5gram that starts with *"a man is elevated"* also appears just once.
+
+```{r}
+gram5 |> 
+  filter(
+    str_detect(ngrams, "^a man is elevated")
+  ) |> 
+  select(ngrams, freq) |> 
+  rename(`5gram` = ngrams) |> 
+  gt()
+```
+
+If we wanted to compare the probabilities of the words *in* and *to* in this context. we'd wind up with the following results.
+
+$$
+P(\text{in} | \text{a man is elevated}) = \frac{C(\text{a man is elevated in})}{C(\text{a man is elevated)}} = \frac{1}{1} = 1
+$$
+
+$$
+P(\text{to} | \text{a man is elevated}) = \frac{C(\text{a man is elevated to})}{C(\text{a man is elevated)}} = \frac{0}{1} = 0
+$$
+
+According to this 5gram model trained on Moby Dick, there's a *0% chance* that the next word could be *"to"*.
+
+Is that really reasonable?
+
+### Approximating with ngrams
+
+Instead of using long ngrams, we can try approximating with shorter ngrams (known as the Markov Assumption).
+
+$$
+P(\text{in} | \text{a man is elevated}) \approx P(\text{in} | \text{elevated})
+$$
+
+```{r}
+gram2 |> 
+  filter(
+    str_detect(ngrams, "^elevated")
+  ) |> 
+  select(ngrams, freq) |> 
+  rename(
+    bigrams = ngrams
+  ) |> 
+  mutate(
+    prob = round(freq/sum(freq), digits = 2)
+  ) |> 
+  gt() |> 
+    cols_label(
+      prob = md("$P(w_i)$")
+    ) 
+```
+
+## Calculating probabilities
+
+Remember this chain rule?
+
+$$
+P(\text{du hast mich gefragt})=P(\text{du})P(\text{hast}|\text{du})P(\text{mich}|\text{du hast})P(\text{gefragt}|\text{du hast mich})
+$$
+
+We'd simplify this, like so:
+
+$$
+P(\text{du hast mich gefragt}) = P({\text{du} | \text{\#}})P(\text{hast} | \text{du})P(\text{mich} | \text{hast})P(\text{gefragt}|\text{mich})
+$$
+
+### Log Probabilities
+
+There's an additional complication about how we represent probabilities. Let's build a very probable 10 word string starting with *"The".* I'll just grab the most frequent $w_i$ that comes after $w_{i-1}$.[^3]
+
+[^3]: If we went longer than 10, we actually get $\text{The Pequod's a little}\overline{\text{, and the whale}}$
+
+```{r}
+gen_sent <- function(bigrams, n = 10){
+  out_list = vector(length = n, mode = "list")
+  start = "The"
+  for(i in 1:n){
+    next_df = bigrams |> 
+      filter(str_detect(ngrams, str_c("^", start, " "))) |> 
+      mutate(prob = freq/sum(freq)) |> 
+      arrange(desc(freq)) |> 
+      slice(1)
+    out_list[[i]] <- next_df
+    
+    next_df |> 
+      pull(ngrams) |> 
+      str_extract("[^\\s]+ $") |> 
+      str_squish()->
+      start
+  }
+  return(out_list)
+}
+```
+
+```{r}
+gen_sent(gram2, n = 10) |> 
+  list_rbind() ->
+  sent_df
+
+sent_df |> 
+  select(
+    ngrams,
+    freq, 
+    prob
+  ) |> 
+  gt() |> 
+    cols_label(
+      ngrams = "bigram",
+      prob = md("$P(w_i | w_{i-1})$")
+    ) |> 
+  fmt_number(
+    columns = freq,
+    decimals = 0
+  ) |> 
+  fmt_number(
+    columns = prob,
+    decimals = 2
+  )
+```
+
+```{r}
+#| results: markup
+sent_df |> 
+  mutate(
+    first = str_extract(ngrams, "^[^\\s]+")
+  ) |> 
+  pull(first) |> 
+  str_c(collapse = " ") |> 
+  str_replace_all(" ([^\\w])", "\\1") |> 
+  str_replace_all("’ ", "’") ->
+  sent
+
+str_c("> ", sent, ",") |> print()
+```
+
+We can calculate the cumulative probability of each next substring of the sentence.
+
+```{r}
+sent_df |> 
+  mutate(
+    total_prob = cumprod(prob)
+  ) |> 
+  select(
+    ngrams,
+    freq, 
+    prob,
+    total_prob
+  ) |> 
+  gt() |> 
+    cols_label(
+      ngrams = "bigram",
+      prob = md("$P(w_i | w_{i-1})$"),
+      total_prob = md("$P(w_{i-n}\\dots w_i)$")
+    ) |> 
+  fmt_number(
+    columns = freq,
+    decimals = 0
+  ) |> 
+  fmt_number(
+    columns = prob,
+    decimals = 2
+  ) |>
+  fmt_number(
+    columns = total_prob,
+    decimals = 10
+  )
+```
+
+I artificially clamped the number of decimal points that would show in the final column to 10, but because of the way computers represent decimal points, they *also* have a lower limit they can get to. So these probabilities will often be represented as *log* probabilities.
+
+If you don't remember how logarithms work, that's ok. There's just a few useful properties to remember.
+
+$$
+\log(x)  \left\{ \begin{array}{c} > 0; x>1\\=0; x =1\\<0; x<1 \end{array} \right\}
+$$
+
+$$
+\log(0) = -\infty
+$$
+
+$$
+\log(x  y) = \log(x) + \log(y)
+$$
+
+$$
+\log(\frac{x}{y}) = \log(x) - \log(y)
+$$
+
+```{r}
+sent_df |> 
+  mutate(log_prob = log(prob),
+         total_lp = cumsum(log_prob)) 
 ```
