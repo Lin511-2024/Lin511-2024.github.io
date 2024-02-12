@@ -595,7 +595,7 @@ We're going to start diving into mathematical formulas now (fortunately the numb
 To represent the count of a word or string of words in a corpus. We'll use $C(\text{word})$. So given the table above we have
 
 |                                                                   |     |     |
-|:-----------------------------------------|:-------------:|:--------------|
+|:------------------------------------------------------------------|:---:|:----|
 | $C(\text{I could tell he was angry from the tone of his})$        |  =  | 3   |
 | $C(\text{I could tell he was angry from the tone of his boys})$   |  =  | 0   |
 | $C(\text{I could tell he was angry from the tone of his choice})$ |  =  | 0   |
