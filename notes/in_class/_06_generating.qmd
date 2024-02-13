@@ -1,0 +1,38 @@
+---
+title: "_06_generating"
+---
+
+
+## Actually generating ngrams
+
+```{python}
+#| echo: true
+import re
+import gutenbergpy.textget
+from nltk.tokenize import sent_tokenize, word_tokenize
+```
+
+```{python}
+raw_book = gutenbergpy.textget.get_text_by_id(2701) # with headers
+book_clean = gutenbergpy.textget.strip_headers(raw_book) # without headers
+book_str = book_clean.decode("utf-8")
+```
+
+```{python}
+book_sentences = sent_tokenize(book_str)
+book_sentences[2024]
+```
+
+```{python}
+book_words = [word_tokenize(sent) for sent in book_sentences]
+book_words[2024]
+```
+
+```{python }
+from nltk.lm.preprocessing import pad_both_ends
+list(pad_both_ends(book_words[2024], n = 2))
+```
+
+```{python}
+padded_book_words = [pad_both_ends(sent, n = 2) for sent in book_words]
+```
