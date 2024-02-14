@@ -1,5 +1,5 @@
 ---
-title: Generating sequences from ngrams
+title: Sampling from a probability distribution
 date: 2024-02-15
 knitr: 
   opts_chunk: 
@@ -9,6 +9,8 @@ knitr:
     dev: ragg_png
 filters: 
   - codeblocklabel
+categories:
+  - compling
 ---
 
 ```{r}
@@ -44,15 +46,13 @@ moby_tokens <- tibble(
 )
 ```
 
-## "Sampling" from a probability distribution
-
 From an n-gram model, we can generate new sequences by sampling from the probability distribution over tokens.
 
-### From counts to proportions
+## From counts to proportions
 
 Let's start by saying we're working with a bigram model (counts of 2 token sequences). If we start with an input token *"the"*, how do we randomly generate the next token?
 
-Let's restrict our view to just the top 5 words that followed "the":
+Let's restrict our view to just the top 5 words that followed "the" in *Moby Dick*:
 
 ```{r}
 moby_tokens |> 
@@ -118,7 +118,7 @@ top_five |>
 
 These two plots *should* look the same, just with different labels on the y-axis.
 
-### From proportions to a "probability distribution"
+## From proportions to a "probability distribution"
 
 Now, if we stack each bar on top of each other and lie it flat, we get the "probability distribution" over tokens. The rectangle for each word represents how much probability it "takes up".
 
@@ -161,7 +161,7 @@ top_five_for_rand |>
 sample_base
 ```
 
-###  Sampling from the probability distribution
+## Sampling from the probability distribution
 
 To sample from this probability distribution, we can randomly throw darts at the figure above. Whichever rectangle the dart lands inside, we'll say is the word we "sampled".
 
@@ -290,4 +290,3 @@ new_rand_samp |>
       decimals = 0
     )
 ```
-
