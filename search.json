@@ -444,48 +444,155 @@
     ]
   },
   {
-    "objectID": "notes/programming/01_Python_basics.html",
-    "href": "notes/programming/01_Python_basics.html",
-    "title": "Python basics",
+    "objectID": "notes/programming/02_regex.html",
+    "href": "notes/programming/02_regex.html",
+    "title": "Regular Expressions, Quickly",
     "section": "",
-    "text": "print(1)\n\n1\n\n\n\nprint(\"hello\")\n\nhello\n\n\n\nprint(2 + 2)\n\n4\n\n\n\nx = 1\ny = 10\n\nprint(x + y)\n\n11\n\n\n\nword1 = \"Hello\"\nword2 = \" World!\"\n\nprint(word1 + word2)\n\nHello World!\n\n\n\nprint(True)\n\nTrue\n\n\n\nprint(False)\n\nFalse\n\n\n\nprint(True and False)\n\nFalse\n\n\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Python Basics},\n  url = {https://lin511-2024.github.io/notes/programming/01_Python_basics.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Python Basics.” https://lin511-2024.github.io/notes/programming/01_Python_basics.html.",
+    "text": "Look at Github\n\n\n\nThe real content is in your regex-in-class-&lt;username&gt; repository on github. This is meant to be more of a reference sheet.",
     "crumbs": [
       "Notes",
       "Programming",
-      "Python basics"
+      "Regular Expressions, Quickly"
     ]
   },
   {
-    "objectID": "notes/index.html",
-    "href": "notes/index.html",
-    "title": "Meeting Notes",
-    "section": "",
-    "text": "These are the notes for our regular meetings. \n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSetup Notes\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJan 8, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nRegular Languages and Finite State Machines\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nFSA in-class notes\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nPushdown Automata and Context Free Languages\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nJan 23, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nRegular Expressions, Quickly\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJan 25, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nMore Python: Poetry, Lists, Loops\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJan 30, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nTokenization\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nFeb 6, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nWorking with Tokenizers\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nFeb 8, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nngrams\n\n\n-or- What if we could parse natural language with a finite state automaton?\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nFeb 13, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nSampling from a probability distribution\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nFeb 15, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nPython basics\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJosef Fruehwald\n\n\n\n\n\n\nNo matching items\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Meeting {Notes}},\n  url = {https://lin511-2024.github.io/notes},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Meeting Notes.” https://lin511-2024.github.io/notes.",
+    "objectID": "notes/programming/02_regex.html#setting-up-for-using-regular-expressions-in-python",
+    "href": "notes/programming/02_regex.html#setting-up-for-using-regular-expressions-in-python",
+    "title": "Regular Expressions, Quickly",
+    "section": "Setting up for using regular expressions in python",
+    "text": "Setting up for using regular expressions in python\n\nWe’ll need to import the re module\nUnlike simple strings, we’ll need to write our regular expressions with a preceding r\n\n\nimport re\n\nr\"regex\"\n\n'regex'",
     "crumbs": [
       "Notes",
-      "Notes Home"
+      "Programming",
+      "Regular Expressions, Quickly"
     ]
   },
   {
-    "objectID": "syllabus/schedule.html",
-    "href": "syllabus/schedule.html",
-    "title": "Course Schedule",
-    "section": "",
-    "text": "Week 1\n\n\n\nDates:\n\nJan 8-12\n\n\n\n\nTopics:\n\nSetup, What is Computational Linguistics?\n\n\n\n\n\nReadings\n\nFollow posted tutorials for setting up our course technology.\nTP Chapter 1\n\n\n\n\n\nWeek 2-3\n\n\n\nDates:\n\nJan 15-26\n\n\n\n\nTopics:\n\nFiles, Text, Strings, Regular Expressions, Finite State Automata\n\n\n\n\nNo Office Hours for MLK Jr Day.\n\nReadings:\n\nCourse Notes: What is Python\nSLP Chapter 2, section 2.1 (pdf)\nTP, Chapter 2, Variables, expressions and statements\nTP Chapter 3, Functionss\n\n\n\n\n\nWeek 4-5\n\n\n\nDates:\n\nJan 29-Feb 09\n\n\n\n\nTopics:\n\nText Normalization, Tokenization, Python Variables, Python Functions\n\n\n\n\n\nReadings:\n\nSLP Chapter 2, sections 2.2, 2.3, 2.4\nTP, Chapter 10, Lists\nTP, Chapter 7, Iteration\nTP, Chapter 5, Conditionals\nNLTK Book, Chapter 3\n\n\n\n\n\nWeek 6-7\n\n\n\nDates:\n\nFeb 12 - 23\n\n\n\n\nTopics:\n\nn-grams, Corpora, Document Classification, Python Loops and Conditionals\n\n\n\n\n\nReadings\n\nSLP Chapters 3, 4, 5\n\n\n\n\n\nWeek 8-9\n\n\n\nDates:\n\nFeb 26 - Mar 08\n\n\n\n\nTopics:\n\nHidden Markov Models\n\n\n\n\n\nReadings\n\nSLP Appendix A: Hidden Markov Models\nTP Chapter 11, Dictionaries\nTP Chapter 15, Classes and Objects\n\n\n\nSpring Break\n\n\n\n\n\nWeek 10-11\n\n\n\nDates:\n\nMar 18-29\n\n\n\n\nTopics:\n\nParsing, Dependency trees\n\n\n\n\n\n\n\nWeek 12-13\n\n\n\nDates:\n\nApr 01-12\n\n\n\n\nTopics:\n\nDistributional semantics, word “embeddings”\n\n\n\n\n\n\n\nWeek 14-15\n\n\n\nDates:\n\nApr 15-19\n\n\n\n\nTopics:\n\nNeural Network Basics, Review\n\n\n\n\n\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Course {Schedule}},\n  url = {https://lin511-2024.github.io/syllabus/schedule.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Course Schedule.” https://lin511-2024.github.io/syllabus/schedule.html.",
+    "objectID": "notes/programming/02_regex.html#important-re-functions",
+    "href": "notes/programming/02_regex.html#important-re-functions",
+    "title": "Regular Expressions, Quickly",
+    "section": "Important re functions",
+    "text": "Important re functions\nTwo ways to use re to search strings are\n\nre.search()\n\nReturn structured information about where the regex matches.\n\nre.findall()\n\nReturn all actual matching substrings\n\n\n\nsentence1 = \"The speaker is speaking.\"\n\n\nre.search()\n\nre.search(r\"speak\", sentence1)\n\n&lt;re.Match object; span=(4, 9), match='speak'&gt;\n\n\n\nsentence1[4:9]\n\n'speak'\n\n\n\n\nre.findall()\n\nre.findall(r\"speak\", sentence1)\n\n['speak', 'speak']",
     "crumbs": [
-      "Home",
-      "Schedule"
+      "Notes",
+      "Programming",
+      "Regular Expressions, Quickly"
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Computational Linguistics (Spring 2024)",
-    "section": "",
-    "text": "Welcome to the Lin511 Computational Linguistics website. This course is being taught in the University of Kentucky’s Linguistics Department in Spring 2024\nIf you are visiting on a mobile device, site navigation can be found under the “hamburger” at the top.\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Computational {Linguistics} {(Spring} 2024)},\n  url = {https://lin511-2024.github.io/},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Computational Linguistics (Spring\n2024).” https://lin511-2024.github.io/.",
+    "objectID": "notes/programming/02_regex.html#simple-character-searches",
+    "href": "notes/programming/02_regex.html#simple-character-searches",
+    "title": "Regular Expressions, Quickly",
+    "section": "Simple character searches",
+    "text": "Simple character searches\nLike the examples above, literally the characters you want to use will match.\n\nspeak_regex = r\"speak\"\nget_regex_url(speak_regex)\n\nspeak",
     "crumbs": [
-      "Home"
+      "Notes",
+      "Programming",
+      "Regular Expressions, Quickly"
     ]
+  },
+  {
+    "objectID": "notes/programming/02_regex.html#options",
+    "href": "notes/programming/02_regex.html#options",
+    "title": "Regular Expressions, Quickly",
+    "section": "Options",
+    "text": "Options\nIf you want some characters to be chosen from a set of options, place them in [].\n\nvowels_regex = r\"[aeiou]\"\nget_regex_url(vowels_regex)\n\n[aeiou]\n\n\n\nre.findall(r\"[aeiou]\", sentence1)\n\n['e', 'e', 'a', 'e', 'i', 'e', 'a', 'i']\n\n\n\nthe_regex = r\"[Tt]he\"\nget_regex_url(the_regex)\n\n[Tt]he\n\n\n\nre.findall(the_regex, sentence1)\n\n['The']\n\n\n\nRanges\nRanges of characters or numbers can be given inside [] like so\n\nget_regex_url(r\"[a-z]\")\nget_regex_url(r\"[A-Z]\")\nget_regex_url(r\"[0-9]\")\nget_regex_url(r\"[A-Za-z]\")\n\n[a-z]\n\n\n[A-Z]\n\n\n[0-9]\n\n\n[A-Za-z]\n\n\n\n\n“Metacharacters”\n\n\\w == [A-Za-z0-9_]\n\nword characters\n\n\\W == [^A-Za-z0-9_]\n\nnon-word characters\n\n\\d == [0-9]\n\ndigits\n\n\\D == [^0-9]\n\nnon-digits\n\n\\s == [ \\t\\n]\n\nAny whitespace character\n\n\\S == [^ \\t\\n]\n\nnon-whitespace\n\n\n\n\nAny Character\nTo match any character (letter, number, punctuation, space, etc.) use . or “dot”\n\nre.findall(\n    # return every word character and \n    # the following character\n    r\"\\w.\",\n    sentence1\n)\n\n['Th', 'e ', 'sp', 'ea', 'ke', 'r ', 'is', 'sp', 'ea', 'ki', 'ng']\n\n\n\n\nEscaping special symbols\nIf you wanted to find the actual period in sentence1, you’d have to “escape” the . with a preceding `.\n\n# compare\nget_regex_url(r\".\")\nget_regex_url(r\"\\.\")\n\n.\n\n\n.\n\n\n\nre.findall(\n    \"\\.\",\n    sentence1\n)\n\n['.']",
+    "crumbs": [
+      "Notes",
+      "Programming",
+      "Regular Expressions, Quickly"
+    ]
+  },
+  {
+    "objectID": "notes/programming/02_regex.html#modifiers",
+    "href": "notes/programming/02_regex.html#modifiers",
+    "title": "Regular Expressions, Quickly",
+    "section": "Modifiers",
+    "text": "Modifiers\nModifiers come after the definition of a single character, and define how many times that character can appear.\n\na? = zero or one a\na+ = one or more a\na* = zero or more a\n\n\nget_regex_url(r\"bana?na\")\nget_regex_url(r\"bana+na\")\nget_regex_url(r\"bana*na\")\n\nbana?na\n\n\nbana+na\n\n\nbana*na",
+    "crumbs": [
+      "Notes",
+      "Programming",
+      "Regular Expressions, Quickly"
+    ]
+  },
+  {
+    "objectID": "notes/programming/02_regex.html#grouping",
+    "href": "notes/programming/02_regex.html#grouping",
+    "title": "Regular Expressions, Quickly",
+    "section": "Grouping",
+    "text": "Grouping\nYou can define groupings within regular expressions. The effect of these groupings depends what kind of regex function you’re using. For re.findall(), it’ll find the whole string, but return just the text from the grouping.\n\nsentence2 = \"The big bear and the small bear ran away.\"\n\n\nget_regex_url(r\"[Tt]he (\\w+) bear\")\n\n[Tt]he (+) bear\n\n\n\nre.findall(\n    r\"[Tt]he (\\w+) bear\",\n    sentence2\n)\n\n['big', 'small']",
+    "crumbs": [
+      "Notes",
+      "Programming",
+      "Regular Expressions, Quickly"
+    ]
+  },
+  {
+    "objectID": "notes/programming/02_regex.html#boundaries",
+    "href": "notes/programming/02_regex.html#boundaries",
+    "title": "Regular Expressions, Quickly",
+    "section": "Boundaries",
+    "text": "Boundaries\n\n^the == Finds “the” at the start of a string.\nthe$ == Finds ” the” at the end of a string.\n\\bthe\\b == Finds “the” in between word boundaries.\n\n\nget_regex_url(r\"^the \")\nget_regex_url(r\" the$\")\nget_regex_url(r\"\\bthe\\b\")\n\n^the\n\n\nthe$\n\n\n[(https://regexper.com/#%5Cbthe%5Cb)\n\n\n\nsentence3 = \"I saw the other bear.\"\nre.findall(\n    r\"the\",\n    sentence3\n)\n\n['the', 'the']\n\n\nThe second “the” there comes from inside “other”\n\nre.findall(\n    r\"\\bthe\\b\",\n    sentence3\n)\n\n['the']\n\n\n\nsentence3\n\n'I saw the other bear.'",
+    "crumbs": [
+      "Notes",
+      "Programming",
+      "Regular Expressions, Quickly"
+    ]
+  },
+  {
+    "objectID": "notes/in_class/00_python.html",
+    "href": "notes/in_class/00_python.html",
+    "title": "Starting Python",
+    "section": "",
+    "text": "This is how python works",
+    "crumbs": [
+      "Notes",
+      "In-class",
+      "Starting Python"
+    ]
+  },
+  {
+    "objectID": "notes/in_class/00_python.html#arithmetic-math",
+    "href": "notes/in_class/00_python.html#arithmetic-math",
+    "title": "Starting Python",
+    "section": "Arithmetic & Math",
+    "text": "Arithmetic & Math\n\n8+5\n\n13\n\n\n\n2084 -          1985\n\n99",
+    "crumbs": [
+      "Notes",
+      "In-class",
+      "Starting Python"
+    ]
+  },
+  {
+    "objectID": "notes/in_class/00_python.html#variables-and-assignment",
+    "href": "notes/in_class/00_python.html#variables-and-assignment",
+    "title": "Starting Python",
+    "section": "“Variables” and “Assignment”",
+    "text": "“Variables” and “Assignment”\n\nfruehwald_age = 2084 - 1985\n\nTitleCase\nsnake_case\ncamelCase\n\nfruehwald_age * 12\n\n1188\n\n\n\nVariables vs Strings\n\n\"fruehwald_age\"\n\n'fruehwald_age'\n\n\n\n'fruehwald_age'\n\n'fruehwald_age'\n\n\n\njohn_favorite_color = \"purple\"\n\n\nJohn_favorite_color\n\nNameError: name 'John_favorite_color' is not defined",
+    "crumbs": [
+      "Notes",
+      "In-class",
+      "Starting Python"
+    ]
+  },
+  {
+    "objectID": "notes/in_class/00_python.html#importing",
+    "href": "notes/in_class/00_python.html#importing",
+    "title": "Starting Python",
+    "section": "Importing",
+    "text": "Importing\n\nimport re\n\n\nre.search()\n\n\n# import pathlib\n# pathlib.Path()\n\nfrom pathlib import Path\n\n\nPath()\n\nPosixPath('.')",
+    "crumbs": [
+      "Notes",
+      "In-class",
+      "Starting Python"
+    ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This is the website for Lin511, Computational Linguistics, taught at the University of Kentucky Spring 2024\n\nAttribution\n\nThe robot emoji in the course logo is modified from Open Emoji (link), licenced CC-BY-SA 4.0. Edited version here(svg).\n\n\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {About},\n  url = {https://lin511-2024.github.io/about.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “About.” https://lin511-2024.github.io/about.html."
   },
   {
     "objectID": "syllabus/syllabus.html",
@@ -664,154 +771,107 @@
     ]
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Computational Linguistics (Spring 2024)",
     "section": "",
-    "text": "This is the website for Lin511, Computational Linguistics, taught at the University of Kentucky Spring 2024\n\nAttribution\n\nThe robot emoji in the course logo is modified from Open Emoji (link), licenced CC-BY-SA 4.0. Edited version here(svg).\n\n\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {About},\n  url = {https://lin511-2024.github.io/about.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “About.” https://lin511-2024.github.io/about.html."
+    "text": "Welcome to the Lin511 Computational Linguistics website. This course is being taught in the University of Kentucky’s Linguistics Department in Spring 2024\nIf you are visiting on a mobile device, site navigation can be found under the “hamburger” at the top.\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Computational {Linguistics} {(Spring} 2024)},\n  url = {https://lin511-2024.github.io/},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Computational Linguistics (Spring\n2024).” https://lin511-2024.github.io/.",
+    "crumbs": [
+      "Home"
+    ]
   },
   {
-    "objectID": "notes/in_class/00_python.html",
-    "href": "notes/in_class/00_python.html",
-    "title": "Starting Python",
+    "objectID": "syllabus/schedule.html",
+    "href": "syllabus/schedule.html",
+    "title": "Course Schedule",
     "section": "",
-    "text": "This is how python works",
+    "text": "Week 1\n\n\n\nDates:\n\nJan 8-12\n\n\n\n\nTopics:\n\nSetup, What is Computational Linguistics?\n\n\n\n\n\nReadings\n\nFollow posted tutorials for setting up our course technology.\nTP Chapter 1\n\n\n\n\n\nWeek 2-3\n\n\n\nDates:\n\nJan 15-26\n\n\n\n\nTopics:\n\nFiles, Text, Strings, Regular Expressions, Finite State Automata\n\n\n\n\nNo Office Hours for MLK Jr Day.\n\nReadings:\n\nCourse Notes: What is Python\nSLP Chapter 2, section 2.1 (pdf)\nTP, Chapter 2, Variables, expressions and statements\nTP Chapter 3, Functionss\n\n\n\n\n\nWeek 4-5\n\n\n\nDates:\n\nJan 29-Feb 09\n\n\n\n\nTopics:\n\nText Normalization, Tokenization, Python Variables, Python Functions\n\n\n\n\n\nReadings:\n\nSLP Chapter 2, sections 2.2, 2.3, 2.4\nTP, Chapter 10, Lists\nTP, Chapter 7, Iteration\nTP, Chapter 5, Conditionals\nNLTK Book, Chapter 3\n\n\n\n\n\nWeek 6-7\n\n\n\nDates:\n\nFeb 12 - 23\n\n\n\n\nTopics:\n\nn-grams, Corpora, Document Classification, Python Loops and Conditionals\n\n\n\n\n\nReadings\n\nSLP Chapters 3, 4, 5\n\n\n\n\n\nWeek 8-9\n\n\n\nDates:\n\nFeb 26 - Mar 08\n\n\n\n\nTopics:\n\nHidden Markov Models\n\n\n\n\n\nReadings\n\nSLP Appendix A: Hidden Markov Models\nTP Chapter 11, Dictionaries\nTP Chapter 15, Classes and Objects\n\n\n\nSpring Break\n\n\n\n\n\nWeek 10-11\n\n\n\nDates:\n\nMar 18-29\n\n\n\n\nTopics:\n\nParsing, Dependency trees\n\n\n\n\n\n\n\nWeek 12-13\n\n\n\nDates:\n\nApr 01-12\n\n\n\n\nTopics:\n\nDistributional semantics, word “embeddings”\n\n\n\n\n\n\n\nWeek 14-15\n\n\n\nDates:\n\nApr 15-19\n\n\n\n\nTopics:\n\nNeural Network Basics, Review\n\n\n\n\n\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Course {Schedule}},\n  url = {https://lin511-2024.github.io/syllabus/schedule.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Course Schedule.” https://lin511-2024.github.io/syllabus/schedule.html.",
     "crumbs": [
-      "Notes",
-      "In-class",
-      "Starting Python"
+      "Home",
+      "Schedule"
     ]
   },
   {
-    "objectID": "notes/in_class/00_python.html#arithmetic-math",
-    "href": "notes/in_class/00_python.html#arithmetic-math",
-    "title": "Starting Python",
-    "section": "Arithmetic & Math",
-    "text": "Arithmetic & Math\n\n8+5\n\n13\n\n\n\n2084 -          1985\n\n99",
-    "crumbs": [
-      "Notes",
-      "In-class",
-      "Starting Python"
-    ]
-  },
-  {
-    "objectID": "notes/in_class/00_python.html#variables-and-assignment",
-    "href": "notes/in_class/00_python.html#variables-and-assignment",
-    "title": "Starting Python",
-    "section": "“Variables” and “Assignment”",
-    "text": "“Variables” and “Assignment”\n\nfruehwald_age = 2084 - 1985\n\nTitleCase\nsnake_case\ncamelCase\n\nfruehwald_age * 12\n\n1188\n\n\n\nVariables vs Strings\n\n\"fruehwald_age\"\n\n'fruehwald_age'\n\n\n\n'fruehwald_age'\n\n'fruehwald_age'\n\n\n\njohn_favorite_color = \"purple\"\n\n\nJohn_favorite_color\n\nNameError: name 'John_favorite_color' is not defined",
-    "crumbs": [
-      "Notes",
-      "In-class",
-      "Starting Python"
-    ]
-  },
-  {
-    "objectID": "notes/in_class/00_python.html#importing",
-    "href": "notes/in_class/00_python.html#importing",
-    "title": "Starting Python",
-    "section": "Importing",
-    "text": "Importing\n\nimport re\n\n\nre.search()\n\n\n# import pathlib\n# pathlib.Path()\n\nfrom pathlib import Path\n\n\nPath()\n\nPosixPath('.')",
-    "crumbs": [
-      "Notes",
-      "In-class",
-      "Starting Python"
-    ]
-  },
-  {
-    "objectID": "notes/programming/02_regex.html",
-    "href": "notes/programming/02_regex.html",
-    "title": "Regular Expressions, Quickly",
+    "objectID": "notes/index.html",
+    "href": "notes/index.html",
+    "title": "Meeting Notes",
     "section": "",
-    "text": "Look at Github\n\n\n\nThe real content is in your regex-in-class-&lt;username&gt; repository on github. This is meant to be more of a reference sheet.",
+    "text": "These are the notes for our regular meetings. \n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSetup Notes\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJan 8, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nRegular Languages and Finite State Machines\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nFSA in-class notes\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nPushdown Automata and Context Free Languages\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nJan 23, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nRegular Expressions, Quickly\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJan 25, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nMore Python: Poetry, Lists, Loops\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJan 30, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nTokenization\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nFeb 6, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nWorking with Tokenizers\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nFeb 8, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nngrams\n\n\n-or- What if we could parse natural language with a finite state automaton?\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nFeb 13, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nMaking and Counting ngrams in python\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nFeb 13, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nSampling from a probability distribution\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nFeb 15, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nPython basics\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJosef Fruehwald\n\n\n\n\n\n\nNo matching items\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Meeting {Notes}},\n  url = {https://lin511-2024.github.io/notes},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Meeting Notes.” https://lin511-2024.github.io/notes.",
     "crumbs": [
       "Notes",
-      "Programming",
-      "Regular Expressions, Quickly"
+      "Notes Home"
     ]
   },
   {
-    "objectID": "notes/programming/02_regex.html#setting-up-for-using-regular-expressions-in-python",
-    "href": "notes/programming/02_regex.html#setting-up-for-using-regular-expressions-in-python",
-    "title": "Regular Expressions, Quickly",
-    "section": "Setting up for using regular expressions in python",
-    "text": "Setting up for using regular expressions in python\n\nWe’ll need to import the re module\nUnlike simple strings, we’ll need to write our regular expressions with a preceding r\n\n\nimport re\n\nr\"regex\"\n\n'regex'",
+    "objectID": "notes/programming/01_Python_basics.html",
+    "href": "notes/programming/01_Python_basics.html",
+    "title": "Python basics",
+    "section": "",
+    "text": "print(1)\n\n1\n\n\n\nprint(\"hello\")\n\nhello\n\n\n\nprint(2 + 2)\n\n4\n\n\n\nx = 1\ny = 10\n\nprint(x + y)\n\n11\n\n\n\nword1 = \"Hello\"\nword2 = \" World!\"\n\nprint(word1 + word2)\n\nHello World!\n\n\n\nprint(True)\n\nTrue\n\n\n\nprint(False)\n\nFalse\n\n\n\nprint(True and False)\n\nFalse\n\n\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Python Basics},\n  url = {https://lin511-2024.github.io/notes/programming/01_Python_basics.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Python Basics.” https://lin511-2024.github.io/notes/programming/01_Python_basics.html.",
     "crumbs": [
       "Notes",
       "Programming",
-      "Regular Expressions, Quickly"
+      "Python basics"
     ]
   },
   {
-    "objectID": "notes/programming/02_regex.html#important-re-functions",
-    "href": "notes/programming/02_regex.html#important-re-functions",
-    "title": "Regular Expressions, Quickly",
-    "section": "Important re functions",
-    "text": "Important re functions\nTwo ways to use re to search strings are\n\nre.search()\n\nReturn structured information about where the regex matches.\n\nre.findall()\n\nReturn all actual matching substrings\n\n\n\nsentence1 = \"The speaker is speaking.\"\n\n\nre.search()\n\nre.search(r\"speak\", sentence1)\n\n&lt;re.Match object; span=(4, 9), match='speak'&gt;\n\n\n\nsentence1[4:9]\n\n'speak'\n\n\n\n\nre.findall()\n\nre.findall(r\"speak\", sentence1)\n\n['speak', 'speak']",
+    "objectID": "notes/programming/05_ngrams.html",
+    "href": "notes/programming/05_ngrams.html",
+    "title": "Making and Counting ngrams in python",
+    "section": "",
+    "text": "Here, we’ll work through some of the practicalities of creating and counting ngrams from text. Let’s grab the book first.\nbook-getting function\nfrom gutenbergpy.textget \\\n    import get_text_by_id,\\\n           strip_headers\n\ndef get_clean_book(book_id):\n    \"\"\"Get the cleaned book\n\n    Args:\n        book_id (str|int): The book id\n\n    Returns:\n        (str): The full book\n    \"\"\"\n    raw_book = get_text_by_id(book_id)\n    book_byte = strip_headers(raw_book)\n    book_clean = book_byte.decode(\"utf-8\")\n\n    return book_clean\nmoby_dick = get_clean_book(2701)",
     "crumbs": [
       "Notes",
       "Programming",
-      "Regular Expressions, Quickly"
+      "Making and Counting ngrams in python"
     ]
   },
   {
-    "objectID": "notes/programming/02_regex.html#simple-character-searches",
-    "href": "notes/programming/02_regex.html#simple-character-searches",
-    "title": "Regular Expressions, Quickly",
-    "section": "Simple character searches",
-    "text": "Simple character searches\nLike the examples above, literally the characters you want to use will match.\n\nspeak_regex = r\"speak\"\nget_regex_url(speak_regex)\n\nspeak",
+    "objectID": "notes/programming/05_ngrams.html#first-unigrams",
+    "href": "notes/programming/05_ngrams.html#first-unigrams",
+    "title": "Making and Counting ngrams in python",
+    "section": "First, unigrams",
+    "text": "First, unigrams\nFirst step will be getting the “unigram” frequencies.\n\n\n\nwords in context\nwords to predict\ntotal\nname\n\n\n\n\n0\n1\n1\nunigram\n\n\n1\n1\n2\nbigram\n\n\n2\n2\n3\ntrigram\n\n\n\nTo get any counts, we need to tokenize.\n\nfrom nltk.tokenize import word_tokenize\n\nmoby_words = word_tokenize(moby_dick)\n\nNext, we can count with collections.Counter()\n\n\nfrom collections import Counter\n\nmoby_count = Counter(moby_words)\nmoby_count.most_common(10)\n\n[(',', 19211),\n ('the', 13717),\n ('.', 7164),\n ('of', 6563),\n ('and', 6009),\n ('to', 4515),\n ('a', 4507),\n (';', 4178),\n ('in', 3915),\n ('that', 2918)]\n\n\n\nThe “unigram” probability of a word: \\[\nP(w_i) = \\frac{C(w_i)}{\\sum_{i=1}^n C(w_i)}\n\\]\nWe can get \\(C(w_i)\\) from the counter dictionary\n\n\nmoby_count[\"whale\"]\n\n771\n\n\n\nThe trickier thing to get is \\(\\sum_{i=1}^n C(w_i)\\). One way to do it is with a for loop.\n\n\ntotal_freq = 0\nfor word in moby_count:\n    total_freq += moby_count[word]\n\ntotal_freq\n\n255958\n\n\n\nWith total_freq, we can calculate the probability of each token, which we can store in another dictionary.\n\n\nmoby_prob = {}\nfor word in moby_count:\n    moby_prob[word] = moby_count[word] / total_freq\n\nmoby_prob[\"whale\"]\n\n0.0030122129411856635\n\n\n\n\nIntroducing numpy\nnumpy is a python package that allows you to do numeric computation more easilly.\n\n## if you need to install it:\n# ! pip install numpy\n\nimport numpy as np\n\nIf we just had a python list of numbers, we couldn’t quickly divide each number by the sum.\n\n\nsample_list = [0, 1, 3]\nsample_list / sum(sample_list)\n\nTypeError: unsupported operand type(s) for /: 'list' and 'int'\n\n\n\nWe can do this with a numpy array.\n\n\nsample_array = np.array([0, 1, 3])\nsample_array / sample_array.sum()\n\narray([0.  , 0.25, 0.75])\n\n\n\nThere’s lots of numpy methods to make life easier when working with numbers.\n\n\n[\n    sample_array.min(), \n    sample_array.max()\n]\n\n[0, 3]\n\n\n\n\n\nRelating tokens, counts and probabilities\nWhile the dictionary moby_count is convenient for quickly getting the count of a token, we’ll need separate lists and arrays for:\n\nthe text of each token\nthe count of each token\nthe probability of each token\n\n\n# a list of the text of each token\nword_list = [w for w in moby_count]\n\n# an array of the count of each token\ncount_array = np.array(\n    [\n        moby_count[w] \n        for w in word_list\n    ]\n)\n\n# a array of the probability of each token\nprob_array = count_array / count_array.sum()\n\nA thing to think about is how the mathematical formula on the left is being implemented in the code on the right.\n\n\n\n\n\n\n\\[\n\\frac{C(w_i)}{\\sum_{i=1}^n w_i}\n\\]\n\n\ncount_array / count_array.sum()\n\n\n\nWe can get a specific word’s probability like so:\n\n\nprob_array[\n    word_list.index(\"whale\")\n]\n\n0.0030122129411856635\n\n\n\n\n\n“Sampling” random words\nWe can sample a random word from the unigram distribution like so:\n\n\nnp.random.choice(\n    word_list, \n    size = 10, \n    p = prob_array\n)\n\narray(['it', 'letter', 'compasses', 'and', 'cut', 'lot', 'a', 'thus',\n       'flew', 'With'], dtype='&lt;U28')",
     "crumbs": [
       "Notes",
       "Programming",
-      "Regular Expressions, Quickly"
+      "Making and Counting ngrams in python"
     ]
   },
   {
-    "objectID": "notes/programming/02_regex.html#options",
-    "href": "notes/programming/02_regex.html#options",
-    "title": "Regular Expressions, Quickly",
-    "section": "Options",
-    "text": "Options\nIf you want some characters to be chosen from a set of options, place them in [].\n\nvowels_regex = r\"[aeiou]\"\nget_regex_url(vowels_regex)\n\n[aeiou]\n\n\n\nre.findall(r\"[aeiou]\", sentence1)\n\n['e', 'e', 'a', 'e', 'i', 'e', 'a', 'i']\n\n\n\nthe_regex = r\"[Tt]he\"\nget_regex_url(the_regex)\n\n[Tt]he\n\n\n\nre.findall(the_regex, sentence1)\n\n['The']\n\n\n\nRanges\nRanges of characters or numbers can be given inside [] like so\n\nget_regex_url(r\"[a-z]\")\nget_regex_url(r\"[A-Z]\")\nget_regex_url(r\"[0-9]\")\nget_regex_url(r\"[A-Za-z]\")\n\n[a-z]\n\n\n[A-Z]\n\n\n[0-9]\n\n\n[A-Za-z]\n\n\n\n\n“Metacharacters”\n\n\\w == [A-Za-z0-9_]\n\nword characters\n\n\\W == [^A-Za-z0-9_]\n\nnon-word characters\n\n\\d == [0-9]\n\ndigits\n\n\\D == [^0-9]\n\nnon-digits\n\n\\s == [ \\t\\n]\n\nAny whitespace character\n\n\\S == [^ \\t\\n]\n\nnon-whitespace\n\n\n\n\nAny Character\nTo match any character (letter, number, punctuation, space, etc.) use . or “dot”\n\nre.findall(\n    # return every word character and \n    # the following character\n    r\"\\w.\",\n    sentence1\n)\n\n['Th', 'e ', 'sp', 'ea', 'ke', 'r ', 'is', 'sp', 'ea', 'ki', 'ng']\n\n\n\n\nEscaping special symbols\nIf you wanted to find the actual period in sentence1, you’d have to “escape” the . with a preceding `.\n\n# compare\nget_regex_url(r\".\")\nget_regex_url(r\"\\.\")\n\n.\n\n\n.\n\n\n\nre.findall(\n    \"\\.\",\n    sentence1\n)\n\n['.']",
+    "objectID": "notes/programming/05_ngrams.html#making-bigrams",
+    "href": "notes/programming/05_ngrams.html#making-bigrams",
+    "title": "Making and Counting ngrams in python",
+    "section": "Making Bigrams",
+    "text": "Making Bigrams\nMaking bigrams is a bit more complex. We need to get counts of each sequence of two tokens. Fortunately, nltk has a nice and convenient function for this.\n\n\nfrom nltk import ngrams\nsent1 = [\"Call\", \"me\", \"Ishmael\", \".\"]\n\nlist(\n    ngrams(sent1, n = 2)\n)\n\n[('Call', 'me'), ('me', 'Ishmael'), ('Ishmael', '.')]\n\n\n\nThis is a list of “tuples”. Tuples are kind of like lists, but you’re not able to edit them after you create them. We can use Counter() on a list of tuples just like we did a list of tokens.\n\n\nmoby_bigram_count = Counter(\n    ngrams(moby_words, 2)\n)\n\nmoby_bigram_count.most_common(10)\n\n[((',', 'and'), 2630),\n (('of', 'the'), 1869),\n (('’', 's'), 1784),\n (('in', 'the'), 1122),\n ((',', 'the'), 916),\n ((';', 'and'), 857),\n (('to', 'the'), 715),\n (('.', 'But'), 596),\n (('.', '“'), 594),\n ((',', 'that'), 583)]\n\n\n\n\nbigram_list = [bigram for bigram in moby_bigram_count]\nbigram_count = np.array(\n    [moby_bigram_count[bigram] for bigram in bigram_list]\n)\n\n\nGetting conditional probabilities\nNow, getting the probability of a single token isn’t as straightforward, since we’re looking at conditional probabilities.\n\\[\nP(w_i | w_{i-1}) = \\frac{C(w_{i-1}w_i)}{\\sum C(w_{i-1}w)}\n\\]\nTo use concrete words for a second:\n\\[\nP(\\text{whale} | \\text{the}) = \\frac{C(\\text{the whale})}{\\sum C(\\text{the }w)}\n\\]\nSo, to calculate the conditional probability, we need to get\n\nThe count of the bigram “the whale”\nA list (or array) of the count of every bigram that begins with “the”.\nThe sum of this second list.\n\n\n\n# the first word in the\n# 2 word sequence\nw_0 = \"the\"\n\nw_0w = [\n    bigram \n    for bigram in moby_bigram_count\n    if bigram[0] == w_0\n]\n\nw_0w[0:10]\n\n[('the', 'Whale'),\n ('the', 'Monstrous'),\n ('the', 'Less'),\n ('the', 'True'),\n ('the', 'Hand'),\n ('the', 'Arsacides'),\n ('the', 'Carpenter'),\n ('the', 'Cabin'),\n ('the', 'End'),\n ('the', 'First')]\n\n\n\n\n\nC_w_0w = np.array(\n    [\n        moby_bigram_count[bigram]\n        for bigram in w_0w\n    ]\n)\n\ntotal_w_0 = C_w_0w.sum()\n\ntotal_w_0\n\n13717\n\n\n\nWe can now get the specific conditional probability for the word “whale”\n\n\nmoby_bigram_count[\n    (\"the\", \"whale\")\n]\n\n325\n\n\n\n\n\nmoby_bigram_count[\n    (\"the\", \"whale\")\n] / total_w_0\n\n0.02369322738208063\n\n\n\nTo randomly generate any word following “the”, we need to get the probability distribution across bigrams.\n\n\nP_w_0w = C_w_0w / C_w_0w.sum()\n\nw_1 = [bigram[1] for bigram in w_0w]\n\nnp.random.choice(\n    w_1,\n    size = 4,\n    p = P_w_0w\n)\n\narray(['hammers', 'steak', 'chances', 'house'], dtype='&lt;U21')\n\n\n\nTo generate a sequence, starting with a specific word, we need to encapsulate our logic above into a single function.\n\ndef generate_sequence(\n        bigram_count:dict,\n        w_0:str = \"The\", \n        n:int = 10\n        )-&gt;list[str]:\n    \"\"\"Generate a sequence of words from \n    a bigram model\n\n    Args:\n        w_0 (str): The initial token\n        n (int): The size of the sequence\n            to generate\n\n    Returns:\n        (list[str]): The generated sequence\n    \"\"\"\n    ## start out with the seed token\n    sequence = [w_0]\n\n    for i in range(n):\n        ## The new seed token should be\n        ## the last one added\n        w_0 = sequence[-1]\n\n        ## get all bigrams beginning \n        ## with the seed token\n        w_0w = [\n            bigram \n            for bigram in bigram_count\n            if bigram[0] == w_0\n        ]\n\n        ## get the counts of all bigrams\n        C_w_0w = np.array([\n            bigram_count[bigram]\n            for bigram in w_0w\n        ])\n\n        ## get the probabilities of all bigrams\n        P_w_0w = C_w_0w / C_w_0w.sum()\n\n        ## get the second token \n        ## from every bigram\n        w_1 = [\n            bigram[1]\n            for bigram in w_0w\n        ]\n\n        ## sample a new token\n        chosen = np.random.choice(\n            w_1,\n            size = 1,\n            p = P_w_0w\n        )\n\n        ## add the sampled token to the \n        ## sequence\n        sequence.append(chosen[0])\n\n    return sequence\n\n\n\ngenerate_sequence(moby_bigram_count)\n\n['The',\n 'heavers',\n 'singing',\n 'in',\n 'his',\n 'suit',\n ',',\n 'filled',\n 'for',\n 'their',\n 'spirits']",
     "crumbs": [
       "Notes",
       "Programming",
-      "Regular Expressions, Quickly"
+      "Making and Counting ngrams in python"
     ]
   },
   {
-    "objectID": "notes/programming/02_regex.html#modifiers",
-    "href": "notes/programming/02_regex.html#modifiers",
-    "title": "Regular Expressions, Quickly",
-    "section": "Modifiers",
-    "text": "Modifiers\nModifiers come after the definition of a single character, and define how many times that character can appear.\n\na? = zero or one a\na+ = one or more a\na* = zero or more a\n\n\nget_regex_url(r\"bana?na\")\nget_regex_url(r\"bana+na\")\nget_regex_url(r\"bana*na\")\n\nbana?na\n\n\nbana+na\n\n\nbana*na",
+    "objectID": "notes/programming/05_ngrams.html#padding",
+    "href": "notes/programming/05_ngrams.html#padding",
+    "title": "Making and Counting ngrams in python",
+    "section": "Padding",
+    "text": "Padding\nThe bigram sequence generator above has to start out on a specific word, and it will keep going for as many loops as we tell it.\nIf we wanted a generator that doesn’t need a specific word to start on, and will auto-stop when it gets to the end of a sentence, we’ll need to pre-process our data differently, so that there are special “start” and “stop” symbols, or “padding”.\n\n\nfrom nltk.tokenize import sent_tokenize\nmoby_sentences = sent_tokenize(moby_dick)\n\nprint(moby_sentences[500])\n\nDeep into distant woodlands\nwinds a mazy way, reaching to overlapping spurs of mountains bathed in\ntheir hill-side blue.\n\n\n\n\n\nmoby_sent_words = [\n    word_tokenize(sentence) \n    for sentence in moby_sentences\n]\n\nmoby_sent_words[500]\n\n['Deep',\n 'into',\n 'distant',\n 'woodlands',\n 'winds',\n 'a',\n 'mazy',\n 'way',\n ',',\n 'reaching',\n 'to',\n 'overlapping',\n 'spurs',\n 'of',\n 'mountains',\n 'bathed',\n 'in',\n 'their',\n 'hill-side',\n 'blue',\n '.']\n\n\n\n\nmoby_sent_words_padded = [\n    [\"&lt;s&gt;\"] + sent + [\"&lt;/s&gt;\"]\n    for sent in moby_sent_words\n]\n\nmoby_sent_words_padded[500]\n\n['&lt;s&gt;',\n 'Deep',\n 'into',\n 'distant',\n 'woodlands',\n 'winds',\n 'a',\n 'mazy',\n 'way',\n ',',\n 'reaching',\n 'to',\n 'overlapping',\n 'spurs',\n 'of',\n 'mountains',\n 'bathed',\n 'in',\n 'their',\n 'hill-side',\n 'blue',\n '.',\n '&lt;/s&gt;']\n\n\n\nmoby_words2 = [\n    token \n    for sent in moby_sent_words_padded\n        for token in sent\n]\n\nmoby_bigrams2 = ngrams(moby_words2, n = 2)\nmoby_bigram_count2 = Counter(moby_bigrams2)\n\n\n\ngenerate_sequence(\n    moby_bigram_count2, \n    w_0 = \"&lt;s&gt;\", \n    n = 20\n)\n\n['&lt;s&gt;',\n 'With',\n 'what',\n 'business',\n ',',\n 'Starbuck',\n 'caught',\n 'one',\n 'foot',\n 'part—what',\n 'a',\n 'chess-man',\n 'beside',\n 'the',\n 'rolling',\n 'on',\n 'the',\n 'boats',\n 'and',\n 'sunk',\n '!']",
     "crumbs": [
       "Notes",
       "Programming",
-      "Regular Expressions, Quickly"
+      "Making and Counting ngrams in python"
     ]
   },
   {
-    "objectID": "notes/programming/02_regex.html#grouping",
-    "href": "notes/programming/02_regex.html#grouping",
-    "title": "Regular Expressions, Quickly",
-    "section": "Grouping",
-    "text": "Grouping\nYou can define groupings within regular expressions. The effect of these groupings depends what kind of regex function you’re using. For re.findall(), it’ll find the whole string, but return just the text from the grouping.\n\nsentence2 = \"The big bear and the small bear ran away.\"\n\n\nget_regex_url(r\"[Tt]he (\\w+) bear\")\n\n[Tt]he (+) bear\n\n\n\nre.findall(\n    r\"[Tt]he (\\w+) bear\",\n    sentence2\n)\n\n['big', 'small']",
+    "objectID": "notes/programming/05_ngrams.html#doing-it-faster-with-nltk",
+    "href": "notes/programming/05_ngrams.html#doing-it-faster-with-nltk",
+    "title": "Making and Counting ngrams in python",
+    "section": "Doing it faster with nltk",
+    "text": "Doing it faster with nltk\n\nfrom nltk.lm.preprocessing import padded_everygram_pipeline\nfrom nltk.lm import MLE\n\nngram_size = 3\n\ntrain, vocab = padded_everygram_pipeline(ngram_size, moby_sent_words)\nlm = MLE(ngram_size)\nlm.fit(train, vocab)\n\n\n\nsequence = [\"&lt;s&gt;\", \"&lt;s&gt;\"]\nfor i in range(100):\n    w_0 = sequence[-2:]\n    new = lm.generate(num_words=1, text_seed=w_0)\n    sequence.append(new)\n    if new == \"&lt;/s&gt;\":\n        break\n\nsequence\n\n['&lt;s&gt;',\n '&lt;s&gt;',\n 'had',\n 'turned',\n ',',\n 'and',\n 'continually',\n 'set',\n 'in',\n 'a',\n 'calm—give',\n 'us',\n 'a',\n 'blue',\n 'hanging',\n 'tester',\n 'of',\n 'smoke',\n ',',\n 'illuminated',\n 'by',\n 'the',\n 'terms',\n 'of',\n 'my',\n 'own',\n 'voice',\n '.',\n '&lt;/s&gt;']",
     "crumbs": [
       "Notes",
       "Programming",
-      "Regular Expressions, Quickly"
-    ]
-  },
-  {
-    "objectID": "notes/programming/02_regex.html#boundaries",
-    "href": "notes/programming/02_regex.html#boundaries",
-    "title": "Regular Expressions, Quickly",
-    "section": "Boundaries",
-    "text": "Boundaries\n\n^the == Finds “the” at the start of a string.\nthe$ == Finds ” the” at the end of a string.\n\\bthe\\b == Finds “the” in between word boundaries.\n\n\nget_regex_url(r\"^the \")\nget_regex_url(r\" the$\")\nget_regex_url(r\"\\bthe\\b\")\n\n^the\n\n\nthe$\n\n\n[(https://regexper.com/#%5Cbthe%5Cb)\n\n\n\nsentence3 = \"I saw the other bear.\"\nre.findall(\n    r\"the\",\n    sentence3\n)\n\n['the', 'the']\n\n\nThe second “the” there comes from inside “other”\n\nre.findall(\n    r\"\\bthe\\b\",\n    sentence3\n)\n\n['the']\n\n\n\nsentence3\n\n'I saw the other bear.'",
-    "crumbs": [
-      "Notes",
-      "Programming",
-      "Regular Expressions, Quickly"
+      "Making and Counting ngrams in python"
     ]
   },
   {
