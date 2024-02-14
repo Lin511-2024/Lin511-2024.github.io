@@ -1,5 +1,5 @@
 ---
-title: Generating sequences from ngrams
+title: Sampling from a probability distribution
 date: 2024-02-15
 knitr: 
   opts_chunk: 
@@ -9,6 +9,8 @@ knitr:
     dev: ragg_png
 filters: 
   - codeblocklabel
+categories:
+  - compling
 ---
 
 ```{r}
@@ -44,15 +46,13 @@ moby_tokens <- tibble(
 )
 ```
 
-## "Sampling" from a probability distribution
-
 From an n-gram model, we can generate new sequences by sampling from the probability distribution over tokens.
 
-### From counts to proportions
+## From counts to proportions
 
 Let's start by saying we're working with a bigram model (counts of 2 token sequences). If we start with an input token *"the"*, how do we randomly generate the next token?
 
-Let's restrict our view to just the top 5 words that followed "the":
+Let's restrict our view to just the top 5 words that followed "the" in *Moby Dick*:
 
 ```{r}
 moby_tokens |> 
@@ -118,7 +118,7 @@ top_five |>
 
 These two plots *should* look the same, just with different labels on the y-axis.
 
-### From proportions to a "probability distribution"
+## From proportions to a "probability distribution"
 
 Now, if we stack each bar on top of each other and lie it flat, we get the "probability distribution" over tokens. The rectangle for each word represents how much probability it "takes up".
 
@@ -161,7 +161,7 @@ top_five_for_rand |>
 sample_base
 ```
 
-###  Sampling from the probability distribution
+## Sampling from the probability distribution
 
 To sample from this probability distribution, we can randomly throw darts at the figure above. Whichever rectangle the dart lands inside, we'll say is the word we "sampled".
 
@@ -291,3 +291,163 @@ new_rand_samp |>
     )
 ```
 
+## Different Probability distributions
+
+Words occur at different frequencies in different contexts, so they'll have different probability distributions in each context. Even the same "dart throws will return different sampled words if the probability distributions are different.
+
+```{r}
+moby_tokens |> 
+  mutate(
+    fol = lead(token)
+  ) |> 
+  count(token, fol) |> 
+  filter(
+    token == "The"
+  ) |> 
+  filter(
+    fol %in% top_five$fol
+  ) |> 
+  mutate(
+    prop = n/sum(n),
+    fol = factor(fol, levels = top_five$fol)
+  ) |> 
+  bind_rows(
+    top_five
+  ) ->
+  the_The
+```
+
+```{r}
+the_The |> 
+  pivot_longer(n:prop) |> 
+  unite(col = "joint", c(token, name)) |> 
+  pivot_wider(names_from = joint, values_from = value) |> 
+  arrange(fol) |> 
+  gt() |> 
+    tab_spanner(
+      columns = starts_with("The_", ignore.case = F),
+      label = '"The _"'
+    ) |> 
+    tab_spanner(
+      columns = starts_with("the_", ignore.case = F),
+      label = '"the _"'
+    ) |> 
+    cols_label(
+      ends_with("_n") ~ "n",
+      ends_with("_prop") ~ "proportion",
+      fol = ""
+    ) |> 
+   fmt_number(
+     columns = ends_with("_prop"),
+     decimals = 2
+   )
+```
+
+```{r}
+rand_samples |> 
+  mutate(yrand = runif(20, min = -0.15, max = 0.15)) ->
+  rand_offsets
+
+bind_rows(
+  rand_offsets |> mutate(y = 1 + yrand),
+  rand_offsets |> mutate(y = 2 + yrand)
+)->
+  two_rand
+```
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3
+the_The |> 
+  arrange(fol) |> 
+  mutate(
+    end_prop = cumsum(prop),
+    start_prop = lag(end_prop),
+    .by = token
+  ) |> 
+  replace_na(
+    list(start_prop = 0)
+  ) |> 
+  mutate(
+    token_n = as.numeric(as.factor(token)),
+    label_pos = ((end_prop-start_prop)/2)+start_prop
+    ) |> 
+  ggplot()+
+    geom_rect(
+      aes(
+        xmin = start_prop,
+        xmax = end_prop,
+        ymin = token_n-0.4,
+        ymax = token_n+0.4,
+        fill = fol
+      ),
+      color = "black"
+    )+
+    geom_label(
+      aes(
+        label = fol,
+        x = label_pos,
+        y  = token_n + 0.3
+      ),
+      alpha = 0.6
+    )+
+    geom_point(
+      data = two_rand,
+      aes(x = samp, y = y),
+      shape = "❌",
+      size= 4
+    )+  
+    scale_fill_bright(guide = "none")+
+    theme_minimal(base_size = 16)+
+    scale_y_continuous(
+     breaks = c(1,2) ,
+     labels = c('"the"', '"The"')
+    )+
+    scale_x_continuous(
+      expand = expansion(mult = c(0, 0.02))
+    )+
+    labs(
+      x = "proportion",
+      y = NULL
+    )+
+    theme(
+      panel.grid = element_blank()
+    )
+```
+
+```{r}
+two_rand |> 
+  mutate(token_n = round(y)) |> 
+  select(samp, token_n) |> 
+  left_join(
+    the_The |> 
+      arrange(fol) |> 
+      mutate(
+        end_prop = cumsum(prop),
+        start_prop = lag(end_prop),
+        .by = token
+      ) |> 
+      replace_na(
+        list(start_prop = 0)
+      ) |> 
+      mutate(token_n = as.numeric(as.factor(token))),
+    by = join_by(token_n, between(samp, start_prop, end_prop))
+  ) |> 
+  count(token, fol) |> 
+  arrange(fol) |> 
+  pivot_wider(
+    names_from = token, values_from = n
+  ) |> 
+  replace_na(
+    list(
+      The = 0,
+      the = 0
+    )
+  ) |> 
+  gt() |> 
+    cols_label(
+      fol = "",
+      The = '"The _"',
+      the = '"the _"'
+    )
+```
