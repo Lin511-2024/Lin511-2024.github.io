@@ -1824,21 +1824,6 @@
       ],
       "Hash": "960e2ae9e09656611e0b8214ad543207"
     },
-    "syllabifyr": {
-      "Package": "syllabifyr",
-      "Version": "0.1.1",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Requirements": [
-        "R",
-        "dplyr",
-        "purrr",
-        "stringr",
-        "tibble",
-        "tidyr"
-      ],
-      "Hash": "64107e7b025d2562efe70d67d2b483c3"
-    },
     "sys": {
       "Package": "sys",
       "Version": "3.4.2",
