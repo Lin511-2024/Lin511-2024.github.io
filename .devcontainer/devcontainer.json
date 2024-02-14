@@ -49,7 +49,7 @@
 		// 	"onAutoForward": "ignore"
 		// }
 	},
-	"postCreateCommand": "R -e 'renv::use_python(type = \"virtualenv\", python = \"/usr/local/python/3.11.4/bin/python\"); renv::restore()'",
+	"postCreateCommand": "sh .devcontainer/config.sh
 
 	// Use 'postAttachCommand' to run commands after the container is started.
 	"postAttachCommand": "sudo rstudio-server start"
