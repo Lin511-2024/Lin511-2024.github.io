@@ -1,0 +1,453 @@
+---
+title: Sampling from a probability distribution
+date: 2024-02-15
+knitr: 
+  opts_chunk: 
+    echo: false
+    message: false
+    warning: false
+    dev: ragg_png
+filters: 
+  - codeblocklabel
+categories:
+  - compling
+---
+
+```{r}
+library(tidyverse)
+library(khroma)
+library(reticulate)
+library(gt)
+library(ggtext)
+
+ragg_png <- function(..., res = 150) {
+  ragg::agg_png(..., res = res, units = "in")
+}
+```
+
+```{python}
+import re
+import gutenbergpy.textget
+from nltk.tokenize import word_tokenize
+from collections import Counter
+```
+
+```{python}
+raw_book = gutenbergpy.textget.get_text_by_id(2701) # with headers
+moby_dick_byte = gutenbergpy.textget.strip_headers(raw_book) # without headers
+moby_dick = moby_dick_byte.decode("utf-8")
+moby_dick_tokens = word_tokenize(moby_dick)
+moby_dick_words = [tok for tok in moby_dick_tokens if re.match(r"\w", tok)]
+```
+
+```{r}
+moby_tokens <- tibble(
+  token = py$moby_dick_tokens
+)
+```
+
+From an n-gram model, we can generate new sequences by sampling from the probability distribution over tokens.
+
+## From counts to proportions
+
+Let's start by saying we're working with a bigram model (counts of 2 token sequences). If we start with an input token *"the"*, how do we randomly generate the next token?
+
+Let's restrict our view to just the top 5 words that followed "the" in *Moby Dick*:
+
+```{r}
+moby_tokens |> 
+  mutate(
+    fol = lead(token)
+  ) |> 
+  count(token, fol) |> 
+  filter(
+    token == "the"
+  ) |> 
+  arrange(desc(n)) |> 
+  slice(1:5) |> 
+  mutate(
+    fol = factor(fol) |> fct_reorder(.x = -n, .fun = median),
+    prop = n/sum(n)
+  )->
+  top_five
+```
+
+```{r}
+#| fig-width: 5
+#| fig-height: 3
+#| fig-cap: "Frequency of words that come after 'the'"
+top_five |> 
+  ggplot(
+    aes(fol,  n)
+  )+
+    geom_col(aes(fill = fol), color = "black")+
+    scale_y_continuous(expand = expansion())+
+    scale_fill_bright(guide = "none")+
+    theme_minimal()+
+    labs(
+      y = "count",
+      x = "following word",
+      title = "words that came after 'the'"
+    )
+```
+
+We can re-express these frequencies as proportions by dividing each frequency by the sum of all frequencies.
+
+$$
+P(w_i|w_{i-1}) = \frac{C(w_{i-1}w_i)}{\sum(w_{i-1}w)}
+$$
+
+```{r}
+#| fig-width: 5
+#| fig-height: 3
+#| fig-cap: "Proportion of words that come after 'the'"
+top_five |> 
+  ggplot(
+    aes(fol,  prop)
+  )+
+    geom_col(aes(fill = fol), color = "black")+
+    scale_y_continuous(expand = expansion())+
+    scale_fill_bright(guide = "none")+
+    theme_minimal()+
+    labs(
+      y = "proportion",
+      x = "following word",
+      title = "words that came after 'the'"
+    )
+```
+
+These two plots *should* look the same, just with different labels on the y-axis.
+
+## From proportions to a "probability distribution"
+
+Now, if we stack each bar on top of each other and lie it flat, we get the "probability distribution" over tokens. The rectangle for each word represents how much probability it "takes up".
+
+```{r}
+#| fig-width: 8
+#| fig-height: 1.5
+#| fig-cap: "Words as a probability distribution"
+top_five |> 
+  mutate(
+    end_prop = cumsum(prop),
+    start_prop = lag(end_prop, )
+  ) |> 
+  replace_na(
+    list(start_prop = 0)
+  ) ->
+  top_five_for_rand
+
+top_five_for_rand |> 
+  mutate(label_pos = ((end_prop - start_prop)/2) + start_prop) |> 
+  ggplot()+
+    geom_rect(
+      aes(ymin = 0, ymax = 1, fill = fol, xmin = start_prop, xmax = end_prop),
+      color = "black"
+    ) +
+    geom_label(
+      aes(x = label_pos, y = 0.8, label = fol),
+      alpha = 0.6
+    )+
+    scale_fill_bright(guide = "none")+
+    scale_y_continuous(expand = expansion(mult = 0.01))+
+    labs(y = NULL,
+         x = "proportion")+
+    theme_minimal(base_size = 16)+
+    theme(
+      axis.text.y = element_blank(),
+      panel.grid = element_blank()
+    )->
+  sample_base
+
+sample_base
+```
+
+## Sampling from the probability distribution
+
+To sample from this probability distribution, we can randomly throw darts at the figure above. Whichever rectangle the dart lands inside, we'll say is the word we "sampled".
+
+Just be super clear that the 20 ❌es in the next plot are totally at random, I'll include the code that I used to generate them.
+
+```{r}
+#| echo: true
+tibble(
+  samp = runif(20, min = 0, max = 1)
+) ->
+  rand_samples
+```
+
+```{r}
+set.seed(2024)
+```
+
+```{r}
+rand_samples |> 
+  mutate(yrand = runif(20, min = 0.25, 0.5))->
+  rand_samples
+```
+
+```{r}
+#| fig-width: 8
+#| fig-height: 1.5
+#| fig-cap: "Random samples from a probability distribution"
+sample_base +
+    geom_text(
+      data = rand_samples,
+      aes(x = samp, y = yrand),
+      size = 3,
+      label = "❌"
+      )
+```
+
+If we count up the total number of ❌es in each square above, the order of highest to lowest frequency samples probably won't perfectly line up with the tokens that had the highest to lowest probabilities.
+
+```{r}
+rand_samples |> 
+  left_join(
+    top_five_for_rand,
+    by = join_by(between(samp, start_prop, end_prop))
+  ) |> 
+  count(fol) |> 
+  arrange(desc(n)) |> 
+  gt()
+```
+
+### A little more realistic
+
+If we try to get just a little bit more realistic, and look at the top 100 tokens that follow "the", we'll see that a single randomly sampled token is very often *not* going to be the highest probability token.
+
+```{r}
+moby_tokens |> 
+  mutate(
+    fol = lead(token)
+  ) |> 
+  count(token, fol) |> 
+  filter(
+    token == "the"
+  ) |> 
+  arrange(desc(n)) |> 
+  slice(1:100) |> 
+  mutate(
+    prop = n/sum(n)
+  ) |> 
+  mutate(
+    end_prop = cumsum(prop),
+    start_prop = lag(end_prop)
+  ) |> 
+  replace_na(
+    list(start_prop = 0)
+  ) |> 
+  mutate(
+    fol = factor(fol) |> fct_reorder(-n)
+  ) ->
+  total_the
+```
+
+```{r}
+#| fig-width: 8
+#| fig-height: 1.5
+#| fig-cap: "Randomly sampling from the top 100"
+
+new_rand_samp <- tibble(rand = runif(1), yrand = runif(1, 0.25, 0.75))
+
+total_the |> 
+   ggplot()+
+    geom_rect(
+      aes(ymin = 0, ymax = 1, fill = as.numeric(fol), xmin = start_prop, xmax = end_prop),
+      color = "grey20",
+      linewidth = 0.2
+    )+
+    geom_point(
+      data = new_rand_samp,
+      aes(x = rand, y = yrand),
+      shape = "❌",
+      size= 4
+    )+
+    scale_fill_hawaii(guide = "none")+
+    scale_y_continuous(expand = expansion(mult = 0.01))+
+    labs(y = NULL,
+         x = "proportion")+
+    theme_minimal(base_size = 16)+
+    theme(
+      axis.text.y = element_blank(),
+      panel.grid = element_blank()
+    )  
+```
+
+```{r}
+new_rand_samp |> 
+  left_join(
+    total_the,
+    by = join_by(between(rand, start_prop, end_prop))
+  ) |> 
+  select(fol, n, prop) |> 
+  gt() |> 
+    fmt_number(
+      columns = prop,
+      decimals = 2
+    ) |> 
+    fmt_number(
+      columns = n,
+      decimals = 0
+    )
+```
+
+## Different Probability distributions
+
+Words occur at different frequencies in different contexts, so they'll have different probability distributions in each context. Even the same "dart throws will return different sampled words if the probability distributions are different.
+
+```{r}
+moby_tokens |> 
+  mutate(
+    fol = lead(token)
+  ) |> 
+  count(token, fol) |> 
+  filter(
+    token == "The"
+  ) |> 
+  filter(
+    fol %in% top_five$fol
+  ) |> 
+  mutate(
+    prop = n/sum(n),
+    fol = factor(fol, levels = top_five$fol)
+  ) |> 
+  bind_rows(
+    top_five
+  ) ->
+  the_The
+```
+
+```{r}
+the_The |> 
+  pivot_longer(n:prop) |> 
+  unite(col = "joint", c(token, name)) |> 
+  pivot_wider(names_from = joint, values_from = value) |> 
+  arrange(fol) |> 
+  gt() |> 
+    tab_spanner(
+      columns = starts_with("The_", ignore.case = F),
+      label = '"The _"'
+    ) |> 
+    tab_spanner(
+      columns = starts_with("the_", ignore.case = F),
+      label = '"the _"'
+    ) |> 
+    cols_label(
+      ends_with("_n") ~ "n",
+      ends_with("_prop") ~ "proportion",
+      fol = ""
+    ) |> 
+   fmt_number(
+     columns = ends_with("_prop"),
+     decimals = 2
+   )
+```
+
+```{r}
+rand_samples |> 
+  mutate(yrand = runif(20, min = -0.15, max = 0.15)) ->
+  rand_offsets
+
+bind_rows(
+  rand_offsets |> mutate(y = 1 + yrand),
+  rand_offsets |> mutate(y = 2 + yrand)
+)->
+  two_rand
+```
+
+```{r}
+#| fig-width: 8
+#| fig-height: 3
+the_The |> 
+  arrange(fol) |> 
+  mutate(
+    end_prop = cumsum(prop),
+    start_prop = lag(end_prop),
+    .by = token
+  ) |> 
+  replace_na(
+    list(start_prop = 0)
+  ) |> 
+  mutate(
+    token_n = as.numeric(as.factor(token)),
+    label_pos = ((end_prop-start_prop)/2)+start_prop
+    ) |> 
+  ggplot()+
+    geom_rect(
+      aes(
+        xmin = start_prop,
+        xmax = end_prop,
+        ymin = token_n-0.4,
+        ymax = token_n+0.4,
+        fill = fol
+      ),
+      color = "black"
+    )+
+    geom_label(
+      aes(
+        label = fol,
+        x = label_pos,
+        y  = token_n + 0.3
+      ),
+      alpha = 0.6
+    )+
+    geom_point(
+      data = two_rand,
+      aes(x = samp, y = y),
+      shape = "❌",
+      size= 4
+    )+  
+    scale_fill_bright(guide = "none")+
+    theme_minimal(base_size = 16)+
+    scale_y_continuous(
+     breaks = c(1,2) ,
+     labels = c('"the"', '"The"')
+    )+
+    scale_x_continuous(
+      expand = expansion(mult = c(0, 0.02))
+    )+
+    labs(
+      x = "proportion",
+      y = NULL
+    )+
+    theme(
+      panel.grid = element_blank()
+    )
+```
+
+```{r}
+two_rand |> 
+  mutate(token_n = round(y)) |> 
+  select(samp, token_n) |> 
+  left_join(
+    the_The |> 
+      arrange(fol) |> 
+      mutate(
+        end_prop = cumsum(prop),
+        start_prop = lag(end_prop),
+        .by = token
+      ) |> 
+      replace_na(
+        list(start_prop = 0)
+      ) |> 
+      mutate(token_n = as.numeric(as.factor(token))),
+    by = join_by(token_n, between(samp, start_prop, end_prop))
+  ) |> 
+  count(token, fol) |> 
+  arrange(fol) |> 
+  pivot_wider(
+    names_from = token, values_from = n
+  ) |> 
+  replace_na(
+    list(
+      The = 0,
+      the = 0
+    )
+  ) |> 
+  gt() |> 
+    cols_label(
+      fol = "",
+      The = '"The _"',
+      the = '"the _"'
+    )
+```
