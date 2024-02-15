@@ -7,9 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Josef Fruehwald">
-<meta name="dcterms.date" content="2024-01-16">
 
-<title>Lin511-2024 - FSA in-class notes</title>
+<title>Lin511-2024 - Side Note</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,8 +31,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../notes/meetings/02_pda.html" rel="next">
-<link href="../../notes/meetings/01_fsm.html" rel="prev">
+<link href="../../notes/programming/00_setup.html" rel="next">
+<link href="../../notes/meetings/05_ngrams2.html" rel="prev">
 <link href="../../assets/logo.svg" rel="icon" type="image/svg+xml">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -46,7 +45,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/quarto-contrib/codenamelabel/codeblocklabel.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -75,13 +73,10 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../../styles/styles.css">
-<meta property="og:title" content="Lin511-2024 - FSA in-class notes">
+<meta property="og:title" content="Lin511-2024 - Side Note">
 <meta property="og:description" content="">
 <meta property="og:site_name" content="Lin511-2024">
 </head>
@@ -134,7 +129,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/meetings/01_fsm.html">Class Meetings</a></li><li class="breadcrumb-item"><a href="../../notes/meetings/01-1_fsm_addenda.html">FSA in-class notes</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/meetings/01_fsm.html">Class Meetings</a></li><li class="breadcrumb-item"><a href="../../notes/meetings/06_side-note.html">Side Note</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -221,7 +216,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notes/meetings/01-1_fsm_addenda.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../notes/meetings/01-1_fsm_addenda.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">FSA in-class notes</span></a>
   </div>
 </li>
@@ -251,7 +246,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notes/meetings/06_side-note.html" class="sidebar-item-text sidebar-link">
+  <a href="../../notes/meetings/06_side-note.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Side Note</span></a>
   </div>
 </li>
@@ -327,25 +322,15 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#finite-state-automata-and-regex" id="toc-finite-state-automata-and-regex" class="nav-link active" data-scroll-target="#finite-state-automata-and-regex">Finite State Automata and RegEx</a></li>
-  <li><a href="#the-regex-for-batman" id="toc-the-regex-for-batman" class="nav-link" data-scroll-target="#the-regex-for-batman">The RegEx for Batman</a></li>
-  </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Lin511-2024/Lin511-2024.github.io/blob/main/notes/meetings/01-1_fsm_addenda.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/meetings/01_fsm.html">Class Meetings</a></li><li class="breadcrumb-item"><a href="../../notes/meetings/01-1_fsm_addenda.html">FSA in-class notes</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/meetings/01_fsm.html">Class Meetings</a></li><li class="breadcrumb-item"><a href="../../notes/meetings/06_side-note.html">Side Note</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">FSA in-class notes</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">compling</div>
-  </div>
-  </div>
+<h1 class="title">Side Note</h1>
+</div>
 
 
 
@@ -358,12 +343,6 @@ ul.task-list li input[type="checkbox"] {
           </div>
   </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">January 16, 2024</p>
-    </div>
-  </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
@@ -379,57 +358,52 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="finite-state-automata-and-regex" class="level2">
-<h2 class="anchored" data-anchor-id="finite-state-automata-and-regex">Finite State Automata and RegEx</h2>
-<p><code>ok(a+y)?</code></p>
-<div class="cell" data-layout-align="default">
+<p>These patterns in log-log plots are not unique to language or linguistic data.</p>
+<p><a href="https://www.reddit.com/r/dndnext/comments/qde7r1/update_race_class_poll_results_2000_responses/">Source</a></p>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">stateDiagram
-    direction LR
-    [*] --&gt; 1
-    1 --&gt; 2: o
-    2 --&gt; 3: k
-
-    3 --&gt; group1
-
-    state group1{
-        [*] --&gt; 4
-        4 --&gt; 4: a
-        4 --&gt; [*]: y
-    }
-    group1 --&gt; [*]: ε
-
-    3 --&gt; [*]: ε
-</pre>
-</div>
-<p></p></figure><p></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="06_side-note_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
 </div>
 </div>
 </div>
-</section>
-<section id="the-regex-for-batman" class="level2">
-<h2 class="anchored" data-anchor-id="the-regex-for-batman">The RegEx for Batman</h2>
-<div class="langname">
-<pre class="langname">regex</pre>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="06_side-note_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
 </div>
-<pre class="regex"><code>Na (na){15} Batman!( Batman! Batman!)?</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="06_side-note_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
-</section>
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald,
   author = {Fruehwald, Josef},
-  title = {FSA in-Class Notes},
-  date = {2024-01-16},
-  url = {https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html},
+  title = {Side {Note}},
+  url = {https://lin511-2024.github.io/notes/meetings/06_side-note.html},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2024" class="csl-entry quarto-appendix-citeas" role="listitem">
-Fruehwald, Josef. 2024. <span>“FSA in-Class Notes.”</span> January 16,
-2024. <a href="https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html">https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald" class="csl-entry quarto-appendix-citeas" role="listitem">
+Fruehwald, Josef. n.d. <span>“Side Note.”</span> <a href="https://lin511-2024.github.io/notes/meetings/06_side-note.html">https://lin511-2024.github.io/notes/meetings/06_side-note.html</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -964,13 +938,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../notes/meetings/01_fsm.html" class="pagination-link  aria-label=" regular="" languages="" and="" finite="" state="" machines"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Regular Languages and Finite State Machines</span>
+      <a href="../../notes/meetings/05_ngrams2.html" class="pagination-link  aria-label=" sampling="" from="" a="" probability="" distribution"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Sampling from a probability distribution</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../notes/meetings/02_pda.html" class="pagination-link" aria-label="Pushdown Automata and Context Free Languages">
-        <span class="nav-page-text">Pushdown Automata and Context Free Languages</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../notes/programming/00_setup.html" class="pagination-link" aria-label="Setup Notes">
+        <span class="nav-page-text">Setup Notes</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1001,7 +975,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </a>
   </li>  
 </ul>
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Lin511-2024/Lin511-2024.github.io/blob/main/notes/meetings/01-1_fsm_addenda.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div>
+    <div class="toc-actions"><ul><li><a href="https://github.com/Lin511-2024/Lin511-2024.github.io/blob/main/notes/meetings/06_side-note.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
