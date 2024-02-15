@@ -1,0 +1,17 @@
+{
+  "hash": "312d8f11d0fabf81a3d6cc0a7f98be3b",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Side Note\"\nknitr: \n  opts_chunk: \n    echo: false\n    message: false\n    warning: false\n    dev: ragg_png\n---\n\n\nThese patterns in log-log plots are not unique to language or linguistic data.\n\n[Source](https://www.reddit.com/r/dndnext/comments/qde7r1/update_race_class_poll_results_2000_responses/)\n\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n\n:::\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![](06_side-note_files/figure-html/unnamed-chunk-3-1.png){fig-align='center' width=60%}\n:::\n:::\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![](06_side-note_files/figure-html/unnamed-chunk-4-1.png){fig-align='center' width=60%}\n:::\n:::\n\n::: {.cell layout-align=\"center\"}\n::: {.cell-output-display}\n![](06_side-note_files/figure-html/unnamed-chunk-5-1.png){fig-align='center' width=60%}\n:::\n:::\n",
+    "supporting": [
+      "06_side-note_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

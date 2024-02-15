@@ -1,0 +1,156 @@
+---
+title: "Side Note"
+knitr: 
+  opts_chunk: 
+    echo: false
+    message: false
+    warning: false
+    dev: ragg_png
+---
+
+These patterns in log-log plots are not unique to language or linguistic data.
+
+[Source](https://www.reddit.com/r/dndnext/comments/qde7r1/update_race_class_poll_results_2000_responses/)
+
+```{r}
+library(tidyverse)
+library(showtext)
+library(ggrepel)
+library(colorspace)
+font_add_google("MedievalSharp", "MedievalSharp")
+showtext_auto()
+ragg_png <- function(..., res = 300) {
+  ragg::agg_png(..., res = res, units = "in")
+}
+```
+
+```{r}
+read_csv("assets/dnd.csv") |> 
+  pivot_longer(
+    cols = -1,
+    names_to = "Class",
+    values_to = "n"
+  ) |> 
+  filter(
+    !Class %in% c("Multi Class", "Blood Hunter", "Other")
+  )->
+  dnd_long
+```
+
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+#| out-width: 60%
+#| fig-align: center
+#| dev: ragg_png
+dnd_long |> 
+  group_by(Ancestry) |> 
+  summarise(n = sum(n)) |> 
+  arrange(desc(n)) |> 
+  mutate(rank = row_number()) ->
+  ancestry_dat
+
+ancestry_dat |> 
+  ggplot(aes(rank, n))+
+    geom_point(color = "#c73020", size = 3)+
+    geom_text_repel(
+      data = ancestry_dat |> head(7),
+      aes(label = Ancestry),
+      size = 5,
+      color = lighten("#c73020", amount = 0.3),
+      family = "MedievalSharp"
+    )+
+    scale_x_log10()+
+    scale_y_log10()+
+    labs(title = "Most Popular Ancestries")+
+    theme_minimal(base_family = "MedievalSharp", base_size = 24)+
+    theme(
+      aspect.ratio = 1,
+      panel.grid.minor  = element_blank(),
+      plot.background = element_rect(fill = "grey20"),
+      axis.text = element_text(color = "grey90"),
+      axis.title = element_text(color = "white"),
+      panel.grid = element_line(color = "grey40", linewidth = 0.5),
+      title = element_text(color = "white")
+      )
+```
+
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+#| out-width: 60%
+#| fig-align: center
+#| dev: ragg_png
+dnd_long |> 
+  group_by(Class) |> 
+  summarise(n = sum(n)) |> 
+  arrange(desc(n)) |> 
+  mutate(rank = row_number() ) ->
+  class_dat
+
+class_dat |> 
+  ggplot(aes(rank, n))+
+    geom_point(color = "#c73020", size = 3)+
+    geom_text_repel(
+      data = class_dat |> head(7),
+      aes(label = Class),
+      size = 5,
+      color = lighten("#c73020", amount = 0.3),
+      family = "MedievalSharp"
+    )+
+    scale_x_log10()+
+    scale_y_log10()+
+    labs(title = "Most Popular Classes")+
+    theme_minimal(base_family = "MedievalSharp", base_size = 24)+
+    theme(
+      aspect.ratio = 1,
+      panel.grid.minor  = element_blank(),
+      plot.background = element_rect(fill = "grey20"),
+      axis.text = element_text(color = "grey90"),
+      axis.title = element_text(color = "white"),
+      panel.grid = element_line(color = "grey40", linewidth = 0.5),
+      title = element_text(color = "white")
+      )
+```
+
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+#| out-width: 60%
+#| fig-align: center
+#| dev: ragg_png
+dnd_long |> 
+  unite(
+    col = "Joint",
+    c(Ancestry, Class),
+    sep = " "
+  ) |> 
+  arrange(desc(n)) |> 
+  mutate(rank = row_number())->
+  joint_dat
+
+
+joint_dat |> 
+  ggplot(aes(rank, n))+
+    geom_point(color = "#c73020", size = 3)+
+    geom_text_repel(
+      data = joint_dat |> head(7),
+      aes(label = Joint),
+      size = 5,
+      color = lighten("#c73020", amount = 0.3),
+      family = "MedievalSharp"
+    )+
+    scale_x_log10()+
+    scale_y_log10()+
+    labs(title = "Most Popular Ancestry + Class")+
+    theme_minimal(base_family = "MedievalSharp", base_size = 24)+
+    theme(
+      aspect.ratio = 1,
+      panel.grid.minor  = element_blank(),
+      plot.background = element_rect(fill = "grey20"),
+      axis.text = element_text(color = "grey90"),
+      axis.title = element_text(color = "white"),
+      panel.grid = element_line(color = "grey40", linewidth = 0.5),
+      title = element_text(color = "white")
+      )
+```
