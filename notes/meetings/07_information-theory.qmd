@@ -709,3 +709,28 @@ target = [
 
 print(target[0:9])
 ```
+
+### Total Bigram Entropy
+
+```{python}
+#| echo: true
+#| code-fold: true
+#| code-summary: code for getting all bigrams
+all_bigrams = [
+  bg 
+  for sent in moby_sents
+  for bg in list(
+    bigrams(
+      pad_both_ends(
+        word_tokenize(sent), 
+        2
+      )
+    )
+  )
+]
+```
+
+```{python}
+#| echo: true
+lm.entropy(all_bigrams)
+```
