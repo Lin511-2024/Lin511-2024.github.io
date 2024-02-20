@@ -22,3 +22,7 @@ code:not(pre *){
   --mermaid-edge-color: white;
   --mermaid-label-bg-color: white;
 }
+
+.cell:not(.page-full):has(.cell-output){
+   background-color: $gray-600;
+}

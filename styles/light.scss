@@ -9,3 +9,8 @@
 .codebox{
    background-color: $gray-100;
 }
+
+
+.cell:not(.page-full):has(.cell-output){
+   background-color: $gray-100;
+}
