@@ -1,0 +1,307 @@
+---
+title: "ngram \"smoothing\""
+date: 2024-02-27
+knitr: 
+  opts_chunk: 
+    echo: false
+    message: false
+    warning: false
+    dev: ragg_png
+filters: 
+  - codeblocklabel
+categories:
+  - compling
+---
+
+## Recap
+
+In the notes on information theory, we talked about how we can evaluate texts with respect to language models, and vice versa, with metrics like perplexity.
+
+*But* we run into trouble with [really novel sentences](07_information-theory.qmd#really-novel-sentences), when the probability is estimated to be 0. This can happen for one of two reasons:
+
+```{r}
+library(tidyverse)
+library(ngram)
+library(khroma)
+library(gt)
+library(reticulate)
+
+ragg_png <- function(..., res = 300) {
+  ragg::agg_png(..., res = res, units = "in")
+}
+```
+
+```{python}
+import re
+import gutenbergpy.textget
+from nltk.tokenize import word_tokenize
+from collections import Counter
+```
+
+```{python}
+raw_book = gutenbergpy.textget.get_text_by_id(2701) # with headers
+moby_dick_byte = gutenbergpy.textget.strip_headers(raw_book) # without headers
+moby_dick = moby_dick_byte.decode("utf-8")
+moby_dick_tokens = word_tokenize(moby_dick)
+moby_dick_words = [tok for tok in moby_dick_tokens]
+```
+
+## Where 0 probabilities come from
+
+### "Out of Vocabulary Items"
+
+"Out of Vocabulary Items" or OOVs are tokens that were not present in the training data. This won't be so common for closed-vocabulary tokenizers, like [Byte Pair Encoding](03_tokenization.qmd#closed-vocabulary-tokenization-byte-pair-encoding), but for tokenization like we've used on *Moby Dick*, this is guaranteed to happen.
+
+```{python}
+#| echo: true
+
+"ogre" in moby_dick_tokens
+```
+
+OOVs aren't just the domain of ngram models, but also come up in, say, looking up word pronunciations in pronunciation dictionaries.
+
+```{python}
+#| echo: true
+from nltk.corpus import cmudict
+cmu_dictionary = cmudict.dict()
+```
+
+```{python}
+#| echo: true
+cmu_dictionary["philadelphia"]
+```
+
+```{python}
+#| echo: true
+#| error: true
+cmu_dictionary["passyunk"]
+```
+
+### Missing Sequences
+
+Even if every token is represented in the training data, specific sequences aren't.
+
+```{python}
+#| echo: true
+"screamed" in moby_dick_tokens
+```
+
+```{python}
+#| echo: true
+scream_idx = moby_dick_tokens.index("screamed")
+moby_dick_tokens[
+  (scream_idx-3):(scream_idx+3)
+]
+```
+
+## A *predictable* problem
+
+An interesting thing is that there is a pretty good way to estimate whether the next token you see in a corpus will be new to you. It's approximately equal to the probability that you'll see a token that's only appeared once so far.
+
+$$
+P(\text{new}) \approx P(\text{once)}
+$$
+
+It takes a lot of processing to actually calculate, but here's how the Good-Turing estimate works out for the book Frankenstein.
+
+![Good Turing Smoothing](assets/good_turing.png){fig-align="center" width="90%"}
+
+So, for *Moby Dick*, we can calculate the probability that a new token will be completely new.
+
+```{python}
+#| echo: true
+counter_dict = Counter(moby_dick_words)
+ones = 0
+for k in counter_dict:
+  if counter_dict[k] == 1:
+    ones+=1
+    
+ones / counter_dict.total()
+```
+
+Maybe that doesn't seem so bad, but remember, the problem only gets worse the larger our ngrams get.
+
+```{r}
+tibble(
+  word = py$moby_dick_words
+) |> 
+  count(word, name = "freq") |> 
+  arrange(desc(freq)) |> 
+  mutate(rank = row_number()) ->
+  one_grams
+
+long_string = str_c(py$moby_dick_words, collapse = " ")
+
+moby_dick2gram = ngram(long_string)
+moby_dick3gram = ngram(long_string, n = 3)
+moby_dick4gram = ngram(long_string, n = 4)
+moby_dick5gram = ngram(long_string, n = 5)
+
+gram2 = get.phrasetable(moby_dick2gram) |> mutate(n = 2)
+gram3 = get.phrasetable(moby_dick3gram) |> mutate(n = 3)
+gram4 = get.phrasetable(moby_dick4gram) |> mutate(n = 4)
+gram5 = get.phrasetable(moby_dick5gram) |> mutate(n = 5)
+
+bind_rows(
+  gram2,
+  gram3,
+  gram4,
+  gram5
+) |> 
+  mutate(
+    rank = rank(desc(freq), ties.method = "random"),
+    .by = n
+  ) ->
+  all_gram
+```
+
+```{r}
+#| fig-width: 7
+#| fig-height: 5
+#| out-width: "80%"
+#| fig-align: center
+#| fig-cap: "The proportion of all tokens which are hapax legomena "
+one_grams |> 
+  mutate(
+    ngrams = word,
+    n = 1
+  ) |> 
+  bind_rows(
+    gram2, gram3, gram4, gram5
+  ) |> 
+  mutate(
+    hapax = freq == 1
+  ) |> 
+  summarise(
+    total_count = sum(freq),
+    total_type = n(),
+    .by = c(hapax, n)
+  ) |> 
+  mutate(
+    total_prop = total_count/sum(total_count),
+    type_prop = total_type/sum(total_type),
+    .by = n
+  ) |> 
+  ggplot(
+    aes(
+      factor(n),
+      total_prop
+    )
+  )+
+    geom_col(
+      aes(fill = hapax),
+      position = "stack",
+      color = "black"
+    )+
+    scale_fill_bright()+
+    scale_y_continuous(
+      expand = expansion()
+    )+
+    labs(
+      x = "n gram size",
+      y = "proportion hapax legomena"
+    )+
+    theme_minimal(base_size = 20)
+```
+
+## Dealing with it
+
+### `Unk`ifying
+
+One thing you can do to deal with the OOV issue is convert all tokens below a certain frequency to the label `<UNK>` for "unknown."
+
+```{python}
+#| echo: true
+moby_count = Counter(moby_dick_tokens)
+moby_unk_tokens = moby_dick_tokens
+for idx, tok in enumerate(moby_unk_tokens):
+  if moby_count[tok] < 2:
+    moby_unk_tokens[idx] = "<UNK>"
+
+moby_unk_count = Counter(moby_unk_tokens)
+```
+
+```{python}
+#| echo: true
+check_word  = "ogre"
+if check_word in moby_unk_count:
+  print(moby_unk_count[check_word])
+else:
+  print(moby_unk_count["<UNK>"])
+```
+
+NLTK conveniently. builds this into is vocabulary module.
+
+```{python}
+#| echo: true
+from nltk.lm import Vocabulary
+moby_vocab = Vocabulary(moby_dick_tokens, unk_cutoff = 2)
+```
+
+```{python}
+#| echo: true
+moby_vocab.lookup("ogre")
+```
+
+### Smoothing
+
+Even after unkifying, there are still going to be some ngrams where the individual *tokens* occur in the training data, but the specific sequence doesn't.
+
+So, we estimated the probability that the next token we see is going to be new token:
+
+```{python}
+#| echo: true
+ones / counter_dict.total()
+```
+
+The problem is, in order to give *unseen* token a slice of the pie, we need to take *away* some space from the seen tokens. Where does that probability fit into this layer cake, where all the space is already accounted for?
+
+```{r}
+tibble(
+  token = py$moby_dick_tokens
+) |> 
+  mutate(
+    fol = lead(token)
+  ) |> 
+  count(token, fol) |> 
+  filter(
+    token == "the"
+  ) |> 
+  arrange(desc(n)) |> 
+  slice(1:100) |> 
+  mutate(
+    prop = n/sum(n)
+  ) |> 
+  mutate(
+    end_prop = cumsum(prop),
+    start_prop = lag(end_prop)
+  ) |> 
+  replace_na(
+    list(start_prop = 0)
+  ) |> 
+  mutate(
+    fol = factor(fol) |> fct_reorder(-n)
+  ) ->
+  total_the
+```
+
+```{r}
+#| fig-width: 8
+#| fig-height: 1.5
+total_the |> 
+   ggplot()+
+    geom_rect(
+      aes(ymin = 0, ymax = 1, fill = as.numeric(fol), xmin = start_prop, xmax = end_prop),
+      color = "grey20",
+      linewidth = 0.2
+    )+
+    scale_fill_hawaii(guide = "none")+
+    scale_y_continuous(expand = expansion(mult = 0.01))+
+    labs(y = NULL,
+         x = "proportion")+
+    theme_minimal(base_size = 16)+
+    theme(
+      axis.text.y = element_blank(),
+      panel.grid = element_blank()
+    )  
+```
