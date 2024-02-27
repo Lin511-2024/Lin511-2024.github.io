@@ -61,6 +61,11 @@ moby_dick_words = [tok for tok in moby_dick_tokens]
 OOVs aren't just the domain of ngram models, but also come up in, say, looking up word pronunciations in pronunciation dictionaries.
 
 ```{python}
+import nltk
+nltk.download('cmudict')
+```
+
+```{python}
 #| echo: true
 from nltk.corpus import cmudict
 cmu_dictionary = cmudict.dict()
