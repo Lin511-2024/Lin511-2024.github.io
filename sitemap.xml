@@ -2,110 +2,114 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/08_ngram_smoothing.html</loc>
-    <lastmod>2024-02-27T13:26:23.559Z</lastmod>
+    <lastmod>2024-03-07T16:26:53.022Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/02_pda.html</loc>
-    <lastmod>2024-02-27T13:26:23.556Z</lastmod>
+    <lastmod>2024-03-07T16:26:53.020Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/05_ngrams2.html</loc>
-    <lastmod>2024-02-27T13:26:23.558Z</lastmod>
+    <lastmod>2024-03-07T16:26:53.021Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/03_tokenization.html</loc>
-    <lastmod>2024-02-27T13:26:23.557Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/notes/meetings/04_ngrams.html</loc>
-    <lastmod>2024-02-27T13:26:23.557Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/notes/concepts/01_what-is-python.html</loc>
-    <lastmod>2024-02-27T13:26:23.538Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/notes/concepts/00_glossary.html</loc>
-    <lastmod>2024-02-27T13:26:23.538Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/notes/concepts/02_undersdanding-paths.html</loc>
-    <lastmod>2024-02-27T13:26:23.538Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/notes/programming/03_python_plus.html</loc>
-    <lastmod>2024-02-27T13:26:23.570Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/notes/programming/05_ngrams.html</loc>
-    <lastmod>2024-02-27T13:26:23.570Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/notes/programming/01_Python_basics.html</loc>
-    <lastmod>2024-02-27T13:26:23.569Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/notes/index.html</loc>
-    <lastmod>2024-02-27T13:26:23.555Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/syllabus/schedule.html</loc>
-    <lastmod>2024-02-27T13:26:23.578Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/index.html</loc>
-    <lastmod>2024-02-27T13:26:23.537Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/syllabus/syllabus.html</loc>
-    <lastmod>2024-02-27T13:26:23.578Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/about.html</loc>
-    <lastmod>2024-02-27T13:26:23.536Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/notes/in_class/00_python.html</loc>
-    <lastmod>2024-02-27T13:26:23.555Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/notes/programming/02_regex.html</loc>
-    <lastmod>2024-02-27T13:26:23.569Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/notes/programming/04_tokenizers.html</loc>
-    <lastmod>2024-02-27T13:26:23.570Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/notes/programming/00_setup.html</loc>
-    <lastmod>2024-02-27T13:26:23.569Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/notes/concepts/01_keyboarding.html</loc>
-    <lastmod>2024-02-27T13:26:23.538Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/notes/concepts/03_navigating-directories.html</loc>
-    <lastmod>2024-02-27T13:26:23.539Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/notes/concepts/04_git_errors.html</loc>
-    <lastmod>2024-02-27T13:26:23.539Z</lastmod>
+    <lastmod>2024-03-07T16:26:53.020Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/06_side-note.html</loc>
-    <lastmod>2024-02-27T13:26:23.558Z</lastmod>
+    <lastmod>2024-03-07T16:26:53.021Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/notes/concepts/04_git_errors.html</loc>
+    <lastmod>2024-03-07T16:26:53.003Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/notes/concepts/03_navigating-directories.html</loc>
+    <lastmod>2024-03-07T16:26:53.003Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/notes/concepts/01_keyboarding.html</loc>
+    <lastmod>2024-03-07T16:26:53.002Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/notes/programming/00_setup.html</loc>
+    <lastmod>2024-03-07T16:26:53.030Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/notes/programming/04_tokenizers.html</loc>
+    <lastmod>2024-03-07T16:26:53.031Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/notes/programming/02_regex.html</loc>
+    <lastmod>2024-03-07T16:26:53.031Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/notes/in_class/00_python.html</loc>
+    <lastmod>2024-03-07T16:26:53.018Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/about.html</loc>
+    <lastmod>2024-03-07T16:26:53.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/syllabus/syllabus.html</loc>
+    <lastmod>2024-03-07T16:26:53.038Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/index.html</loc>
+    <lastmod>2024-03-07T16:26:53.001Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/syllabus/schedule.html</loc>
+    <lastmod>2024-03-07T16:26:53.038Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/notes/index.html</loc>
+    <lastmod>2024-03-07T16:26:53.018Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/notes/programming/01_Python_basics.html</loc>
+    <lastmod>2024-03-07T16:26:53.030Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/notes/programming/05_ngrams.html</loc>
+    <lastmod>2024-03-07T16:26:53.031Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/notes/programming/03_python_plus.html</loc>
+    <lastmod>2024-03-07T16:26:53.031Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/notes/concepts/02_undersdanding-paths.html</loc>
+    <lastmod>2024-03-07T16:26:53.003Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/notes/concepts/00_glossary.html</loc>
+    <lastmod>2024-03-07T16:26:53.002Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/notes/concepts/01_what-is-python.html</loc>
+    <lastmod>2024-03-07T16:26:53.002Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/notes/meetings/04_ngrams.html</loc>
+    <lastmod>2024-03-07T16:26:53.020Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/notes/meetings/09_markov_models.html</loc>
+    <lastmod>2024-03-07T16:26:53.022Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/01_fsm.html</loc>
-    <lastmod>2024-02-27T13:26:23.556Z</lastmod>
+    <lastmod>2024-03-07T16:26:53.019Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/07_information-theory.html</loc>
-    <lastmod>2024-02-27T13:26:23.558Z</lastmod>
+    <lastmod>2024-03-07T16:26:53.021Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html</loc>
-    <lastmod>2024-02-27T13:26:23.556Z</lastmod>
+    <lastmod>2024-03-07T16:26:53.019Z</lastmod>
   </url>
 </urlset>

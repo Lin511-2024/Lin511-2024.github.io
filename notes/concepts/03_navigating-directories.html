@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.550">
+<meta name="generator" content="quarto-1.4.551">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -297,6 +297,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">ngram “smoothing”</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../notes/meetings/09_markov_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Markov Models</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -425,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">February 27, 2024</p>
+      <p class="date-modified">March 7, 2024</p>
     </div>
   </div>
     
@@ -453,7 +459,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>When you first launch your command line interface, it will look something like this:</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full" style="display: block; margin-left: auto; margin-right: auto;">
 <figure class="figure page-columns page-full">
-<p><img src="assets/Display_—_-zsh_—_72×22.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+<p><img src="assets/Display_—_-zsh_—_72×22.png" class="img-fluid figure-img" style="width:80.0%"></p>
 <figcaption class="margin-caption">Command Line Interface</figcaption>
 </figure>
 </div>
@@ -581,7 +587,7 @@ FranklinInstituteSounds         html_practice</code></pre>
 <p>Now, we’re inside <code>html_practice</code>&nbsp;which is inside <code>Documents</code>. But what if we wanted to move into another directory that is also inside of <code>Documents</code>. For example, the directory <code>Zoom</code> is also inside of <code>Documents</code>, which is where Zoom saves all of the chat logs from our class meetings.</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full" style="display: block; margin-left: auto; margin-right: auto;">
 <figure class="figure page-columns page-full">
-<p><img src="assets/html_practice-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="assets/html_practice-1.png" class="img-fluid figure-img"></p>
 <figcaption class="margin-caption">Where we want to move</figcaption>
 </figure>
 </div>
@@ -861,6 +867,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/lin511-2024\.github\.io");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -895,7 +919,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
