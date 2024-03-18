@@ -51,8 +51,6 @@ stateDiagram
   C --> [*]: 0.2
   C --> C: 0.7
   C --> B: 0.1
-  
-  
 ```
 
 It's going to be easier to represent all of the probabilities of transition between one state and the next as a "transition matrix"
@@ -160,6 +158,17 @@ third_step
 trans_mat @ trans_mat @ trans_mat
 ```
 :::
+
+```{python}
+#| echo: true
+
+net_mat = np.array([
+  [0.9, 0.1],
+  [0.3, 0.7]
+])
+
+net_mat @ net_mat @ net_mat @ net_mat @ net_mat @ net_mat @ net_mat @ net_mat @ net_mat @ net_mat @ net_mat @ net_mat @ net_mat @ net_mat @ net_mat @ net_mat @ net_mat
+```
 
 ## Hidden Markov Models
 
