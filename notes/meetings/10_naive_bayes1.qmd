@@ -1,0 +1,223 @@
+---
+title: Bayes Theorem
+date: 2024-03-19
+knitr: 
+  opts_chunk: 
+    echo: false
+    message: false
+    warning: false
+    dev: ragg_png
+format:
+  html:
+    mermaid:
+      theme: neutral
+filters: 
+  - codeblocklabel
+categories:
+  - compling
+bibliography: references.bib
+---
+
+```{r}
+library(reticulate)
+```
+
+Before we can get started with "Naive Bayes Classification", we should maybe begin with "What is Bayes Theorem".
+
+## Bayes Theorem
+
+![Thomas Bayes. [Public domain, via Wikimedia](https://commons.wikimedia.org/wiki/File:Thomas_Bayes.gif)](assets/Thomas_Bayes.gif){fig-align="center"}
+
+Bayes Theorem describes how we should use evidence or data as an indicator of some kind of outcome, or hypothesis. Specifically:
+
+-   We need to consider how likely the data would be given the outcome (a conditional probability, $P(d|h)$)
+
+-   The probability of the outcome, generally $P(h)$.
+
+-   The probability of the data, generally $P(d)$.
+
+To use a linguistic example, let's say we were listening to a recording with a lot of static, and we couldn't make out even which language we were listening to. But then, we hear a very distinct \[ð\]. What is the probability that we're listening to English?
+
+-   The probability that we would hear \[ð\] if it *were* English is pretty high. It appears at the start of a lot of frequent function words.
+
+-   The probability we're listening to a recording of English, generally, depends on the context. Are we pulling random recordings from the internet? Are we listening to collection of specifically cross-linguistic data?
+
+-   The probability of hearing \[ð\], regardless of the language, would require some more data exploration. It's not that common a phoneme, cross-linguistically, but it is an allophone in many languages (e.g. Spanish).
+
+The formula for calculating the probability that we're listening to English would be:
+
+$$
+P(\text{English} | ð) = \frac{P(ð|\text{English}) P(\text{English})}{P(ð)}
+$$
+
+The really important thing to remember is that inverting a conditional probability is *hard*.
+
+### A Bayes Failure
+
+@wieling2016 found that many different languages were undergoing a change from preferring "UH" type filled pauses to "UM" type filled pauses. And, like many language changes where women lead the change:
+
+$$
+P(\text{UM} | \text{woman}) \gt P(\text{UM} | \text{man})
+$$
+
+The Daily Mail ran a headline that said something like "Did you say 'Uh'? You probably support [UKIP](https://en.wikipedia.org/wiki/UK_Independence_Party)."
+
+This involved the inversion of a *few* different conditional probabilities.
+
+$$
+P(\text{UKIP support} | \text{man}) = \frac{P{(\text{man} | \text{UKIP support})P(\text{UKIP support)}}}{P(\text{man})}
+$$
+
+and
+
+$$
+P(\text{man}|\text{Uh}) = \frac{P(\text{Uh}|\text{man})P(\text{man})}{P(\text{UH})}
+$$
+
+They really only had access to the two *conditional* probabilities on the right hand side of the equations! And, additionally, the $P(\text{UKIP support})$ probability was pretty low!
+
+## An example for document classification
+
+```{python}
+#| echo: true
+#| results: hide
+import nltk
+import numpy as np
+from collections import Counter
+nltk.download("movie_reviews")
+```
+
+```{python}
+#| echo: true
+from nltk.corpus import movie_reviews
+```
+
+The `movie_reviews` object is kind of idiosyncractic. Here's how we access its contents.
+
+### Movie Reviews setup
+
+#### Getting all File IDs
+
+```{python}
+#| echo: true
+# To get all review ids:
+all_ids = list(
+  movie_reviews.fileids()
+  )
+
+all_ids[0:10]
+```
+
+#### Getting sentiments from file ids
+
+```{python}
+#| echo: true
+from collections import Counter
+Counter([x.split("/")[0] for x in all_ids])
+```
+
+So, we know $P(\text{positive}) = P(\text{negative}) = 0.5$.
+
+#### Getting the words from a single review
+
+```{python}
+#| echo: true
+movie_reviews.words(
+  all_ids[1]
+)
+```
+
+#### Getting words from negative or positive reviews
+
+```{python}
+#| echo: true
+movie_reviews.words(categories = ["neg"])
+```
+
+```{python}
+movie_reviews.words(categories = ["pos"])
+```
+
+### Getting ready to classify
+
+Let's say we wanted to know whether or not a movie review was negative given the fact it has the word "*barely* " in it. That is, we want to know:
+
+$$
+P(\text{negative}|barely) \gt P(\text{positive} | barely)
+$$
+
+or
+
+$$
+P(\text{negative} | barely) \lt P(\text{positive}|barely)
+$$
+
+Using Bayes theorem, that means we need to find out:
+
+$$
+P(\text{sentiment}|barely) = \frac{P(barely | \text{sentiment})P(\text{sentiment})}{P(barely)}
+$$
+
+#### Getting Counts
+
+Our probabilities will be derived from counts:
+
+```{python}
+#| echo: true
+# from collections import Counter
+C_neg = Counter(
+  movie_reviews.words(
+    categories = ["neg"]
+    )
+  )
+
+C_pos = Counter(
+  movie_reviews.words(
+    categories = ["pos"]
+    )
+  )  
+
+C_all = Counter(
+  movie_reviews.words()
+)
+```
+
+#### Calculating probabilities
+
+```{python}
+#| echo: true
+# Conditional probabilities
+P_barely_pos = C_pos["barely"] / C_pos.total()
+P_barely_neg = C_neg["barely"] / C_neg.total()
+
+# Base probability
+P_barely = C_all["barely"] / C_all.total()
+
+# Sentiment probabilities
+P_pos = 0.5
+P_neg = 0.5
+```
+
+#### Calculating the posterior
+
+```{python}
+#| echo: true
+
+P_pos_barely = (P_barely_pos * P_pos) / P_barely
+
+P_neg_barely = (P_barely_neg * P_neg) / P_barely
+```
+
+```{python}
+#| echo: true
+P_pos_barely
+```
+
+```{python}
+#| echo: true
+P_neg_barely
+```
+
+## Naive Bayes
+
+Now, this is the measure of how a *single* word contributes the the classification of a document.
