@@ -135,6 +135,7 @@ movie_reviews.words(categories = ["neg"])
 ```
 
 ```{python}
+#| echo: true
 movie_reviews.words(categories = ["pos"])
 ```
 
@@ -220,4 +221,56 @@ P_neg_barely
 
 ## Naive Bayes
 
-Now, this is the measure of how a *single* word contributes the the classification of a document.
+Now, this is the measure of how a *single* word contributes the the classification of a document. But let's grab just one of the reviews with "barely" in it.
+
+```{python}
+#| echo: true
+review_words = [
+  list(movie_reviews.words(id)) 
+  for id in all_ids
+  ]
+
+barely_reviews = [
+  review 
+  for review in review_words 
+  if "barely" in review
+  ] 
+
+len(barely_reviews[0])
+```
+
+There were `r length(py$barely_reviews[[1]])` other words in the review. Surely they *each* contributed some to the total meaning.
+
+### "Bag of Words"
+
+The most basic Naive Bayes model treats each review like a "bag of words."
+
+```{python}
+#| echo: true
+
+Counter(barely_reviews[0]).most_common(10)
+```
+
+Then, for each token, we calculate the $P(\text{sentiment} | w)$ and multiply them together.
+
+$$
+P(\text{sentiment} | W) = P(\text{sentiment)}\prod_{w\in W}P(w|\text{sentiment)}
+$$
+
+Or, to do it in log-space
+
+$$
+\log P(\text{sentiment}|W) = \log P(\text{sentiment)} + \sum_{w\in W}\log P(w|\text{sentiment})
+$$
+
+### Practicalities
+
+All of the same issues that arose for n-gram models [which required "smoothing"](08_ngram_smoothing.qmd) also arise for these Naive Bayes models, including:
+
+-   Out of vocabulary items in the document you're trying to classify.
+
+-   A token if interest $w$ not appearing in one of the categories, leading to a 0.0 probability.
+
+### "Feature Engineering".
+
+Another thing to take into account is that you might want to adjust or create new features based on the text to do your classification, which is commonly known as "feature engineering."
