@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Josef Fruehwald">
+<meta name="dcterms.date" content="2024-03-19">
 
-<title>Lin511-2024 - Glossary</title>
+<title>Lin511-2024 - Bayes Theorem</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,7 +22,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -31,8 +86,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../notes/concepts/01_keyboarding.html" rel="next">
-<link href="../../notes/index.html" rel="prev">
+<link href="../../notes/programming/00_setup.html" rel="next">
+<link href="../../notes/meetings/09_markov_models.html" rel="prev">
 <link href="../../assets/logo.svg" rel="icon" type="image/svg+xml">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -46,8 +101,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="../../site_libs/quarto-contrib/codenamelabel/codeblocklabel.css" rel="stylesheet">
-<script src="../../site_libs/quarto-contrib/kbd/kbd.js"></script>
-<link href="../../site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -77,14 +130,43 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles/styles.css">
-<meta property="og:title" content="Lin511-2024 - Glossary">
+<meta property="og:title" content="Lin511-2024 - Bayes Theorem">
 <meta property="og:description" content="">
 <meta property="og:site_name" content="Lin511-2024">
 </head>
 
-<body class="nav-sidebar docked nav-fixed">
+<body class="nav-sidebar docked nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -132,7 +214,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/concepts/00_glossary.html">Concepts</a></li><li class="breadcrumb-item"><a href="../../notes/concepts/00_glossary.html">Glossary</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/meetings/01_fsm.html">Class Meetings</a></li><li class="breadcrumb-item"><a href="../../notes/meetings/10_naive_bayes1.html">Bayes Theorem</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -157,16 +239,16 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
  <span class="menu-text">Concepts</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notes/concepts/00_glossary.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../notes/concepts/00_glossary.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Glossary</span></a>
   </div>
 </li>
@@ -204,13 +286,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
  <span class="menu-text">Class Meetings</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../notes/meetings/01_fsm.html" class="sidebar-item-text sidebar-link">
@@ -273,7 +355,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notes/meetings/10_naive_bayes1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../notes/meetings/10_naive_bayes1.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Bayes Theorem</span></a>
   </div>
 </li>
@@ -349,15 +431,49 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#bayes-theorem" id="toc-bayes-theorem" class="nav-link active" data-scroll-target="#bayes-theorem">Bayes Theorem</a>
+  <ul>
+  <li><a href="#a-bayes-failure" id="toc-a-bayes-failure" class="nav-link" data-scroll-target="#a-bayes-failure">A Bayes Failure</a></li>
+  </ul></li>
+  <li><a href="#an-example-for-document-classification" id="toc-an-example-for-document-classification" class="nav-link" data-scroll-target="#an-example-for-document-classification">An example for document classification</a>
+  <ul>
+  <li><a href="#movie-reviews-setup" id="toc-movie-reviews-setup" class="nav-link" data-scroll-target="#movie-reviews-setup">Movie Reviews setup</a>
+  <ul class="collapse">
+  <li><a href="#getting-all-file-ids" id="toc-getting-all-file-ids" class="nav-link" data-scroll-target="#getting-all-file-ids">Getting all File IDs</a></li>
+  <li><a href="#getting-sentiments-from-file-ids" id="toc-getting-sentiments-from-file-ids" class="nav-link" data-scroll-target="#getting-sentiments-from-file-ids">Getting sentiments from file ids</a></li>
+  <li><a href="#getting-the-words-from-a-single-review" id="toc-getting-the-words-from-a-single-review" class="nav-link" data-scroll-target="#getting-the-words-from-a-single-review">Getting the words from a single review</a></li>
+  <li><a href="#getting-words-from-negative-or-positive-reviews" id="toc-getting-words-from-negative-or-positive-reviews" class="nav-link" data-scroll-target="#getting-words-from-negative-or-positive-reviews">Getting words from negative or positive reviews</a></li>
+  </ul></li>
+  <li><a href="#getting-ready-to-classify" id="toc-getting-ready-to-classify" class="nav-link" data-scroll-target="#getting-ready-to-classify">Getting ready to classify</a>
+  <ul class="collapse">
+  <li><a href="#getting-counts" id="toc-getting-counts" class="nav-link" data-scroll-target="#getting-counts">Getting Counts</a></li>
+  <li><a href="#calculating-probabilities" id="toc-calculating-probabilities" class="nav-link" data-scroll-target="#calculating-probabilities">Calculating probabilities</a></li>
+  <li><a href="#calculating-the-posterior" id="toc-calculating-the-posterior" class="nav-link" data-scroll-target="#calculating-the-posterior">Calculating the posterior</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#naive-bayes" id="toc-naive-bayes" class="nav-link" data-scroll-target="#naive-bayes">Naive Bayes</a>
+  <ul>
+  <li><a href="#bag-of-words" id="toc-bag-of-words" class="nav-link" data-scroll-target="#bag-of-words">“Bag of Words”</a></li>
+  <li><a href="#practicalities" id="toc-practicalities" class="nav-link" data-scroll-target="#practicalities">Practicalities</a></li>
+  <li><a href="#feature-engineering." id="toc-feature-engineering." class="nav-link" data-scroll-target="#feature-engineering.">“Feature Engineering”.</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/Lin511-2024/Lin511-2024.github.io/blob/main/notes/meetings/10_naive_bayes1.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/concepts/00_glossary.html">Concepts</a></li><li class="breadcrumb-item"><a href="../../notes/concepts/00_glossary.html">Glossary</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/meetings/01_fsm.html">Class Meetings</a></li><li class="breadcrumb-item"><a href="../../notes/meetings/10_naive_bayes1.html">Bayes Theorem</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Glossary</h1>
-</div>
+<h1 class="title">Bayes Theorem</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">compling</div>
+  </div>
+  </div>
 
 
 
@@ -370,6 +486,12 @@ ul.task-list li input[type="checkbox"] {
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 19, 2024</p>
+    </div>
+  </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
@@ -388,82 +510,300 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell">
 
 </div>
-<div class="cell">
-
+<p>Before we can get started with “Naive Bayes Classification”, we should maybe begin with “What is Bayes Theorem”.</p>
+<section id="bayes-theorem" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="bayes-theorem">Bayes Theorem</h2>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="assets/Thomas_Bayes.gif" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Thomas Bayes. <a href="https://commons.wikimedia.org/wiki/File:Thomas_Bayes.gif">Public domain, via Wikimedia</a></figcaption>
+</figure>
 </div>
-<h3 class="anchored">
-Case Folding
-</h3>
-To convert text data either to all uppercase or lowercase characters.
-<h3 class="anchored">
-Clone
-</h3>
-Making a copy of a git repository on another computer, whether <a href="#local-adj">locally</a> or <a href="#remote-adj">remotely</a>.
-<h3 class="anchored">
-Copy-Paste
-</h3>
-<p>Copying text to your computer’s ‘clipboard’ and pasting it into another location.</p>
-<p>Copying can be done many ways, including selecting text with your mouse, right-clicking then selecting ‘copy’, by selecting text and using your computer’s ‘hotkey’ for copying (<kbd aria-hidden="true" data-linux="Control+C" data-mac="Command+C" data-windows="Control+C,"></kbd><span class="visually-hidden"></span>), or, in the course documents, by clicking on the ‘copy’ icon in most code chunks.</p>
-To paste, you can either right-click and select ‘Paste’, or use your system’s ‘hotkey’ (<kbd aria-hidden="true" data-linux="Control+V" data-mac="Command+V" data-windows="Control+V"></kbd><span class="visually-hidden"></span>).
-<h3 class="anchored">
-Find, or <kbd aria-hidden="true" data-linux="Control+F" data-mac="Command+F" data-windows="Control+F"></kbd><span class="visually-hidden"></span>
-</h3>
-You can find text in most pages or documents by either typing <kbd aria-hidden="true" data-linux="Control+F" data-mac="Command+F" data-windows="Control+F"></kbd><span class="visually-hidden"></span>, then typing in the text you want to find in the dialogue box that pops up.
-<h3 class="anchored">
-Formal
-</h3>
-In <em>computational</em> linguistics, ‘formal’ isn’t the opposite of ‘casual’. It’s about any system or language which has a strict set of acceptable symbols, and how they can be combined.
-<h3 class="anchored">
-GitHub Codespaces
-</h3>
-GitHub Codespaces are a ‘development environment’, running on a <a href="#virtual-machine-vm">Virtual Machine</a>. They’re like mini computers you can access through your web browser that get created just for the repository you launch one in. The actual memory and computation are being run on GitHub’s physical computers.
-<h3 class="anchored">
-Index (noun)
-</h3>
-A value (usually an integer) that denotes the location of a valuable in an indexable object.
-<h3 class="anchored">
-Index (verb)
-</h3>
-To use a numeric <a href="#index-noun">index</a> on an object to return the value at that index.
-<h3 class="anchored">
-Local (adj)
-</h3>
-Describes anything that exists or happens on the <em>actual</em> device you’re interacting with. For example, if you have a Microsoft Word document on your computer that ends in .docx, it is probably ‘local’ (even if theres a <a href="#remote-adj">‘remote’</a> copy somewhere). These days, it’s not always obvious if things happen locally or remotely. If you have a phone that does facial recognition on pictures you take, if the facial recognition program runs <em>on</em> your phone, it’s ‘local’. But if the picture needs to get uploaded to Apple or Google first, then the facial recognition is ‘remote’.
-<h3 class="anchored">
-Remote (adj)
-</h3>
-Describes anything that exists or happens on a <em>different</em> device than the one you’re interacting with. For example, if you edit a Google Doc, the actual document is stored on a Google computer, not on the device you’re editing.
-<h3 class="anchored">
-Slice (verb)
-</h3>
-To pull out a range of values from an object, defined by a starting and stopping position.
-<h3 class="anchored">
-Tab Autocomplete
-</h3>
-Many programming applications have “Tab Autocomplete” suggestions that allow you to type in just a few letters of the command, function, or variable you want to use, and then hit <kbd aria-hidden="true">Tab</kbd><span class="visually-hidden">Tab</span>.
-<h3 class="anchored">
-Terminal
-</h3>
-A text based interface to your computer. Instead of clicking on visual icons to, say, open a folder and look at its contents, you type in text based commands like <code>cd</code> and <code>ls</code>.
-<h3 class="anchored">
-Virtual Machine/VM
-</h3>
-Virtual Machines are simulations of computers. It’s like having an encapsulated computer, running its own operating system and programs, that borrows memory and computing resources from computers it’s running on.
-<h3 class="anchored">
-dictionary
-</h3>
-<p>In programming languages, a dictionary is a data structure that stores key, value pairs, and lets you retrieve a value with a given key.</p>
+<p>Bayes Theorem describes how we should use evidence or data as an indicator of some kind of outcome, or hypothesis. Specifically:</p>
+<ul>
+<li><p>We need to consider how likely the data would be given the outcome (a conditional probability, <span class="math inline">\(P(d|h)\)</span>)</p></li>
+<li><p>The probability of the outcome, generally <span class="math inline">\(P(h)\)</span>.</p></li>
+<li><p>The probability of the data, generally <span class="math inline">\(P(d)\)</span>.</p></li>
+</ul>
+<p>To use a linguistic example, let’s say we were listening to a recording with a lot of static, and we couldn’t make out even which language we were listening to. But then, we hear a very distinct [ð]. What is the probability that we’re listening to English?</p>
+<ul>
+<li><p>The probability that we would hear [ð] if it <em>were</em> English is pretty high. It appears at the start of a lot of frequent function words.</p></li>
+<li><p>The probability we’re listening to a recording of English, generally, depends on the context. Are we pulling random recordings from the internet? Are we listening to collection of specifically cross-linguistic data?</p></li>
+<li><p>The probability of hearing [ð], regardless of the language, would require some more data exploration. It’s not that common a phoneme, cross-linguistically, but it is an allophone in many languages (e.g.&nbsp;Spanish).</p></li>
+</ul>
+<p>The formula for calculating the probability that we’re listening to English would be:</p>
+<p><span class="math display">\[
+P(\text{English} | ð) = \frac{P(ð|\text{English}) P(\text{English})}{P(ð)}
+\]</span></p>
+<p>The really important thing to remember is that inverting a conditional probability is <em>hard</em>.</p>
+<section id="a-bayes-failure" class="level3">
+<h3 class="anchored" data-anchor-id="a-bayes-failure">A Bayes Failure</h3>
+<p><span class="citation" data-cites="wieling2016">Wieling et al. (<a href="#ref-wieling2016" role="doc-biblioref">2016</a>)</span> found that many different languages were undergoing a change from preferring “UH” type filled pauses to “UM” type filled pauses. And, like many language changes where women lead the change:</p>
+<p><span class="math display">\[
+P(\text{UM} | \text{woman}) \gt P(\text{UM} | \text{man})
+\]</span></p>
+<p>The Daily Mail ran a headline that said something like “Did you say ‘Uh’? You probably support <a href="https://en.wikipedia.org/wiki/UK_Independence_Party">UKIP</a>.”</p>
+<p>This involved the inversion of a <em>few</em> different conditional probabilities.</p>
+<p><span class="math display">\[
+P(\text{UKIP support} | \text{man}) = \frac{P{(\text{man} | \text{UKIP support})P(\text{UKIP support)}}}{P(\text{man})}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+P(\text{man}|\text{Uh}) = \frac{P(\text{Uh}|\text{man})P(\text{man})}{P(\text{UH})}
+\]</span></p>
+<p>They really only had access to the two <em>conditional</em> probabilities on the right hand side of the equations! And, additionally, the <span class="math inline">\(P(\text{UKIP support})\)</span> probability was pretty low!</p>
+</section>
+</section>
+<section id="an-example-for-document-classification" class="level2">
+<h2 class="anchored" data-anchor-id="an-example-for-document-classification">An example for document classification</h2>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nltk</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>nltk.download(<span class="st">"movie_reviews"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.corpus <span class="im">import</span> movie_reviews</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>movie_reviews</code> object is kind of idiosyncractic. Here’s how we access its contents.</p>
+<section id="movie-reviews-setup" class="level3">
+<h3 class="anchored" data-anchor-id="movie-reviews-setup">Movie Reviews setup</h3>
+<section id="getting-all-file-ids" class="level4">
+<h4 class="anchored" data-anchor-id="getting-all-file-ids">Getting all File IDs</h4>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To get all review ids:</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>all_ids <span class="op">=</span> <span class="bu">list</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  movie_reviews.fileids()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>all_ids[<span class="dv">0</span>:<span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['neg/cv000_29416.txt', 'neg/cv001_19502.txt', 'neg/cv002_17424.txt', 'neg/cv003_12683.txt', 'neg/cv004_12641.txt', 'neg/cv005_29357.txt', 'neg/cv006_17022.txt', 'neg/cv007_4992.txt', 'neg/cv008_29326.txt', 'neg/cv009_29417.txt']</code></pre>
+</div>
+</div>
+</section>
+<section id="getting-sentiments-from-file-ids" class="level4">
+<h4 class="anchored" data-anchor-id="getting-sentiments-from-file-ids">Getting sentiments from file ids</h4>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>Counter([x.split(<span class="st">"/"</span>)[<span class="dv">0</span>] <span class="cf">for</span> x <span class="kw">in</span> all_ids])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Counter({'neg': 1000, 'pos': 1000})</code></pre>
+</div>
+</div>
+<p>So, we know <span class="math inline">\(P(\text{positive}) = P(\text{negative}) = 0.5\)</span>.</p>
+</section>
+<section id="getting-the-words-from-a-single-review" class="level4">
+<h4 class="anchored" data-anchor-id="getting-the-words-from-a-single-review">Getting the words from a single review</h4>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>movie_reviews.words(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  all_ids[<span class="dv">1</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['the', 'happy', 'bastard', "'", 's', 'quick', 'movie', ...]</code></pre>
+</div>
+</div>
+</section>
+<section id="getting-words-from-negative-or-positive-reviews" class="level4">
+<h4 class="anchored" data-anchor-id="getting-words-from-negative-or-positive-reviews">Getting words from negative or positive reviews</h4>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>movie_reviews.words(categories <span class="op">=</span> [<span class="st">"neg"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['plot', ':', 'two', 'teen', 'couples', 'go', 'to', ...]</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>movie_reviews.words(categories <span class="op">=</span> [<span class="st">"pos"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['films', 'adapted', 'from', 'comic', 'books', 'have', ...]</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="getting-ready-to-classify" class="level3">
+<h3 class="anchored" data-anchor-id="getting-ready-to-classify">Getting ready to classify</h3>
+<p>Let’s say we wanted to know whether or not a movie review was negative given the fact it has the word “<em>barely</em>” in it. That is, we want to know:</p>
+<p><span class="math display">\[
+P(\text{negative}|barely) \gt P(\text{positive} | barely)
+\]</span></p>
+<p>or</p>
+<p><span class="math display">\[
+P(\text{negative} | barely) \lt P(\text{positive}|barely)
+\]</span></p>
+<p>Using Bayes theorem, that means we need to find out:</p>
+<p><span class="math display">\[
+P(\text{sentiment}|barely) = \frac{P(barely | \text{sentiment})P(\text{sentiment})}{P(barely)}
+\]</span></p>
+<section id="getting-counts" class="level4">
+<h4 class="anchored" data-anchor-id="getting-counts">Getting Counts</h4>
+<p>Our probabilities will be derived from counts:</p>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># from collections import Counter</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>C_neg <span class="op">=</span> Counter(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  movie_reviews.words(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    categories <span class="op">=</span> [<span class="st">"neg"</span>]</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>C_pos <span class="op">=</span> Counter(</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  movie_reviews.words(</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    categories <span class="op">=</span> [<span class="st">"pos"</span>]</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  )  </span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>C_all <span class="op">=</span> Counter(</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  movie_reviews.words()</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="calculating-probabilities" class="level4">
+<h4 class="anchored" data-anchor-id="calculating-probabilities">Calculating probabilities</h4>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conditional probabilities</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>P_barely_pos <span class="op">=</span> C_pos[<span class="st">"barely"</span>] <span class="op">/</span> C_pos.total()</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>P_barely_neg <span class="op">=</span> C_neg[<span class="st">"barely"</span>] <span class="op">/</span> C_neg.total()</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Base probability</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>P_barely <span class="op">=</span> C_all[<span class="st">"barely"</span>] <span class="op">/</span> C_all.total()</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Sentiment probabilities</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>P_pos <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>P_neg <span class="op">=</span> <span class="fl">0.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="calculating-the-posterior" class="level4">
+<h4 class="anchored" data-anchor-id="calculating-the-posterior">Calculating the posterior</h4>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>P_pos_barely <span class="op">=</span> (P_barely_pos <span class="op">*</span> P_pos) <span class="op">/</span> P_barely</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>P_neg_barely <span class="op">=</span> (P_barely_neg <span class="op">*</span> P_neg) <span class="op">/</span> P_barely</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>P_pos_barely</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.3891150491952352</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>P_neg_barely</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.6228859645471293</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="naive-bayes" class="level2">
+<h2 class="anchored" data-anchor-id="naive-bayes">Naive Bayes</h2>
+<p>Now, this is the measure of how a <em>single</em> word contributes the the classification of a document. But let’s grab just one of the reviews with “barely” in it.</p>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>review_words <span class="op">=</span> [</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">list</span>(movie_reviews.words(<span class="bu">id</span>)) </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> <span class="bu">id</span> <span class="kw">in</span> all_ids</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>barely_reviews <span class="op">=</span> [</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  review </span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> review <span class="kw">in</span> review_words </span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="st">"barely"</span> <span class="kw">in</span> review</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  ] </span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(barely_reviews[<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1025</code></pre>
+</div>
+</div>
+<p>There were 1025 other words in the review. Surely they <em>each</em> contributed some to the total meaning.</p>
+<section id="bag-of-words" class="level3">
+<h3 class="anchored" data-anchor-id="bag-of-words">“Bag of Words”</h3>
+<p>The most basic Naive Bayes model treats each review like a “bag of words.”</p>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>Counter(barely_reviews[<span class="dv">0</span>]).most_common(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[('.', 55), ('the', 54), (',', 51), ("'", 22), ('"', 22), ('and', 18), ('a', 16), ('of', 15), ('-', 14), ('(', 14)]</code></pre>
+</div>
+</div>
+<p>Then, for each token, we calculate the <span class="math inline">\(P(\text{sentiment} | w)\)</span> and multiply them together.</p>
+<p><span class="math display">\[
+P(\text{sentiment} | W) = P(\text{sentiment)}\prod_{w\in W}P(w|\text{sentiment)}
+\]</span></p>
+<p>Or, to do it in log-space</p>
+<p><span class="math display">\[
+\log P(\text{sentiment}|W) = \log P(\text{sentiment)} + \sum_{w\in W}\log P(w|\text{sentiment})
+\]</span></p>
+</section>
+<section id="practicalities" class="level3">
+<h3 class="anchored" data-anchor-id="practicalities">Practicalities</h3>
+<p>All of the same issues that arose for n-gram models <a href="../../notes/meetings/08_ngram_smoothing.html">which required “smoothing”</a> also arise for these Naive Bayes models, including:</p>
+<ul>
+<li><p>Out of vocabulary items in the document you’re trying to classify.</p></li>
+<li><p>A token if interest <span class="math inline">\(w\)</span> not appearing in one of the categories, leading to a 0.0 probability.</p></li>
+</ul>
+</section>
+<section id="feature-engineering." class="level3">
+<h3 class="anchored" data-anchor-id="feature-engineering.">“Feature Engineering”.</h3>
+<p>Another thing to take into account is that you might want to adjust or create new features based on the text to do your classification, which is commonly known as “feature engineering.”</p>
 
 
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald,
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-wieling2016" class="csl-entry" role="listitem">
+Wieling, Martijn, Jack Grieve, Gosse Bouma, Josef Fruehwald, John Coleman, and M. Liberman. 2016. <span>“Variation and Change in the Use of Hesitation Markers in Germanic Languages.”</span> <em>Language Dynamics and Change</em> 6 (2): 199–234. <a href="https://doi.org/10.1163/22105832-00602001">https://doi.org/10.1163/22105832-00602001</a>.
+</div>
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
   author = {Fruehwald, Josef},
-  title = {Glossary},
-  url = {https://lin511-2024.github.io/notes/concepts/00_glossary.html},
+  title = {Bayes {Theorem}},
+  date = {2024-03-19},
+  url = {https://lin511-2024.github.io/notes/meetings/10_naive_bayes1.html},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald" class="csl-entry quarto-appendix-citeas" role="listitem">
-Fruehwald, Josef. n.d. <span>“Glossary.”</span> <a href="https://lin511-2024.github.io/notes/concepts/00_glossary.html">https://lin511-2024.github.io/notes/concepts/00_glossary.html</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Fruehwald, Josef. 2024. <span>“Bayes Theorem.”</span> March 19, 2024. <a href="https://lin511-2024.github.io/notes/meetings/10_naive_bayes1.html">https://lin511-2024.github.io/notes/meetings/10_naive_bayes1.html</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1020,13 +1360,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../notes/index.html" class="pagination-link" aria-label="Notes Home">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Notes Home</span>
+      <a href="../../notes/meetings/09_markov_models.html" class="pagination-link" aria-label="Markov Models">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Markov Models</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../notes/concepts/01_keyboarding.html" class="pagination-link" aria-label="&quot;Where is the ... key?&quot;">
-        <span class="nav-page-text">“Where is the … key?”</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../notes/programming/00_setup.html" class="pagination-link" aria-label="Setup Notes">
+        <span class="nav-page-text">Setup Notes</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1057,7 +1397,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </a>
   </li>  
 </ul>
-    <div class="toc-actions"><ul><li><a href="https://github.com/Lin511-2024/Lin511-2024.github.io/blob/main/notes/concepts/00_glossary.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Lin511-2024/Lin511-2024.github.io/blob/main/notes/meetings/10_naive_bayes1.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
