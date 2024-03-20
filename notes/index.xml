@@ -11,7 +11,581 @@
 <description></description>
 <language>en</language>
 <generator>quarto-1.4.551</generator>
-<lastBuildDate>Tue, 19 Mar 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 21 Mar 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Training and evaluating classifiers</title>
+  <dc:creator>Josef Fruehwald</dc:creator>
+  <link>https://lin511-2024.github.io/notes/programming/06_classifier.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>There are some support functions in the <a href="read_data.py"><code>read_data.py</code> module</a></p>
+<div id="cell-2" class="cell" data-execution_count="1">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> pathlib <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> Path</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> read_data <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> read_baby_names, <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\</span></span>
+<span id="cb1-3">    test_dev_train_split</span>
+<span id="cb1-4"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> nltk</span>
+<span id="cb1-5"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> nltk <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> NaiveBayesClassifier</span>
+<span id="cb1-6"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span></code></pre></div>
+</div>
+<div id="cell-3" class="cell" data-execution_count="2">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">baby_names <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> read_baby_names(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"data/baby_2017.csv"</span>)</span></code></pre></div>
+</div>
+<div id="cell-4" class="cell" data-execution_count="3">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> make_name_features(</span>
+<span id="cb3-2">        data_line: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">list</span>[<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>]</span>
+<span id="cb3-3">    ) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-&gt;</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">list</span>[<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">tuple</span>[<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">dict</span>, <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>]]:</span>
+<span id="cb3-4">    gender <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> data_line[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]</span>
+<span id="cb3-5">    name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> data_line[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]</span>
+<span id="cb3-6"></span>
+<span id="cb3-7">    features <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {</span>
+<span id="cb3-8">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"first_letter"</span>: name[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>],</span>
+<span id="cb3-9">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"second_letter"</span>: name[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>],</span>
+<span id="cb3-10">        <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"last_letter"</span>: name[<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]</span>
+<span id="cb3-11">    }</span>
+<span id="cb3-12"></span>
+<span id="cb3-13">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> (features, gender)</span></code></pre></div>
+</div>
+<div id="cell-5" class="cell" data-execution_count="4">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">all_name_features <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb4-2">    make_name_features(line) </span>
+<span id="cb4-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> line <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> baby_names</span>
+<span id="cb4-4">    ]</span>
+<span id="cb4-5">train_name, dev_name, test_name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> test_dev_train_split(all_name_features)</span></code></pre></div>
+</div>
+<p>Before we train a whole Naive Bayes classifier, let’s think about how we might do with a <em>much</em> simpler classifier.</p>
+<div id="cell-7" class="cell" data-execution_count="5">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> joes_v_good_classifier(features: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">dict</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-&gt;</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>:</span>
+<span id="cb5-2">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"F"</span></span></code></pre></div>
+</div>
+<p>Let’s score its accuracy on the dev set.</p>
+<div id="cell-9" class="cell" data-execution_count="6">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> classifier_metric(classifier, data):</span>
+<span id="cb6-2">    guess <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> classifier(data[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>])</span>
+<span id="cb6-3">    answer <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> data[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]</span>
+<span id="cb6-4"></span>
+<span id="cb6-5">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> guess <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> answer:</span>
+<span id="cb6-6">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb6-7">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span></code></pre></div>
+</div>
+<div id="cell-10" class="cell" data-execution_count="7">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">joe_guesses <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([</span>
+<span id="cb7-2">    classifier_metric(joes_v_good_classifier, data)</span>
+<span id="cb7-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> data <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> dev_name</span>
+<span id="cb7-4">])</span></code></pre></div>
+</div>
+<div id="cell-11" class="cell" data-execution_count="8">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">joe_guesses.mean()</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>0.566676932553126</code></pre>
+</div>
+</div>
+<p>By just always guessing <code>"F"</code>, I did better than chance!</p>
+<section id="moving-beyond-accuracy" class="level2">
+<h2 class="anchored" data-anchor-id="moving-beyond-accuracy">Moving beyond accuracy</h2>
+<ul>
+<li>Recall: Of all of the names that <em>were</em> <code>"F"</code>, how many did the classifier label <code>"F"</code>?</li>
+<li>Precision: Of all of the names labelled <code>"F"</code>, how many <em>were</em> <code>"F"</code>?</li>
+</ul>
+<div id="cell-13" class="cell" data-execution_count="9">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">joe_recall <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([</span>
+<span id="cb10-2">    classifier_metric(joes_v_good_classifier, data)</span>
+<span id="cb10-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> data <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> dev_name</span>
+<span id="cb10-4">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> data[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"F"</span></span>
+<span id="cb10-5">])</span></code></pre></div>
+</div>
+<div id="cell-14" class="cell" data-execution_count="10">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">joe_recall_est <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> joe_recall.mean()</span>
+<span id="cb11-2">joe_recall_est</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>1.0</code></pre>
+</div>
+</div>
+<div id="cell-15" class="cell" data-execution_count="11">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">joe_precision <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([</span>
+<span id="cb13-2">    classifier_metric(joes_v_good_classifier, data)</span>
+<span id="cb13-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> data <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> dev_name</span>
+<span id="cb13-4">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> joes_v_good_classifier(data[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"F"</span></span>
+<span id="cb13-5">])</span></code></pre></div>
+</div>
+<div id="cell-16" class="cell" data-execution_count="12">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">joe_precision_est <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> joe_precision.mean()</span>
+<span id="cb14-2">joe_precision_est</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>0.566676932553126</code></pre>
+</div>
+</div>
+<p>These two measure are often combined into a single score called the “F Measure”.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AF%20=%202%5Cfrac%7Bpr%7D%7Bp+r%7D%0A"></p>
+<div id="cell-18" class="cell" data-execution_count="13">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">joe_f <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> ((joe_recall_est <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> joe_precision_est)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>(joe_recall_est <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> joe_precision_est))</span></code></pre></div>
+</div>
+<div id="cell-19" class="cell" data-execution_count="14">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1">joe_f</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>0.7234126204049538</code></pre>
+</div>
+</div>
+<section id="a-high-precision-low-recall-classifier" class="level3">
+<h3 class="anchored" data-anchor-id="a-high-precision-low-recall-classifier">A high-precision, low-recall classifier</h3>
+<div id="cell-21" class="cell" data-execution_count="15">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> a_classifier(features: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">dict</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-&gt;</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>:</span>
+<span id="cb19-2">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> features[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"last_letter"</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"a"</span>:</span>
+<span id="cb19-3">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"F"</span></span>
+<span id="cb19-4">    </span>
+<span id="cb19-5">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"M"</span></span></code></pre></div>
+</div>
+<div id="cell-22" class="cell" data-execution_count="16">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1">a_recall <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([</span>
+<span id="cb20-2">    classifier_metric(a_classifier, data)</span>
+<span id="cb20-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> data <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> dev_name</span>
+<span id="cb20-4">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> data[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"F"</span></span>
+<span id="cb20-5">])</span></code></pre></div>
+</div>
+<div id="cell-23" class="cell" data-execution_count="17">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1">a_recall_est <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> a_recall.mean()</span>
+<span id="cb21-2">a_recall_est</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<pre><code>0.3391304347826087</code></pre>
+</div>
+</div>
+<div id="cell-24" class="cell" data-execution_count="18">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1">a_precision <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([</span>
+<span id="cb23-2">    classifier_metric(a_classifier, data)</span>
+<span id="cb23-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> data <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> dev_name</span>
+<span id="cb23-4">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> a_classifier(data[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"F"</span></span>
+<span id="cb23-5">])</span></code></pre></div>
+</div>
+<div id="cell-25" class="cell" data-execution_count="19">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1">a_precision_est <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> a_precision.mean()</span>
+<span id="cb24-2">a_precision_est</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>0.9292628443782577</code></pre>
+</div>
+</div>
+<p>The way this classifier worked, it was really reluctant to label a name <code>"F"</code>, but when it <em>did</em>, it was mostly right. For this data set, this results in a way worse F measure than just labelling every single name <code>"F"</code>.</p>
+<div id="cell-27" class="cell" data-execution_count="20">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1">a_f <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> ((a_recall_est <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> a_precision_est)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>(a_recall_est <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> a_precision_est))</span>
+<span id="cb26-2">a_f</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<pre><code>0.49691419470435993</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="training-and-evaluating-the-naive-bayes-classifier" class="level2">
+<h2 class="anchored" data-anchor-id="training-and-evaluating-the-naive-bayes-classifier">Training and evaluating the Naive Bayes classifier</h2>
+<div id="cell-29" class="cell" data-execution_count="21">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1">nb_classifier <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> NaiveBayesClassifier.train(train_name)</span></code></pre></div>
+</div>
+<div id="cell-30" class="cell" data-execution_count="22">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb29" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1">nb_recall <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([</span>
+<span id="cb29-2">    classifier_metric(nb_classifier.classify, data)</span>
+<span id="cb29-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> data <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> dev_name</span>
+<span id="cb29-4">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> data[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>] <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"F"</span></span>
+<span id="cb29-5">])</span></code></pre></div>
+</div>
+<div id="cell-31" class="cell" data-execution_count="23">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb30" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1">nb_recall_est <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> nb_recall.mean()</span>
+<span id="cb30-2">nb_recall_est</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<pre><code>0.7902173913043479</code></pre>
+</div>
+</div>
+<div id="cell-32" class="cell" data-execution_count="24">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb32" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1">nb_precision <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([</span>
+<span id="cb32-2">    classifier_metric(nb_classifier.classify, data)</span>
+<span id="cb32-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> data <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> dev_name</span>
+<span id="cb32-4">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> nb_classifier.classify(data[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"F"</span></span>
+<span id="cb32-5">])</span></code></pre></div>
+</div>
+<div id="cell-33" class="cell" data-execution_count="25">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb33" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1">nb_precision_est <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> nb_precision.mean()</span>
+<span id="cb33-2">nb_precision_est</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<pre><code>0.7859459459459459</code></pre>
+</div>
+</div>
+<div id="cell-34" class="cell" data-execution_count="26">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb35" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1">nb_f <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> ((nb_precision_est <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> nb_recall_est)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>(nb_precision_est <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> nb_recall_est))</span>
+<span id="cb35-2">nb_f</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<pre><code>0.7880758807588076</code></pre>
+</div>
+</div>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
+  author = {Fruehwald, Josef},
+  title = {Training and Evaluating Classifiers},
+  date = {2024-03-21},
+  url = {https://lin511-2024.github.io/notes/programming/06_classifier.html},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2024" class="csl-entry quarto-appendix-citeas">
+Fruehwald, Josef. 2024. <span>“Training and Evaluating
+Classifiers.”</span> March 21, 2024. <a href="https://lin511-2024.github.io/notes/programming/06_classifier.html">https://lin511-2024.github.io/notes/programming/06_classifier.html</a>.
+</div></div></section></div> ]]></description>
+  <category>python</category>
+  <guid>https://lin511-2024.github.io/notes/programming/06_classifier.html</guid>
+  <pubDate>Thu, 21 Mar 2024 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Bayes Theorem</title>
   <dc:creator>Josef Fruehwald</dc:creator>
@@ -18605,7 +19179,7 @@ font-style: inherit;">=</span> nlp(sentence)</span>
 <div>
 
 </div>
-<div class="quarto-layout-panel" data-layout-ncol="2" style="border-style: solid;">
+<div class="quarto-layout-panel" style="border-style: solid;" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <p>Tokens</p>
@@ -18631,7 +19205,7 @@ _ c a n t e r</code></pre>
 <div>
 
 </div>
-<div class="quarto-layout-panel" data-layout-ncol="2" style="border-style: solid;">
+<div class="quarto-layout-panel" style="border-style: solid;" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <p>tokens</p>
@@ -18657,7 +19231,7 @@ _c a n t e r</code></pre>
 <div>
 
 </div>
-<div class="quarto-layout-panel" data-layout-ncol="2" style="border-style: solid;">
+<div class="quarto-layout-panel" style="border-style: solid;" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <p>tokens</p>
@@ -18683,7 +19257,7 @@ _ca n t e r _</code></pre>
 <div>
 
 </div>
-<div class="quarto-layout-panel" data-layout-ncol="2" style="border-style: solid;">
+<div class="quarto-layout-panel" style="border-style: solid;" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <p>tokens</p>
@@ -21877,7 +22451,7 @@ Fruehwald, Josef. 2024. <span>“Setup Notes.”</span> January 8, 2024. <a href
 Fruehwald, Josef. n.d. <span>“Side Note.”</span> <a href="https://lin511-2024.github.io/notes/meetings/06_side-note.html">https://lin511-2024.github.io/notes/meetings/06_side-note.html</a>.
 </div></div></section></div> ]]></description>
   <guid>https://lin511-2024.github.io/notes/meetings/06_side-note.html</guid>
-  <pubDate>Tue, 19 Mar 2024 12:13:31 GMT</pubDate>
+  <pubDate>Wed, 20 Mar 2024 18:17:57 GMT</pubDate>
 </item>
 <item>
   <title>Python basics</title>
@@ -22012,7 +22586,7 @@ Fruehwald, Josef. n.d. <span>“Python Basics.”</span> <a href="https://lin511
 </div></div></section></div> ]]></description>
   <category>python</category>
   <guid>https://lin511-2024.github.io/notes/programming/01_Python_basics.html</guid>
-  <pubDate>Tue, 19 Mar 2024 12:13:31 GMT</pubDate>
+  <pubDate>Wed, 20 Mar 2024 18:17:57 GMT</pubDate>
 </item>
 </channel>
 </rss>
