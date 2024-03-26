@@ -11,7 +11,324 @@
 <description></description>
 <language>en</language>
 <generator>quarto-1.4.551</generator>
-<lastBuildDate>Thu, 21 Mar 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 25 Mar 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Logistic Regression</title>
+  <dc:creator>Josef Fruehwald</dc:creator>
+  <link>https://lin511-2024.github.io/notes/meetings/11_logistic_regression.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<div class="cell">
+
+</div>
+<section id="comparison" class="level2">
+<h2 class="anchored" data-anchor-id="comparison">Comparison</h2>
+<section id="naive-bayes" class="level3">
+<h3 class="anchored" data-anchor-id="naive-bayes">Naive Bayes</h3>
+<p>A Naive Bayes classifier tries to build a model <em>for each class</em>. Recall Bayes’ Theorem:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Ctext%7Bdata%7D%20%7C%20%5Ctext%7Bclass)%7DP(%5Ctext%7Bclass%7D)%0A"></p>
+<p>The term <img src="https://latex.codecogs.com/png.latex?P(%5Ctext%7Bdata%7D%20%7C%20%5Ctext%7Bclass%7D)"> is a model of the kind of data that appears in each class. When trying to do a classification task, we get back how probable the data distribution for each class.</p>
+</section>
+<section id="logistic-regression" class="level3">
+<h3 class="anchored" data-anchor-id="logistic-regression">Logistic Regression</h3>
+<p>Logistic Regression instead tries to directly estimate</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AP(%5Ctext%7Bclass%7D%20%7C%20%5Ctext%7Bdata%7D)%0A"></p>
+</section>
+</section>
+<section id="some-terminology-and-math" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="some-terminology-and-math">Some Terminology and Math</h2>
+<section id="probabilities" class="level3">
+<h3 class="anchored" data-anchor-id="probabilities">Probabilities</h3>
+<p>Probabilities range from 0 (impossible) to 1 (guaranteed).</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A0%20%5Cle%20p%20%5Cle1%0A"></p>
+<p>If something happens 2 out of every 3 times, we can calculate its probability with a fraction.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Ap%20=%20%5Cfrac%7B2%7D%7B3%7D%20=%200.6%5Cbar%7B6%7D%0A"></p>
+</section>
+<section id="odds" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="odds">Odds</h3>
+<p>Instead of representing how often something happened out of the total possible number of times, we’d get it’s <strong>odds</strong>.</p>
+<p>If something happens 2 out of every 3 times, that means for every 2 times it happens, 1 time it doesn’t.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Ao%20=%202:1%20=%20%5Cfrac%7B2%7D%7B1%7D%20=%202%0A"></p>
+<p>If we expressed the odds of the opposite outcome, it would be</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Ao%20=%201:2%20=%20%5Cfrac%7B1%7D%7B2%7D%20=%200.5%0A"></p>
+<p>The smallest odds you can get are <img src="https://latex.codecogs.com/png.latex?0:1"> (something <em>never</em> happens). The largest odds can get are <img src="https://latex.codecogs.com/png.latex?1:0"> (something <em>always</em> happens). That means odds are bounded by 0 and infinity.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A0%20%5Cle%200%20%5Cle%20%5Cinfty%0A"></p>
+<div class="cell">
+
+</div>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-prob-odds" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-prob-odds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://lin511-2024.github.io/notes/meetings/11_logistic_regression_files/figure-html/fig-prob-odds-1.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-prob-odds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: The relationship between probabilities and odds
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="log-odds-or-logits" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="log-odds-or-logits">Log-Odds or Logits</h3>
+<p>The log of 0 is <img src="https://latex.codecogs.com/png.latex?-%5Cinfty">, and the log of <img src="https://latex.codecogs.com/png.latex?%5Cinfty"> is <img src="https://latex.codecogs.com/png.latex?%5Cinfty">. So, if we take the log of the odds, we get a value that is symmetrically bounded.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A-%5Cinfty%20%5Cle%20%5Clog%7Bo%7D%20%5Cle%20%5Cinfty%0A"></p>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-prob-logit" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-prob-logit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://lin511-2024.github.io/notes/meetings/11_logistic_regression_files/figure-html/fig-prob-logit-1.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-prob-logit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: The relationship between probabilities and logits
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>What’s also useful about this is that probabilities on opposite sides of 0.5 differ in logits only in their sign.</p>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> scipy.special <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> logit</span>
+<span id="cb1-3"></span>
+<span id="cb1-4"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(logit(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>-0.6931471805599454</code></pre>
+</div>
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(logit(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.6931471805599452</code></pre>
+</div>
+</div>
+</section>
+<section id="why-use-logits" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="why-use-logits">Why use logits?</h3>
+<p>Because we can add and subtract an <em>arbitrary</em> number of values together (the outcome can be any negative or positive number) and then translate that back into a probability by reversing the function.</p>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> scipy.special <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> expit</span>
+<span id="cb5-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(expit(<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.11920292202211755</code></pre>
+</div>
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(expit(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.8807970779778823</code></pre>
+</div>
+</div>
+<section id="the-inverse-logit-function." class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="the-inverse-logit-function.">The “inverse logit” function.</h4>
+<p>The “inverse logit” function, in NLP tasks, is usually called the “sigmoid” function, because it looks like an “S” and is represented with <img src="https://latex.codecogs.com/png.latex?%5Csigma()">.</p>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-sigma" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-sigma-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://lin511-2024.github.io/notes/meetings/11_logistic_regression_files/figure-html/fig-sigma-1.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-sigma-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: The σ function
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="training-or-fitting-a-logistic-regression" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="training-or-fitting-a-logistic-regression">Training, or Fitting, a Logistic Regression</h2>
+<section id="step-1-deciding-on-your-binary-outcome" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-deciding-on-your-binary-outcome">Step 1: Deciding on your binary outcome</h3>
+<p>e.g: Positive (1) vs Negative (0) movie reviews.</p>
+</section>
+<section id="step-2-feature-engineering" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-feature-engineering">Step 2: Feature engineering</h3>
+<p>You need to settle on features to encode into each training token. For example:</p>
+<ul>
+<li><p>How many words in the review.</p></li>
+<li><p>How many positive or negative words from specific sentiment lexicons.</p></li>
+<li><p>etc.</p></li>
+</ul>
+</section>
+<section id="step-3-train-the-model" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="step-3-train-the-model">Step 3: “Train” the model</h3>
+<p>The model will return “weights” for each feature, and a “bias”.</p>
+<ul>
+<li><p>As the absolute value of weights move away from 0, you can think of that feature as being more or less important.</p></li>
+<li><p>As the “bias” moves up and down from 0, you can think of the overall probability moving up and down.</p></li>
+</ul>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-biases" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-biases-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://lin511-2024.github.io/notes/meetings/11_logistic_regression_files/figure-html/fig-biases-1.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-biases-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: The effect of different ‘biases’ on the same set of weights.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<section id="the-weights" class="level4">
+<h4 class="anchored" data-anchor-id="the-weights">The weights</h4>
+<p>The weights we get for each feature get multiplied by the feature value, and added together to get the logit value.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Az%20=%200.5~%5Ctext%7BN%20positive%20words%7D%20+%20-0.2%20~%5Ctext%7BN%20negative%20words%7D%20+%200.1~%5Ctext%7Btotal%20length%7D%20+%20b%0A"></p>
+<p>We could generalize the multiplication and addition:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Az%20=%20%5Cleft(%5Csum%20w_ix_i%20%5Cright)%20+%20b%0A"></p>
+<p>And, we could also even further simplify things with <a href="../../notes/meetings/09_markov_models.html#matrix-multiplication">matrix multiplication</a>, using the “dot product”.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Az%20=%20(w%5Ccdot%20x)%20+%20b%0A"></p>
+</section>
+</section>
+<section id="step-4-use-the-model-to-classify" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-use-the-model-to-classify">Step 4: Use the model to classify</h3>
+<p>Now, with the features for a new set of data, multiply them by the weights, and add the bias. The categorization rule says we’ll say it’s 1 if <img src="https://latex.codecogs.com/png.latex?%5Csigma(z)%3E0.5">, and otherwise.</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Az'%20=%20w%5Ccdot%20x'%20+b%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Ac%20=%20%5Cleft%5C%7B%5Cbegin%7Barray%7D%7Bl%7D1~%5Ctext%7Bif%7D~%5Csigma(z')%5Cgt0.5%5C%5C0~%5Ctext%7Botherwise%7D%20%5Cend%7Barray%7D%20%5Cright%5C%7D%0A"></p>
+</section>
+</section>
+<section id="overfitting-vs-underfitting" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="overfitting-vs-underfitting">Overfitting vs Underfitting</h2>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-temp" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-temp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://lin511-2024.github.io/notes/meetings/11_logistic_regression_files/figure-html/fig-temp-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-temp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Daily high temps for the Patterson Office Tower area.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-temp-under" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-temp-under-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://lin511-2024.github.io/notes/meetings/11_logistic_regression_files/figure-html/fig-temp-under-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-temp-under-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Daily high temps for the Patterson Office Tower area.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-temp-over" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-temp-over-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://lin511-2024.github.io/notes/meetings/11_logistic_regression_files/figure-html/fig-temp-over-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-temp-over-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Daily high temps for the Patterson Office Tower area.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<section id="overfitting-with-a-classifier" class="level3">
+<h3 class="anchored" data-anchor-id="overfitting-with-a-classifier">Overfitting with a classifier</h3>
+<p>If you fit a logistic regression with a <em>ton</em> of features, and each and every feature can get its own weight, you might “overfit” on the training data.</p>
+<p>One way to deal with this is to try to “regularize” the estimation of weights, so that they get biased towards 0. The usual regularizing methods are (frustratingly) called “L1” and “L2” regularization.</p>
+<dl>
+<dt>L1 Regularization</dt>
+<dd>
+<p>Shrinks weights down towards 0, and may even 0 out some weights entirely.</p>
+</dd>
+<dt>L2 Regularization</dt>
+<dd>
+<p>Shrinks weights down towards 0, but probably won’t set any to exactly 0.</p>
+</dd>
+</dl>
+<p>For ~reasons~, L2 regularization is mathematically and computationally easier to use.</p>
+
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
+  author = {Fruehwald, Josef},
+  title = {Logistic {Regression}},
+  date = {2024-03-25},
+  url = {https://lin511-2024.github.io/notes/meetings/11_logistic_regression.html},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2024" class="csl-entry quarto-appendix-citeas">
+Fruehwald, Josef. 2024. <span>“Logistic Regression.”</span> March 25,
+2024. <a href="https://lin511-2024.github.io/notes/meetings/11_logistic_regression.html">https://lin511-2024.github.io/notes/meetings/11_logistic_regression.html</a>.
+</div></div></section></div> ]]></description>
+  <category>compling</category>
+  <guid>https://lin511-2024.github.io/notes/meetings/11_logistic_regression.html</guid>
+  <pubDate>Mon, 25 Mar 2024 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Training and evaluating classifiers</title>
   <dc:creator>Josef Fruehwald</dc:creator>
@@ -22451,7 +22768,7 @@ Fruehwald, Josef. 2024. <span>“Setup Notes.”</span> January 8, 2024. <a href
 Fruehwald, Josef. n.d. <span>“Side Note.”</span> <a href="https://lin511-2024.github.io/notes/meetings/06_side-note.html">https://lin511-2024.github.io/notes/meetings/06_side-note.html</a>.
 </div></div></section></div> ]]></description>
   <guid>https://lin511-2024.github.io/notes/meetings/06_side-note.html</guid>
-  <pubDate>Wed, 20 Mar 2024 18:17:57 GMT</pubDate>
+  <pubDate>Tue, 26 Mar 2024 12:41:51 GMT</pubDate>
 </item>
 <item>
   <title>Python basics</title>
@@ -22586,7 +22903,7 @@ Fruehwald, Josef. n.d. <span>“Python Basics.”</span> <a href="https://lin511
 </div></div></section></div> ]]></description>
   <category>python</category>
   <guid>https://lin511-2024.github.io/notes/programming/01_Python_basics.html</guid>
-  <pubDate>Wed, 20 Mar 2024 18:17:57 GMT</pubDate>
+  <pubDate>Tue, 26 Mar 2024 12:41:51 GMT</pubDate>
 </item>
 </channel>
 </rss>

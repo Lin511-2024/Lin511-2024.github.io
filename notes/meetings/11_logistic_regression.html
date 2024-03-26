@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Josef Fruehwald">
+<meta name="dcterms.date" content="2024-03-25">
 
-<title>Lin511-2024 - What is Python?</title>
+<title>Lin511-2024 - Logistic Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +66,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../notes/concepts/02_undersdanding-paths.html" rel="next">
-<link href="../../notes/concepts/01_keyboarding.html" rel="prev">
+<link href="../../notes/programming/00_setup.html" rel="next">
+<link href="../../notes/meetings/10_naive_bayes1.html" rel="prev">
 <link href="../../assets/logo.svg" rel="icon" type="image/svg+xml">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -109,14 +110,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles/styles.css">
-<meta property="og:title" content="Lin511-2024 - What is Python?">
-<meta property="og:description" content="">
+<meta property="og:title" content="Lin511-2024 - Logistic Regression">
 <meta property="og:site_name" content="Lin511-2024">
 </head>
 
-<body class="nav-sidebar docked nav-fixed">
+<body class="nav-sidebar docked nav-fixed slimcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -164,7 +193,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/concepts/00_glossary.html">Concepts</a></li><li class="breadcrumb-item"><a href="../../notes/concepts/01_what-is-python.html">What <em>is</em> Python?</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/meetings/01_fsm.html">Class Meetings</a></li><li class="breadcrumb-item"><a href="../../notes/meetings/11_logistic_regression.html">Logistic Regression</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -189,13 +218,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
  <span class="menu-text">Concepts</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../notes/concepts/00_glossary.html" class="sidebar-item-text sidebar-link">
@@ -210,7 +239,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notes/concepts/01_what-is-python.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../notes/concepts/01_what-is-python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">What <em>is</em> Python?</span></a>
   </div>
 </li>
@@ -236,13 +265,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
  <span class="menu-text">Class Meetings</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../notes/meetings/01_fsm.html" class="sidebar-item-text sidebar-link">
@@ -311,7 +340,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../notes/meetings/11_logistic_regression.html" class="sidebar-item-text sidebar-link">
+  <a href="../../notes/meetings/11_logistic_regression.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Logistic Regression</span></a>
   </div>
 </li>
@@ -397,21 +426,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#python-is-set-of-rules-for-a-formal-language" id="toc-python-is-set-of-rules-for-a-formal-language" class="nav-link active" data-scroll-target="#python-is-set-of-rules-for-a-formal-language">📕 Python is set of rules for a formal language</a></li>
-  <li><a href="#python-is-a-program-that-interprets-formal-language-input" id="toc-python-is-a-program-that-interprets-formal-language-input" class="nav-link" data-scroll-target="#python-is-a-program-that-interprets-formal-language-input">🤖 Python is a program that interprets formal language input</a></li>
-  <li><a href="#python-is-an-ecosystem" id="toc-python-is-an-ecosystem" class="nav-link" data-scroll-target="#python-is-an-ecosystem">⛰️ Python is an Ecosystem</a></li>
-  <li><a href="#python-is-a-social-project" id="toc-python-is-a-social-project" class="nav-link" data-scroll-target="#python-is-a-social-project">🧑‍💻 Python is a social project</a></li>
-  <li><a href="#the-polysemy-is-ok" id="toc-the-polysemy-is-ok" class="nav-link" data-scroll-target="#the-polysemy-is-ok">📕, 🤖, ⛰️, 🧑‍💻 The Polysemy is Ok</a></li>
+  <li><a href="#comparison" id="toc-comparison" class="nav-link active" data-scroll-target="#comparison">Comparison</a>
+  <ul>
+  <li><a href="#naive-bayes" id="toc-naive-bayes" class="nav-link" data-scroll-target="#naive-bayes">Naive Bayes</a></li>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic Regression</a></li>
+  </ul></li>
+  <li><a href="#some-terminology-and-math" id="toc-some-terminology-and-math" class="nav-link" data-scroll-target="#some-terminology-and-math">Some Terminology and Math</a>
+  <ul>
+  <li><a href="#probabilities" id="toc-probabilities" class="nav-link" data-scroll-target="#probabilities">Probabilities</a></li>
+  <li><a href="#odds" id="toc-odds" class="nav-link" data-scroll-target="#odds">Odds</a></li>
+  <li><a href="#log-odds-or-logits" id="toc-log-odds-or-logits" class="nav-link" data-scroll-target="#log-odds-or-logits">Log-Odds or Logits</a></li>
+  <li><a href="#why-use-logits" id="toc-why-use-logits" class="nav-link" data-scroll-target="#why-use-logits">Why use logits?</a>
+  <ul class="collapse">
+  <li><a href="#the-inverse-logit-function." id="toc-the-inverse-logit-function." class="nav-link" data-scroll-target="#the-inverse-logit-function.">The “inverse logit” function.</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#training-or-fitting-a-logistic-regression" id="toc-training-or-fitting-a-logistic-regression" class="nav-link" data-scroll-target="#training-or-fitting-a-logistic-regression">Training, or Fitting, a Logistic Regression</a>
+  <ul>
+  <li><a href="#step-1-deciding-on-your-binary-outcome" id="toc-step-1-deciding-on-your-binary-outcome" class="nav-link" data-scroll-target="#step-1-deciding-on-your-binary-outcome">Step 1: Deciding on your binary outcome</a></li>
+  <li><a href="#step-2-feature-engineering" id="toc-step-2-feature-engineering" class="nav-link" data-scroll-target="#step-2-feature-engineering">Step 2: Feature engineering</a></li>
+  <li><a href="#step-3-train-the-model" id="toc-step-3-train-the-model" class="nav-link" data-scroll-target="#step-3-train-the-model">Step 3: “Train” the model</a>
+  <ul class="collapse">
+  <li><a href="#the-weights" id="toc-the-weights" class="nav-link" data-scroll-target="#the-weights">The weights</a></li>
+  </ul></li>
+  <li><a href="#step-4-use-the-model-to-classify" id="toc-step-4-use-the-model-to-classify" class="nav-link" data-scroll-target="#step-4-use-the-model-to-classify">Step 4: Use the model to classify</a></li>
+  </ul></li>
+  <li><a href="#overfitting-vs-underfitting" id="toc-overfitting-vs-underfitting" class="nav-link" data-scroll-target="#overfitting-vs-underfitting">Overfitting vs Underfitting</a>
+  <ul>
+  <li><a href="#overfitting-with-a-classifier" id="toc-overfitting-with-a-classifier" class="nav-link" data-scroll-target="#overfitting-with-a-classifier">Overfitting with a classifier</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Lin511-2024/Lin511-2024.github.io/blob/main/notes/concepts/01_what-is-python.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Lin511-2024/Lin511-2024.github.io/blob/main/notes/meetings/11_logistic_regression.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/concepts/00_glossary.html">Concepts</a></li><li class="breadcrumb-item"><a href="../../notes/concepts/01_what-is-python.html">What <em>is</em> Python?</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../notes/meetings/01_fsm.html">Class Meetings</a></li><li class="breadcrumb-item"><a href="../../notes/meetings/11_logistic_regression.html">Logistic Regression</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">What <em>is</em> Python?</h1>
-</div>
+<h1 class="title">Logistic Regression</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">compling</div>
+  </div>
+  </div>
 
 
 
@@ -424,6 +480,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 25, 2024</p>
+    </div>
+  </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
@@ -439,212 +501,297 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>When talking about “Python” or other programming langauges, we often engage in a form of polysemy<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> that can be confusing at first. I’ll try to unpack the different meanings here.</p>
-<section id="python-is-set-of-rules-for-a-formal-language" class="level2">
-<h2 class="anchored" data-anchor-id="python-is-set-of-rules-for-a-formal-language">📕 Python is set of rules for a formal language</h2>
-<p>When we talk about “Python”, one thing we sometimes refer to is an abstract set of rules for a formal language.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<div class="cell">
+
 </div>
-<div class="callout-title-container flex-fill">
-📕 The abstract language
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>When you say:</p>
-<blockquote class="blockquote">
-<p>I’m learning Python this semester.</p>
-</blockquote>
-<p>You’re talking about the abstract set of rules.</p>
-</div>
-</div>
-<p>We can describe some of these rules in natural language (this isn’t how they’re <em>actually</em> written).</p>
-<ul>
-<li>If a list of values has been assigned to a variable, when the variable’s name is followed <code>[0]</code>, return the first value in the list.</li>
-<li>If <code>print(</code> is followed by a value or variable, which is then followed by <code>)</code>, print the value, or the value assigned to the variable.</li>
-<li>If a <code>#</code> symbol is encountered on a line, ignore everything following it.</li>
-</ul>
-<p>These rules define very precisely how code should be written, and also define what should be <em>done</em> when certain patterns of code are encountered, but these rules are abstract, and don’t actually <em>do</em> anything.</p>
+<section id="comparison" class="level2">
+<h2 class="anchored" data-anchor-id="comparison">Comparison</h2>
+<section id="naive-bayes" class="level3">
+<h3 class="anchored" data-anchor-id="naive-bayes">Naive Bayes</h3>
+<p>A Naive Bayes classifier tries to build a model <em>for each class</em>. Recall Bayes’ Theorem:</p>
+<p><span class="math display">\[
+P(\text{data} | \text{class)}P(\text{class})
+\]</span></p>
+<p>The term <span class="math inline">\(P(\text{data} | \text{class})\)</span> is a model of the kind of data that appears in each class. When trying to do a classification task, we get back how probable the data distribution for each class.</p>
 </section>
-<section id="python-is-a-program-that-interprets-formal-language-input" class="level2">
-<h2 class="anchored" data-anchor-id="python-is-a-program-that-interprets-formal-language-input">🤖 Python is a program that interprets formal language input</h2>
-<p>Simply having a set of abstract rules can be fun, but it’s not so useful if you have no way to actually <em>do</em> things. To make code we write actually do anything, we need to use a program called an <strong>Interpreter</strong>.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<section id="logistic-regression" class="level3">
+<h3 class="anchored" data-anchor-id="logistic-regression">Logistic Regression</h3>
+<p>Logistic Regression instead tries to directly estimate</p>
+<p><span class="math display">\[
+P(\text{class} | \text{data})
+\]</span></p>
+</section>
+</section>
+<section id="some-terminology-and-math" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="some-terminology-and-math">Some Terminology and Math</h2>
+<section id="probabilities" class="level3">
+<h3 class="anchored" data-anchor-id="probabilities">Probabilities</h3>
+<p>Probabilities range from 0 (impossible) to 1 (guaranteed).</p>
+<p><span class="math display">\[
+0 \le p \le1
+\]</span></p>
+<p>If something happens 2 out of every 3 times, we can calculate its probability with a fraction.</p>
+<p><span class="math display">\[
+p = \frac{2}{3} = 0.6\bar{6}
+\]</span></p>
+</section>
+<section id="odds" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="odds">Odds</h3>
+<p>Instead of representing how often something happened out of the total possible number of times, we’d get it’s <strong>odds</strong>.</p>
+<p>If something happens 2 out of every 3 times, that means for every 2 times it happens, 1 time it doesn’t.</p>
+<p><span class="math display">\[
+o = 2:1 = \frac{2}{1} = 2
+\]</span></p>
+<p>If we expressed the odds of the opposite outcome, it would be</p>
+<p><span class="math display">\[
+o = 1:2 = \frac{1}{2} = 0.5
+\]</span></p>
+<p>The smallest odds you can get are <span class="math inline">\(0:1\)</span> (something <em>never</em> happens). The largest odds can get are <span class="math inline">\(1:0\)</span> (something <em>always</em> happens). That means odds are bounded by 0 and infinity.</p>
+<p><span class="math display">\[
+0 \le 0 \le \infty
+\]</span></p>
+<div class="cell">
+
 </div>
-<div class="callout-title-container flex-fill">
-🤖 The Python Interpreter
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-prob-odds" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-prob-odds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11_logistic_regression_files/figure-html/fig-prob-odds-1.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-prob-odds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: The relationship between probabilities and odds
+</figcaption>
+</figure>
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>When you say</p>
-<blockquote class="blockquote">
-<p>I’m having a hard time installing Python.</p>
-</blockquote>
-<p>you’re talking about a Python Interpreter.</p>
+</div>
+</section>
+<section id="log-odds-or-logits" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="log-odds-or-logits">Log-Odds or Logits</h3>
+<p>The log of 0 is <span class="math inline">\(-\infty\)</span>, and the log of <span class="math inline">\(\infty\)</span> is <span class="math inline">\(\infty\)</span>. So, if we take the log of the odds, we get a value that is symmetrically bounded.</p>
+<p><span class="math display">\[
+-\infty \le \log{o} \le \infty
+\]</span></p>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-prob-logit" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-prob-logit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11_logistic_regression_files/figure-html/fig-prob-logit-1.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-prob-logit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: The relationship between probabilities and logits
+</figcaption>
+</figure>
 </div>
 </div>
-<p>The Python interpreter processes code, determines whether or not it is valid, then does the things the code told it to do.</p>
-<p>Code can get passed to the interpreter many different ways, including</p>
-<ul>
-<li>In a single text file, called a python “script”, (usually named to end in <code>.py</code>)</li>
-<li>In an interactive python “shell”.</li>
-<li>Inside a Jupyter notebook.</li>
-</ul>
-<p>For example, the text in the shaded block below was passed to a Python interpreter, and the interpreter decided that it was invalid (because there is an opening quote <code>"</code>, but not a closing quote).</p>
-<div class="cell" data-execution_count="1">
-<div class="code-with-filename">
+</div>
+<p>What’s also useful about this is that probabilities on opposite sides of 0.5 differ in logits only in their sign.</p>
+<div class="cell">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
-<div class="code-with-filename-file">
-<pre><strong>Python Code</strong></pre>
-</div>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">"x</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell-output cell-output-error">
-<pre><code>SyntaxError: unterminated string literal (detected at line 1) (20073044.py, line 1)</code></pre>
-</div>
-</div>
-<p>The text in this next shaded block was passed to a Python interpreter. This time, it was deemed valid, and the interpreter did what the code instructed.</p>
-<div class="cell" data-execution_count="2">
-<div class="langname">
-<pre class="langname">python</pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"hello! "</span> <span class="op">*</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> logit</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(logit(<span class="dv">1</span><span class="op">/</span><span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>hello! hello! hello! </code></pre>
+<pre><code>-0.6931471805599454</code></pre>
 </div>
-</div>
-</section>
-<section id="python-is-an-ecosystem" class="level2">
-<h2 class="anchored" data-anchor-id="python-is-an-ecosystem">⛰️ Python is an Ecosystem</h2>
-<p>People often say that Python comes “with batteries included”, meaning it can do a lot of different things out without needing to install any extensions. But you <em>can</em> install extensions in the form of additional libraries that extend Python’s capabilities.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-⛰️ The Ecosystem
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>When someone says</p>
-<blockquote class="blockquote">
-<p>Python is the most widely used language in natural language processing.</p>
-</blockquote>
-<p>They are talking about the <em>ecosystem</em> of libraries for Python hat have been built to do natural language processing.</p>
-</div>
-</div>
-<p>Some examples of additional libraries for Python are</p>
-<ul>
-<li><code>numpy</code>: Allows for effective computation with numbers</li>
-<li><code>matplotlib</code>: Makes graphs</li>
-</ul>
-<div class="cell" data-execution_count="3">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span> <span class="op">*</span> np.pi, <span class="dv">200</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.sin(x)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>ax.plot(x, y)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="01_what-is-python_files/figure-html/cell-4-output-1.png" class="figure-img" width="590" height="411"></p>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(logit(<span class="dv">2</span><span class="op">/</span><span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.6931471805599452</code></pre>
+</div>
+</div>
+</section>
+<section id="why-use-logits" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="why-use-logits">Why use logits?</h3>
+<p>Because we can add and subtract an <em>arbitrary</em> number of values together (the outcome can be any negative or positive number) and then translate that back into a probability by reversing the function.</p>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> expit</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(expit(<span class="op">-</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.11920292202211755</code></pre>
+</div>
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(expit(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.8807970779778823</code></pre>
+</div>
+</div>
+<section id="the-inverse-logit-function." class="level4 page-columns page-full">
+<h4 class="anchored" data-anchor-id="the-inverse-logit-function.">The “inverse logit” function.</h4>
+<p>The “inverse logit” function, in NLP tasks, is usually called the “sigmoid” function, because it looks like an “S” and is represented with <span class="math inline">\(\sigma()\)</span>.</p>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-sigma" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-sigma-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11_logistic_regression_files/figure-html/fig-sigma-1.png" class="img-fluid figure-img" style="width:80.0%">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-sigma-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: The σ function
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="python-is-a-social-project" class="level2">
-<h2 class="anchored" data-anchor-id="python-is-a-social-project">🧑‍💻 Python is a social project</h2>
-<p>The meanings of “Python” we’ve already talked about are</p>
+</section>
+</section>
+<section id="training-or-fitting-a-logistic-regression" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="training-or-fitting-a-logistic-regression">Training, or Fitting, a Logistic Regression</h2>
+<section id="step-1-deciding-on-your-binary-outcome" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-deciding-on-your-binary-outcome">Step 1: Deciding on your binary outcome</h3>
+<p>e.g: Positive (1) vs Negative (0) movie reviews.</p>
+</section>
+<section id="step-2-feature-engineering" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-feature-engineering">Step 2: Feature engineering</h3>
+<p>You need to settle on features to encode into each training token. For example:</p>
 <ul>
-<li>📕 The abstract language</li>
-<li>🤖 The Python Interpreter</li>
-<li>⛰️ The Python Ecosystem</li>
+<li><p>How many words in the review.</p></li>
+<li><p>How many positive or negative words from specific sentiment lexicons.</p></li>
+<li><p>etc.</p></li>
 </ul>
-<p>Understanding how to put all of these pieces together effectively is a <em>social</em> project.</p>
-<div class="callout callout-style-simple callout-none no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-🧑‍💻 The social project
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>When you say</p>
-<blockquote class="blockquote">
-<p>So-n-so is really good at Python.</p>
-</blockquote>
-<p>You are talking about their involvement in the Python social project.</p>
-</div>
-</div>
+</section>
+<section id="step-3-train-the-model" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="step-3-train-the-model">Step 3: “Train” the model</h3>
+<p>The model will return “weights” for each feature, and a “bias”.</p>
 <ul>
-<li>❌ There is no part of the 📕 <em>abstract language</em> that will inform you that there is a very good Python library for doing a certain task.</li>
-<li>❌ The 🤖 <em>Python Interpreter</em> won’t tell you that there’s a better way to do what you’re trying to do.</li>
-<li>❌ There are nearly <a href="https://pypi.org/">half a million libraries on ⛰️ <em>the Python Package Index</em></a>, so you can’t just peruse it to find what’s relevant.</li>
+<li><p>As the absolute value of weights move away from 0, you can think of that feature as being more or less important.</p></li>
+<li><p>As the “bias” moves up and down from 0, you can think of the overall probability moving up and down.</p></li>
 </ul>
-<p>In order to know newest or most effective way to do things, you need to be involved in 🧑‍💻 <em>the social project</em>. That begins within a classroom, then extends to keeping up with blogs and other discourses about changes and developments.</p>
-<p>One way people demonstrate that they are involved in the Python social project is by writing their code <em>idiomatically</em>. For example, in the code block above, I included the line <code>import numpy as np</code>. But <em>there’s no rule</em> that we import <code>numpy</code> as <code>np</code>, it’s simply convention.</p>
-<p>This code below will run just as well, but would cause problems for people trying to read your code, because it’s not idiomatic.</p>
-<div class="cell" data-execution_count="4">
-<div class="langname">
-<pre class="langname">python</pre>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-biases" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-biases-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11_logistic_regression_files/figure-html/fig-biases-1.png" class="img-fluid figure-img" style="width:80.0%">
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> jokes</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> farts</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> farts.linspace(<span class="dv">0</span>, <span class="dv">2</span> <span class="op">*</span> farts.pi, <span class="dv">200</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> farts.sin(x)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> jokes.subplots()</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>ax.plot(x, y)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>jokes.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="01_what-is-python_files/figure-html/cell-5-output-1.png" class="figure-img" width="590" height="411"></p>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-biases-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: The effect of different ‘biases’ on the same set of weights.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
+<section id="the-weights" class="level4">
+<h4 class="anchored" data-anchor-id="the-weights">The weights</h4>
+<p>The weights we get for each feature get multiplied by the feature value, and added together to get the logit value.</p>
+<p><span class="math display">\[
+z = 0.5~\text{N positive words} + -0.2 ~\text{N negative words} + 0.1~\text{total length} + b
+\]</span></p>
+<p>We could generalize the multiplication and addition:</p>
+<p><span class="math display">\[
+z = \left(\sum w_ix_i \right) + b
+\]</span></p>
+<p>And, we could also even further simplify things with <a href="../../notes/meetings/09_markov_models.html#matrix-multiplication">matrix multiplication</a>, using the “dot product”.</p>
+<p><span class="math display">\[
+z = (w\cdot x) + b
+\]</span></p>
 </section>
-<section id="the-polysemy-is-ok" class="level2">
-<h2 class="anchored" data-anchor-id="the-polysemy-is-ok">📕, 🤖, ⛰️, 🧑‍💻 The Polysemy is Ok</h2>
-<p>It’s ok just say “Python” when you’re talking about one specific meaning.</p>
+</section>
+<section id="step-4-use-the-model-to-classify" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-use-the-model-to-classify">Step 4: Use the model to classify</h3>
+<p>Now, with the features for a new set of data, multiply them by the weights, and add the bias. The categorization rule says we’ll say it’s 1 if <span class="math inline">\(\sigma(z)&gt;0.5\)</span>, and otherwise.</p>
+<p><span class="math display">\[
+z' = w\cdot x' +b
+\]</span></p>
+<p><span class="math display">\[
+c = \left\{\begin{array}{l}1~\text{if}~\sigma(z')\gt0.5\\0~\text{otherwise} \end{array} \right\}
+\]</span></p>
+</section>
+</section>
+<section id="overfitting-vs-underfitting" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="overfitting-vs-underfitting">Overfitting vs Underfitting</h2>
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-temp" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-temp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11_logistic_regression_files/figure-html/fig-temp-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-temp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Daily high temps for the Patterson Office Tower area.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-temp-under" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-temp-under-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11_logistic_regression_files/figure-html/fig-temp-under-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-temp-under-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Daily high temps for the Patterson Office Tower area.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-temp-over" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-temp-over-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="11_logistic_regression_files/figure-html/fig-temp-over-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-temp-over-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Daily high temps for the Patterson Office Tower area.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<section id="overfitting-with-a-classifier" class="level3">
+<h3 class="anchored" data-anchor-id="overfitting-with-a-classifier">Overfitting with a classifier</h3>
+<p>If you fit a logistic regression with a <em>ton</em> of features, and each and every feature can get its own weight, you might “overfit” on the training data.</p>
+<p>One way to deal with this is to try to “regularize” the estimation of weights, so that they get biased towards 0. The usual regularizing methods are (frustratingly) called “L1” and “L2” regularization.</p>
+<dl>
+<dt>L1 Regularization</dt>
+<dd>
+<p>Shrinks weights down towards 0, and may even 0 out some weights entirely.</p>
+</dd>
+<dt>L2 Regularization</dt>
+<dd>
+<p>Shrinks weights down towards 0, but probably won’t set any to exactly 0.</p>
+</dd>
+</dl>
+<p>For ~reasons~, L2 regularization is mathematically and computationally easier to use.</p>
 
 
 </section>
+</section>
 
-
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>A word is polysemous when it has more than one meaning.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald,
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
   author = {Fruehwald, Josef},
-  title = {What *Is* {Python?}},
-  url = {https://lin511-2024.github.io/notes/concepts/01_what-is-python.html},
+  title = {Logistic {Regression}},
+  date = {2024-03-25},
+  url = {https://lin511-2024.github.io/notes/meetings/11_logistic_regression.html},
   langid = {en}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald" class="csl-entry quarto-appendix-citeas" role="listitem">
-Fruehwald, Josef. n.d. <span>“What *Is* Python?”</span> <a href="https://lin511-2024.github.io/notes/concepts/01_what-is-python.html">https://lin511-2024.github.io/notes/concepts/01_what-is-python.html</a>.
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Fruehwald, Josef. 2024. <span>“Logistic Regression.”</span> March 25,
+2024. <a href="https://lin511-2024.github.io/notes/meetings/11_logistic_regression.html">https://lin511-2024.github.io/notes/meetings/11_logistic_regression.html</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1201,13 +1348,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../notes/concepts/01_keyboarding.html" class="pagination-link" aria-label="&quot;Where is the ... key?&quot;">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">“Where is the … key?”</span>
+      <a href="../../notes/meetings/10_naive_bayes1.html" class="pagination-link" aria-label="Bayes Theorem">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Bayes Theorem</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../notes/concepts/02_undersdanding-paths.html" class="pagination-link" aria-label="Understanding Directories">
-        <span class="nav-page-text">Understanding Directories</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../notes/programming/00_setup.html" class="pagination-link" aria-label="Setup Notes">
+        <span class="nav-page-text">Setup Notes</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1238,7 +1385,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </a>
   </li>  
 </ul>
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Lin511-2024/Lin511-2024.github.io/blob/main/notes/concepts/01_what-is-python.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Lin511-2024/Lin511-2024.github.io/blob/main/notes/meetings/11_logistic_regression.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
