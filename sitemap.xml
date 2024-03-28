@@ -2,126 +2,130 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/08_ngram_smoothing.html</loc>
-    <lastmod>2024-03-26T12:35:51.315Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.982Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/02_pda.html</loc>
-    <lastmod>2024-03-26T12:35:51.314Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.981Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/05_ngrams2.html</loc>
-    <lastmod>2024-03-26T12:35:51.315Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.982Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/10_naive_bayes1.html</loc>
-    <lastmod>2024-03-26T12:35:51.316Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.983Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/11_logistic_regression.html</loc>
-    <lastmod>2024-03-26T12:35:51.316Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.983Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/06_side-note.html</loc>
-    <lastmod>2024-03-26T12:35:51.315Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.982Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/concepts/04_git_errors.html</loc>
-    <lastmod>2024-03-26T12:35:51.300Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.969Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/concepts/03_navigating-directories.html</loc>
-    <lastmod>2024-03-26T12:35:51.300Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.969Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/concepts/01_keyboarding.html</loc>
-    <lastmod>2024-03-26T12:35:51.298Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.968Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/programming/00_setup.html</loc>
-    <lastmod>2024-03-26T12:35:51.324Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.990Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/programming/04_tokenizers.html</loc>
-    <lastmod>2024-03-26T12:35:51.326Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.991Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/programming/05_ngrams.html</loc>
-    <lastmod>2024-03-26T12:35:51.326Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.991Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/programming/01_Python_basics.html</loc>
-    <lastmod>2024-03-26T12:35:51.325Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/notes/index.html</loc>
-    <lastmod>2024-03-26T12:35:51.313Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/syllabus/schedule.html</loc>
-    <lastmod>2024-03-26T12:35:51.333Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/index.html</loc>
-    <lastmod>2024-03-26T12:35:51.298Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/syllabus/syllabus.html</loc>
-    <lastmod>2024-03-26T12:35:51.334Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lin511-2024.github.io/about.html</loc>
-    <lastmod>2024-03-26T12:35:51.296Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.990Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/in_class/00_python.html</loc>
-    <lastmod>2024-03-26T12:35:51.312Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.979Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/about.html</loc>
+    <lastmod>2024-03-28T02:03:52.966Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/syllabus/syllabus.html</loc>
+    <lastmod>2024-03-28T02:03:52.999Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/index.html</loc>
+    <lastmod>2024-03-28T02:03:52.968Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/syllabus/schedule.html</loc>
+    <lastmod>2024-03-28T02:03:52.998Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/notes/index.html</loc>
+    <lastmod>2024-03-28T02:03:52.980Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lin511-2024.github.io/notes/programming/07_logistic.html</loc>
+    <lastmod>2024-03-28T02:03:52.992Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/programming/02_regex.html</loc>
-    <lastmod>2024-03-26T12:35:51.325Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.990Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/programming/06_classifier.html</loc>
-    <lastmod>2024-03-26T12:35:51.326Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.992Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/programming/03_python_plus.html</loc>
-    <lastmod>2024-03-26T12:35:51.325Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.991Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/concepts/02_undersdanding-paths.html</loc>
-    <lastmod>2024-03-26T12:35:51.299Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.969Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/concepts/00_glossary.html</loc>
-    <lastmod>2024-03-26T12:35:51.298Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.968Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/concepts/01_what-is-python.html</loc>
-    <lastmod>2024-03-26T12:35:51.299Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.969Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/04_ngrams.html</loc>
-    <lastmod>2024-03-26T12:35:51.314Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.981Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/09_markov_models.html</loc>
-    <lastmod>2024-03-26T12:35:51.316Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.983Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/03_tokenization.html</loc>
-    <lastmod>2024-03-26T12:35:51.314Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.981Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/01_fsm.html</loc>
-    <lastmod>2024-03-26T12:35:51.313Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.980Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/07_information-theory.html</loc>
-    <lastmod>2024-03-26T12:35:51.315Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.982Z</lastmod>
   </url>
   <url>
     <loc>https://lin511-2024.github.io/notes/meetings/01-1_fsm_addenda.html</loc>
-    <lastmod>2024-03-26T12:35:51.313Z</lastmod>
+    <lastmod>2024-03-28T02:03:52.980Z</lastmod>
   </url>
 </urlset>

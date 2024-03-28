@@ -636,36 +636,59 @@
     ]
   },
   {
-    "objectID": "notes/index.html",
-    "href": "notes/index.html",
-    "title": "Meeting Notes",
+    "objectID": "notes/in_class/00_python.html",
+    "href": "notes/in_class/00_python.html",
+    "title": "Starting Python",
     "section": "",
-    "text": "These are the notes for our regular meetings. \n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSetup Notes\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJan 8, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nRegular Languages and Finite State Machines\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nFSA in-class notes\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nPushdown Automata and Context Free Languages\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nJan 23, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nRegular Expressions, Quickly\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJan 25, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nMore Python: Poetry, Lists, Loops\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJan 30, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nTokenization\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nFeb 6, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nWorking with Tokenizers\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nFeb 8, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nngrams\n\n\n-or- What if we could parse natural language with a finite state automaton?\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nFeb 13, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nSampling from a probability distribution\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nFeb 15, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nMaking and Counting ngrams in python\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nFeb 15, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nInformation Theory\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nFeb 20, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nngram “smoothing”\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nFeb 27, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nMarkov Models\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nMar 7, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nBayes Theorem\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nMar 19, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nTraining and evaluating classifiers\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nMar 21, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nLogistic Regression\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nMar 25, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nSide Note\n\n\n\n\n\n\n\n\n\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nPython basics\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJosef Fruehwald\n\n\n\n\n\n\nNo matching items\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Meeting {Notes}},\n  url = {https://lin511-2024.github.io/notes},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Meeting Notes.” https://lin511-2024.github.io/notes.",
+    "text": "This is how python works",
     "crumbs": [
       "Notes",
-      "Notes Home"
+      "In-class",
+      "Starting Python"
     ]
   },
   {
-    "objectID": "syllabus/schedule.html",
-    "href": "syllabus/schedule.html",
-    "title": "Course Schedule",
-    "section": "",
-    "text": "Week 1\n\n\n\nDates:\n\nJan 8-12\n\n\n\n\nTopics:\n\nSetup, What is Computational Linguistics?\n\n\n\n\n\nReadings\n\nFollow posted tutorials for setting up our course technology.\nTP Chapter 1\n\n\n\n\n\nWeek 2-3\n\n\n\nDates:\n\nJan 15-26\n\n\n\n\nTopics:\n\nFiles, Text, Strings, Regular Expressions, Finite State Automata\n\n\n\n\nNo Office Hours for MLK Jr Day.\n\nReadings:\n\nCourse Notes: What is Python\nSLP Chapter 2, section 2.1 (pdf)\nTP, Chapter 2, Variables, expressions and statements\nTP Chapter 3, Functionss\n\n\n\n\n\nWeek 4-5\n\n\n\nDates:\n\nJan 29-Feb 09\n\n\n\n\nTopics:\n\nText Normalization, Tokenization, Python Variables, Python Functions\n\n\n\n\n\nReadings:\n\nSLP Chapter 2, sections 2.2, 2.3, 2.4\nTP, Chapter 10, Lists\nTP, Chapter 7, Iteration\nTP, Chapter 5, Conditionals\nNLTK Book, Chapter 3\n\n\n\n\n\nWeek 6-7\n\n\n\nDates:\n\nFeb 12 - 23\n\n\n\n\nTopics:\n\nn-grams, Corpora, Document Classification, Python Loops and Conditionals\n\n\n\n\n\nReadings\n\nSLP Chapters 3, 4, 5\n\n\n\n\n\nWeek 8-9\n\n\n\nDates:\n\nFeb 26 - Mar 08\n\n\n\n\nTopics:\n\nHidden Markov Models\n\n\n\n\n\nReadings\n\nSLP Appendix A: Hidden Markov Models\nTP Chapter 11, Dictionaries\nTP Chapter 15, Classes and Objects\n\n\n\nSpring Break\n\n\n\n\n\nWeek 10-11\n\n\n\nDates:\n\nMar 18-29\n\n\n\n\nTopics:\n\nParsing, Dependency trees\n\n\n\n\n\n\n\nWeek 12-13\n\n\n\nDates:\n\nApr 01-12\n\n\n\n\nTopics:\n\nDistributional semantics, word “embeddings”\n\n\n\n\n\n\n\nWeek 14-15\n\n\n\nDates:\n\nApr 15-19\n\n\n\n\nTopics:\n\nNeural Network Basics, Review\n\n\n\n\n\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Course {Schedule}},\n  url = {https://lin511-2024.github.io/syllabus/schedule.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Course Schedule.” https://lin511-2024.github.io/syllabus/schedule.html.",
+    "objectID": "notes/in_class/00_python.html#arithmetic-math",
+    "href": "notes/in_class/00_python.html#arithmetic-math",
+    "title": "Starting Python",
+    "section": "Arithmetic & Math",
+    "text": "Arithmetic & Math\n\n8+5\n\n13\n\n\n\n2084 -          1985\n\n99",
     "crumbs": [
-      "Home",
-      "Schedule"
+      "Notes",
+      "In-class",
+      "Starting Python"
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Computational Linguistics (Spring 2024)",
-    "section": "",
-    "text": "Welcome to the Lin511 Computational Linguistics website. This course is being taught in the University of Kentucky’s Linguistics Department in Spring 2024\nIf you are visiting on a mobile device, site navigation can be found under the “hamburger” at the top.\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Computational {Linguistics} {(Spring} 2024)},\n  url = {https://lin511-2024.github.io/},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Computational Linguistics (Spring\n2024).” https://lin511-2024.github.io/.",
+    "objectID": "notes/in_class/00_python.html#variables-and-assignment",
+    "href": "notes/in_class/00_python.html#variables-and-assignment",
+    "title": "Starting Python",
+    "section": "“Variables” and “Assignment”",
+    "text": "“Variables” and “Assignment”\n\nfruehwald_age = 2084 - 1985\n\nTitleCase\nsnake_case\ncamelCase\n\nfruehwald_age * 12\n\n1188\n\n\n\nVariables vs Strings\n\n\"fruehwald_age\"\n\n'fruehwald_age'\n\n\n\n'fruehwald_age'\n\n'fruehwald_age'\n\n\n\njohn_favorite_color = \"purple\"\n\n\nJohn_favorite_color\n\nNameError: name 'John_favorite_color' is not defined",
     "crumbs": [
-      "Home"
+      "Notes",
+      "In-class",
+      "Starting Python"
     ]
+  },
+  {
+    "objectID": "notes/in_class/00_python.html#importing",
+    "href": "notes/in_class/00_python.html#importing",
+    "title": "Starting Python",
+    "section": "Importing",
+    "text": "Importing\n\nimport re\n\n\nre.search()\n\n\n# import pathlib\n# pathlib.Path()\n\nfrom pathlib import Path\n\n\nPath()\n\nPosixPath('.')",
+    "crumbs": [
+      "Notes",
+      "In-class",
+      "Starting Python"
+    ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This is the website for Lin511, Computational Linguistics, taught at the University of Kentucky Spring 2024\n\nAttribution\n\nThe robot emoji in the course logo is modified from Open Emoji (link), licenced CC-BY-SA 4.0. Edited version here(svg).\n\n\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {About},\n  url = {https://lin511-2024.github.io/about.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “About.” https://lin511-2024.github.io/about.html."
   },
   {
     "objectID": "syllabus/syllabus.html",
@@ -844,58 +867,71 @@
     ]
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Computational Linguistics (Spring 2024)",
     "section": "",
-    "text": "This is the website for Lin511, Computational Linguistics, taught at the University of Kentucky Spring 2024\n\nAttribution\n\nThe robot emoji in the course logo is modified from Open Emoji (link), licenced CC-BY-SA 4.0. Edited version here(svg).\n\n\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {About},\n  url = {https://lin511-2024.github.io/about.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “About.” https://lin511-2024.github.io/about.html."
+    "text": "Welcome to the Lin511 Computational Linguistics website. This course is being taught in the University of Kentucky’s Linguistics Department in Spring 2024\nIf you are visiting on a mobile device, site navigation can be found under the “hamburger” at the top.\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Computational {Linguistics} {(Spring} 2024)},\n  url = {https://lin511-2024.github.io/},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Computational Linguistics (Spring\n2024).” https://lin511-2024.github.io/.",
+    "crumbs": [
+      "Home"
+    ]
   },
   {
-    "objectID": "notes/in_class/00_python.html",
-    "href": "notes/in_class/00_python.html",
-    "title": "Starting Python",
+    "objectID": "syllabus/schedule.html",
+    "href": "syllabus/schedule.html",
+    "title": "Course Schedule",
     "section": "",
-    "text": "This is how python works",
+    "text": "Week 1\n\n\n\nDates:\n\nJan 8-12\n\n\n\n\nTopics:\n\nSetup, What is Computational Linguistics?\n\n\n\n\n\nReadings\n\nFollow posted tutorials for setting up our course technology.\nTP Chapter 1\n\n\n\n\n\nWeek 2-3\n\n\n\nDates:\n\nJan 15-26\n\n\n\n\nTopics:\n\nFiles, Text, Strings, Regular Expressions, Finite State Automata\n\n\n\n\nNo Office Hours for MLK Jr Day.\n\nReadings:\n\nCourse Notes: What is Python\nSLP Chapter 2, section 2.1 (pdf)\nTP, Chapter 2, Variables, expressions and statements\nTP Chapter 3, Functionss\n\n\n\n\n\nWeek 4-5\n\n\n\nDates:\n\nJan 29-Feb 09\n\n\n\n\nTopics:\n\nText Normalization, Tokenization, Python Variables, Python Functions\n\n\n\n\n\nReadings:\n\nSLP Chapter 2, sections 2.2, 2.3, 2.4\nTP, Chapter 10, Lists\nTP, Chapter 7, Iteration\nTP, Chapter 5, Conditionals\nNLTK Book, Chapter 3\n\n\n\n\n\nWeek 6-7\n\n\n\nDates:\n\nFeb 12 - 23\n\n\n\n\nTopics:\n\nn-grams, Corpora, Document Classification, Python Loops and Conditionals\n\n\n\n\n\nReadings\n\nSLP Chapters 3, 4, 5\n\n\n\n\n\nWeek 8-9\n\n\n\nDates:\n\nFeb 26 - Mar 08\n\n\n\n\nTopics:\n\nHidden Markov Models\n\n\n\n\n\nReadings\n\nSLP Appendix A: Hidden Markov Models\nTP Chapter 11, Dictionaries\nTP Chapter 15, Classes and Objects\n\n\n\nSpring Break\n\n\n\n\n\nWeek 10-11\n\n\n\nDates:\n\nMar 18-29\n\n\n\n\nTopics:\n\nParsing, Dependency trees\n\n\n\n\n\n\n\nWeek 12-13\n\n\n\nDates:\n\nApr 01-12\n\n\n\n\nTopics:\n\nDistributional semantics, word “embeddings”\n\n\n\n\n\n\n\nWeek 14-15\n\n\n\nDates:\n\nApr 15-19\n\n\n\n\nTopics:\n\nNeural Network Basics, Review\n\n\n\n\n\n\n\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Course {Schedule}},\n  url = {https://lin511-2024.github.io/syllabus/schedule.html},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Course Schedule.” https://lin511-2024.github.io/syllabus/schedule.html.",
     "crumbs": [
-      "Notes",
-      "In-class",
-      "Starting Python"
+      "Home",
+      "Schedule"
     ]
   },
   {
-    "objectID": "notes/in_class/00_python.html#arithmetic-math",
-    "href": "notes/in_class/00_python.html#arithmetic-math",
-    "title": "Starting Python",
-    "section": "Arithmetic & Math",
-    "text": "Arithmetic & Math\n\n8+5\n\n13\n\n\n\n2084 -          1985\n\n99",
+    "objectID": "notes/index.html",
+    "href": "notes/index.html",
+    "title": "Meeting Notes",
+    "section": "",
+    "text": "These are the notes for our regular meetings. \n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSetup Notes\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJan 8, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nRegular Languages and Finite State Machines\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nFSA in-class notes\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nJan 16, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nPushdown Automata and Context Free Languages\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nJan 23, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nRegular Expressions, Quickly\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJan 25, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nMore Python: Poetry, Lists, Loops\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJan 30, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nTokenization\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nFeb 6, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nWorking with Tokenizers\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nFeb 8, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nngrams\n\n\n-or- What if we could parse natural language with a finite state automaton?\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nFeb 13, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nSampling from a probability distribution\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nFeb 15, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nMaking and Counting ngrams in python\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nFeb 15, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nInformation Theory\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nFeb 20, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nngram “smoothing”\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nFeb 27, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nMarkov Models\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nMar 7, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nBayes Theorem\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nMar 19, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nTraining and evaluating classifiers\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nMar 21, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nLogistic Regression\n\n\n\n\n\n\ncompling\n\n\n\n\n\n\n\n\n\nMar 25, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nTraining and evaluating a logistic regression\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nMar 27, 2024\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nSide Note\n\n\n\n\n\n\n\n\n\n\n\nJosef Fruehwald\n\n\n\n\n\n\n\n\n\n\n\n\nPython basics\n\n\n\n\n\n\npython\n\n\n\n\n\n\n\n\n\nJosef Fruehwald\n\n\n\n\n\n\nNo matching items\n\n Back to topReuseCC-BY-SA 4.0CitationBibTeX citation:@online{fruehwald,\n  author = {Fruehwald, Josef},\n  title = {Meeting {Notes}},\n  url = {https://lin511-2024.github.io/notes},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nFruehwald, Josef. n.d. “Meeting Notes.” https://lin511-2024.github.io/notes.",
     "crumbs": [
       "Notes",
-      "In-class",
-      "Starting Python"
+      "Notes Home"
     ]
   },
   {
-    "objectID": "notes/in_class/00_python.html#variables-and-assignment",
-    "href": "notes/in_class/00_python.html#variables-and-assignment",
-    "title": "Starting Python",
-    "section": "“Variables” and “Assignment”",
-    "text": "“Variables” and “Assignment”\n\nfruehwald_age = 2084 - 1985\n\nTitleCase\nsnake_case\ncamelCase\n\nfruehwald_age * 12\n\n1188\n\n\n\nVariables vs Strings\n\n\"fruehwald_age\"\n\n'fruehwald_age'\n\n\n\n'fruehwald_age'\n\n'fruehwald_age'\n\n\n\njohn_favorite_color = \"purple\"\n\n\nJohn_favorite_color\n\nNameError: name 'John_favorite_color' is not defined",
+    "objectID": "notes/programming/07_logistic.html",
+    "href": "notes/programming/07_logistic.html",
+    "title": "Training and evaluating a logistic regression",
+    "section": "",
+    "text": "Let’s do some sentiment classification with logistic regression! We’ll use the scikit-learn package (sklearn) to fit the logistic regression, as well as for train-test splitting.\npython\n\nimport nltk \nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.model_selection import train_test_split\n\nimport numpy as np\n\nnltk.download(\"movie_reviews\")\nnltk.download(\"punkt\")\nnltk.download(\"stopwords\")\nnltk.download(\"vader_lexicon\")\n\n[nltk_data] Downloading package movie_reviews to\n[nltk_data]     /Users/joseffruehwald/nltk_data...\n[nltk_data]   Package movie_reviews is already up-to-date!\n[nltk_data] Downloading package punkt to\n[nltk_data]     /Users/joseffruehwald/nltk_data...\n[nltk_data]   Package punkt is already up-to-date!\n[nltk_data] Downloading package stopwords to\n[nltk_data]     /Users/joseffruehwald/nltk_data...\n[nltk_data]   Package stopwords is already up-to-date!\n[nltk_data] Downloading package vader_lexicon to\n[nltk_data]     /Users/joseffruehwald/nltk_data...\n[nltk_data]   Package vader_lexicon is already up-to-date!\n\n\nTrue",
     "crumbs": [
       "Notes",
-      "In-class",
-      "Starting Python"
+      "Programming",
+      "Training and evaluating a logistic regression"
     ]
   },
   {
-    "objectID": "notes/in_class/00_python.html#importing",
-    "href": "notes/in_class/00_python.html#importing",
-    "title": "Starting Python",
-    "section": "Importing",
-    "text": "Importing\n\nimport re\n\n\nre.search()\n\n\n# import pathlib\n# pathlib.Path()\n\nfrom pathlib import Path\n\n\nPath()\n\nPosixPath('.')",
+    "objectID": "notes/programming/07_logistic.html#approach-1-sentiment-analyzer",
+    "href": "notes/programming/07_logistic.html#approach-1-sentiment-analyzer",
+    "title": "Training and evaluating a logistic regression",
+    "section": "Approach 1: Sentiment Analyzer",
+    "text": "Approach 1: Sentiment Analyzer\nFor our first approach, we’ll use a sentiment analyzer to extract some features for the logistic regression. According to the VADER documentation, the sentiment scores we get back will be the proportion of words in a review that were in the positive, negative, and neutral lexicon lists.\n\n\npython\n\nfrom nltk.corpus import movie_reviews\nfrom nltk.sentiment.vader import SentimentIntensityAnalyzer\n\nWe’ll grab all of the review ids and labels, to then split them into training and test sets.\n\n\npython\n\nall_ids = list(\n  movie_reviews.fileids()\n  )\n\nall_labels  = [x.split(\"/\")[0] for x in all_ids]\n\nThe train_tets_split() function will give is nice train/test divisions of the data.\n\n\npython\n\nX_train, X_test, y_train, y_test = train_test_split(all_ids, all_labels, train_size=0.8)\n\n\nLooking at the Sentiment Analyzer\nLet’s load up the sentiment analyzer and see what it does to one movie review.\n\n\npython\n\nsent = SentimentIntensityAnalyzer()\none_review = movie_reviews.raw(X_train[0])\n\n\n\npython\n\nsent.polarity_scores(one_review)\n\n{'neg': 0.15, 'neu': 0.702, 'pos': 0.149, 'compound': -0.3162}\n\n\nWhat we’ll need to fit the logistic regression is an array of feature values with 1 row per review, and one column per sentiment value. Here’s a function that’ll do that.\n\n\npython\n\ndef make_features(X):\n    whole_reviews = [movie_reviews.raw(fileids = id) for id in X]\n    review_words = [movie_reviews.words(fileids = id) for id in X]\n    sent_analyzer = SentimentIntensityAnalyzer()\n    all_sentiments = [sent_analyzer.polarity_scores(r) for r in whole_reviews]\n\n    neg_array = np.array([\n        a_sentiment[\"neg\"]\n        for a_sentiment in all_sentiments\n        ])\n\n    pos_array = np.array([\n        a_sentiment[\"pos\"]\n        for a_sentiment in all_sentiments\n        ])\n\n    neu_array = np.array([\n        a_sentiment[\"neu\"]\n        for a_sentiment in all_sentiments\n        ])\n    \n    all_features = np.vstack([neg_array, pos_array, neu_array]).T\n\n    return all_features\n\nWe’ll also need a function that will turn “pos” and “neg” into 1 and 0.\n\n\npython\n\ndef make_outcomes(y):\n    binary = [\n        1 \n        if label == \"pos\"\n        else\n        0\n        for label in y\n    ]\n\n    return np.array(binary)\n\n\n\npython\n\ntrain_features = make_features(X_train)\ntrain_outcomes = make_outcomes(y_train)\n\n\n\npython\n\ntrain_features.shape\n\n(1600, 3)\n\n\n\n\nSetting up the logistic regression\nTo set up the logistic regression, we create a model object with all of the settings we want. For example, here we’ll use L2 regularization.\n\n\npython\n\nmodel = LogisticRegression(penalty = \"l2\")\n\nThen, it’s just a matter of fitting the model.\n\n\npython\n\nmodel.fit(train_features, train_outcomes)\n\nLogisticRegression()In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.  LogisticRegression?Documentation for LogisticRegressioniFittedLogisticRegression() \n\n\nSince we have relatively few features, we can make some kind of sense of the coefficients.\n\n\npython\n\nmodel.coef_\n\narray([[-5.24518667,  6.06030818, -0.72804943]])\n\n\n\n\nEvaluating the classifier\nTo evaluate the classifier, we need to create our test features and test outcomes.\n\n\npython\n\ntest_features = make_features(X_test)\ntest_outcomes = make_outcomes(y_test)\n\n\n\npython\n\npredictions = model.predict(test_features)\n\nNow, let’s get the recall score.\n\n\npython\n\nrecall_array = np.array([\n    pred\n    for pred, label in zip(predictions, test_outcomes)\n    if label == 1\n])\n\n\n\npython\n\nrecall_array.mean()\n\n0.5849056603773585\n\n\nHow doe we need to adjust the code above to get the precision array?\n\n\npython\n\nprecision_array = np.array([\n\n])\n\n\n\npython\n\nprecision_array.mean()\n\n/var/folders/sf/84lgr1c10pggym7_8p8f54r40000gp/T/ipykernel_54013/2512464149.py:1: RuntimeWarning: Mean of empty slice.\n  precision_array.mean()\n/Users/joseffruehwald/Documents/courses/Lin511-2024.github.io/renv/python/virtualenvs/renv-python-3.11/lib/python3.11/site-packages/numpy/core/_methods.py:129: RuntimeWarning: invalid value encountered in scalar divide\n  ret = ret.dtype.type(ret / rcount)\n\n\nnan",
     "crumbs": [
       "Notes",
-      "In-class",
-      "Starting Python"
+      "Programming",
+      "Training and evaluating a logistic regression"
+    ]
+  },
+  {
+    "objectID": "notes/programming/07_logistic.html#doing-it-with-word-counts",
+    "href": "notes/programming/07_logistic.html#doing-it-with-word-counts",
+    "title": "Training and evaluating a logistic regression",
+    "section": "Doing it with word counts",
+    "text": "Doing it with word counts\n\n\npython\n\nfrom sklearn.feature_extraction.text import CountVectorizer\n\n\n\npython\n\ndef make_token_features(X):\n    raw_reviews = [movie_reviews.raw(id) for id in X]\n    count_vec = CountVectorizer(analyzer=\"word\", stop_words= \"english\", binary=True)\n    X = count_vec.fit_transform(raw_reviews)\n\n    return count_vec, X\n\n\n\npython\n\nvectorizer, train_features2 = make_token_features(X_train)\n\n\n\npython\n\nmodel2 = LogisticRegression(penalty = \"l2\")\n\n\n\npython\n\nmodel2.fit(train_features2, train_outcomes)\n\nLogisticRegression()In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.  LogisticRegression?Documentation for LogisticRegressioniFittedLogisticRegression() \n\n\n\n\npython\n\nraw_reviews = [movie_reviews.raw(id) for id in X_test]\ntest_features2 = vectorizer.transform(raw_reviews)\n\n\n\npython\n\npredictions2 = model2.predict(test_features2)\n\n\n\npython\n\nrecall_array = np.array([\n\n])\nrecall_array.mean()\n\n/var/folders/sf/84lgr1c10pggym7_8p8f54r40000gp/T/ipykernel_54013/1754276131.py:4: RuntimeWarning: Mean of empty slice.\n  recall_array.mean()\n/Users/joseffruehwald/Documents/courses/Lin511-2024.github.io/renv/python/virtualenvs/renv-python-3.11/lib/python3.11/site-packages/numpy/core/_methods.py:129: RuntimeWarning: invalid value encountered in scalar divide\n  ret = ret.dtype.type(ret / rcount)\n\n\nnan\n\n\n\n\npython\n\nprecision_array = np.array([\n \n])\nprecision_array.mean()\n\n/var/folders/sf/84lgr1c10pggym7_8p8f54r40000gp/T/ipykernel_54013/1530356477.py:4: RuntimeWarning: Mean of empty slice.\n  precision_array.mean()\n\n\nnan",
+    "crumbs": [
+      "Notes",
+      "Programming",
+      "Training and evaluating a logistic regression"
     ]
   },
   {
