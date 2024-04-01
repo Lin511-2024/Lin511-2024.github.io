@@ -1,0 +1,439 @@
+---
+title: Term Frequency - Inverse Document Frequency
+date: 2024-04-02
+knitr: 
+  opts_chunk: 
+    echo: false
+    message: false
+    warning: false
+    dev: ragg_png
+format:
+  html:
+    mermaid:
+      theme: neutral
+filters: 
+  - codeblocklabel
+categories:
+  - compling
+---
+
+## Descrbing a document by its words
+
+### Binary coding
+
+One way to represent the content of a document, like a movie review, is with a binary code of 1, if a word appears in it, or a 0, if a word does not.
+
+```{r}
+library(reticulate)
+library(tidyverse)
+library(khroma)
+```
+
+```{python}
+#| echo: true
+import numpy as np
+
+import nltk
+from nltk.corpus import movie_reviews
+from nltk.corpus import stopwords
+all_ids = movie_reviews.fileids()
+all_words = [movie_reviews.words(id) for id in all_ids]
+```
+
+```{python}
+#| echo: true
+english_stop = stopwords.words("english")
+print(english_stop[0:10])
+```
+
+```{python}
+#| echo: true
+all_words_filtered = [
+  [
+    word 
+    for word in review 
+    if word not in english_stop
+  ]
+  for review in all_words
+]
+```
+
+```{python}
+#| echo: true
+review_has_good = np.array([
+  1 
+  if "good" in review
+  else
+  0
+  for review in all_words_filtered
+])
+
+review_has_excellent = np.array([
+  1 
+  if "excellent" in review
+  else
+  0
+  for review in all_words_filtered
+])
+
+review_has_bad = np.array([
+  1 
+  if "bad" in review
+  else
+  0
+  for review in all_words_filtered
+])
+```
+
+```{r}
+#| label: fig-binary
+#| fig-width: 8
+#| fig-height: 3
+#| fig-cap: "Presence or absence of 'good' and 'bad'"
+tibble(
+  good = py$review_has_good,
+  excellent = py$review_has_excellent,
+  bad = py$review_has_bad
+) |>
+  mutate(
+    review_number = row_number()
+  ) |>
+  pivot_longer(
+    good:bad
+  ) |>
+  slice(1:200) |>
+  ggplot(
+    aes(
+      review_number,
+      name,
+      fill = factor(value)
+    )
+  )+
+    geom_tile(color = "black")+
+    scale_fill_manual(
+      values = c("white", "grey50")
+    )+
+    labs(
+      y = "word",
+      fill = "code"
+    )+
+    theme_minimal()
+```
+
+### Token Counts
+
+*Or*, we could count how often each word appeared in a review. Probably if a review has the word "good" in it 6 times, that's a more important word to the review than one where it appears just once.
+
+```{python}
+#| echo: true
+from collections import Counter
+
+good_count = np.array([
+  Counter(review)["good"]
+  for review in all_words_filtered
+])
+
+excellent_count = np.array([
+  Counter(review)["excellent"]
+  for review in all_words_filtered
+])
+
+bad_count = np.array([
+  Counter(review)["bad"]
+  for review in all_words_filtered
+])
+```
+
+```{r}
+#| label: fig-count
+#| fig-width: 8
+#| fig-height: 3
+#| fig-cap: "Presence or absence of 'good' and 'bad'"
+tibble(
+  good = py$good_count,
+  excellent = py$excellent_count,
+  bad = py$bad_count
+) |>
+  mutate(
+    review_number = row_number()
+  ) |>
+  pivot_longer(
+    good:bad
+  ) |>
+  mutate(
+    value = case_when(value == 0 ~ NA, .default = value)
+  ) |>  
+  slice(1:200) |>
+  ggplot(
+    aes(
+      review_number,
+      name,
+      fill = value
+    )
+  )+
+    geom_tile(color = "black")+
+    scale_fill_lajolla()+
+    labs(
+      y = "word",
+      fill = "count"
+    )+
+    theme_minimal()+
+    theme(panel.grid = element_blank())
+```
+
+### Document Frequency
+
+On the *other* hand, it looks like "good" and "bad" appear in lots of reviews.
+
+```{python}
+#| echo: true
+review_has_good.mean()
+review_has_bad.mean()
+```
+
+Wheras, the word "excellent" doesn't appear in that many reviews overall.
+
+```{python}
+review_has_excellent.mean()
+```
+
+Maybe, when the word "excellent" appears in a review, it should be taken more seriously, since it doesn't appear in that many.
+
+## TF-IDF
+
+TF
+  : **T**erm **F**requency
+
+IDF
+  : **I**nverse **D**ocument **F**requency
+
+The TF-IDF value tries to describe the words that appear in a document by how important they are to *that* document.
+
+| If a word appears __ in this document | that appears in documents __ | then... |
+| ------------ | ------------ | ------------ |
+|often |  rarely | it's probably important | 
+| often | very often | it might not be that important |
+
+### Term Frequency
+
+
+$$
+tf = \log_{10}C(w)+1
+$$
+
+```{python}
+#| echo: true
+good_tf = np.log10(good_count+1)
+excellent_tf = np.log10(excellent_count + 1)
+bad_tf = np.log10(bad_count + 1)
+```
+
+### Inverse Document Frequency
+
+If $n$ is the total number of documents there are, and $df$ is the number of documents a word appears in
+
+$$
+idf = \log_{10}\frac{n}{df}
+$$
+
+```{python}
+#| echo: true
+n_documents = len(all_words_filtered)
+
+good_idf = np.log10(
+  n_documents/review_has_good.sum()
+  )
+
+excellent_idf = np.log10(
+  n_documents/review_has_excellent.sum()
+  )
+
+bad_idf = np.log10(
+  n_documents/review_has_bad.sum()
+  )
+```
+
+### TF-IDF
+
+We just multiply these two together
+
+```{python}
+#| echo: true
+good_tf_idf = good_tf * good_idf
+excellent_tf_idf = excellent_tf * excellent_idf
+bad_tf_idf = bad_tf * bad_idf
+```
+
+```{r}
+#| label: fig-tf-idf
+#| fig-width: 8
+#| fig-height: 3
+#| fig-cap: "TF-IDF"
+tibble(
+  good = py$good_tf_idf,
+  excellent = py$excellent_tf_idf,
+  bad = py$bad_tf_idf
+) |>
+  mutate(
+    review_number = row_number()
+  ) |>
+  pivot_longer(
+    good:bad
+  ) |>
+  slice(1:200) |>
+  ggplot(
+    aes(
+      review_number,
+      name,
+      fill = value
+    )
+  )+
+    geom_tile(color = "black")+
+    scale_fill_lajolla()+
+    labs(
+      y = "word",
+      fill = "tf-idf"
+    )+
+    theme_minimal()+
+    theme(panel.grid = element_blank())
+```
+
+## Document "vectors"
+Another way to look at these reviews is as "vectors", or rows of numbers, that exist along the "good" axis, or the "bad" axis.
+
+```{r}
+#| label: fig-document-vectors
+#| fig-cap: "Documents in 'good' and 'bad' space"
+tibble(
+  good = py$good_tf_idf,
+  excellent = py$excellent_tf_idf,
+  bad = py$bad_tf_idf
+) |>
+  mutate(
+    review_number = row_number()
+  ) |>
+  ggplot(
+    aes(bad, good)
+  )+
+    stat_sum()+
+    stat_smooth()+
+    coord_fixed()+
+    labs(
+      x = "bad (tf-idf)",
+      y = "good (tf-idf)"
+    )+
+    theme(
+      panel.grid.minor = element_blank()
+    )
+```
+
+
+## Doing it with sklearn
+
+```{python}
+#| echo: true
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
+```
+
+Setting up the data.
+
+
+```{python}
+#| echo: true
+raw_reviews = [
+  movie_reviews.raw(id) 
+  for id in all_ids
+  ]
+
+labels = [
+  id.split("/")[0]
+  for id in all_ids
+]
+
+binary = np.array([
+  1 
+  if label == "pos"
+  else
+  0
+  for label in labels
+])
+```
+
+Test-train split
+
+```{python}
+#| echo: true
+X_train, X_test, y_train, y_test = train_test_split(
+  raw_reviews,
+  binary,
+  train_size = 0.8
+)
+```
+
+Making the tf-idf "vectorizor"
+
+```{python}
+#| echo: true
+vectorizor = TfidfVectorizer(stop_words="english")
+X_train_vec = vectorizor.fit_transform(X_train)
+X_test_vec = vectorizor.transform(X_test)
+```
+
+Fitting a logistic regression
+
+```{python}
+#| echo: true
+model = LogisticRegression(penalty = "l2")
+model.fit(X_train_vec, y_train)
+```
+
+Testing the logistic regression
+
+```{python}
+#| echo: true
+preds = model.predict(X_test_vec)
+```
+
+Accuracy
+
+```{python}
+#| echo: true
+(preds == y_test).mean()
+```
+
+Recall
+
+```{python}
+#| echo: true
+recall_array = np.array([
+  pred 
+  for pred, label in zip(preds,y_test)
+  if label == 1
+])
+
+recall_array.mean()
+```
+
+Precision
+
+```{python}
+#| echo: true
+precision_array = np.array([
+  label
+  for pred, label in zip(preds, y_test)
+  if pred == 1
+])
+precision_array.mean()
+```
+
+F score
+
+```{python}
+#| echo: true
+precision = precision_array.mean()
+recall = recall_array.mean()
+
+2 * ((precision * recall)/(precision + recall))
+```
