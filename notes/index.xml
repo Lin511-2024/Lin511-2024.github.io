@@ -11,7 +11,1144 @@
 <description></description>
 <language>en</language>
 <generator>quarto-1.4.552</generator>
-<lastBuildDate>Wed, 27 Mar 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 02 Apr 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Term Frequency - Inverse Document Frequency</title>
+  <dc:creator>Josef Fruehwald</dc:creator>
+  <link>https://lin511-2024.github.io/notes/meetings/12_tf-idf.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="descrbing-a-document-by-its-words" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="descrbing-a-document-by-its-words">Descrbing a document by its words</h2>
+<section id="binary-coding" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="binary-coding">Binary coding</h3>
+<p>One way to represent the content of a document, like a movie review, is with a binary code of 1, if a word appears in it, or a 0, if a word does not.</p>
+<div class="cell">
+
+</div>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span>
+<span id="cb1-2"></span>
+<span id="cb1-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> nltk</span>
+<span id="cb1-4"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> nltk.corpus <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> movie_reviews</span>
+<span id="cb1-5"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> nltk.corpus <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> stopwords</span>
+<span id="cb1-6">all_ids <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> movie_reviews.fileids()</span>
+<span id="cb1-7">all_words <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [movie_reviews.words(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">id</span>) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">id</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> all_ids]</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">english_stop <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> stopwords.words(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"english"</span>)</span>
+<span id="cb2-2"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(english_stop[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>])</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', "you're"]</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">all_words_filtered <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb4-2">  [</span>
+<span id="cb4-3">    word </span>
+<span id="cb4-4">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> word <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> review </span>
+<span id="cb4-5">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> word <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">not</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> english_stop</span>
+<span id="cb4-6">  ]</span>
+<span id="cb4-7">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> review <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> all_words</span>
+<span id="cb4-8">]</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">review_has_good <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([</span>
+<span id="cb5-2">  <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> </span>
+<span id="cb5-3">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"good"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> review</span>
+<span id="cb5-4">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span></span>
+<span id="cb5-5">  <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb5-6">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> review <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> all_words_filtered</span>
+<span id="cb5-7">])</span>
+<span id="cb5-8"></span>
+<span id="cb5-9">review_has_excellent <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([</span>
+<span id="cb5-10">  <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> </span>
+<span id="cb5-11">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"excellent"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> review</span>
+<span id="cb5-12">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span></span>
+<span id="cb5-13">  <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb5-14">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> review <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> all_words_filtered</span>
+<span id="cb5-15">])</span>
+<span id="cb5-16"></span>
+<span id="cb5-17">review_has_bad <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([</span>
+<span id="cb5-18">  <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> </span>
+<span id="cb5-19">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bad"</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> review</span>
+<span id="cb5-20">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span></span>
+<span id="cb5-21">  <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb5-22">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> review <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> all_words_filtered</span>
+<span id="cb5-23">])</span></code></pre></div>
+</div>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-binary" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-binary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://lin511-2024.github.io/notes/meetings/12_tf-idf_files/figure-html/fig-binary-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-binary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Presence or absence of ‘good’ and ‘bad’
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="token-counts" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="token-counts">Token Counts</h3>
+<p><em>Or</em>, we could count how often each word appeared in a review. Probably if a review has the word “good” in it 6 times, that’s a more important word to the review than one where it appears just once.</p>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> collections <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> Counter</span>
+<span id="cb6-2"></span>
+<span id="cb6-3">good_count <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([</span>
+<span id="cb6-4">  Counter(review)[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"good"</span>]</span>
+<span id="cb6-5">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> review <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> all_words_filtered</span>
+<span id="cb6-6">])</span>
+<span id="cb6-7"></span>
+<span id="cb6-8">excellent_count <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([</span>
+<span id="cb6-9">  Counter(review)[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"excellent"</span>]</span>
+<span id="cb6-10">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> review <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> all_words_filtered</span>
+<span id="cb6-11">])</span>
+<span id="cb6-12"></span>
+<span id="cb6-13">bad_count <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([</span>
+<span id="cb6-14">  Counter(review)[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bad"</span>]</span>
+<span id="cb6-15">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> review <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> all_words_filtered</span>
+<span id="cb6-16">])</span></code></pre></div>
+</div>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-count" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-count-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://lin511-2024.github.io/notes/meetings/12_tf-idf_files/figure-html/fig-count-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-count-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Presence or absence of ‘good’ and ‘bad’
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="document-frequency" class="level3">
+<h3 class="anchored" data-anchor-id="document-frequency">Document Frequency</h3>
+<p>On the <em>other</em> hand, it looks like “good” and “bad” appear in lots of reviews.</p>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">review_has_good.mean()</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.591</code></pre>
+</div>
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">review_has_bad.mean()</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.3865</code></pre>
+</div>
+</div>
+<p>Wheras, the word “excellent” doesn’t appear in that many reviews overall.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>0.0725</code></pre>
+</div>
+</div>
+<p>Maybe, when the word “excellent” appears in a review, it should be taken more seriously, since it doesn’t appear in that many.</p>
+</section>
+</section>
+<section id="tf-idf" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="tf-idf">TF-IDF</h2>
+<dl>
+<dt>TF</dt>
+<dd>
+<strong>T</strong>erm <strong>F</strong>requency
+</dd>
+<dt>IDF</dt>
+<dd>
+<strong>I</strong>nverse <strong>D</strong>ocument <strong>F</strong>requency
+</dd>
+</dl>
+<p>The TF-IDF value tries to describe the words that appear in a document by how important they are to <em>that</em> document.</p>
+<table class="table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>If a word appears __ in this document</th>
+<th>that appears in documents __</th>
+<th>then…</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>often</td>
+<td>rarely</td>
+<td>it’s probably important</td>
+</tr>
+<tr class="even">
+<td>often</td>
+<td>very often</td>
+<td>it might not be that important</td>
+</tr>
+</tbody>
+</table>
+<section id="term-frequency" class="level3">
+<h3 class="anchored" data-anchor-id="term-frequency">Term Frequency</h3>
+<p><img src="https://latex.codecogs.com/png.latex?%0Atf%20=%20%5Clog_%7B10%7DC(w)+1%0A"></p>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1">good_tf <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.log10(good_count<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb12-2">excellent_tf <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.log10(excellent_count <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb12-3">bad_tf <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.log10(bad_count <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span></code></pre></div>
+</div>
+</section>
+<section id="inverse-document-frequency" class="level3">
+<h3 class="anchored" data-anchor-id="inverse-document-frequency">Inverse Document Frequency</h3>
+<p>If <img src="https://latex.codecogs.com/png.latex?n"> is the total number of documents there are, and <img src="https://latex.codecogs.com/png.latex?df"> is the number of documents a word appears in</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Aidf%20=%20%5Clog_%7B10%7D%5Cfrac%7Bn%7D%7Bdf%7D%0A"></p>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">n_documents <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(all_words_filtered)</span>
+<span id="cb13-2"></span>
+<span id="cb13-3">good_idf <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.log10(</span>
+<span id="cb13-4">  n_documents<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>review_has_good.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">sum</span>()</span>
+<span id="cb13-5">  )</span>
+<span id="cb13-6"></span>
+<span id="cb13-7">excellent_idf <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.log10(</span>
+<span id="cb13-8">  n_documents<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>review_has_excellent.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">sum</span>()</span>
+<span id="cb13-9">  )</span>
+<span id="cb13-10"></span>
+<span id="cb13-11">bad_idf <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.log10(</span>
+<span id="cb13-12">  n_documents<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>review_has_bad.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">sum</span>()</span>
+<span id="cb13-13">  )</span></code></pre></div>
+</div>
+</section>
+<section id="tf-idf-1" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="tf-idf-1">TF-IDF</h3>
+<p>We just multiply these two together</p>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">good_tf_idf <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> good_tf <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> good_idf</span>
+<span id="cb14-2">excellent_tf_idf <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> excellent_tf <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> excellent_idf</span>
+<span id="cb14-3">bad_tf_idf <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> bad_tf <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> bad_idf</span></code></pre></div>
+</div>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-tf-idf" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-tf-idf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://lin511-2024.github.io/notes/meetings/12_tf-idf_files/figure-html/fig-tf-idf-1.png" class="img-fluid figure-img" width="768">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-tf-idf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: TF-IDF
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="document-vectors" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="document-vectors">Document “vectors”</h2>
+<p>Another way to look at these reviews is as “vectors”, or rows of numbers, that exist along the “good” axis, or the “bad” axis.</p>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-document-vectors" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-document-vectors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://lin511-2024.github.io/notes/meetings/12_tf-idf_files/figure-html/fig-document-vectors-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-document-vectors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Documents in ‘good’ and ‘bad’ space
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="doing-it-with-sklearn" class="level2">
+<h2 class="anchored" data-anchor-id="doing-it-with-sklearn">Doing it with sklearn</h2>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> sklearn.linear_model <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> LogisticRegression</span>
+<span id="cb15-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> sklearn.model_selection <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> train_test_split</span>
+<span id="cb15-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> sklearn.feature_extraction.text <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> TfidfVectorizer</span></code></pre></div>
+</div>
+<p>Setting up the data.</p>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">raw_reviews <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb16-2">  movie_reviews.raw(<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">id</span>) </span>
+<span id="cb16-3">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">id</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> all_ids</span>
+<span id="cb16-4">  ]</span>
+<span id="cb16-5"></span>
+<span id="cb16-6">labels <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb16-7">  <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">id</span>.split(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"/"</span>)[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>]</span>
+<span id="cb16-8">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">id</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> all_ids</span>
+<span id="cb16-9">]</span>
+<span id="cb16-10"></span>
+<span id="cb16-11">binary <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([</span>
+<span id="cb16-12">  <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> </span>
+<span id="cb16-13">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> label <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"pos"</span></span>
+<span id="cb16-14">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span></span>
+<span id="cb16-15">  <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb16-16">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> label <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> labels</span>
+<span id="cb16-17">])</span></code></pre></div>
+</div>
+<p>Test-train split</p>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1">X_train, X_test, y_train, y_test <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> train_test_split(</span>
+<span id="cb17-2">  raw_reviews,</span>
+<span id="cb17-3">  binary,</span>
+<span id="cb17-4">  train_size <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span></span>
+<span id="cb17-5">)</span></code></pre></div>
+</div>
+<p>Making the tf-idf “vectorizor”</p>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1">vectorizor <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> TfidfVectorizer(stop_words<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"english"</span>)</span>
+<span id="cb18-2">X_train_vec <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> vectorizor.fit_transform(X_train)</span>
+<span id="cb18-3">X_test_vec <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> vectorizor.transform(X_test)</span></code></pre></div>
+</div>
+<p>Fitting a logistic regression</p>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">model <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> LogisticRegression(penalty <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"l2"</span>)</span>
+<span id="cb19-2">model.fit(X_train_vec, y_train)</span></code></pre></div>
+<div class="cell-output-display">
+<style>#sk-container-id-1 {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: black;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
+  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-icon: #696969;
+
+  @media (prefers-color-scheme: dark) {
+    /* Redefinition of color scheme for dark theme */
+    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
+    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-icon: #878787;
+  }
+}
+
+#sk-container-id-1 {
+  color: var(--sklearn-color-text);
+}
+
+#sk-container-id-1 pre {
+  padding: 0;
+}
+
+#sk-container-id-1 input.sk-hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#sk-container-id-1 div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+#sk-container-id-1 div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+#sk-container-id-1 div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+#sk-container-id-1 div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#sk-container-id-1 div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+#sk-container-id-1 div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+#sk-container-id-1 div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+#sk-container-id-1 label.sk-toggleable__label {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+#sk-container-id-1 div.sk-toggleable__content {
+  max-height: 0;
+  max-width: 0;
+  overflow: hidden;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  max-height: 200px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label label.sk-toggleable__label,
+#sk-container-id-1 div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+#sk-container-id-1 div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+}
+
+#sk-container-id-1 div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+#sk-container-id-1 div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+#sk-container-id-1 div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 1ex;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-1);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+#sk-container-id-1 a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+#sk-container-id-1 a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+</a></style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LogisticRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked=""><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;&nbsp;LogisticRegression<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.4/modules/generated/sklearn.linear_model.LogisticRegression.html">?<span>Documentation for LogisticRegression</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></label><div class="sk-toggleable__content fitted"><pre>LogisticRegression()</pre></div> </div></div></div></div>
+</div>
+</div>
+<p>Testing the logistic regression</p>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1">preds <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> model.predict(X_test_vec)</span></code></pre></div>
+</div>
+<p>Accuracy</p>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1">(preds <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> y_test).mean()</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.8475</code></pre>
+</div>
+</div>
+<p>Recall</p>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1">recall_array <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([</span>
+<span id="cb23-2">  pred </span>
+<span id="cb23-3">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> pred, label <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">zip</span>(preds,y_test)</span>
+<span id="cb23-4">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> label <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb23-5">])</span>
+<span id="cb23-6"></span>
+<span id="cb23-7">recall_array.mean()</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.8693467336683417</code></pre>
+</div>
+</div>
+<p>Precision</p>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb25" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1">precision_array <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([</span>
+<span id="cb25-2">  label</span>
+<span id="cb25-3">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> pred, label <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">zip</span>(preds, y_test)</span>
+<span id="cb25-4">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> pred <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb25-5">])</span>
+<span id="cb25-6">precision_array.mean()</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.8317307692307693</code></pre>
+</div>
+</div>
+<p>F score</p>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1">precision <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> precision_array.mean()</span>
+<span id="cb27-2">recall <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> recall_array.mean()</span>
+<span id="cb27-3"></span>
+<span id="cb27-4"><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> ((precision <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> recall)<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>(precision <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> recall))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.85012285012285</code></pre>
+</div>
+</div>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
+  author = {Fruehwald, Josef},
+  title = {Term {Frequency} - {Inverse} {Document} {Frequency}},
+  date = {2024-04-02},
+  url = {https://lin511-2024.github.io/notes/meetings/12_tf-idf.html},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2024" class="csl-entry quarto-appendix-citeas">
+Fruehwald, Josef. 2024. <span>“Term Frequency - Inverse Document
+Frequency.”</span> April 2, 2024. <a href="https://lin511-2024.github.io/notes/meetings/12_tf-idf.html">https://lin511-2024.github.io/notes/meetings/12_tf-idf.html</a>.
+</div></div></section></div> ]]></description>
+  <category>compling</category>
+  <guid>https://lin511-2024.github.io/notes/meetings/12_tf-idf.html</guid>
+  <pubDate>Tue, 02 Apr 2024 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Training and evaluating a logistic regression</title>
   <dc:creator>Josef Fruehwald</dc:creator>
@@ -24158,142 +25295,7 @@ Fruehwald, Josef. 2024. <span>“Setup Notes.”</span> January 8, 2024. <a href
 Fruehwald, Josef. n.d. <span>“Side Note.”</span> <a href="https://lin511-2024.github.io/notes/meetings/06_side-note.html">https://lin511-2024.github.io/notes/meetings/06_side-note.html</a>.
 </div></div></section></div> ]]></description>
   <guid>https://lin511-2024.github.io/notes/meetings/06_side-note.html</guid>
-  <pubDate>Thu, 28 Mar 2024 02:10:39 GMT</pubDate>
-</item>
-<item>
-  <title>Python basics</title>
-  <dc:creator>Josef Fruehwald</dc:creator>
-  <link>https://lin511-2024.github.io/notes/programming/01_Python_basics.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<div id="cell-1" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>1</code></pre>
-</div>
-</div>
-<div id="cell-2" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"hello"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>hello</code></pre>
-</div>
-</div>
-<div id="cell-3" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>4</code></pre>
-</div>
-</div>
-<div id="cell-4" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">x <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span></span>
-<span id="cb7-2">y <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">10</span></span>
-<span id="cb7-3"></span>
-<span id="cb7-4"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(x <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> y)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>11</code></pre>
-</div>
-</div>
-<div id="cell-5" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">word1 <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Hello"</span></span>
-<span id="cb9-2">word2 <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">" World!"</span></span>
-<span id="cb9-3"></span>
-<span id="cb9-4"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(word1 <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> word2)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Hello World!</code></pre>
-</div>
-</div>
-<div id="cell-6" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">True</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>True</code></pre>
-</div>
-</div>
-<div id="cell-7" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">False</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>False</code></pre>
-</div>
-</div>
-<div id="cell-8" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><span class="bu" style="color: null;
-background-color: null;
-font-style: inherit;">print</span>(<span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">True</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">and</span> <span class="va" style="color: #111111;
-background-color: null;
-font-style: inherit;">False</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>False</code></pre>
-</div>
-</div>
-
-
-
-<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald,
-  author = {Fruehwald, Josef},
-  title = {Python Basics},
-  url = {https://lin511-2024.github.io/notes/programming/01_Python_basics.html},
-  langid = {en}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald" class="csl-entry quarto-appendix-citeas">
-Fruehwald, Josef. n.d. <span>“Python Basics.”</span> <a href="https://lin511-2024.github.io/notes/programming/01_Python_basics.html">https://lin511-2024.github.io/notes/programming/01_Python_basics.html</a>.
-</div></div></section></div> ]]></description>
-  <category>python</category>
-  <guid>https://lin511-2024.github.io/notes/programming/01_Python_basics.html</guid>
-  <pubDate>Thu, 28 Mar 2024 02:10:39 GMT</pubDate>
+  <pubDate>Mon, 01 Apr 2024 21:20:30 GMT</pubDate>
 </item>
 </channel>
 </rss>
