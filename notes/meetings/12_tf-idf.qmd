@@ -144,15 +144,29 @@ bad_count = np.array([
 ])
 ```
 
+Since the reviews are different lengths, we can "normalize" them.
+
+```{python}
+#| echo: true
+total_review = np.array([
+  len(review)
+  for review in all_words_filtered
+])
+
+good_norm = good_count/total_review
+excellent_norm = excellent_count/total_review
+bad_norm = bad_count/total_review
+```
+
 ```{r}
 #| label: fig-count
 #| fig-width: 8
 #| fig-height: 3
 #| fig-cap: "Presence or absence of 'good' and 'bad'"
 tibble(
-  good = py$good_count,
-  excellent = py$excellent_count,
-  bad = py$bad_count
+  good = py$good_norm,
+  excellent = py$excellent_norm,
+  bad = py$bad_norm
 ) |>
   mutate(
     review_number = row_number()
@@ -194,6 +208,7 @@ review_has_bad.mean()
 Wheras, the word "excellent" doesn't appear in that many reviews overall.
 
 ```{python}
+#| echo: true
 review_has_excellent.mean()
 ```
 
@@ -218,14 +233,64 @@ The TF-IDF value tries to describe the words that appear in a document by how im
 
 
 $$
-tf = \log_{10}C(w)+1
+tf = \log C(w)+1
 $$
+
+Why log? 
+
+```{python}
+one_review = list(movie_reviews.words())
+```
+
+```{r}
+#| label: fig-raw-count
+#| fig-cap: "Raw Count"
+#| fig-width: 6
+#| fig-height: 4
+tibble(
+  words = py$one_review
+) |>
+  count(words) |>
+  ggplot(
+    aes(n)
+  )+
+  stat_bin()+
+  labs(
+    x = "count",
+    y = "tokens with count"
+  )+
+  scale_y_continuous(expand = expansion(0))+
+  theme_minimal()+
+  theme(panel.grid = element_blank())
+```
+
+```{r}
+#| label: fig-log-count
+#| fig-cap: "Raw Count"
+#| fig-width: 6
+#| fig-height: 4
+tibble(
+  words = py$one_review
+) |>
+  count(words) |>
+  ggplot(
+    aes(log(n))
+  )+
+  stat_bin()+
+  labs(
+    x = "log count",
+    y = "tokens with count"
+  )+
+  scale_y_continuous(expand = expansion(0))+
+  theme_minimal()+
+  theme(panel.grid = element_blank())
+```
 
 ```{python}
 #| echo: true
-good_tf = np.log10(good_count+1)
-excellent_tf = np.log10(excellent_count + 1)
-bad_tf = np.log10(bad_count + 1)
+good_tf = np.log(good_count+1)
+excellent_tf = np.log(excellent_count + 1)
+bad_tf = np.log(bad_count + 1)
 ```
 
 ### Inverse Document Frequency
@@ -233,22 +298,22 @@ bad_tf = np.log10(bad_count + 1)
 If $n$ is the total number of documents there are, and $df$ is the number of documents a word appears in
 
 $$
-idf = \log_{10}\frac{n}{df}
+idf = \log \frac{n}{df}
 $$
 
 ```{python}
 #| echo: true
 n_documents = len(all_words_filtered)
 
-good_idf = np.log10(
+good_idf = np.log(
   n_documents/review_has_good.sum()
   )
 
-excellent_idf = np.log10(
+excellent_idf = np.log(
   n_documents/review_has_excellent.sum()
   )
 
-bad_idf = np.log10(
+bad_idf = np.log(
   n_documents/review_has_bad.sum()
   )
 ```
@@ -316,12 +381,12 @@ tibble(
     aes(bad, good)
   )+
     stat_sum()+
-    stat_smooth()+
     coord_fixed()+
     labs(
       x = "bad (tf-idf)",
       y = "good (tf-idf)"
     )+
+    theme_minimal()+
     theme(
       panel.grid.minor = element_blank()
     )
@@ -436,4 +501,11 @@ precision = precision_array.mean()
 recall = recall_array.mean()
 
 2 * ((precision * recall)/(precision + recall))
+```
+
+
+```{python}
+#| echo: true
+tokens = vectorizor.get_feature_names_out()
+tokens[model.coef_.argmax()]
 ```
