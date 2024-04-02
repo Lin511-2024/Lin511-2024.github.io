@@ -265,6 +265,40 @@ background-color: null;
 font-style: inherit;">in</span> all_words_filtered</span>
 <span id="cb6-16">])</span></code></pre></div>
 </div>
+<p>Since the reviews are different lengths, we can “normalize” them.</p>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">total_review <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([</span>
+<span id="cb7-2">  <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">len</span>(review)</span>
+<span id="cb7-3">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> review <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> all_words_filtered</span>
+<span id="cb7-4">])</span>
+<span id="cb7-5"></span>
+<span id="cb7-6">good_norm <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> good_count<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>total_review</span>
+<span id="cb7-7">excellent_norm <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> excellent_count<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>total_review</span>
+<span id="cb7-8">bad_norm <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> bad_count<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>total_review</span></code></pre></div>
+</div>
 <div class="cell page-columns page-full">
 <div class="cell-output-display page-columns page-full">
 <div id="fig-count" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
@@ -287,20 +321,24 @@ Figure&nbsp;2: Presence or absence of ‘good’ and ‘bad’
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
-<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">review_has_good.mean()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1">review_has_good.mean()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.591</code></pre>
 </div>
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1">review_has_bad.mean()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">review_has_bad.mean()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.3865</code></pre>
 </div>
 </div>
 <p>Wheras, the word “excellent” doesn’t appear in that many reviews overall.</p>
 <div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1">review_has_excellent.mean()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.0725</code></pre>
 </div>
@@ -347,30 +385,62 @@ Figure&nbsp;2: Presence or absence of ‘good’ and ‘bad’
 </tr>
 </tbody>
 </table>
-<section id="term-frequency" class="level3">
+<section id="term-frequency" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="term-frequency">Term Frequency</h3>
-<p><img src="https://latex.codecogs.com/png.latex?%0Atf%20=%20%5Clog_%7B10%7DC(w)+1%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Atf%20=%20%5Clog%20C(w)+1%0A"></p>
+<p>Why log?</p>
+<div class="cell">
+
+</div>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-raw-count" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-raw-count-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://lin511-2024.github.io/notes/meetings/12_tf-idf_files/figure-html/fig-raw-count-1.png" class="img-fluid figure-img" width="576">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-raw-count-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Raw Count
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell page-columns page-full">
+<div class="cell-output-display page-columns page-full">
+<div id="fig-log-count" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-log-count-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://lin511-2024.github.io/notes/meetings/12_tf-idf_files/figure-html/fig-log-count-1.png" class="img-fluid figure-img" width="576">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-log-count-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Raw Count
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 <div class="cell">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1">good_tf <span class="op" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">good_tf <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">=</span> np.log10(good_count<span class="op" style="color: #5E5E5E;
+font-style: inherit;">=</span> np.log(good_count<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>)</span>
-<span id="cb12-2">excellent_tf <span class="op" style="color: #5E5E5E;
+<span id="cb14-2">excellent_tf <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">=</span> np.log10(excellent_count <span class="op" style="color: #5E5E5E;
+font-style: inherit;">=</span> np.log(excellent_count <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span>)</span>
-<span id="cb12-3">bad_tf <span class="op" style="color: #5E5E5E;
+<span id="cb14-3">bad_tf <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">=</span> np.log10(bad_count <span class="op" style="color: #5E5E5E;
+font-style: inherit;">=</span> np.log(bad_count <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
 background-color: null;
@@ -380,46 +450,46 @@ font-style: inherit;">1</span>)</span></code></pre></div>
 <section id="inverse-document-frequency" class="level3">
 <h3 class="anchored" data-anchor-id="inverse-document-frequency">Inverse Document Frequency</h3>
 <p>If <img src="https://latex.codecogs.com/png.latex?n"> is the total number of documents there are, and <img src="https://latex.codecogs.com/png.latex?df"> is the number of documents a word appears in</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Aidf%20=%20%5Clog_%7B10%7D%5Cfrac%7Bn%7D%7Bdf%7D%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Aidf%20=%20%5Clog%20%5Cfrac%7Bn%7D%7Bdf%7D%0A"></p>
 <div class="cell">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
-<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">n_documents <span class="op" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1">n_documents <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">len</span>(all_words_filtered)</span>
-<span id="cb13-2"></span>
-<span id="cb13-3">good_idf <span class="op" style="color: #5E5E5E;
+<span id="cb15-2"></span>
+<span id="cb15-3">good_idf <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">=</span> np.log10(</span>
-<span id="cb13-4">  n_documents<span class="op" style="color: #5E5E5E;
+font-style: inherit;">=</span> np.log(</span>
+<span id="cb15-4">  n_documents<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/</span>review_has_good.<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">sum</span>()</span>
-<span id="cb13-5">  )</span>
-<span id="cb13-6"></span>
-<span id="cb13-7">excellent_idf <span class="op" style="color: #5E5E5E;
+<span id="cb15-5">  )</span>
+<span id="cb15-6"></span>
+<span id="cb15-7">excellent_idf <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">=</span> np.log10(</span>
-<span id="cb13-8">  n_documents<span class="op" style="color: #5E5E5E;
+font-style: inherit;">=</span> np.log(</span>
+<span id="cb15-8">  n_documents<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/</span>review_has_excellent.<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">sum</span>()</span>
-<span id="cb13-9">  )</span>
-<span id="cb13-10"></span>
-<span id="cb13-11">bad_idf <span class="op" style="color: #5E5E5E;
+<span id="cb15-9">  )</span>
+<span id="cb15-10"></span>
+<span id="cb15-11">bad_idf <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">=</span> np.log10(</span>
-<span id="cb13-12">  n_documents<span class="op" style="color: #5E5E5E;
+font-style: inherit;">=</span> np.log(</span>
+<span id="cb15-12">  n_documents<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/</span>review_has_bad.<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">sum</span>()</span>
-<span id="cb13-13">  )</span></code></pre></div>
+<span id="cb15-13">  )</span></code></pre></div>
 </div>
 </section>
 <section id="tf-idf-1" class="level3 page-columns page-full">
@@ -429,17 +499,17 @@ font-style: inherit;">sum</span>()</span>
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
-<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">good_tf_idf <span class="op" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">good_tf_idf <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> good_tf <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">*</span> good_idf</span>
-<span id="cb14-2">excellent_tf_idf <span class="op" style="color: #5E5E5E;
+<span id="cb16-2">excellent_tf_idf <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> excellent_tf <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">*</span> excellent_idf</span>
-<span id="cb14-3">bad_tf_idf <span class="op" style="color: #5E5E5E;
+<span id="cb16-3">bad_tf_idf <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> bad_tf <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -453,7 +523,7 @@ font-style: inherit;">*</span> bad_idf</span></code></pre></div>
 <img src="https://lin511-2024.github.io/notes/meetings/12_tf-idf_files/figure-html/fig-tf-idf-1.png" class="img-fluid figure-img" width="768">
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-tf-idf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: TF-IDF
+Figure&nbsp;5: TF-IDF
 </figcaption>
 </figure>
 </div>
@@ -472,7 +542,7 @@ Figure&nbsp;3: TF-IDF
 <img src="https://lin511-2024.github.io/notes/meetings/12_tf-idf_files/figure-html/fig-document-vectors-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-document-vectors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: Documents in ‘good’ and ‘bad’ space
+Figure&nbsp;6: Documents in ‘good’ and ‘bad’ space
 </figcaption>
 </figure>
 </div>
@@ -485,17 +555,17 @@ Figure&nbsp;4: Documents in ‘good’ and ‘bad’ space
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><span class="im" style="color: #00769E;
+<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> sklearn.linear_model <span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> LogisticRegression</span>
-<span id="cb15-2"><span class="im" style="color: #00769E;
+<span id="cb17-2"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> sklearn.model_selection <span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">import</span> train_test_split</span>
-<span id="cb15-3"><span class="im" style="color: #00769E;
+<span id="cb17-3"><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">from</span> sklearn.feature_extraction.text <span class="im" style="color: #00769E;
 background-color: null;
@@ -506,99 +576,99 @@ font-style: inherit;">import</span> TfidfVectorizer</span></code></pre></div>
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
-<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1">raw_reviews <span class="op" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1">raw_reviews <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> [</span>
-<span id="cb16-2">  movie_reviews.raw(<span class="bu" style="color: null;
+<span id="cb18-2">  movie_reviews.raw(<span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">id</span>) </span>
-<span id="cb16-3">  <span class="cf" style="color: #003B4F;
+<span id="cb18-3">  <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">id</span> <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">in</span> all_ids</span>
-<span id="cb16-4">  ]</span>
-<span id="cb16-5"></span>
-<span id="cb16-6">labels <span class="op" style="color: #5E5E5E;
+<span id="cb18-4">  ]</span>
+<span id="cb18-5"></span>
+<span id="cb18-6">labels <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> [</span>
-<span id="cb16-7">  <span class="bu" style="color: null;
+<span id="cb18-7">  <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">id</span>.split(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"/"</span>)[<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span>]</span>
-<span id="cb16-8">  <span class="cf" style="color: #003B4F;
+<span id="cb18-8">  <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">id</span> <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">in</span> all_ids</span>
-<span id="cb16-9">]</span>
-<span id="cb16-10"></span>
-<span id="cb16-11">binary <span class="op" style="color: #5E5E5E;
+<span id="cb18-9">]</span>
+<span id="cb18-10"></span>
+<span id="cb18-11">binary <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([</span>
-<span id="cb16-12">  <span class="dv" style="color: #AD0000;
+<span id="cb18-12">  <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span> </span>
-<span id="cb16-13">  <span class="cf" style="color: #003B4F;
+<span id="cb18-13">  <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">if</span> label <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"pos"</span></span>
-<span id="cb16-14">  <span class="cf" style="color: #003B4F;
+<span id="cb18-14">  <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">else</span></span>
-<span id="cb16-15">  <span class="dv" style="color: #AD0000;
+<span id="cb18-15">  <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span></span>
-<span id="cb16-16">  <span class="cf" style="color: #003B4F;
+<span id="cb18-16">  <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span> label <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">in</span> labels</span>
-<span id="cb16-17">])</span></code></pre></div>
+<span id="cb18-17">])</span></code></pre></div>
 </div>
 <p>Test-train split</p>
 <div class="cell">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
-<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1">X_train, X_test, y_train, y_test <span class="op" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">X_train, X_test, y_train, y_test <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> train_test_split(</span>
-<span id="cb17-2">  raw_reviews,</span>
-<span id="cb17-3">  binary,</span>
-<span id="cb17-4">  train_size <span class="op" style="color: #5E5E5E;
+<span id="cb19-2">  raw_reviews,</span>
+<span id="cb19-3">  binary,</span>
+<span id="cb19-4">  train_size <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="fl" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0.8</span></span>
-<span id="cb17-5">)</span></code></pre></div>
+<span id="cb19-5">)</span></code></pre></div>
 </div>
 <p>Making the tf-idf “vectorizor”</p>
 <div class="cell">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
-<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1">vectorizor <span class="op" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1">vectorizor <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> TfidfVectorizer(stop_words<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"english"</span>)</span>
-<span id="cb18-2">X_train_vec <span class="op" style="color: #5E5E5E;
+<span id="cb20-2">X_train_vec <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> vectorizor.fit_transform(X_train)</span>
-<span id="cb18-3">X_test_vec <span class="op" style="color: #5E5E5E;
+<span id="cb20-3">X_test_vec <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> vectorizor.transform(X_test)</span></code></pre></div>
 </div>
@@ -607,14 +677,14 @@ font-style: inherit;">=</span> vectorizor.transform(X_test)</span></code></pre><
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
-<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1">model <span class="op" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1">model <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> LogisticRegression(penalty <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"l2"</span>)</span>
-<span id="cb19-2">model.fit(X_train_vec, y_train)</span></code></pre></div>
+<span id="cb21-2">model.fit(X_train_vec, y_train)</span></code></pre></div>
 <div class="cell-output-display">
 <style>#sk-container-id-1 {
   /* Definition of color scheme common for light and dark mode */
@@ -1028,7 +1098,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
-<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1">preds <span class="op" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1">preds <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> model.predict(X_test_vec)</span></code></pre></div>
 </div>
@@ -1037,11 +1107,11 @@ font-style: inherit;">=</span> model.predict(X_test_vec)</span></code></pre></di
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
-<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1">(preds <span class="op" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1">(preds <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> y_test).mean()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.8475</code></pre>
+<pre><code>0.8225</code></pre>
 </div>
 </div>
 <p>Recall</p>
@@ -1049,29 +1119,29 @@ font-style: inherit;">==</span> y_test).mean()</span></code></pre></div>
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
-<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1">recall_array <span class="op" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb25" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1">recall_array <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([</span>
-<span id="cb23-2">  pred </span>
-<span id="cb23-3">  <span class="cf" style="color: #003B4F;
+<span id="cb25-2">  pred </span>
+<span id="cb25-3">  <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span> pred, label <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">in</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">zip</span>(preds,y_test)</span>
-<span id="cb23-4">  <span class="cf" style="color: #003B4F;
+<span id="cb25-4">  <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">if</span> label <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span></span>
-<span id="cb23-5">])</span>
-<span id="cb23-6"></span>
-<span id="cb23-7">recall_array.mean()</span></code></pre></div>
+<span id="cb25-5">])</span>
+<span id="cb25-6"></span>
+<span id="cb25-7">recall_array.mean()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.8693467336683417</code></pre>
+<pre><code>0.815</code></pre>
 </div>
 </div>
 <p>Precision</p>
@@ -1079,28 +1149,28 @@ font-style: inherit;">1</span></span>
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
-<div class="sourceCode cell-code" id="cb25" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1">precision_array <span class="op" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1">precision_array <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> np.array([</span>
-<span id="cb25-2">  label</span>
-<span id="cb25-3">  <span class="cf" style="color: #003B4F;
+<span id="cb27-2">  label</span>
+<span id="cb27-3">  <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span> pred, label <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">in</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">zip</span>(preds, y_test)</span>
-<span id="cb25-4">  <span class="cf" style="color: #003B4F;
+<span id="cb27-4">  <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">if</span> pred <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span></span>
-<span id="cb25-5">])</span>
-<span id="cb25-6">precision_array.mean()</span></code></pre></div>
+<span id="cb27-5">])</span>
+<span id="cb27-6">precision_array.mean()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.8317307692307693</code></pre>
+<pre><code>0.8274111675126904</code></pre>
 </div>
 </div>
 <p>F score</p>
@@ -1108,14 +1178,14 @@ font-style: inherit;">1</span></span>
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
-<div class="sourceCode cell-code" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1">precision <span class="op" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb29" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1">precision <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> precision_array.mean()</span>
-<span id="cb27-2">recall <span class="op" style="color: #5E5E5E;
+<span id="cb29-2">recall <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span> recall_array.mean()</span>
-<span id="cb27-3"></span>
-<span id="cb27-4"><span class="dv" style="color: #AD0000;
+<span id="cb29-3"></span>
+<span id="cb29-4"><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1127,7 +1197,19 @@ font-style: inherit;">/</span>(precision <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span> recall))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.85012285012285</code></pre>
+<pre><code>0.8211586901763224</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb31" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1">tokens <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> vectorizor.get_feature_names_out()</span>
+<span id="cb31-2">tokens[model.coef_.argmax()]</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'life'</code></pre>
 </div>
 </div>
 
@@ -22023,7 +22105,7 @@ font-style: inherit;">=</span> nlp(sentence)</span>
 <div>
 
 </div>
-<div class="quarto-layout-panel" data-layout-ncol="2" style="border-style: solid;">
+<div class="quarto-layout-panel" style="border-style: solid;" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <p>Tokens</p>
@@ -22049,7 +22131,7 @@ _ c a n t e r</code></pre>
 <div>
 
 </div>
-<div class="quarto-layout-panel" data-layout-ncol="2" style="border-style: solid;">
+<div class="quarto-layout-panel" style="border-style: solid;" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <p>tokens</p>
@@ -22075,7 +22157,7 @@ _c a n t e r</code></pre>
 <div>
 
 </div>
-<div class="quarto-layout-panel" data-layout-ncol="2" style="border-style: solid;">
+<div class="quarto-layout-panel" style="border-style: solid;" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <p>tokens</p>
@@ -22101,7 +22183,7 @@ _ca n t e r _</code></pre>
 <div>
 
 </div>
-<div class="quarto-layout-panel" data-layout-ncol="2" style="border-style: solid;">
+<div class="quarto-layout-panel" style="border-style: solid;" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <p>tokens</p>
@@ -25295,7 +25377,7 @@ Fruehwald, Josef. 2024. <span>“Setup Notes.”</span> January 8, 2024. <a href
 Fruehwald, Josef. n.d. <span>“Side Note.”</span> <a href="https://lin511-2024.github.io/notes/meetings/06_side-note.html">https://lin511-2024.github.io/notes/meetings/06_side-note.html</a>.
 </div></div></section></div> ]]></description>
   <guid>https://lin511-2024.github.io/notes/meetings/06_side-note.html</guid>
-  <pubDate>Mon, 01 Apr 2024 21:20:30 GMT</pubDate>
+  <pubDate>Tue, 02 Apr 2024 12:31:33 GMT</pubDate>
 </item>
 </channel>
 </rss>
