@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.552">
+<meta name="generator" content="quarto-1.4.553">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -410,6 +410,12 @@ window.Quarto = {
  <span class="menu-text">Training and evaluating a logistic regression</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../notes/programming/08_classes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Classes</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -488,7 +494,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">April 2, 2024</p>
+      <p class="date-modified">April 8, 2024</p>
     </div>
   </div>
     
@@ -675,19 +681,19 @@ Figure&nbsp;2: Presence or absence of ‘good’ and ‘bad’
 <dl>
 <dt>TF</dt>
 <dd>
-<strong>T</strong>erm <strong>F</strong>requency
+<p><strong>T</strong>erm <strong>F</strong>requency</p>
 </dd>
 <dt>IDF</dt>
 <dd>
-<strong>I</strong>nverse <strong>D</strong>ocument <strong>F</strong>requency
+<p><strong>I</strong>nverse <strong>D</strong>ocument <strong>F</strong>requency</p>
 </dd>
 </dl>
 <p>The TF-IDF value tries to describe the words that appear in a document by how important they are to <em>that</em> document.</p>
 <table class="table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 39%">
+<col style="width: 30%">
+<col style="width: 30%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1307,7 +1313,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>(preds <span class="op">==</span> y_test).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.8225</code></pre>
+<pre><code>0.8425</code></pre>
 </div>
 </div>
 <p>Recall</p>
@@ -1323,7 +1329,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>recall_array.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.815</code></pre>
+<pre><code>0.86</code></pre>
 </div>
 </div>
 <p>Precision</p>
@@ -1338,7 +1344,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>])</span>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>precision_array.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.8274111675126904</code></pre>
+<pre><code>0.8309178743961353</code></pre>
 </div>
 </div>
 <p>F score</p>
@@ -1351,7 +1357,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">*</span> ((precision <span class="op">*</span> recall)<span class="op">/</span>(precision <span class="op">+</span> recall))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.8211586901763224</code></pre>
+<pre><code>0.8452088452088452</code></pre>
 </div>
 </div>
 <div class="cell">

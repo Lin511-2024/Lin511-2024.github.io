@@ -10,8 +10,2170 @@
 <atom:link href="https://lin511-2024.github.io/notes/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <language>en</language>
-<generator>quarto-1.4.552</generator>
-<lastBuildDate>Tue, 02 Apr 2024 00:00:00 GMT</lastBuildDate>
+<generator>quarto-1.4.553</generator>
+<lastBuildDate>Tue, 09 Apr 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Classes</title>
+  <dc:creator>Josef Fruehwald</dc:creator>
+  <link>https://lin511-2024.github.io/notes/programming/08_classes.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>So far, the kinds of objects of our own that we’ve created in python are <strong>variables</strong> and <strong>functions</strong>.</p>
+<p><strong>Variables</strong>:</p>
+<div id="cell-3" class="cell" data-execution_count="35">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1">width <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span></span>
+<span id="cb1-2">height <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span></span></code></pre></div>
+</div>
+<p><strong>Functions</strong>:</p>
+<div id="cell-5" class="cell" data-execution_count="36">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> area(width, height):</span>
+<span id="cb2-2">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> width <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> height</span>
+<span id="cb2-3"></span>
+<span id="cb2-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> perimeter(width, height):</span>
+<span id="cb2-5">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> (<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>width) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> (<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>height)</span></code></pre></div>
+</div>
+<div id="cell-6" class="cell" data-execution_count="37">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">area(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="37">
+<pre><code>40</code></pre>
+</div>
+</div>
+<div id="cell-7" class="cell" data-execution_count="38">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">perimeter(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="38">
+<pre><code>26</code></pre>
+</div>
+</div>
+<p>Today we’re going to introduce a new type called <strong>classes</strong>. You’ve already been interacting with classes from other python packages, so this might demystify some of how python works.</p>
+<div id="cell-9" class="cell" data-execution_count="39">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span></code></pre></div>
+</div>
+<section id="classes" class="level2">
+<h2 class="anchored" data-anchor-id="classes">Classes</h2>
+<p>Classes are python’s implementation of what’s known as “object oriented programming”. They let us bundle together lots of different values, and functions for operating and updating those values in one single “object”.</p>
+<p>For example, I’m currently working on a project that will need to bundle together lots of different speaker demographics, so I’ve been working on a <code>Speaker</code> class.</p>
+<div id="cell-11" class="cell" data-execution_count="40">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">class</span> Speaker():</span>
+<span id="cb8-2">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">pass</span></span></code></pre></div>
+</div>
+<p>The <code>class</code> keyword says that what follows will be a new kind of class. By convention, class names are in <code>TitleCase</code>.</p>
+<section id="initializing-a-class" class="level3">
+<h3 class="anchored" data-anchor-id="initializing-a-class">Initializing a class</h3>
+<p>To tell a class what kind of values it should be “initialized” with, we need to define a special function inside the class called <code>__init__()</code>.</p>
+<div id="cell-14" class="cell" data-execution_count="41">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">class</span> Speaker():</span>
+<span id="cb9-2">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(</span>
+<span id="cb9-3">            <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, </span>
+<span id="cb9-4">            name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb9-5">            pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb9-6">            age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb9-7">            year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span></span>
+<span id="cb9-8">    ):</span>
+<span id="cb9-9">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> name</span>
+<span id="cb9-10">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pronoun</span>
+<span id="cb9-11">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> age</span>
+<span id="cb9-12">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> year</span></code></pre></div>
+</div>
+<p><code>__init__()</code> should always take a special variable called <code>self</code> as the first argument. The other arguments I defined all get assigned to an attribute of <code>self</code>. Here’s how that looks in use.</p>
+<div id="cell-16" class="cell" data-execution_count="42">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># creating an *instance*</span></span>
+<span id="cb10-2">joe <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Speaker(</span>
+<span id="cb10-3">    name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Joe F"</span>, </span>
+<span id="cb10-4">    pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"he"</span>,</span>
+<span id="cb10-5">    age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">39</span>, </span>
+<span id="cb10-6">    year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2024</span></span>
+<span id="cb10-7">)</span></code></pre></div>
+</div>
+<p>We can then get the attributes of the <code>joe</code> object with the <code>.</code> syntax.</p>
+<div id="cell-18" class="cell" data-execution_count="43">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">joe.name</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="43">
+<pre><code>'Joe F'</code></pre>
+</div>
+</div>
+<div id="cell-19" class="cell" data-execution_count="44">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">joe.age</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="44">
+<pre><code>39</code></pre>
+</div>
+</div>
+<div id="cell-20" class="cell" data-execution_count="45">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1">joe.year</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="45">
+<pre><code>2024</code></pre>
+</div>
+</div>
+<p>We can create another instance of <code>Speaker</code>.</p>
+<div id="cell-22" class="cell" data-execution_count="46">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1">noam <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Speaker(</span>
+<span id="cb17-2">    name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Noam C"</span>, </span>
+<span id="cb17-3">    pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"he"</span>,</span>
+<span id="cb17-4">    age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">95</span>, </span>
+<span id="cb17-5">    year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2024</span></span>
+<span id="cb17-6">)</span>
+<span id="cb17-7">noam.name</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="46">
+<pre><code>'Noam C'</code></pre>
+</div>
+</div>
+</section>
+<section id="more-stuff-in-__init__." class="level3">
+<h3 class="anchored" data-anchor-id="more-stuff-in-__init__.">More stuff in <code>__init__()</code>.</h3>
+<p>Above, the <code>__init__()</code> function just assigns each input value to the same name attribute of the instance. But we can do more.</p>
+<div id="cell-24" class="cell" data-execution_count="47">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">class</span> Speaker():</span>
+<span id="cb19-2">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(</span>
+<span id="cb19-3">            <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, </span>
+<span id="cb19-4">            name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb19-5">            pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb19-6">            age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb19-7">            year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span></span>
+<span id="cb19-8">    ):</span>
+<span id="cb19-9">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> name</span>
+<span id="cb19-10">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pronoun</span>
+<span id="cb19-11">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> age</span>
+<span id="cb19-12">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> year</span>
+<span id="cb19-13">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dob <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> age</span></code></pre></div>
+</div>
+<div id="cell-25" class="cell" data-execution_count="48">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1">joe <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Speaker(</span>
+<span id="cb20-2">    name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Joe F"</span>, </span>
+<span id="cb20-3">    pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"he"</span>,</span>
+<span id="cb20-4">    age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">39</span>, </span>
+<span id="cb20-5">    year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2024</span></span>
+<span id="cb20-6">)</span>
+<span id="cb20-7"></span>
+<span id="cb20-8">noam <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Speaker(</span>
+<span id="cb20-9">    name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Noam C"</span>, </span>
+<span id="cb20-10">    pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"he"</span>,</span>
+<span id="cb20-11">    age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">95</span>, </span>
+<span id="cb20-12">    year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2024</span></span>
+<span id="cb20-13">)</span></code></pre></div>
+</div>
+<div id="cell-26" class="cell" data-execution_count="49">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1">joe.dob</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="49">
+<pre><code>1985</code></pre>
+</div>
+</div>
+<div id="cell-27" class="cell" data-execution_count="50">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1">noam.dob</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="50">
+<pre><code>1929</code></pre>
+</div>
+</div>
+</section>
+<section id="making-a-class-print-nice" class="level3">
+<h3 class="anchored" data-anchor-id="making-a-class-print-nice">Making a class print nice</h3>
+<p>Right now, if we say <code>print(joe)</code>, we’re going to get a pretty ugly output.</p>
+<div id="cell-29" class="cell" data-execution_count="51">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb25" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(joe)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;__main__.Speaker object at 0x1195eadd0&gt;</code></pre>
+</div>
+</div>
+<p>We can tell a class what it should print by defining a <code>__repr__()</code> method inside of it.</p>
+<div id="cell-31" class="cell" data-execution_count="52">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">class</span> Speaker():</span>
+<span id="cb27-2">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(</span>
+<span id="cb27-3">            <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, </span>
+<span id="cb27-4">            name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb27-5">            pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb27-6">            age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb27-7">            year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span></span>
+<span id="cb27-8">    ):</span>
+<span id="cb27-9">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> name</span>
+<span id="cb27-10">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pronoun</span>
+<span id="cb27-11">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> age</span>
+<span id="cb27-12">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> year</span>
+<span id="cb27-13">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dob <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> age</span>
+<span id="cb27-14"></span>
+<span id="cb27-15">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__repr__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>):</span>
+<span id="cb27-16">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>name<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> was interviewed in "</span>\</span>
+<span id="cb27-17">               <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>year<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> when </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>pronoun<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> "</span>\</span>
+<span id="cb27-18">               <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"was </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>age<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> years old."</span></span></code></pre></div>
+</div>
+<div id="cell-32" class="cell" data-execution_count="53">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1">joe <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Speaker(</span>
+<span id="cb28-2">    name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Joe F"</span>, </span>
+<span id="cb28-3">    pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"he"</span>,</span>
+<span id="cb28-4">    age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">39</span>, </span>
+<span id="cb28-5">    year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2024</span></span>
+<span id="cb28-6">)</span>
+<span id="cb28-7"></span>
+<span id="cb28-8">noam <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Speaker(</span>
+<span id="cb28-9">    name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Noam C"</span>, </span>
+<span id="cb28-10">    pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"he"</span>,</span>
+<span id="cb28-11">    age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">95</span>, </span>
+<span id="cb28-12">    year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2024</span></span>
+<span id="cb28-13">)</span></code></pre></div>
+</div>
+<div id="cell-33" class="cell" data-execution_count="54">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb29" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(joe)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Joe F was interviewed in 2024 when he was 39 years old.</code></pre>
+</div>
+</div>
+<div id="cell-34" class="cell" data-execution_count="55">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb31" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(noam)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Noam C was interviewed in 2024 when he was 95 years old.</code></pre>
+</div>
+</div>
+</section>
+<section id="adding-methods" class="level3">
+<h3 class="anchored" data-anchor-id="adding-methods">Adding methods</h3>
+<p>There might be things you want to <em>calculate</em> or otherwise derive from the values within class instance, or values you want to <em>update</em>. You can do this by defining additional methods.</p>
+<div id="cell-36" class="cell" data-execution_count="56">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb33" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">class</span> Speaker():</span>
+<span id="cb33-2">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(</span>
+<span id="cb33-3">            <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, </span>
+<span id="cb33-4">            name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb33-5">            pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb33-6">            age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb33-7">            year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span></span>
+<span id="cb33-8">    ):</span>
+<span id="cb33-9">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> name</span>
+<span id="cb33-10">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pronoun</span>
+<span id="cb33-11">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> age</span>
+<span id="cb33-12">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> year</span>
+<span id="cb33-13">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dob <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> age</span>
+<span id="cb33-14"></span>
+<span id="cb33-15">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__repr__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>):</span>
+<span id="cb33-16">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>name<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> was interviewed in "</span>\</span>
+<span id="cb33-17">               <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>year<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> when </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>pronoun<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> "</span>\</span>
+<span id="cb33-18">               <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"was </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>age<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> years old."</span></span>
+<span id="cb33-19">    </span>
+<span id="cb33-20">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> age_in(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, year):</span>
+<span id="cb33-21">        age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dob</span>
+<span id="cb33-22">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:</span>
+<span id="cb33-23">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> np.nan</span>
+<span id="cb33-24">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> age</span>
+<span id="cb33-25">    </span>
+<span id="cb33-26">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> year_when(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, age):</span>
+<span id="cb33-27">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dob <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> age</span></code></pre></div>
+</div>
+<div id="cell-37" class="cell" data-execution_count="57">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb34" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1">joe <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Speaker(</span>
+<span id="cb34-2">    name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Joe F"</span>, </span>
+<span id="cb34-3">    pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"he"</span>,</span>
+<span id="cb34-4">    age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">39</span>, </span>
+<span id="cb34-5">    year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2024</span></span>
+<span id="cb34-6">)</span>
+<span id="cb34-7"></span>
+<span id="cb34-8">noam <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Speaker(</span>
+<span id="cb34-9">    name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Noam C"</span>, </span>
+<span id="cb34-10">    pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"he"</span>,</span>
+<span id="cb34-11">    age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">95</span>, </span>
+<span id="cb34-12">    year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2024</span></span>
+<span id="cb34-13">)</span></code></pre></div>
+</div>
+<p>If we wanted to see how old <code>noam</code> was when <code>joe</code> was born, we can now do this</p>
+<div id="cell-39" class="cell" data-execution_count="58">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb35" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1">noam.age_in(joe.dob)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="58">
+<pre><code>56</code></pre>
+</div>
+</div>
+<p>We’ll get <code>nan</code> if we do the reverse, because we wrote the <code>age_in()</code> method not to return negative numbers.</p>
+<div id="cell-41" class="cell" data-execution_count="59">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb37" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1">joe.age_in(noam.dob)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="59">
+<pre><code>nan</code></pre>
+</div>
+</div>
+<p>There was a notable event in 1971 when <code>Noam C</code> met <code>Michel F</code> over a large carafe of orange juice. Let’s see how old he was.</p>
+<div id="cell-43" class="cell" data-execution_count="60">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb39" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1">noam.age_in(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1971</span>)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="60">
+<pre><code>42</code></pre>
+</div>
+</div>
+<p>If <code>Joe F</code> wants to reach a similar landmark meeting by that age, what year will he have to do it in?</p>
+<div id="cell-45" class="cell" data-execution_count="61">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb41" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1">joe.year_when(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">42</span>)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="61">
+<pre><code>2027</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="whats-the-point-of-classes" class="level2">
+<h2 class="anchored" data-anchor-id="whats-the-point-of-classes">What’s the point of classes?</h2>
+<p>Classes won’t always be useful for a one-off usage, but they can be <em>really</em> useful when used in batches. Here’s some sample demographics from the Philadelphia Neighborhood Corpus.</p>
+<div id="cell-47" class="cell" data-execution_count="62">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb43" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1">names <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb43-2">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Adam M"</span>, </span>
+<span id="cb43-3">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Adan F"</span>, </span>
+<span id="cb43-4">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Adrienne M"</span>, </span>
+<span id="cb43-5">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Agnes"</span>, </span>
+<span id="cb43-6">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Agnes P"</span></span>
+<span id="cb43-7">]</span>
+<span id="cb43-8"></span>
+<span id="cb43-9">pronouns <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb43-10">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"he"</span>,</span>
+<span id="cb43-11">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"he"</span>,</span>
+<span id="cb43-12">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"she"</span>,</span>
+<span id="cb43-13">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"she"</span>,</span>
+<span id="cb43-14">    <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"she"</span></span>
+<span id="cb43-15">]</span>
+<span id="cb43-16"></span>
+<span id="cb43-17">ages <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([</span>
+<span id="cb43-18">    <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">83</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">35</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">35</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">59</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">50</span></span>
+<span id="cb43-19">])</span>
+<span id="cb43-20"></span>
+<span id="cb43-21">years <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([</span>
+<span id="cb43-22">    <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2004</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1981</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1991</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1979</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1974</span></span>
+<span id="cb43-23">])</span></code></pre></div>
+</div>
+<p>We can create a list of speaker objects from this data.</p>
+<div id="cell-49" class="cell" data-execution_count="63">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb44" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1">speakers <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb44-2">    Speaker(name, pronoun, age, year)</span>
+<span id="cb44-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> name, pronoun, age, year <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">zip</span>(</span>
+<span id="cb44-4">        names, pronouns, ages, years</span>
+<span id="cb44-5">    )</span>
+<span id="cb44-6">]</span></code></pre></div>
+</div>
+<div id="cell-50" class="cell" data-execution_count="64">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb45" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1">speakers</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="64">
+<pre><code>[Adam M was interviewed in 2004 when he was 83 years old.,
+ Adan F was interviewed in 1981 when he was 35 years old.,
+ Adrienne M was interviewed in 1991 when she was 35 years old.,
+ Agnes was interviewed in 1979 when she was 59 years old.,
+ Agnes P was interviewed in 1974 when she was 50 years old.]</code></pre>
+</div>
+</div>
+<p>We can get the dates of birth for everyone now with relatively little code.</p>
+<div id="cell-52" class="cell" data-execution_count="65">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb47" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1">dobs <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([</span>
+<span id="cb47-2">    speaker.dob</span>
+<span id="cb47-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> speaker <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> speakers</span>
+<span id="cb47-4">])</span>
+<span id="cb47-5">dobs</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="65">
+<pre><code>array([1921, 1946, 1956, 1920, 1924])</code></pre>
+</div>
+</div>
+<p>Two large events in Philadelphia were papal visits in 1979 and 2015. We can figure out how old everyone was on those two dates now.</p>
+<div id="cell-54" class="cell" data-execution_count="66">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb49" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1">first_pope_age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([</span>
+<span id="cb49-2">    speaker.age_in(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1979</span>)</span>
+<span id="cb49-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> speaker <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> speakers</span>
+<span id="cb49-4">])</span>
+<span id="cb49-5">first_pope_age</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="66">
+<pre><code>array([58, 33, 23, 59, 55])</code></pre>
+</div>
+</div>
+<div id="cell-55" class="cell" data-execution_count="67">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb51" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1">second_pope_age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> np.array([</span>
+<span id="cb51-2">    speaker.age_in(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2015</span>)</span>
+<span id="cb51-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> speaker <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> speakers</span>
+<span id="cb51-4">])</span>
+<span id="cb51-5">second_pope_age</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="67">
+<pre><code>array([94, 69, 59, 95, 91])</code></pre>
+</div>
+</div>
+</section>
+<section id="more-advanced-class-features" class="level2">
+<h2 class="anchored" data-anchor-id="more-advanced-class-features">More advanced class features</h2>
+<p>There are some more advanced features we can build into classes in python. A lot of them are accessed by these methods that begin and end with double underscores <code>__</code>, so-called “dunder methods”. <a href="https://mathspp.com/blog/pydonts/dunder-methods">Here’s nice blog post about them.</a></p>
+<section id="comparison-methods" class="level3">
+<h3 class="anchored" data-anchor-id="comparison-methods">Comparison methods</h3>
+<p>For example, with our <code>Speaker</code> class, theres no way to compare two instances with <code>&lt;</code> or <code>==</code>.</p>
+<div id="cell-57" class="cell" data-execution_count="69">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb53" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1">joe <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> noam</span></code></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>TypeError: '&gt;' not supported between instances of 'Speaker' and 'Speaker'</code></pre>
+</div>
+</div>
+<p>But, we <em>can</em> tell a class how to behave with respect to these operators. Let’s say that the dimension we wanted to compare people on was their date of birth.</p>
+<div id="cell-59" class="cell" data-execution_count="70">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb55" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">class</span> Speaker():</span>
+<span id="cb55-2">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(</span>
+<span id="cb55-3">            <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, </span>
+<span id="cb55-4">            name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb55-5">            pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb55-6">            age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb55-7">            year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span></span>
+<span id="cb55-8">    ):</span>
+<span id="cb55-9">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> name</span>
+<span id="cb55-10">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pronoun</span>
+<span id="cb55-11">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> age</span>
+<span id="cb55-12">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> year</span>
+<span id="cb55-13">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dob <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> age</span>
+<span id="cb55-14"></span>
+<span id="cb55-15">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__repr__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>):</span>
+<span id="cb55-16">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>name<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> was interviewed in "</span>\</span>
+<span id="cb55-17">               <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>year<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> when </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>pronoun<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> "</span>\</span>
+<span id="cb55-18">               <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"was </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>age<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> years old."</span></span>
+<span id="cb55-19">    </span>
+<span id="cb55-20">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># defines &lt; between self and another obj</span></span>
+<span id="cb55-21">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__lt__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, obj):</span>
+<span id="cb55-22">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dob <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> obj.dob</span>
+<span id="cb55-23">    </span>
+<span id="cb55-24">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># defines &lt;= self and another obj</span></span>
+<span id="cb55-25">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__le__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, obj):</span>
+<span id="cb55-26">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dob <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;=</span> obj.dob</span>
+<span id="cb55-27"></span>
+<span id="cb55-28">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> age_in(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, year):</span>
+<span id="cb55-29">        age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dob</span>
+<span id="cb55-30">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:</span>
+<span id="cb55-31">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> np.nan</span>
+<span id="cb55-32">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> age</span>
+<span id="cb55-33">    </span>
+<span id="cb55-34">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> year_when(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, age):</span>
+<span id="cb55-35">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dob <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> age</span></code></pre></div>
+</div>
+<p>As it turns out, defining just <code>__lt__()</code> and <code>__le__()</code> is enough to get all of the comparison operators to work.</p>
+<div id="cell-61" class="cell" data-execution_count="71">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb56" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1">joe <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Speaker(</span>
+<span id="cb56-2">    name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Joe F"</span>, </span>
+<span id="cb56-3">    pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"he"</span>,</span>
+<span id="cb56-4">    age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">39</span>, </span>
+<span id="cb56-5">    year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2024</span></span>
+<span id="cb56-6">)</span>
+<span id="cb56-7"></span>
+<span id="cb56-8">noam <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Speaker(</span>
+<span id="cb56-9">    name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Noam C"</span>, </span>
+<span id="cb56-10">    pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"he"</span>,</span>
+<span id="cb56-11">    age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">95</span>, </span>
+<span id="cb56-12">    year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2024</span></span>
+<span id="cb56-13">)</span></code></pre></div>
+</div>
+<div id="cell-62" class="cell" data-execution_count="72">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb57" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1">joe <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> noam</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="72">
+<pre><code>False</code></pre>
+</div>
+</div>
+<div id="cell-63" class="cell" data-execution_count="73">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb59" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1">joe <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span>  noam</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="73">
+<pre><code>True</code></pre>
+</div>
+</div>
+<div id="cell-64" class="cell" data-execution_count="74">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb61" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1">joe <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> noam</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="74">
+<pre><code>False</code></pre>
+</div>
+</div>
+<p>Having these less than and greater than methods defines also allows us to <em>sort</em> a list of objects.</p>
+<div id="cell-66" class="cell" data-execution_count="75">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb63" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1">speakers <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb63-2">    Speaker(name, pronoun, age, year)</span>
+<span id="cb63-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> name, pronoun, age, year <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">zip</span>(</span>
+<span id="cb63-4">        names, pronouns, ages, years</span>
+<span id="cb63-5">    )</span>
+<span id="cb63-6">]</span></code></pre></div>
+</div>
+<p>The order of objects in this list is just the order they appeared in in the original lists/arrays.</p>
+<div id="cell-68" class="cell" data-execution_count="76">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb64" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1">speakers</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="76">
+<pre><code>[Adam M was interviewed in 2004 when he was 83 years old.,
+ Adan F was interviewed in 1981 when he was 35 years old.,
+ Adrienne M was interviewed in 1991 when she was 35 years old.,
+ Agnes was interviewed in 1979 when she was 59 years old.,
+ Agnes P was interviewed in 1974 when she was 50 years old.]</code></pre>
+</div>
+</div>
+<p>But, with all of the comparison methods defined, we can get the <code>max()</code> and <code>min()</code> of this list.</p>
+<div id="cell-70" class="cell" data-execution_count="77">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb66" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1">youngest <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">max</span>(speakers)</span>
+<span id="cb66-2">youngest</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="77">
+<pre><code>Adrienne M was interviewed in 1991 when she was 35 years old.</code></pre>
+</div>
+</div>
+<div id="cell-71" class="cell" data-execution_count="78">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb68" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1">oldest <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">min</span>(speakers)</span>
+<span id="cb68-2">oldest</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="78">
+<pre><code>Agnes was interviewed in 1979 when she was 59 years old.</code></pre>
+</div>
+</div>
+<p>And we can sort the list.</p>
+<div id="cell-73" class="cell" data-execution_count="79">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb70" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">sorted</span>(speakers)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="79">
+<pre><code>[Agnes was interviewed in 1979 when she was 59 years old.,
+ Adam M was interviewed in 2004 when he was 83 years old.,
+ Agnes P was interviewed in 1974 when she was 50 years old.,
+ Adan F was interviewed in 1981 when he was 35 years old.,
+ Adrienne M was interviewed in 1991 when she was 35 years old.]</code></pre>
+</div>
+</div>
+</section>
+<section id="dynamic-properties" class="level3">
+<h3 class="anchored" data-anchor-id="dynamic-properties">Dynamic properties</h3>
+<p>Sometimes, you might want to define dynamic properties of classes. For example, let’s look at <code>noam</code>.</p>
+<div id="cell-75" class="cell" data-execution_count="81">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb72" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1">(</span>
+<span id="cb72-2">    noam.age,</span>
+<span id="cb72-3">    noam.year,</span>
+<span id="cb72-4">    noam.dob</span>
+<span id="cb72-5">)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="81">
+<pre><code>(95, 2024, 1929)</code></pre>
+</div>
+</div>
+<p>Let’s say we actually typoed the year, and <code>Noam C</code> was actually interviewed in 2023. We can update the year, but the date of birth won’t be correctly updated.</p>
+<div id="cell-77" class="cell" data-execution_count="82">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb74" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1">noam.year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2023</span></span>
+<span id="cb74-2"></span>
+<span id="cb74-3">(</span>
+<span id="cb74-4">    noam.age,</span>
+<span id="cb74-5">    noam.year,</span>
+<span id="cb74-6">    noam.dob</span>
+<span id="cb74-7">)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="82">
+<pre><code>(95, 2023, 1929)</code></pre>
+</div>
+</div>
+<p>We can fix this by moving the definition of <code>dob</code> outside of the <code>__init__()</code> method, and into its own method decorated with <code>@property</code>.</p>
+<div id="cell-79" class="cell" data-execution_count="83">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb76" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">class</span> Speaker():</span>
+<span id="cb76-2">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(</span>
+<span id="cb76-3">            <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, </span>
+<span id="cb76-4">            name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb76-5">            pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb76-6">            age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb76-7">            year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span></span>
+<span id="cb76-8">    ):</span>
+<span id="cb76-9">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> name</span>
+<span id="cb76-10">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pronoun</span>
+<span id="cb76-11">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> age</span>
+<span id="cb76-12">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> year</span>
+<span id="cb76-13"></span>
+<span id="cb76-14">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__repr__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>):</span>
+<span id="cb76-15">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>name<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> was interviewed in "</span>\</span>
+<span id="cb76-16">               <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>year<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> when </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>pronoun<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> "</span>\</span>
+<span id="cb76-17">               <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"was </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>age<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> years old."</span></span>
+<span id="cb76-18">    </span>
+<span id="cb76-19">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># defines &lt; between self and another obj</span></span>
+<span id="cb76-20">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__lt__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, obj):</span>
+<span id="cb76-21">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dob <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> obj.dob</span>
+<span id="cb76-22">    </span>
+<span id="cb76-23">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># defines &lt;= self and another obj</span></span>
+<span id="cb76-24">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__le__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, obj):</span>
+<span id="cb76-25">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dob <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;=</span> obj.dob</span>
+<span id="cb76-26">    </span>
+<span id="cb76-27">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># dynamically define dob</span></span>
+<span id="cb76-28">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">@property</span></span>
+<span id="cb76-29">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> dob(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>):</span>
+<span id="cb76-30">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.age</span>
+<span id="cb76-31"></span>
+<span id="cb76-32">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> age_in(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, year):</span>
+<span id="cb76-33">        age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dob</span>
+<span id="cb76-34">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:</span>
+<span id="cb76-35">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> np.nan</span>
+<span id="cb76-36">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> age</span>
+<span id="cb76-37">    </span>
+<span id="cb76-38">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> year_when(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, age):</span>
+<span id="cb76-39">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dob <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> age</span></code></pre></div>
+</div>
+<div id="cell-80" class="cell" data-execution_count="84">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb77" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb77-1">joe <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Speaker(</span>
+<span id="cb77-2">    name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Joe F"</span>, </span>
+<span id="cb77-3">    pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"he"</span>,</span>
+<span id="cb77-4">    age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">39</span>, </span>
+<span id="cb77-5">    year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2024</span></span>
+<span id="cb77-6">)</span>
+<span id="cb77-7"></span>
+<span id="cb77-8">noam <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Speaker(</span>
+<span id="cb77-9">    name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Noam C"</span>, </span>
+<span id="cb77-10">    pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"he"</span>,</span>
+<span id="cb77-11">    age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">95</span>, </span>
+<span id="cb77-12">    year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2024</span></span>
+<span id="cb77-13">)</span></code></pre></div>
+</div>
+<p>The basic values have remained the same,</p>
+<div id="cell-82" class="cell" data-execution_count="85">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb78" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1">(</span>
+<span id="cb78-2">    noam.age,</span>
+<span id="cb78-3">    noam.year,</span>
+<span id="cb78-4">    noam.dob</span>
+<span id="cb78-5">)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="85">
+<pre><code>(95, 2024, 1929)</code></pre>
+</div>
+</div>
+<p>But now, if we change the value of <code>noam.year</code>, the date of birth will be dynamically updated.</p>
+<div id="cell-84" class="cell" data-execution_count="86">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb80" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1">noam.year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2023</span></span>
+<span id="cb80-2"></span>
+<span id="cb80-3">(</span>
+<span id="cb80-4">    noam.age,</span>
+<span id="cb80-5">    noam.year,</span>
+<span id="cb80-6">    noam.dob</span>
+<span id="cb80-7">)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="86">
+<pre><code>(95, 2023, 1928)</code></pre>
+</div>
+</div>
+</section>
+<section id="chaining-together-classes" class="level3">
+<h3 class="anchored" data-anchor-id="chaining-together-classes">Chaining together classes</h3>
+<p>Let’s say we were going to follow some new practices in asking speakers about their gender, and gave them a rating scale between 0 and 10 for <code>masculine</code> and <code>feminine</code>. We could define a new <code>Gender</code> class like so:</p>
+<div id="cell-86" class="cell" data-execution_count="90">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb82" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">class</span> Gender():</span>
+<span id="cb82-2">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, masc<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>, fem<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>):</span>
+<span id="cb82-3">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.masc <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> masc</span>
+<span id="cb82-4">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.fem <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> fem</span>
+<span id="cb82-5"></span>
+<span id="cb82-6">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__repr__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>):</span>
+<span id="cb82-7">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"masc: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>masc<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">; fem: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>fem<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span></span></code></pre></div>
+</div>
+<div id="cell-87" class="cell" data-execution_count="89">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb83" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb83-1">Gender(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="89">
+<pre><code>masc: 5; fem: 5</code></pre>
+</div>
+</div>
+<p>We can then include a <code>gender</code> parameter within the <code>Speaker</code> class.</p>
+<div id="cell-89" class="cell" data-execution_count="91">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb85" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb85-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">class</span> Speaker():</span>
+<span id="cb85-2">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(</span>
+<span id="cb85-3">            <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, </span>
+<span id="cb85-4">            name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb85-5">            pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb85-6">            gender <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Gender(),</span>
+<span id="cb85-7">            age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>,</span>
+<span id="cb85-8">            year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span></span>
+<span id="cb85-9">    ):</span>
+<span id="cb85-10">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> name</span>
+<span id="cb85-11">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pronoun</span>
+<span id="cb85-12">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.gender <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> gender</span>
+<span id="cb85-13">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> age</span>
+<span id="cb85-14">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> year</span>
+<span id="cb85-15"></span>
+<span id="cb85-16">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__repr__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>):</span>
+<span id="cb85-17">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>name<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> was interviewed in "</span>\</span>
+<span id="cb85-18">               <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>year<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> when </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>pronoun<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> "</span>\</span>
+<span id="cb85-19">               <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"was </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>age<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;"> years old."</span></span>
+<span id="cb85-20">    </span>
+<span id="cb85-21">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># defines &lt; between self and another obj</span></span>
+<span id="cb85-22">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__lt__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, obj):</span>
+<span id="cb85-23">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dob <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> obj.dob</span>
+<span id="cb85-24">    </span>
+<span id="cb85-25">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># defines &lt;= self and another obj</span></span>
+<span id="cb85-26">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__le__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, obj):</span>
+<span id="cb85-27">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dob <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;=</span> obj.dob</span>
+<span id="cb85-28">    </span>
+<span id="cb85-29">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># dynamically define dob</span></span>
+<span id="cb85-30">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">@property</span></span>
+<span id="cb85-31">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> dob(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>):</span>
+<span id="cb85-32">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.age</span>
+<span id="cb85-33"></span>
+<span id="cb85-34">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> age_in(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, year):</span>
+<span id="cb85-35">        age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dob</span>
+<span id="cb85-36">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>:</span>
+<span id="cb85-37">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> np.nan</span>
+<span id="cb85-38">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> age</span>
+<span id="cb85-39">    </span>
+<span id="cb85-40">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> year_when(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, age):</span>
+<span id="cb85-41">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dob <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> age</span></code></pre></div>
+</div>
+<div id="cell-90" class="cell" data-execution_count="92">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb86" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb86-1">joe <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Speaker(</span>
+<span id="cb86-2">    name <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Joe F"</span>,</span>
+<span id="cb86-3">    pronoun <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"he"</span>,</span>
+<span id="cb86-4">    gender <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Gender(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>),</span>
+<span id="cb86-5">    age <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">39</span>,</span>
+<span id="cb86-6">    year <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2024</span></span>
+<span id="cb86-7">)</span></code></pre></div>
+</div>
+<p>We can access the gender attribute with the <code>.</code> syntax.</p>
+<div id="cell-92" class="cell" data-execution_count="93">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb87" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb87-1">joe.gender</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="93">
+<pre><code>masc: 8; fem: 2</code></pre>
+</div>
+</div>
+<p>And we can access the attributes of <em>that</em> object as well.</p>
+<div id="cell-94" class="cell" data-execution_count="94">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb89" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb89-1">joe.gender.masc</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="94">
+<pre><code>8</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald2024,
+  author = {Fruehwald, Josef},
+  title = {Classes},
+  date = {2024-04-09},
+  url = {https://lin511-2024.github.io/notes/programming/08_classes.html},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald2024" class="csl-entry quarto-appendix-citeas">
+Fruehwald, Josef. 2024. <span>“Classes.”</span> April 9, 2024. <a href="https://lin511-2024.github.io/notes/programming/08_classes.html">https://lin511-2024.github.io/notes/programming/08_classes.html</a>.
+</div></div></section></div> ]]></description>
+  <category>python</category>
+  <guid>https://lin511-2024.github.io/notes/programming/08_classes.html</guid>
+  <pubDate>Tue, 09 Apr 2024 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Term Frequency - Inverse Document Frequency</title>
   <dc:creator>Josef Fruehwald</dc:creator>
@@ -351,19 +2513,19 @@ Figure&nbsp;2: Presence or absence of ‘good’ and ‘bad’
 <dl>
 <dt>TF</dt>
 <dd>
-<strong>T</strong>erm <strong>F</strong>requency
+<p><strong>T</strong>erm <strong>F</strong>requency</p>
 </dd>
 <dt>IDF</dt>
 <dd>
-<strong>I</strong>nverse <strong>D</strong>ocument <strong>F</strong>requency
+<p><strong>I</strong>nverse <strong>D</strong>ocument <strong>F</strong>requency</p>
 </dd>
 </dl>
 <p>The TF-IDF value tries to describe the words that appear in a document by how important they are to <em>that</em> document.</p>
 <table class="table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 39%">
+<col style="width: 30%">
+<col style="width: 30%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1111,7 +3273,7 @@ font-style: inherit;">=</span> model.predict(X_test_vec)</span></code></pre></di
 background-color: null;
 font-style: inherit;">==</span> y_test).mean()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.8225</code></pre>
+<pre><code>0.8425</code></pre>
 </div>
 </div>
 <p>Recall</p>
@@ -1141,7 +3303,7 @@ font-style: inherit;">1</span></span>
 <span id="cb25-6"></span>
 <span id="cb25-7">recall_array.mean()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.815</code></pre>
+<pre><code>0.86</code></pre>
 </div>
 </div>
 <p>Precision</p>
@@ -1170,7 +3332,7 @@ font-style: inherit;">1</span></span>
 <span id="cb27-5">])</span>
 <span id="cb27-6">precision_array.mean()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.8274111675126904</code></pre>
+<pre><code>0.8309178743961353</code></pre>
 </div>
 </div>
 <p>F score</p>
@@ -1197,7 +3359,7 @@ font-style: inherit;">/</span>(precision <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span> recall))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.8211586901763224</code></pre>
+<pre><code>0.8452088452088452</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -22105,7 +24267,7 @@ font-style: inherit;">=</span> nlp(sentence)</span>
 <div>
 
 </div>
-<div class="quarto-layout-panel" style="border-style: solid;" data-layout-ncol="2">
+<div class="quarto-layout-panel" data-layout-ncol="2" style="border-style: solid;">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <p>Tokens</p>
@@ -22131,7 +24293,7 @@ _ c a n t e r</code></pre>
 <div>
 
 </div>
-<div class="quarto-layout-panel" style="border-style: solid;" data-layout-ncol="2">
+<div class="quarto-layout-panel" data-layout-ncol="2" style="border-style: solid;">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <p>tokens</p>
@@ -22157,7 +24319,7 @@ _c a n t e r</code></pre>
 <div>
 
 </div>
-<div class="quarto-layout-panel" style="border-style: solid;" data-layout-ncol="2">
+<div class="quarto-layout-panel" data-layout-ncol="2" style="border-style: solid;">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <p>tokens</p>
@@ -22183,7 +24345,7 @@ _ca n t e r _</code></pre>
 <div>
 
 </div>
-<div class="quarto-layout-panel" style="border-style: solid;" data-layout-ncol="2">
+<div class="quarto-layout-panel" data-layout-ncol="2" style="border-style: solid;">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
 <p>tokens</p>
@@ -25319,65 +27481,6 @@ Fruehwald, Josef. 2024. <span>“Setup Notes.”</span> January 8, 2024. <a href
   <category>python</category>
   <guid>https://lin511-2024.github.io/notes/programming/00_setup.html</guid>
   <pubDate>Mon, 08 Jan 2024 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Side Note</title>
-  <dc:creator>Josef Fruehwald</dc:creator>
-  <link>https://lin511-2024.github.io/notes/meetings/06_side-note.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>These patterns in log-log plots are not unique to language or linguistic data.</p>
-<p><a href="https://www.reddit.com/r/dndnext/comments/qde7r1/update_race_class_poll_results_2000_responses/">Source</a></p>
-<div class="cell">
-
-</div>
-<div class="cell">
-
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://lin511-2024.github.io/notes/meetings/06_side-note_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://lin511-2024.github.io/notes/meetings/06_side-note_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://lin511-2024.github.io/notes/meetings/06_side-note_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-
-
-
-<a onclick="window.scrollTo(0, 0); return false;" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div>CC-BY-SA 4.0</div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{fruehwald,
-  author = {Fruehwald, Josef},
-  title = {Side {Note}},
-  url = {https://lin511-2024.github.io/notes/meetings/06_side-note.html},
-  langid = {en}
-}
-</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-fruehwald" class="csl-entry quarto-appendix-citeas">
-Fruehwald, Josef. n.d. <span>“Side Note.”</span> <a href="https://lin511-2024.github.io/notes/meetings/06_side-note.html">https://lin511-2024.github.io/notes/meetings/06_side-note.html</a>.
-</div></div></section></div> ]]></description>
-  <guid>https://lin511-2024.github.io/notes/meetings/06_side-note.html</guid>
-  <pubDate>Tue, 02 Apr 2024 12:31:33 GMT</pubDate>
 </item>
 </channel>
 </rss>
