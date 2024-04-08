@@ -217,26 +217,27 @@ Maybe, when the word "excellent" appears in a review, it should be taken more se
 ## TF-IDF
 
 TF
-  : **T**erm **F**requency
+
+:   **T**erm **F**requency
 
 IDF
-  : **I**nverse **D**ocument **F**requency
+
+:   **I**nverse **D**ocument **F**requency
 
 The TF-IDF value tries to describe the words that appear in a document by how important they are to *that* document.
 
-| If a word appears __ in this document | that appears in documents __ | then... |
-| ------------ | ------------ | ------------ |
-|often |  rarely | it's probably important | 
-| often | very often | it might not be that important |
+| If a word appears \_\_ in this document | that appears in documents \_\_ | then...                        |
+|-----------------------------------------|--------------------------------|--------------------------------|
+| often                                   | rarely                         | it's probably important        |
+| often                                   | very often                     | it might not be that important |
 
 ### Term Frequency
-
 
 $$
 tf = \log C(w)+1
 $$
 
-Why log? 
+Why log?
 
 ```{python}
 one_review = list(movie_reviews.words())
@@ -364,6 +365,7 @@ tibble(
 ```
 
 ## Document "vectors"
+
 Another way to look at these reviews is as "vectors", or rows of numbers, that exist along the "good" axis, or the "bad" axis.
 
 ```{r}
@@ -392,7 +394,6 @@ tibble(
     )
 ```
 
-
 ## Doing it with sklearn
 
 ```{python}
@@ -403,7 +404,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 ```
 
 Setting up the data.
-
 
 ```{python}
 #| echo: true
@@ -502,7 +502,6 @@ recall = recall_array.mean()
 
 2 * ((precision * recall)/(precision + recall))
 ```
-
 
 ```{python}
 #| echo: true
