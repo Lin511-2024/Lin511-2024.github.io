@@ -23,7 +23,7 @@
 
 <p>So far, the kinds of objects of our own that we’ve created in python are <strong>variables</strong> and <strong>functions</strong>.</p>
 <p><strong>Variables</strong>:</p>
-<div id="cell-3" class="cell" data-execution_count="35">
+<div id="cell-3" class="cell" data-execution_count="1">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -39,7 +39,7 @@ background-color: null;
 font-style: inherit;">5</span></span></code></pre></div>
 </div>
 <p><strong>Functions</strong>:</p>
-<div id="cell-5" class="cell" data-execution_count="36">
+<div id="cell-5" class="cell" data-execution_count="2">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -69,7 +69,7 @@ font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">*</span>height)</span></code></pre></div>
 </div>
-<div id="cell-6" class="cell" data-execution_count="37">
+<div id="cell-6" class="cell" data-execution_count="3">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -78,11 +78,11 @@ background-color: null;
 font-style: inherit;">8</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">5</span>)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="37">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>40</code></pre>
 </div>
 </div>
-<div id="cell-7" class="cell" data-execution_count="38">
+<div id="cell-7" class="cell" data-execution_count="4">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -91,12 +91,12 @@ background-color: null;
 font-style: inherit;">8</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">5</span>)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="38">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>26</code></pre>
 </div>
 </div>
 <p>Today we’re going to introduce a new type called <strong>classes</strong>. You’ve already been interacting with classes from other python packages, so this might demystify some of how python works.</p>
-<div id="cell-9" class="cell" data-execution_count="39">
+<div id="cell-9" class="cell" data-execution_count="5">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -110,7 +110,7 @@ font-style: inherit;">as</span> np</span></code></pre></div>
 <h2 class="anchored" data-anchor-id="classes">Classes</h2>
 <p>Classes are python’s implementation of what’s known as “object oriented programming”. They let us bundle together lots of different values, and functions for operating and updating those values in one single “object”.</p>
 <p>For example, I’m currently working on a project that will need to bundle together lots of different speaker demographics, so I’ve been working on a <code>Speaker</code> class.</p>
-<div id="cell-11" class="cell" data-execution_count="40">
+<div id="cell-11" class="cell" data-execution_count="6">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -125,7 +125,7 @@ font-style: inherit;">pass</span></span></code></pre></div>
 <section id="initializing-a-class" class="level3">
 <h3 class="anchored" data-anchor-id="initializing-a-class">Initializing a class</h3>
 <p>To tell a class what kind of values it should be “initialized” with, we need to define a special function inside the class called <code>__init__()</code>.</p>
-<div id="cell-14" class="cell" data-execution_count="41">
+<div id="cell-14" class="cell" data-execution_count="7">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -183,7 +183,7 @@ background-color: null;
 font-style: inherit;">=</span> year</span></code></pre></div>
 </div>
 <p><code>__init__()</code> should always take a special variable called <code>self</code> as the first argument. The other arguments I defined all get assigned to an attribute of <code>self</code>. Here’s how that looks in use.</p>
-<div id="cell-16" class="cell" data-execution_count="42">
+<div id="cell-16" class="cell" data-execution_count="8">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -216,35 +216,35 @@ font-style: inherit;">2024</span></span>
 <span id="cb10-7">)</span></code></pre></div>
 </div>
 <p>We can then get the attributes of the <code>joe</code> object with the <code>.</code> syntax.</p>
-<div id="cell-18" class="cell" data-execution_count="43">
+<div id="cell-18" class="cell" data-execution_count="9">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1">joe.name</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="43">
+<div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>'Joe F'</code></pre>
 </div>
 </div>
-<div id="cell-19" class="cell" data-execution_count="44">
+<div id="cell-19" class="cell" data-execution_count="10">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1">joe.age</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="44">
+<div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>39</code></pre>
 </div>
 </div>
-<div id="cell-20" class="cell" data-execution_count="45">
+<div id="cell-20" class="cell" data-execution_count="11">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
 <div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1">joe.year</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="45">
+<div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>2024</code></pre>
 </div>
 </div>
 <p>We can create another instance of <code>Speaker</code>.</p>
-<div id="cell-22" class="cell" data-execution_count="46">
+<div id="cell-22" class="cell" data-execution_count="12">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -273,7 +273,7 @@ background-color: null;
 font-style: inherit;">2024</span></span>
 <span id="cb17-6">)</span>
 <span id="cb17-7">noam.name</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="46">
+<div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>'Noam C'</code></pre>
 </div>
 </div>
@@ -281,7 +281,7 @@ font-style: inherit;">2024</span></span>
 <section id="more-stuff-in-__init__." class="level3">
 <h3 class="anchored" data-anchor-id="more-stuff-in-__init__.">More stuff in <code>__init__()</code>.</h3>
 <p>Above, the <code>__init__()</code> function just assigns each input value to the same name attribute of the instance. But we can do more.</p>
-<div id="cell-24" class="cell" data-execution_count="47">
+<div id="cell-24" class="cell" data-execution_count="13">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -345,7 +345,7 @@ font-style: inherit;">=</span> year <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">-</span> age</span></code></pre></div>
 </div>
-<div id="cell-25" class="cell" data-execution_count="48">
+<div id="cell-25" class="cell" data-execution_count="14">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -399,21 +399,21 @@ background-color: null;
 font-style: inherit;">2024</span></span>
 <span id="cb20-13">)</span></code></pre></div>
 </div>
-<div id="cell-26" class="cell" data-execution_count="49">
+<div id="cell-26" class="cell" data-execution_count="15">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
 <div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1">joe.dob</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="49">
+<div class="cell-output cell-output-display" data-execution_count="15">
 <pre><code>1985</code></pre>
 </div>
 </div>
-<div id="cell-27" class="cell" data-execution_count="50">
+<div id="cell-27" class="cell" data-execution_count="16">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
 <div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1">noam.dob</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="50">
+<div class="cell-output cell-output-display" data-execution_count="16">
 <pre><code>1929</code></pre>
 </div>
 </div>
@@ -421,7 +421,7 @@ font-style: inherit;">2024</span></span>
 <section id="making-a-class-print-nice" class="level3">
 <h3 class="anchored" data-anchor-id="making-a-class-print-nice">Making a class print nice</h3>
 <p>Right now, if we say <code>print(joe)</code>, we’re going to get a pretty ugly output.</p>
-<div id="cell-29" class="cell" data-execution_count="51">
+<div id="cell-29" class="cell" data-execution_count="17">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -429,11 +429,11 @@ font-style: inherit;">2024</span></span>
 background-color: null;
 font-style: inherit;">print</span>(joe)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>&lt;__main__.Speaker object at 0x1195eadd0&gt;</code></pre>
+<pre><code>&lt;__main__.Speaker object at 0x110022dd0&gt;</code></pre>
 </div>
 </div>
 <p>We can tell a class what it should print by defining a <code>__repr__()</code> method inside of it.</p>
-<div id="cell-31" class="cell" data-execution_count="52">
+<div id="cell-31" class="cell" data-execution_count="18">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -556,7 +556,7 @@ font-style: inherit;">}</span><span class="ss" style="color: #20794D;
 background-color: null;
 font-style: inherit;"> years old."</span></span></code></pre></div>
 </div>
-<div id="cell-32" class="cell" data-execution_count="53">
+<div id="cell-32" class="cell" data-execution_count="19">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -610,7 +610,7 @@ background-color: null;
 font-style: inherit;">2024</span></span>
 <span id="cb28-13">)</span></code></pre></div>
 </div>
-<div id="cell-33" class="cell" data-execution_count="54">
+<div id="cell-33" class="cell" data-execution_count="20">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -621,7 +621,7 @@ font-style: inherit;">print</span>(joe)</span></code></pre></div>
 <pre><code>Joe F was interviewed in 2024 when he was 39 years old.</code></pre>
 </div>
 </div>
-<div id="cell-34" class="cell" data-execution_count="55">
+<div id="cell-34" class="cell" data-execution_count="21">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -636,7 +636,7 @@ font-style: inherit;">print</span>(noam)</span></code></pre></div>
 <section id="adding-methods" class="level3">
 <h3 class="anchored" data-anchor-id="adding-methods">Adding methods</h3>
 <p>There might be things you want to <em>calculate</em> or otherwise derive from the values within class instance, or values you want to <em>update</em>. You can do this by defining additional methods.</p>
-<div id="cell-36" class="cell" data-execution_count="56">
+<div id="cell-36" class="cell" data-execution_count="22">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -798,7 +798,7 @@ font-style: inherit;">self</span>.dob <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span> age</span></code></pre></div>
 </div>
-<div id="cell-37" class="cell" data-execution_count="57">
+<div id="cell-37" class="cell" data-execution_count="23">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -853,46 +853,46 @@ font-style: inherit;">2024</span></span>
 <span id="cb34-13">)</span></code></pre></div>
 </div>
 <p>If we wanted to see how old <code>noam</code> was when <code>joe</code> was born, we can now do this</p>
-<div id="cell-39" class="cell" data-execution_count="58">
+<div id="cell-39" class="cell" data-execution_count="24">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
 <div class="sourceCode cell-code" id="cb35" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1">noam.age_in(joe.dob)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="58">
+<div class="cell-output cell-output-display" data-execution_count="24">
 <pre><code>56</code></pre>
 </div>
 </div>
 <p>We’ll get <code>nan</code> if we do the reverse, because we wrote the <code>age_in()</code> method not to return negative numbers.</p>
-<div id="cell-41" class="cell" data-execution_count="59">
+<div id="cell-41" class="cell" data-execution_count="25">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
 <div class="sourceCode cell-code" id="cb37" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1">joe.age_in(noam.dob)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="59">
+<div class="cell-output cell-output-display" data-execution_count="25">
 <pre><code>nan</code></pre>
 </div>
 </div>
 <p>There was a notable event in 1971 when <code>Noam C</code> met <code>Michel F</code> over a large carafe of orange juice. Let’s see how old he was.</p>
-<div id="cell-43" class="cell" data-execution_count="60">
+<div id="cell-43" class="cell" data-execution_count="26">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
 <div class="sourceCode cell-code" id="cb39" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1">noam.age_in(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1971</span>)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="60">
+<div class="cell-output cell-output-display" data-execution_count="26">
 <pre><code>42</code></pre>
 </div>
 </div>
 <p>If <code>Joe F</code> wants to reach a similar landmark meeting by that age, what year will he have to do it in?</p>
-<div id="cell-45" class="cell" data-execution_count="61">
+<div id="cell-45" class="cell" data-execution_count="27">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
 <div class="sourceCode cell-code" id="cb41" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1">joe.year_when(<span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">42</span>)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="61">
+<div class="cell-output cell-output-display" data-execution_count="27">
 <pre><code>2027</code></pre>
 </div>
 </div>
@@ -901,7 +901,7 @@ font-style: inherit;">42</span>)</span></code></pre></div>
 <section id="whats-the-point-of-classes" class="level2">
 <h2 class="anchored" data-anchor-id="whats-the-point-of-classes">What’s the point of classes?</h2>
 <p>Classes won’t always be useful for a one-off usage, but they can be <em>really</em> useful when used in batches. Here’s some sample demographics from the Philadelphia Neighborhood Corpus.</p>
-<div id="cell-47" class="cell" data-execution_count="62">
+<div id="cell-47" class="cell" data-execution_count="28">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -978,7 +978,7 @@ font-style: inherit;">1974</span></span>
 <span id="cb43-23">])</span></code></pre></div>
 </div>
 <p>We can create a list of speaker objects from this data.</p>
-<div id="cell-49" class="cell" data-execution_count="63">
+<div id="cell-49" class="cell" data-execution_count="29">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -997,12 +997,12 @@ font-style: inherit;">zip</span>(</span>
 <span id="cb44-5">    )</span>
 <span id="cb44-6">]</span></code></pre></div>
 </div>
-<div id="cell-50" class="cell" data-execution_count="64">
+<div id="cell-50" class="cell" data-execution_count="30">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
 <div class="sourceCode cell-code" id="cb45" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1">speakers</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="64">
+<div class="cell-output cell-output-display" data-execution_count="30">
 <pre><code>[Adam M was interviewed in 2004 when he was 83 years old.,
  Adan F was interviewed in 1981 when he was 35 years old.,
  Adrienne M was interviewed in 1991 when she was 35 years old.,
@@ -1011,7 +1011,7 @@ font-style: inherit;">zip</span>(</span>
 </div>
 </div>
 <p>We can get the dates of birth for everyone now with relatively little code.</p>
-<div id="cell-52" class="cell" data-execution_count="65">
+<div id="cell-52" class="cell" data-execution_count="31">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -1026,12 +1026,12 @@ background-color: null;
 font-style: inherit;">in</span> speakers</span>
 <span id="cb47-4">])</span>
 <span id="cb47-5">dobs</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="65">
+<div class="cell-output cell-output-display" data-execution_count="31">
 <pre><code>array([1921, 1946, 1956, 1920, 1924])</code></pre>
 </div>
 </div>
 <p>Two large events in Philadelphia were papal visits in 1979 and 2015. We can figure out how old everyone was on those two dates now.</p>
-<div id="cell-54" class="cell" data-execution_count="66">
+<div id="cell-54" class="cell" data-execution_count="32">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -1048,11 +1048,11 @@ background-color: null;
 font-style: inherit;">in</span> speakers</span>
 <span id="cb49-4">])</span>
 <span id="cb49-5">first_pope_age</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="66">
+<div class="cell-output cell-output-display" data-execution_count="32">
 <pre><code>array([58, 33, 23, 59, 55])</code></pre>
 </div>
 </div>
-<div id="cell-55" class="cell" data-execution_count="67">
+<div id="cell-55" class="cell" data-execution_count="33">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -1069,7 +1069,7 @@ background-color: null;
 font-style: inherit;">in</span> speakers</span>
 <span id="cb51-4">])</span>
 <span id="cb51-5">second_pope_age</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="67">
+<div class="cell-output cell-output-display" data-execution_count="33">
 <pre><code>array([94, 69, 59, 95, 91])</code></pre>
 </div>
 </div>
@@ -1080,7 +1080,7 @@ font-style: inherit;">in</span> speakers</span>
 <section id="comparison-methods" class="level3">
 <h3 class="anchored" data-anchor-id="comparison-methods">Comparison methods</h3>
 <p>For example, with our <code>Speaker</code> class, theres no way to compare two instances with <code>&lt;</code> or <code>==</code>.</p>
-<div id="cell-57" class="cell" data-execution_count="69">
+<div id="cell-57" class="cell" data-execution_count="34">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -1092,7 +1092,7 @@ font-style: inherit;">&gt;</span> noam</span></code></pre></div>
 </div>
 </div>
 <p>But, we <em>can</em> tell a class how to behave with respect to these operators. Let’s say that the dimension we wanted to compare people on was their date of birth.</p>
-<div id="cell-59" class="cell" data-execution_count="70">
+<div id="cell-59" class="cell" data-execution_count="35">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -1291,7 +1291,7 @@ background-color: null;
 font-style: inherit;">+</span> age</span></code></pre></div>
 </div>
 <p>As it turns out, defining just <code>__lt__()</code> and <code>__le__()</code> is enough to get all of the comparison operators to work.</p>
-<div id="cell-61" class="cell" data-execution_count="71">
+<div id="cell-61" class="cell" data-execution_count="36">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -1345,41 +1345,41 @@ background-color: null;
 font-style: inherit;">2024</span></span>
 <span id="cb56-13">)</span></code></pre></div>
 </div>
-<div id="cell-62" class="cell" data-execution_count="72">
+<div id="cell-62" class="cell" data-execution_count="37">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
 <div class="sourceCode cell-code" id="cb57" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1">joe <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;</span> noam</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="72">
+<div class="cell-output cell-output-display" data-execution_count="37">
 <pre><code>False</code></pre>
 </div>
 </div>
-<div id="cell-63" class="cell" data-execution_count="73">
+<div id="cell-63" class="cell" data-execution_count="38">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
 <div class="sourceCode cell-code" id="cb59" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1">joe <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;=</span>  noam</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="73">
+<div class="cell-output cell-output-display" data-execution_count="38">
 <pre><code>True</code></pre>
 </div>
 </div>
-<div id="cell-64" class="cell" data-execution_count="74">
+<div id="cell-64" class="cell" data-execution_count="39">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
 <div class="sourceCode cell-code" id="cb61" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1">joe <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> noam</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="74">
+<div class="cell-output cell-output-display" data-execution_count="39">
 <pre><code>False</code></pre>
 </div>
 </div>
 <p>Having these less than and greater than methods defines also allows us to <em>sort</em> a list of objects.</p>
-<div id="cell-66" class="cell" data-execution_count="75">
+<div id="cell-66" class="cell" data-execution_count="40">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -1399,12 +1399,12 @@ font-style: inherit;">zip</span>(</span>
 <span id="cb63-6">]</span></code></pre></div>
 </div>
 <p>The order of objects in this list is just the order they appeared in in the original lists/arrays.</p>
-<div id="cell-68" class="cell" data-execution_count="76">
+<div id="cell-68" class="cell" data-execution_count="41">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
 <div class="sourceCode cell-code" id="cb64" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1">speakers</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="76">
+<div class="cell-output cell-output-display" data-execution_count="41">
 <pre><code>[Adam M was interviewed in 2004 when he was 83 years old.,
  Adan F was interviewed in 1981 when he was 35 years old.,
  Adrienne M was interviewed in 1991 when she was 35 years old.,
@@ -1413,7 +1413,7 @@ font-style: inherit;">zip</span>(</span>
 </div>
 </div>
 <p>But, with all of the comparison methods defined, we can get the <code>max()</code> and <code>min()</code> of this list.</p>
-<div id="cell-70" class="cell" data-execution_count="77">
+<div id="cell-70" class="cell" data-execution_count="42">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -1423,11 +1423,11 @@ font-style: inherit;">=</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">max</span>(speakers)</span>
 <span id="cb66-2">youngest</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="77">
+<div class="cell-output cell-output-display" data-execution_count="42">
 <pre><code>Adrienne M was interviewed in 1991 when she was 35 years old.</code></pre>
 </div>
 </div>
-<div id="cell-71" class="cell" data-execution_count="78">
+<div id="cell-71" class="cell" data-execution_count="43">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -1437,19 +1437,19 @@ font-style: inherit;">=</span> <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">min</span>(speakers)</span>
 <span id="cb68-2">oldest</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="78">
+<div class="cell-output cell-output-display" data-execution_count="43">
 <pre><code>Agnes was interviewed in 1979 when she was 59 years old.</code></pre>
 </div>
 </div>
 <p>And we can sort the list.</p>
-<div id="cell-73" class="cell" data-execution_count="79">
+<div id="cell-73" class="cell" data-execution_count="44">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
 <div class="sourceCode cell-code" id="cb70" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">sorted</span>(speakers)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="79">
+<div class="cell-output cell-output-display" data-execution_count="44">
 <pre><code>[Agnes was interviewed in 1979 when she was 59 years old.,
  Adam M was interviewed in 2004 when he was 83 years old.,
  Agnes P was interviewed in 1974 when she was 50 years old.,
@@ -1461,7 +1461,7 @@ font-style: inherit;">sorted</span>(speakers)</span></code></pre></div>
 <section id="dynamic-properties" class="level3">
 <h3 class="anchored" data-anchor-id="dynamic-properties">Dynamic properties</h3>
 <p>Sometimes, you might want to define dynamic properties of classes. For example, let’s look at <code>noam</code>.</p>
-<div id="cell-75" class="cell" data-execution_count="81">
+<div id="cell-75" class="cell" data-execution_count="45">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -1470,12 +1470,12 @@ font-style: inherit;">sorted</span>(speakers)</span></code></pre></div>
 <span id="cb72-3">    noam.year,</span>
 <span id="cb72-4">    noam.dob</span>
 <span id="cb72-5">)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="81">
+<div class="cell-output cell-output-display" data-execution_count="45">
 <pre><code>(95, 2024, 1929)</code></pre>
 </div>
 </div>
 <p>Let’s say we actually typoed the year, and <code>Noam C</code> was actually interviewed in 2023. We can update the year, but the date of birth won’t be correctly updated.</p>
-<div id="cell-77" class="cell" data-execution_count="82">
+<div id="cell-77" class="cell" data-execution_count="46">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -1490,12 +1490,12 @@ font-style: inherit;">2023</span></span>
 <span id="cb74-5">    noam.year,</span>
 <span id="cb74-6">    noam.dob</span>
 <span id="cb74-7">)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="82">
+<div class="cell-output cell-output-display" data-execution_count="46">
 <pre><code>(95, 2023, 1929)</code></pre>
 </div>
 </div>
 <p>We can fix this by moving the definition of <code>dob</code> outside of the <code>__init__()</code> method, and into its own method decorated with <code>@property</code>.</p>
-<div id="cell-79" class="cell" data-execution_count="83">
+<div id="cell-79" class="cell" data-execution_count="47">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -1707,7 +1707,7 @@ font-style: inherit;">self</span>.dob <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span> age</span></code></pre></div>
 </div>
-<div id="cell-80" class="cell" data-execution_count="84">
+<div id="cell-80" class="cell" data-execution_count="48">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -1762,7 +1762,7 @@ font-style: inherit;">2024</span></span>
 <span id="cb77-13">)</span></code></pre></div>
 </div>
 <p>The basic values have remained the same,</p>
-<div id="cell-82" class="cell" data-execution_count="85">
+<div id="cell-82" class="cell" data-execution_count="49">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -1771,12 +1771,12 @@ font-style: inherit;">2024</span></span>
 <span id="cb78-3">    noam.year,</span>
 <span id="cb78-4">    noam.dob</span>
 <span id="cb78-5">)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="85">
+<div class="cell-output cell-output-display" data-execution_count="49">
 <pre><code>(95, 2024, 1929)</code></pre>
 </div>
 </div>
 <p>But now, if we change the value of <code>noam.year</code>, the date of birth will be dynamically updated.</p>
-<div id="cell-84" class="cell" data-execution_count="86">
+<div id="cell-84" class="cell" data-execution_count="50">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -1791,7 +1791,7 @@ font-style: inherit;">2023</span></span>
 <span id="cb80-5">    noam.year,</span>
 <span id="cb80-6">    noam.dob</span>
 <span id="cb80-7">)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="86">
+<div class="cell-output cell-output-display" data-execution_count="50">
 <pre><code>(95, 2023, 1928)</code></pre>
 </div>
 </div>
@@ -1799,7 +1799,7 @@ font-style: inherit;">2023</span></span>
 <section id="chaining-together-classes" class="level3">
 <h3 class="anchored" data-anchor-id="chaining-together-classes">Chaining together classes</h3>
 <p>Let’s say we were going to follow some new practices in asking speakers about their gender, and gave them a rating scale between 0 and 10 for <code>masculine</code> and <code>feminine</code>. We could define a new <code>Gender</code> class like so:</p>
-<div id="cell-86" class="cell" data-execution_count="90">
+<div id="cell-86" class="cell" data-execution_count="51">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -1865,7 +1865,7 @@ font-style: inherit;">}</span><span class="ss" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"</span></span></code></pre></div>
 </div>
-<div id="cell-87" class="cell" data-execution_count="89">
+<div id="cell-87" class="cell" data-execution_count="52">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -1874,12 +1874,12 @@ background-color: null;
 font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">5</span>)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="89">
+<div class="cell-output cell-output-display" data-execution_count="52">
 <pre><code>masc: 5; fem: 5</code></pre>
 </div>
 </div>
 <p>We can then include a <code>gender</code> parameter within the <code>Speaker</code> class.</p>
-<div id="cell-89" class="cell" data-execution_count="91">
+<div id="cell-89" class="cell" data-execution_count="53">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -2099,7 +2099,7 @@ font-style: inherit;">self</span>.dob <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+</span> age</span></code></pre></div>
 </div>
-<div id="cell-90" class="cell" data-execution_count="92">
+<div id="cell-90" class="cell" data-execution_count="54">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
@@ -2136,22 +2136,214 @@ font-style: inherit;">2024</span></span>
 <span id="cb86-7">)</span></code></pre></div>
 </div>
 <p>We can access the gender attribute with the <code>.</code> syntax.</p>
-<div id="cell-92" class="cell" data-execution_count="93">
+<div id="cell-92" class="cell" data-execution_count="55">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
 <div class="sourceCode cell-code" id="cb87" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb87-1">joe.gender</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="93">
+<div class="cell-output cell-output-display" data-execution_count="55">
 <pre><code>masc: 8; fem: 2</code></pre>
 </div>
 </div>
 <p>And we can access the attributes of <em>that</em> object as well.</p>
-<div id="cell-94" class="cell" data-execution_count="94">
+<div id="cell-94" class="cell" data-execution_count="56">
 <div class="langname">
 <pre class="langname">python</pre>
 </div>
 <div class="sourceCode cell-code" id="cb89" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb89-1">joe.gender.masc</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="94">
+<div class="cell-output cell-output-display" data-execution_count="56">
+<pre><code>8</code></pre>
+</div>
+</div>
+</section>
+<section id="subclases" class="level3">
+<h3 class="anchored" data-anchor-id="subclases">Subclases</h3>
+<p>Now, let’s say we wanted to generalize our <code>Gender</code> class to have any given set of labels we wanted. We can create the more generic class like so:</p>
+<div id="cell-96" class="cell" data-execution_count="57">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb91" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb91-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">class</span> Gender():</span>
+<span id="cb91-2">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, dims: <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">dict</span>):</span>
+<span id="cb91-3">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dim_names <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">list</span>(dims.keys())</span>
+<span id="cb91-4">        <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">dict</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> dims</span>
+<span id="cb91-5">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> key <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dim_names:</span>
+<span id="cb91-6">            <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">setattr</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, key, <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.<span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">dict</span>[key])</span>
+<span id="cb91-7"></span>
+<span id="cb91-8">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__repr__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>):</span>
+<span id="cb91-9">        labs <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb91-10">            <span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>dim<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">: </span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">dict</span>[dim]<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">; "</span></span>
+<span id="cb91-11">            <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> dim <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>.dim_names</span>
+<span id="cb91-12">        ]</span>
+<span id="cb91-13">        <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>.join(labs)</span></code></pre></div>
+</div>
+<div id="cell-97" class="cell" data-execution_count="58">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb92" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb92-1">general <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> Gender({<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"big"</span>:<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"small"</span>: <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>})</span></code></pre></div>
+</div>
+<div id="cell-98" class="cell" data-execution_count="59">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb93" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb93-1">general.big</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="59">
+<pre><code>9</code></pre>
+</div>
+</div>
+<p>Now, we can make a subclass called <code>BinaryGender</code> from the more general class.</p>
+<div id="cell-100" class="cell" data-execution_count="60">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb95" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb95-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">class</span> BinaryGender(Gender):</span>
+<span id="cb95-2">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">def</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(<span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">self</span>, masc <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>, fem <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>):</span>
+<span id="cb95-3">        <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">super</span>().<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">__init__</span>(</span>
+<span id="cb95-4">            {<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"masc"</span>: masc, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"fem"</span>: fem}</span>
+<span id="cb95-5">        )</span></code></pre></div>
+</div>
+<p>Passing <code>Gender</code> as an argument in defining the class tells python that <code>BinaryGender</code> is going to be a “subclass”. That means any methods or properties we defined for <code>Gender</code> will be automatically available to <code>BinaryGender</code>. So, for example, we never defined the <code>__repr__()</code> function for <code>BinaryGender</code>, so it’ll just use the one from <code>Gender</code></p>
+<div id="cell-102" class="cell" data-execution_count="61">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb96" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb96-1">bgender <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> BinaryGender(masc <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>, fem <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span></code></pre></div>
+</div>
+<div id="cell-103" class="cell" data-execution_count="62">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb97" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb97-1">bgender</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="62">
+<pre><code>masc: 8; fem: 2; </code></pre>
+</div>
+</div>
+<p>Inside of the <code>__init__()</code> method, we called this special <code>super().__init__()</code> function. That tells python to run all of the <code>__init__()</code> code from the superclass (<code>Gender</code>) with the specified arguments.</p>
+<div id="cell-105" class="cell" data-execution_count="63">
+<div class="langname">
+<pre class="langname">python</pre>
+</div>
+<div class="sourceCode cell-code" id="cb99" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb99-1">bgender.masc</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="63">
 <pre><code>8</code></pre>
 </div>
 </div>
