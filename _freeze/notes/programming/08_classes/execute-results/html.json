@@ -1,0 +1,15 @@
+{
+  "hash": "fb9618e75cd930f4ab9057fd67bda275",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: Classes\ndate: 2024-04-09\nknitr: \n  opts_chunk: \n    echo: false\n    message: false\n    warning: false\n    dev: ragg_png\nformat:\n  html:\n    mermaid:\n      theme: neutral\nfilters: \n  - codeblocklabel\ncategories:\n  - python\n---\n\n::: {.cell}\n\n:::\n\n\nSo far, the kinds of objects of our own that we've created in python are **variables** and **functions**.\n\n**Variables**:\n\n\n::: {.cell}\n\n```{.python .cell-code}\nwidth = 8\nheight = 5\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
